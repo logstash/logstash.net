@@ -15,7 +15,8 @@ pretty much free to use it however you want in whatever way.
 
 # Demo
 
-You can see a screencast demonstration here: [Screencast]
+You can see a screencast introduction here; it introduces logstash and
+demonstrates the websocket output for live log streaming: [Screencast]
 
 What's the web interface look like? [Screenshot]
 
@@ -36,10 +37,13 @@ wrong place.
 
 # Documentation
 
- * [GettingStartedStandalone] - A guide to collecting logs and running logstash on a single server - should only take you about 10 minutes to get through this guide and be able to search your logs!
- * [GettingStartedCentralized] - A guide to collecting logs from many servers and shipping them to another server for indexing and search.
- * [Roadmap] - roadmap for 1.0
- * [Configuration] - logstash configuration docs 
+* [GettingStartedStandalone] - A guide to collecting logs and running logstash
+  on a single server - should only take you about 10 minutes to get through this
+  guide and be able to search your logs!
+* [GettingStartedCentralized] - A guide to collecting logs from many servers
+  and shipping them to another server for indexing and search.
+* [Roadmap] - roadmap for 1.0
+* [Configuration] - logstash configuration docs 
 
 If you have any questions feel free to email the mailing list. To send email,
 you'll need to join the list first. If you know a use case you want logstash to
@@ -51,7 +55,7 @@ This is only the beginning. Got a feature request? Bug report? Use case? Let me
 know! 
 
 The mailing list is logstash-users@groups.google.com - Join here:
-http://groups.google.com/group/logstash-users/
+<http://groups.google.com/group/logstash-users/>
 
 You can also find support and other users on IRC in #logstash on the freenode
 irc network.
