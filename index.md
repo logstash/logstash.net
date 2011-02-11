@@ -15,10 +15,9 @@ pretty much free to use it however you want in whatever way.
 
 # Demo
 
-You can see a screencast demonstration here:
-http://www.youtube.com/watch?v=Fi7OaiNqPCc (from October 2010)
+You can see a screencast demonstration here: [Screencast]
 
-What's the web interface look like? [http://www.semicomplete.com/images/logstash-20101114.png Screenshot (November 2010)]
+What's the web interface look like? [Screenshot]
 
 # What works?
 
@@ -63,3 +62,5 @@ The code lives on github now: <https://github.com/logstash/logstash/>
 [GettingStartedCentralized]: http://code.google.com/p/logstash/wiki/GettingStartedCentralized
 [Roadmap]: http://code.google.com/p/logstash/wiki/Roadmap
 [Configuration]: http://code.google.com/p/logstash/wiki/Configuration
+[Screenshot]: http://www.semicomplete.com/images/logstash-20101114.png "Screenshot (November 2010"
+[Screencast]: http://www.youtube.com/watch?v=Fi7OaiNqPCc "Screencast (October 2010)"
