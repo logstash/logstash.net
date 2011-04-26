@@ -23,8 +23,8 @@ a:hover  { text-decoration:underline; }
 .nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 0px 10px; }
 
 /* featured content homepage*/
-.logstash_image { float:left; margin:0px 30px 0px 0px; }
-.featured_content { margin: 45px 0px 0px 0px; font-size:18px; }
+.mascot { float:left; margin:0px 30px 0px 0px; }
+.image_and_logo { margin: 45px 0px 0px 0px; font-size:18px; }
 .featured_text { }
 .featured_text p { font-size: 16px; margin-bottom: 20px; }
 a.download_button { background:url('button.png'); background-repeat:no-repeat; width:283px; height:56px; float:left; text-decoration:none; text-align:center; padding-top:10px; font-weight:bold; font-family:"Helvetica Neue","Helvetica","Arial",sans-serif; font-size:22px; color:#475530; text-shadow: -1px -1px 1px #DDD;}
@@ -48,6 +48,5 @@ ul { float: left;}
 
 /* footer */
 
-.footer { text-align: center; font-size:80%; background-color:#cccccc; padding: 10px 0px 10px; }
-.footer, .push { height: 30px;}
-.footer_content { width: 960px; margin: 0 auto; }
+.footer { font-size:80%; text-align:center;}
+
