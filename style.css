@@ -29,6 +29,8 @@ a:hover  { text-decoration:underline; }
 .featured_text p { font-size: 16px; margin-bottom: 20px; }
 a.download_button { background:url('button.png'); background-repeat:no-repeat; width:283px; height:56px; float:left; text-decoration:none; text-align:center; padding-top:10px; font-weight:bold; font-family:"Helvetica Neue","Helvetica","Arial",sans-serif; font-size:22px; color:#475530; text-shadow: -1px -1px 1px #DDD;}
 
+/* main content rendered via template */
+#content { margin: 0px 0px 60px 0px; }
 /* doc index */
 .featured_docs { float: left; margin: 0px 0px 0px 10px;}
 .featured_docs h3 { color: #565656 ; margin: 0px 0px 0px 0px; text-transform: uppercase; text-decoration: none;}
