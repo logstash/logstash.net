@@ -1,2 +1,53 @@
 /* style sheet for logstash */
 
+@import "reset.css";
+
+/* basic tags */
+* { font-family:"Helvetica Neue","Helvetica","Arial",sans-serif; margin: 0;}
+html, body {height: 100%;}
+body  { font-size: 16px; line-height: 1.5; color: #777; background-color: #FFFAF3; }
+h1, h2, h3, h4, h5, h6  { margin: 0; color: #58643C; font-family:"Helvetica","Arial",sans-serif; }
+h1  {font-size: 36px;} h2  { font-size: 32px;} h3  {font-size: 24px;} h4  {font-size: 20px;} h5  {font-size: 18px;} h6  {font-size: 16px;}
+p  { margin: 0; }
+a:link, a:visited  { color: #658F3D; text-decoration:none; }
+a:hover  { text-decoration:underline; }
+
+/* main container */
+.container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
+
+/* header */ 
+.header {padding: 26px 0px;}
+
+/* nav */ 
+.nav { float: right; font-size: 18px;}
+.nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 0px 10px; }
+
+/* featured content homepage*/
+.logstash_image { float:left; margin:0px 30px 0px 0px; }
+.featured_content { margin: 45px 0px 0px 0px; font-size:18px; }
+.featured_text { }
+.featured_text p { font-size: 16px; margin-bottom: 20px; }
+a.download_button { background:url('button.png'); background-repeat:no-repeat; width:283px; height:56px; float:left; text-decoration:none; text-align:center; padding-top:10px; font-weight:bold; font-family:"Helvetica Neue","Helvetica","Arial",sans-serif; font-size:22px; color:#475530; text-shadow: -1px -1px 1px #DDD;}
+
+/* doc index */
+.featured_docs { float: left; margin: 0px 0px 0px 10px;}
+.featured_docs h3 { color: #565656 ; margin: 0px 0px 0px 0px; text-transform: uppercase; text-decoration: none;}
+ul { float: left;}
+.featured_docs li { margin: 0px 0px 0px 10px; text-transform: lowercase;}
+.featured_docs ul { margin: 0px 0px 15px 0px;}
+
+/* doc single page */
+.doc_content { float: left; margin: 0px 0px 0px 10px;}
+
+/* sub content */
+.sub_content { text-align:center; margin: 0px 0px 30px;}
+.sub_content h2 { text-align:center; line-height:1.2; margin: 0px 0px 20px; }
+.sub_content_text { width: 460px; margin: 0px 20px 0px; float: left; text-align:left; }
+.sub_content_text p { margin: 0px 0px 12px; }
+
+
+/* footer */
+
+.footer { text-align: center; font-size:80%; background-color:#cccccc; padding: 10px 0px 10px; }
+.footer, .push { height: 30px;}
+.footer_content { width: 960px; margin: 0 auto; }
