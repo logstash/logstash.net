@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/twitter
-layout: default
+layout: content_right
 ---
 # twitter
 

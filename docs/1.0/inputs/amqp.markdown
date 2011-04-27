@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/amqp
-layout: default
+layout: content_right
 ---
 # amqp
 

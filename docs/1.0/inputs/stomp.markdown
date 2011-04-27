@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/stomp
-layout: default
+layout: content_right
 ---
 # stomp
 
