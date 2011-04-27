@@ -31,6 +31,7 @@ a.download_button { background:url('images/button.png'); background-repeat:no-re
 a.download_button:hover { background: url('images/button_hover.png'); background-repeat:no-repeat;}
 /* main content rendered via template */
 #content { margin: 0px 0px 60px 0px; }
+.content_wrapper {float:left; } /* floats content to the right of mascot image */
 /* doc index */
 .featured_docs { float: left; margin: 0px 0px 0px 10px;}
 .featured_docs h3 { color: #565656 ; margin: 0px 0px 0px 0px; text-transform: uppercase; text-decoration: none;}
