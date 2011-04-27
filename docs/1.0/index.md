@@ -1,6 +1,6 @@
 ---
 title: logstash docs index
-layout: default
+layout: content_right
 ---
 [inputs/tcp](inputs/tcp)
 
