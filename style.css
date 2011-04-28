@@ -35,14 +35,13 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 .content_wrapper {float:left; width:620px; } /* floats content to the right of mascot image for content_right layout */
 
 /* main content that needs to float all the way down for doc single pages */
-#content_right { padding-bottom: 60px;}
-
+#content_right { padding: 0px 0px 60px 0px;}
+#content_right h3 { margin:15px 0px 0px 0px;}
 
 /* doc index */
 #doc_index_container{ }
 .doc_index_section { float: left; margin: 0px 50px 0px 0px;}
 .doc_index_section h2 { margin: 0px 0px 20px 0px;}
-.doc_index_section h3 { }
 .doc_index_section ul { }
 
 
