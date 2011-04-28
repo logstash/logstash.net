@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/stomp
-layout: default
+layout: content_right
 ---
 # stomp
 

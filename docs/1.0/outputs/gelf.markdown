@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/gelf
-layout: default
+layout: content_right
 ---
 # gelf
 

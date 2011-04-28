@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/syslog
-layout: default
+layout: content_right
 ---
 # syslog
 
