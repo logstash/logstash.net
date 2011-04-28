@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/grep
-layout: default
+layout: content_right
 ---
 # grep
 

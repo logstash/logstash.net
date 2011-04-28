@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/grok
-layout: default
+layout: content_right
 ---
 # grok
 

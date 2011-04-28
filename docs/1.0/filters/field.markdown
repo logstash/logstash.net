@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/field
-layout: default
+layout: content_right
 ---
 # field
 

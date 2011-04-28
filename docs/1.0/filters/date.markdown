@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/date
-layout: default
+layout: content_right
 ---
 # date
 

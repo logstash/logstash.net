@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/multiline
-layout: default
+layout: content_right
 ---
 # multiline
 

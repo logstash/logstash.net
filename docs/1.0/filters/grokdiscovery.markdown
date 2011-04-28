@@ -1,6 +1,6 @@
 ---
 title: logstash docs for filters/grokdiscovery
-layout: default
+layout: content_right
 ---
 # grokdiscovery
 
