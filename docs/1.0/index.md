@@ -2,6 +2,9 @@
 title: logstash docs index
 layout: content_right
 ---
+
+<div class="doc_index_container">
+</div>
 [inputs/tcp](inputs/tcp)
 
 [inputs/file](inputs/file)
