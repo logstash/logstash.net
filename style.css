@@ -37,7 +37,8 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 /* doc index */
 #doc_index_container{ }
 .doc_index_section { float: left; margin: 0px 50px 0px 0px;}
-.doc_index_section h3 { margin: 0px 0px 20px 0px;}
+.doc_index_section h2 { margin: 0px 0px 20px 0px;}
+.doc_index_section h3 { }
 .doc_index_section ul { }
 
 
