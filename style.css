@@ -44,7 +44,8 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 .doc_index_section h2 { margin: 0px 0px 20px 0px;}
 .doc_index_section ul { }
 
-
+/* about page */
+.about p { margin: 0px 0px 20px 0px;}
 
 /* sub content */
 .sub_content { text-align:center; margin: 0px 0px 30px;}
