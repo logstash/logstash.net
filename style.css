@@ -42,7 +42,7 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 #doc_index_container{ }
 .doc_index_section { float: left; margin: 0px 50px 0px 0px;}
 .doc_index_section h2 { margin: 0px 0px 20px 0px;}
-.doc_index_section li { margin: 0;}
+#doc_index_container .doc_index_section li { margin: 0;}
 
 /* doc single page */
 #content_right li { margin: 10px 0px 0px 0px;}
