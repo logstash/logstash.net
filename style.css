@@ -35,7 +35,7 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 .content_wrapper {float:left; width:620px; } /* floats content to the right of mascot image for content_right layout */
 
 /* main content that needs to float all the way down for doc single pages */
-
+#content_right { padding-bottom: 60px;}
 
 
 /* doc index */
