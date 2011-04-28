@@ -38,11 +38,15 @@ a.download_button:hover { background: url('images/button_hover.png'); background
 #content_right { padding: 0px 0px 60px 0px;}
 #content_right h3 { margin:15px 0px 0px 0px;}
 
+/* doc single page */
+#content_right li { margin: 10px 0px 0px 0px;}
+
 /* doc index */
 #doc_index_container{ }
 .doc_index_section { float: left; margin: 0px 50px 0px 0px;}
 .doc_index_section h2 { margin: 0px 0px 20px 0px;}
 .doc_index_section ul { }
+
 
 /* about page */
 .about p { margin: 0px 0px 20px 0px;}
