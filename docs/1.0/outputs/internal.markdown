@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/internal
-layout: content_right
+layout: default
 ---
 # internal
 

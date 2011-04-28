@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/stdin
-layout: content_right
+layout: default
 ---
 # stdin
 

@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/elasticsearch
-layout: content_right
+layout: default
 ---
 # elasticsearch
 

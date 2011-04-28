@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/nagios
-layout: content_right
+layout: default
 ---
 # nagios
 

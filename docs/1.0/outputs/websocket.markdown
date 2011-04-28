@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/websocket
-layout: content_right
+layout: default
 ---
 # websocket
 

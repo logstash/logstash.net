@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/tcp
-layout: content_right
+layout: default
 ---
 # tcp
 

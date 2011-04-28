@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/mongodb
-layout: content_right
+layout: default
 ---
 # mongodb
 

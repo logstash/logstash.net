@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/file
-layout: content_right
+layout: default
 ---
 # file
 

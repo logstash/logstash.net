@@ -1,6 +1,6 @@
 ---
 title: logstash docs for outputs/stdout
-layout: content_right
+layout: default
 ---
 # stdout
 

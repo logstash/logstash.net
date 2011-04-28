@@ -1,6 +1,6 @@
 ---
 title: logstash docs for inputs/beanstalk
-layout: content_right
+layout: default
 ---
 # beanstalk
 
