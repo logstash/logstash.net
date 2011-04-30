@@ -36,7 +36,7 @@ The regular expression to match
 
 ### what
 
-* Value type is previousnext
+* Value can be any of: "previous", "next"
 * There is no default value for this setting.
 
 If the pattern matched, does event belong to the next or previous event?
