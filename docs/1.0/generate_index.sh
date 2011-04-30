@@ -7,7 +7,7 @@ set -e
 
 echo "---"
 echo "title: logstash docs index"
-echo "layout: content_right"
+echo "layout: default"
 echo "---"
 
 for i in "$@"; do

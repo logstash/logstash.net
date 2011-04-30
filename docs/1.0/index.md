@@ -2,56 +2,97 @@
 title: logstash docs index
 layout: content_right
 ---
-
-<div class="doc_index_container">
+<div id="doc_index_container">
+  <h2>docs</h2>
+  <div class="doc_index_section">
+    <h3>inputs</h3>
+    <ul>
+      <li>
+      <a href="inputs/tcp">tcp</a>
+      </li>
+      <li>
+      <a href="inputs/file">file</a>
+      </li>
+      <li>
+      <a href="inputs/stdin">stdin</a>
+      </li>
+      <li>
+      <a href="inputs/syslog">syslog</a>
+      </li>
+      <li>
+      <a href="inputs/twitter">twitter</a>
+      </li>
+      <li>
+      <a href="inputs/stomp">stomp</a>
+      </li>
+      <li>
+      <a href="inputs/beanstalk">beanstalk</a>
+      </li>
+      <li>
+      <a href="inputs/amqp">amqp</a>
+      </li>
+    </ul>
+  </div>
+  <div class="doc_index_section">
+    <h3>filters</h3>
+    <ul>
+      <li>
+      <a href="filters/field">field</a>
+      </li>
+      <li>
+      <a href="filters/grok">grok</a>
+      </li>
+      <li>
+      <a href="filters/grokdiscovery">grokdiscovery</a>
+      </li>
+      <li>
+      <a href="filters/grep">grep</a>
+      </li>
+      <li>
+      <a href="filters/multiline">multiline</a>
+      </li>
+      <li>
+      <a href="filters/date">date</a>
+      </li>
+    </ul>
+  </div>
+  <div class="doc_index_section">
+    <h3>outputs</h3>
+    <ul>
+      <li>
+      <a href="outputs/internal">internal</a>
+      </li>
+      <li>
+      <a href="outputs/tcp">tcp</a>
+      </li>
+      <li>
+      <a href="outputs/stdout">stdout</a>
+      </li>
+      <li>
+      <a href="outputs/websocket">websocket</a>
+      </li>
+      <li>
+      <a href="outputs/elasticsearch">elasticsearch</a>
+      </li>
+      <li>
+      <a href="outputs/nagios">nagios</a>
+      </li>
+      <li>
+      <a href="outputs/mongodb">mongodb</a>
+      </li>
+      <li>
+      <a href="outputs/stomp">stomp</a>
+      </li>
+      <li>
+      <a href="outputs/beanstalk">beanstalk</a>
+      </li>
+      <li>
+      <a href="outputs/gelf">gelf</a>
+      </li>
+      <li>
+      <a href="outputs/amqp">amqp</a>
+      </li>
+    </ul>
+  </div>
 </div>
-[inputs/tcp](inputs/tcp)
-
-[inputs/file](inputs/file)
-
-[inputs/stdin](inputs/stdin)
-
-[inputs/syslog](inputs/syslog)
-
-[inputs/twitter](inputs/twitter)
-
-[inputs/stomp](inputs/stomp)
-
-[inputs/beanstalk](inputs/beanstalk)
-
-[inputs/amqp](inputs/amqp)
-
-[filters/field](filters/field)
-
-[filters/grok](filters/grok)
-
-[filters/grokdiscovery](filters/grokdiscovery)
-
-[filters/grep](filters/grep)
-
-[filters/multiline](filters/multiline)
-
-[filters/date](filters/date)
-
-[outputs/internal](outputs/internal)
-
-[outputs/tcp](outputs/tcp)
-
-[outputs/stdout](outputs/stdout)
-
-[outputs/websocket](outputs/websocket)
-
-[outputs/elasticsearch](outputs/elasticsearch)
-
-[outputs/nagios](outputs/nagios)
-
-[outputs/mongodb](outputs/mongodb)
-
-[outputs/stomp](outputs/stomp)
-
-[outputs/beanstalk](outputs/beanstalk)
-
-[outputs/gelf](outputs/gelf)
-
-[outputs/amqp](outputs/amqp)
-
+<div class="clear"></div>

@@ -11,6 +11,8 @@ h1  {font-size: 36px;} h2  { font-size: 32px;} h3  {font-size: 24px;} h4  {font-
 p  { margin: 0; }
 a:link, a:visited  { color: #658F3D; text-decoration:none; }
 a:hover  { text-decoration:underline; }
+pre { white-space: pre; }
+code { font-family: fixed; }
 
 /* main container */
 .container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
