@@ -137,7 +137,7 @@ class LogStashConfigDocGenerator
       section = "outputs"
     end
 
-    template_file = File.join(File.dirname(__FILE__), "docs.markdown.erb")
+    template_file = File.join(File.dirname(__FILE__), "docs.html.erb")
     template = ERB.new(File.new(template_file).read, nil, "-")
 
     description = @class_description
@@ -147,7 +147,7 @@ class LogStashConfigDocGenerator
 
     if settings[:output]
       dir = File.join(settings[:output], section)
-      path = File.join(dir, "#{name}.markdown")
+      path = File.join(dir, "#{name}.html")
       Dir.mkdir(settings[:output]) if !File.directory?(settings[:output])
       Dir.mkdir(dir) if !File.directory?(dir)
       File.open(path, "w") do |out|
@@ -158,42 +158,6 @@ class LogStashConfigDocGenerator
     end
   end # def generate
 
-  def foo(file)
-    # TODO(sissel): probably should use ERB for this.
-    puts "# " + LogStash::Config::Registry.registry[@name].to_s
-    puts
-    puts "Usage example:"
-    puts 
-    puts [
-      "#{section} {",
-      "  #{@name} {",
-      "    # ... settings ...",
-      "  }",
-      "}",
-    ].map { |l| "    #{l}" }.join("\n")
-
-    # TODO(sissel): include description of this plugin, maybe use
-    # rdoc to pull this?
-    @settings.sort { |a,b| a.first.to_s <=> b.first.to_s }.each do |name, config|
-      required = config[:required] ? " (*REQUIRED*)" : ""
-      if name.is_a?(Regexp)
-        puts "## /#{name}/ #{required}"
-      else
-        puts "## #{name} #{required}"
-      end
-      puts
-      if config[:validate].is_a?(Symbol)
-        puts "* Value type is #{config[:validate] or "string"}"
-      elsif config[:validate].is_a?(Array)
-        puts "* Value can be any of: #{config[:validate].map(&:inspect).join(", ")}"
-      end
-        
-      puts "* Default is #{config[:default].inspect}" if config.include?(:default)
-      puts
-      puts config[:description]
-      puts 
-    end
-  end # def generate
 end # class LogStashConfigDocGenerator
 
 if __FILE__ == $0
