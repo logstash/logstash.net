@@ -12,7 +12,7 @@ p  { margin: 0; }
 a:link, a:visited  { color: #658F3D; text-decoration:none; }
 a:hover  { text-decoration:underline; }
 pre { white-space: pre; }
-code { font-family: fixed; }
+code { font-family: monospace; }
 
 /* main container */
 .container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
