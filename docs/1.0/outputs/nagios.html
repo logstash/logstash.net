@@ -1,0 +1,50 @@
+---
+title: logstash docs for outputs/nagios
+layout: content_right
+---
+<h2>nagios</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+outputs {
+  nagios {
+    <a href="#setting_commandfile">commandfile</a> => ... # string, default: "/var/lib/nagios3/rw/nagios.cmd"
+    <a href="#setting_tags">tags</a> => ... # array, default: []
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_commandfile">
+    commandfile
+</a>
+<h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/var/lib/nagios3/rw/nagios.cmd" </li>
+</ul>
+
+The path to your nagios command file
+
+<h4> 
+  <a name="#setting_tags">
+    tags
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+Only handle events with any of these tags. Optional.
+If not specified, will process all events.
+

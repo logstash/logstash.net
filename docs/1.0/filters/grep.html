@@ -1,0 +1,69 @@
+---
+title: logstash docs for filters/grep
+layout: content_right
+---
+<h2>grep</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+filters {
+  grep {
+    <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... # string
+    <a href="#setting_match">match</a> => ... # hash, default: {}
+    <a href="#setting_negate">negate</a> => ... # boolean
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_(?-mix:[A-Za-z0-9_-]+)">
+    (?-mix:[A-Za-z0-9_-]+)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Config for grep is:
+  fieldname: pattern
+  Allow arbitrary keys for this config.
+
+<h4> 
+  <a name="#setting_match">
+    match
+</a>
+<h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+A hash of matches of field => value
+
+<h4> 
+  <a name="#setting_negate">
+    negate
+</a>
+<h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Negate the match. Similar to 'grep -v'
+
+If this is set to true, then any positive matches will result in the
+event being cancelled and dropped. Non-matching will be allowed
+through.
+

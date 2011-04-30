@@ -1,0 +1,63 @@
+---
+title: logstash docs for inputs/twitter
+layout: content_right
+---
+<h2>twitter</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+inputs {
+  twitter {
+    <a href="#setting_keywords">keywords</a> => ... # array (required)
+    <a href="#setting_password">password</a> => ... # password (required)
+    <a href="#setting_user">user</a> => ... # string (required)
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_keywords">
+    keywords (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Any keywords to track in the twitter stream
+
+<h4> 
+  <a name="#setting_password">
+    password (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Your twitter password
+
+<h4> 
+  <a name="#setting_user">
+    user (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Your twitter username
+

@@ -2,26 +2,34 @@
 title: logstash docs for filters/date
 layout: content_right
 ---
-# date
+<h2>date</h2>
 
 
 
-## Synopsis
+<h3> Synopsis </h3>
 
 This is what it might look like in your config file:
 
-    filters {
-      date {
-        (?-mix:[A-Za-z0-9_-]+) => ... # array
-      }
-    }
+<pre>
+filters {
+  date {
+    <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... # array
+  }
+}
+</pre>
 
-## Details
+<h3> Details </h3>
 
-### (?-mix:[A-Za-z0-9_-]+)
+<h4> 
+  <a name="#setting_(?-mix:[A-Za-z0-9_-]+)">
+    (?-mix:[A-Za-z0-9_-]+)
+</a>
+<h4>
 
-* Value type is array
-* There is no default value for this setting.
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
 
 Config for date is:
   fieldname => dateformat

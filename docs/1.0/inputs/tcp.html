@@ -1,0 +1,65 @@
+---
+title: logstash docs for inputs/tcp
+layout: content_right
+---
+<h2>tcp</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+inputs {
+  tcp {
+    <a href="#setting_data_timeout">data_timeout</a> => ... # number, default: 5
+    <a href="#setting_host">host</a> => ... # string, default: "0.0.0.0"
+    <a href="#setting_port">port</a> => ... # number (required)
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_data_timeout">
+    data_timeout
+</a>
+<h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 5 </li>
+</ul>
+
+Read timeout in seconds. If a particular tcp connection is
+idle for more than this timeout period, we will assume 
+it is dead and close it.
+
+<h4> 
+  <a name="#setting_host">
+    host
+</a>
+<h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "0.0.0.0" </li>
+</ul>
+
+The address to listen on
+
+<h4> 
+  <a name="#setting_port">
+    port (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+the port to listen on
+

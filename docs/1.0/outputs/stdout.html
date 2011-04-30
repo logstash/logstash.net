@@ -1,0 +1,35 @@
+---
+title: logstash docs for outputs/stdout
+layout: content_right
+---
+<h2>stdout</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+outputs {
+  stdout {
+    <a href="#setting_debug">debug</a> => ... # boolean
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_debug">
+    debug
+</a>
+<h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Enable debugging. Tries to pretty-print the entire event object.
+

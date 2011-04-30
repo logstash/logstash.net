@@ -1,0 +1,63 @@
+---
+title: logstash docs for filters/multiline
+layout: content_right
+---
+<h2>multiline</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+filters {
+  multiline {
+    <a href="#setting_negate">negate</a> => ... # boolean
+    <a href="#setting_pattern">pattern</a> => ... # string
+    <a href="#setting_what">what</a> => ... # previousnext
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_negate">
+    negate
+</a>
+<h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Negate the regexp pattern ('if not matched')
+
+<h4> 
+  <a name="#setting_pattern">
+    pattern
+</a>
+<h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+The regular expression to match
+
+<h4> 
+  <a name="#setting_what">
+    what
+</a>
+<h4>
+
+<ul>
+  <li> Value can be any of: "previous", "next" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+If the pattern matched, does event belong to the next or previous event?
+

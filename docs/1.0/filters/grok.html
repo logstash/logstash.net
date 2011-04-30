@@ -1,0 +1,72 @@
+---
+title: logstash docs for filters/grok
+layout: content_right
+---
+<h2>grok</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+filters {
+  grok {
+    <a href="#setting_drop_if_match">drop_if_match</a> => ... # boolean
+    <a href="#setting_pattern">pattern</a> => ... # array (required)
+    <a href="#setting_patterns_dir">patterns_dir</a> => ... # array
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_drop_if_match">
+    drop_if_match
+</a>
+<h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Drop if matched. Note, this feature may not stay. It is preferable to combine
+grok + grep filters to do parsing + dropping.
+
+requested in: googlecode/issue/26
+
+<h4> 
+  <a name="#setting_pattern">
+    pattern (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Specify a pattern to parse with.
+Multiple patterns is fine. First match breaks.
+
+<h4> 
+  <a name="#setting_patterns_dir">
+    patterns_dir
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Specify a path to a directory with grok pattern files in it
+Pattern files are plain text with format:
+  NAME PATTERN
+
+For example:
+  NUMBER \d+
+

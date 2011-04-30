@@ -1,0 +1,57 @@
+---
+title: logstash docs for inputs/file
+layout: content_right
+---
+<h2>file</h2>
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre>
+inputs {
+  file {
+    <a href="#setting_exclude">exclude</a> => ... # array
+    <a href="#setting_path">path</a> => ... # array (required)
+  }
+}
+</pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="#setting_exclude">
+    exclude
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+Exclusions. Globs are valid here, too.
+For example, if you have
+
+    path => "/var/log/*"
+
+you might want to exclude gzipped files:
+
+    exclude => "*.gz"
+
+<h4> 
+  <a name="#setting_path">
+    path (required setting)
+</a>
+<h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+The path to the file to use as an input.
+You can use globs here, such as "/var/log/*.log"
+
