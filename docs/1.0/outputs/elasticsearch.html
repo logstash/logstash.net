@@ -36,8 +36,8 @@ outputs {
   <li> There is no default value for this setting. </li>
 </ul>
 
-The name of your cluster if you set it on the ElasticSearch side. Useful
-for discovery.
+<p>The name of your cluster if you set it on the ElasticSearch side. Useful
+for discovery.</p>
 
 <h4> 
   <a name="setting_host">
@@ -50,9 +50,9 @@ for discovery.
   <li> There is no default value for this setting. </li>
 </ul>
 
-The name/address of the host to use for ElasticSearch unicast discovery
+<p>The name/address of the host to use for ElasticSearch unicast discovery
 This is only required if the normal multicast/cluster discovery stuff won't
-work in your environment.
+work in your environment.</p>
 
 <h4> 
   <a name="setting_index">
@@ -65,9 +65,9 @@ work in your environment.
   <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
 </ul>
 
-The index to write events to. This can be dynamic using the %{foo} syntax.
+<p>The index to write events to. This can be dynamic using the %{foo} syntax.
 The default value will partition your indeces by day so you can more easily
-delete old data or only search specific date ranges.
+delete old data or only search specific date ranges.</p>
 
 <h4> 
   <a name="setting_port">
@@ -80,8 +80,8 @@ delete old data or only search specific date ranges.
   <li> Default value is 9300 </li>
 </ul>
 
-The port for ElasticSearch transport to use. This is *not* the ElasticSearch
-REST API port (normally 9200).
+<p>The port for ElasticSearch transport to use. This is <em>not</em> the ElasticSearch
+REST API port (normally 9200).</p>
 
 <h4> 
   <a name="setting_type">
@@ -94,6 +94,6 @@ REST API port (normally 9200).
   <li> Default value is "%{@type}" </li>
 </ul>
 
-The type to write events to. Generally you should try to write only similar
-events to the same 'type'. String expansion '%{foo}' works here.
+<p>The type to write events to. Generally you should try to write only similar
+events to the same 'type'. String expansion '%{foo}' works here.</p>
 

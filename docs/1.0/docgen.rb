@@ -58,7 +58,6 @@ class LogStashConfigDocGenerator
 
   def set_class_description
     @class_description = @comments.join("\n")
-    puts "Got description: #{@comments.first}"
     clear_comments
   end # def set_class_description
  
@@ -70,7 +69,9 @@ class LogStashConfigDocGenerator
     # call the code, which calls 'config' in this class.
     # This will let us align comments with config options.
     name, opts = eval(code)
-    @settings[name] = opts.merge(:description => @comments.join("\n"))
+
+    description = BlueCloth.new(@comments.join("\n")).to_html
+    @settings[name] = opts.merge(:description => description)
     clear_comments
   end # def add_config
 
@@ -78,7 +79,9 @@ class LogStashConfigDocGenerator
     # call the code, which calls 'config' in this class.
     # This will let us align comments with config options.
     name, opts = eval(code)
-    @flags[name] = opts.merge(:description => @comments.join("\n"))
+
+    description = BlueCloth.new(@comments.join("\n")).to_html
+    @flags[name] = opts.merge(:description => description)
     clear_comments
   end # def add_config
 

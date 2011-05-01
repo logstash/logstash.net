@@ -38,14 +38,16 @@ inputs {
   <li> There is no default value for this setting. </li>
 </ul>
 
-Exclusions. Globs are valid here, too.
-For example, if you have
+<p>Exclusions. Globs are valid here, too.
+For example, if you have</p>
 
-    path => "/var/log/*"
+<pre><code>path =&gt; "/var/log/*"
+</code></pre>
 
-you might want to exclude gzipped files:
+<p>you might want to exclude gzipped files:</p>
 
-    exclude => "*.gz"
+<pre><code>exclude =&gt; "*.gz"
+</code></pre>
 
 <h4> 
   <a name="setting_path">
@@ -58,6 +60,6 @@ you might want to exclude gzipped files:
   <li> There is no default value for this setting. </li>
 </ul>
 
-The path to the file to use as an input.
-You can use globs here, such as "/var/log/*.log"
+<p>The path to the file to use as an input.
+You can use globs here, such as "/var/log/*.log"</p>
 

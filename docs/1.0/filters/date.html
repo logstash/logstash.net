@@ -46,19 +46,18 @@ filters {
   <li> There is no default value for this setting. </li>
 </ul>
 
-Config for date is:
-  fieldname => dateformat
+<p>Config for date is:
+  fieldname => dateformat</p>
 
-The same field can be specified multiple times (or multiple dateformats for
-the same field) do try different time formats; first success wins.
+<p>The same field can be specified multiple times (or multiple dateformats for
+the same field) do try different time formats; first success wins.</p>
 
-The date formats allowed are the string 'ISO8601' or whatever is supported
-by Joda; generally: [java.text.SimpleDateFormat][dateformats]
+<p>The date formats allowed are the string 'ISO8601' or whatever is supported
+by Joda; generally: <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">java.text.SimpleDateFormat</a></p>
 
-For example, if you have a field 'logdate' and with a value that looks like 'Aug 13 2010 00:03:44'
-you would use this configuration:
+<p>For example, if you have a field 'logdate' and with a value that looks like 'Aug 13 2010 00:03:44'
+you would use this configuration:</p>
 
-    logdate => "MMM dd yyyy HH:mm:ss"
-
-[dateformats]: http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html
+<pre><code>logdate =&gt; "MMM dd yyyy HH:mm:ss"
+</code></pre>
 
