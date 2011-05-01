@@ -13,6 +13,9 @@ a:link, a:visited  { color: #658F3D; text-decoration:none; }
 a:hover  { text-decoration:underline; }
 pre { white-space: pre; }
 code { font-family: monospace; }
+dl { margin-left: 20px; }
+dt { font-weight: bold; }
+dd { margin-left: 20px; }
 
 /* main container */
 .container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
