@@ -4,22 +4,22 @@ layout: content_right
 ---
 <h2>date</h2>
 
-The date filter is used for parsing dates from fields and using that
-date or timestamp as the timestamp for the event.
+<p>The date filter is used for parsing dates from fields and using that
+date or timestamp as the timestamp for the event.</p>
 
-For example, syslog events usually have timestamps like this:
-  "Apr  7 09:32:01"
+<p>For example, syslog events usually have timestamps like this:
+  "Apr  7 09:32:01"</p>
 
-You would use the date format "MMM dd HH:mm:ss" to parse this.
+<p>You would use the date format "MMM dd HH:mm:ss" to parse this.</p>
 
-The date filter is especially important for sorting events and for
+<p>The date filter is especially important for sorting events and for
 backfilling old data. If you don't get the date correct in your
-event, then searching for them later will likely sort out of order.
+event, then searching for them later will likely sort out of order.</p>
 
-In the absense of this filter, logstash will choose a timestamp based on the
+<p>In the absense of this filter, logstash will choose a timestamp based on the
 first time it sees the event (at input time), if the timestamp is not already
 set in the event. For example, with file input, the timestamp is set to the
-time of reading.
+time of reading.</p>
 
 <h3> Synopsis </h3>
 

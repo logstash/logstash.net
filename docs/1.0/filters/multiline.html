@@ -4,62 +4,64 @@ layout: content_right
 ---
 <h2>multiline</h2>
 
-multiline filter
+<p>multiline filter</p>
 
-This filter will collapse multiline messages into a single event.
+<p>This filter will collapse multiline messages into a single event.</p>
 
-The multiline filter is for combining multiple events from a single source
-into the same event.
+<p>The multiline filter is for combining multiple events from a single source
+into the same event.</p>
 
-The original goal of this filter was to allow joining of multi-line messages
+<p>The original goal of this filter was to allow joining of multi-line messages
 from files into a single event. For example - joining java exception and
-stacktrace messages into a single event.
+stacktrace messages into a single event.</p>
 
-TODO(sissel): Document any issues?
-The config looks like this:
+<p>TODO(sissel): Document any issues?
+The config looks like this:</p>
 
-    filters {
-      multiline {
-        type => "type"
-        pattern => "pattern, a regexp"
-        negate => boolean
-        what => "previous" or "next"
-      }
-    }
+<pre><code>filters {
+  multiline {
+    type =&gt; "type"
+    pattern =&gt; "pattern, a regexp"
+    negate =&gt; boolean
+    what =&gt; "previous" or "next"
+  }
+}
+</code></pre>
 
-The 'regexp' should match what you believe to be an indicator that
-the field is part of a multi-line event
+<p>The 'regexp' should match what you believe to be an indicator that
+the field is part of a multi-line event</p>
 
-The 'what' must be "previous" or "next" and indicates the relation
-to the multi-line event.
+<p>The 'what' must be "previous" or "next" and indicates the relation
+to the multi-line event.</p>
 
-The 'negate' can be "true" or "false" (defaults false). If true, a 
+<p>The 'negate' can be "true" or "false" (defaults false). If true, a
 message not matching the pattern will constitute a match of the multiline
-filter and the what will be applied. (vice-versa is also true)
+filter and the what will be applied. (vice-versa is also true)</p>
 
-For example, java stack traces are multiline and usually have the message
-starting at the far-left, then each subsequent line indented. Do this:
+<p>For example, java stack traces are multiline and usually have the message
+starting at the far-left, then each subsequent line indented. Do this:</p>
 
-    filters {
-      multiline {
-        type => "somefiletype"
-        pattern => "^\\s"
-        what => "previous"
-      }
-    }
-    
-This says that any line starting with whitespace belongs to the previous line.
+<pre><code>filters {
+  multiline {
+    type =&gt; "somefiletype"
+    pattern =&gt; "^\\s"
+    what =&gt; "previous"
+  }
+}
+</code></pre>
 
-Another example is C line continuations (backslash). Here's how to do that:
+<p>This says that any line starting with whitespace belongs to the previous line.</p>
 
-    filters {
-      multiline {
-        type => "somefiletype "
-        pattern => "\\$"
-        what => "next"
-      }
-    }
-    
+<p>Another example is C line continuations (backslash). Here's how to do that:</p>
+
+<pre><code>filters {
+  multiline {
+    type =&gt; "somefiletype "
+    pattern =&gt; "\\$"
+    what =&gt; "next"
+  }
+}
+</code></pre>
 
 <h3> Synopsis </h3>
 

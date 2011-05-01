@@ -4,39 +4,44 @@ layout: content_right
 ---
 <h2>nagios</h2>
 
-The nagios output is used for sending passive check results to nagios via the
-nagios command file. 
+<p>The nagios output is used for sending passive check results to nagios via the
+nagios command file.</p>
 
-For this output to work, your event must have the following fields:
-  "nagios_host"
-  "nagios_service"
+<p>For this output to work, your event must have the following fields:
+  "nagios<em>host"
+  "nagios</em>service"</p>
 
-This field is supported, but optional:
-  "nagios_annotation"
+<p>This field is supported, but optional:
+  "nagios_annotation"</p>
 
-The easiest way to use this output is with the grep filter.
+<p>The easiest way to use this output is with the grep filter.
 Presumably, you only want certain events matching a given pattern
 to send events to nagios. So use grep to match and also to add the required
-fields.
+fields.</p>
 
-    filters {
-      grep {
-        type => "linux-syslog"
-        match => [ "@message", "(error|ERROR|CRITICAL)" ]
-        add_tag => [ "nagios-update" ]
-        add_fields => [
-          "nagios_host", "%{@source_host}",
-          "nagios_service", "the name of your nagios service check"
-        ]
-     }
-   }
-   
-   outputs {
-     nagios { 
-       # only process events with this tag
-       tags => "nagios-update"
-     }
-   }
+<pre><code>filters {
+  grep {
+    type =&gt; "linux-syslog"
+    match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
+    add_tag =&gt; [ "nagios-update" ]
+    add_fields =&gt; [
+      "nagios_host", "%{@source_host}",
+      "nagios_service", "the name of your nagios service check"
+    ]
+ }
+</code></pre>
+
+<p>   }</p>
+
+<p>   outputs {</p>
+
+<pre><code> nagios { 
+   # only process events with this tag
+   tags =&gt; "nagios-update"
+ }
+</code></pre>
+
+<p>   }</p>
 
 <h3> Synopsis </h3>
 
