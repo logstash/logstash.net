@@ -23,6 +23,8 @@ inputs {
     <a href="#setting_name">name</a> => ... # string (required)
     <a href="#setting_password">password</a> => ... # password, default: "guest"
     <a href="#setting_port">port</a> => ... # number, default: 5672
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
     <a href="#setting_user">user</a> => ... # string, default: "guest"
     <a href="#setting_vhost">vhost</a> => ... # string, default: "/"
   }
@@ -44,6 +46,8 @@ inputs {
 
 <p>Enable or disable debugging</p>
 
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
 <h4> 
   <a name="setting_durable">
     durable
@@ -56,6 +60,8 @@ inputs {
 </ul>
 
 <p>Is this exchange durable?</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
 
 <h4> 
   <a name="setting_exchange_type">
@@ -70,6 +76,8 @@ inputs {
 
 <p>The exchange type (fanout, topic, direct)</p>
 
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
 <h4> 
   <a name="setting_host">
     host (required setting)
@@ -82,6 +90,8 @@ inputs {
 </ul>
 
 <p>Your amqp server address</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
 
 <h4> 
   <a name="setting_name">
@@ -96,6 +106,8 @@ inputs {
 
 <p>The name of the exchange</p>
 
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
 <h4> 
   <a name="setting_password">
     password
@@ -108,6 +120,8 @@ inputs {
 </ul>
 
 <p>Your amqp password</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
 
 <h4> 
   <a name="setting_port">
@@ -122,6 +136,40 @@ inputs {
 
 <p>The AMQP port to connect on</p>
 
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
 <h4> 
   <a name="setting_user">
     user
@@ -135,6 +183,8 @@ inputs {
 
 <p>Your amqp username</p>
 
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
+
 <h4> 
   <a name="setting_vhost">
     vhost
@@ -147,4 +197,6 @@ inputs {
 </ul>
 
 <p>The vhost to use</p>
+
+<small>This is documentation from lib/logstash/inputs/amqp.rb</small>
 

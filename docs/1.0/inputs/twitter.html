@@ -14,14 +14,32 @@ This is what it might look like in your config file:
 <pre><code>
 inputs {
   twitter {
+    <a href="#setting_debug">debug</a> => ... # boolean
     <a href="#setting_keywords">keywords</a> => ... # array (required)
     <a href="#setting_password">password</a> => ... # password (required)
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
     <a href="#setting_user">user</a> => ... # string (required)
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
 
 <h4> 
   <a name="setting_keywords">
@@ -36,6 +54,8 @@ inputs {
 
 <p>Any keywords to track in the twitter stream</p>
 
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
+
 <h4> 
   <a name="setting_password">
     password (required setting)
@@ -49,6 +69,40 @@ inputs {
 
 <p>Your twitter password</p>
 
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
+
 <h4> 
   <a name="setting_user">
     user (required setting)
@@ -61,4 +115,6 @@ inputs {
 </ul>
 
 <p>Your twitter username</p>
+
+<small>This is documentation from lib/logstash/inputs/twitter.rb</small>
 

@@ -20,13 +20,31 @@ This is what it might look like in your config file:
 <pre><code>
 inputs {
   file {
+    <a href="#setting_debug">debug</a> => ... # boolean
     <a href="#setting_exclude">exclude</a> => ... # array
     <a href="#setting_path">path</a> => ... # array (required)
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<small>This is documentation from lib/logstash/inputs/file.rb</small>
 
 <h4> 
   <a name="setting_exclude">
@@ -50,6 +68,8 @@ For example, if you have</p>
 <pre><code>exclude =&gt; "*.gz"
 </code></pre>
 
+<small>This is documentation from lib/logstash/inputs/file.rb</small>
+
 <h4> 
   <a name="setting_path">
     path (required setting)
@@ -63,4 +83,38 @@ For example, if you have</p>
 
 <p>The path to the file to use as an input.
 You can use globs here, such as "/var/log/*.log"</p>
+
+<small>This is documentation from lib/logstash/inputs/file.rb</small>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<small>This is documentation from lib/logstash/inputs/file.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+<small>This is documentation from lib/logstash/inputs/file.rb</small>
 

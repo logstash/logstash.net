@@ -23,6 +23,8 @@ inputs {
     <a href="#setting_host">host</a> => ... # string
     <a href="#setting_password">password</a> => ... # password, default: ""
     <a href="#setting_port">port</a> => ... # number, default: 61613
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
     <a href="#setting_user">user</a> => ... # string, default: ""
   }
 }
@@ -43,6 +45,8 @@ inputs {
 
 <p>Enable debugging output?</p>
 
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
 <h4> 
   <a name="setting_destination">
     destination
@@ -58,6 +62,8 @@ inputs {
 
 <p>Example: "/topic/logstash"</p>
 
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
 <h4> 
   <a name="setting_host">
     host
@@ -70,6 +76,8 @@ inputs {
 </ul>
 
 <p>The address of the STOMP server.</p>
+
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
 
 <h4> 
   <a name="setting_password">
@@ -84,6 +92,8 @@ inputs {
 
 <p>The password to authenticate with.</p>
 
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
 <h4> 
   <a name="setting_port">
     port
@@ -97,6 +107,40 @@ inputs {
 
 <p>The port to connet to on your STOMP server.</p>
 
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
+
 <h4> 
   <a name="setting_user">
     user
@@ -109,4 +153,6 @@ inputs {
 </ul>
 
 <p>The username to authenticate with.</p>
+
+<small>This is documentation from lib/logstash/inputs/stomp.rb</small>
 

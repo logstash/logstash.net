@@ -15,9 +15,80 @@ This is what it might look like in your config file:
 <pre><code>
 filters {
   grokdiscovery {
+    <a href="#setting_add_field">add_field</a> => ... # hash, default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array, default: []
+    <a href="#setting_type">type</a> => ... # string
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filters {
+  myfilter {
+    add_fields =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
+
+<small>This is documentation from lib/logstash/filters/grokdiscovery.rb</small>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filters {
+  myfilter {
+    add_tags =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<small>This is documentation from lib/logstash/filters/grokdiscovery.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The type to act on. A filter</p>
+
+<small>This is documentation from lib/logstash/filters/grokdiscovery.rb</small>
 

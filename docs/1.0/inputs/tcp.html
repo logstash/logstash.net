@@ -17,8 +17,11 @@ This is what it might look like in your config file:
 inputs {
   tcp {
     <a href="#setting_data_timeout">data_timeout</a> => ... # number, default: 5
+    <a href="#setting_debug">debug</a> => ... # boolean
     <a href="#setting_host">host</a> => ... # string, default: "0.0.0.0"
     <a href="#setting_port">port</a> => ... # number (required)
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
   }
 }
 </code></pre>
@@ -40,6 +43,23 @@ inputs {
 idle for more than this timeout period, we will assume
 it is dead and close it.</p>
 
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
+
 <h4> 
   <a name="setting_host">
     host
@@ -53,6 +73,8 @@ it is dead and close it.</p>
 
 <p>The address to listen on</p>
 
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
+
 <h4> 
   <a name="setting_port">
     port (required setting)
@@ -65,4 +87,38 @@ it is dead and close it.</p>
 </ul>
 
 <p>the port to listen on</p>
+
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+<small>This is documentation from lib/logstash/inputs/tcp.rb</small>
 
