@@ -17,6 +17,8 @@ dl { margin-left: 20px; }
 dt { font-weight: bold; }
 dd { margin-left: 20px; }
 
+li { list-style-type: square; margin-left: 15px; }
+
 /* main container */
 .container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
 
