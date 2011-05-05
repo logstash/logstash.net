@@ -1,0 +1,104 @@
+---
+title: logstash docs for output/elasticsearch
+layout: content_right
+---
+<h2>elasticsearch</h2>
+
+<p>TODO(sissel): Remove old cruft from pre-jruby
+TODO(sissel): Support river again?</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  elasticsearch {
+    <a href="#setting_cluster">cluster</a> => ... # string
+    <a href="#setting_host">host</a> => ... # string
+    <a href="#setting_index">index</a> => ... # string, default: "logstash-%{+YYYY.MM.dd}"
+    <a href="#setting_port">port</a> => ... # number, default: 9300
+    <a href="#setting_type">type</a> => ... # string, default: "%{@type}"
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_cluster">
+    cluster
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of your cluster if you set it on the ElasticSearch side. Useful
+for discovery.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name/address of the host to use for ElasticSearch unicast discovery
+This is only required if the normal multicast/cluster discovery stuff won't
+work in your environment.</p>
+
+<h4> 
+  <a name="setting_index">
+    index
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
+</ul>
+
+<p>The index to write events to. This can be dynamic using the %{foo} syntax.
+The default value will partition your indeces by day so you can more easily
+delete old data or only search specific date ranges.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 9300 </li>
+</ul>
+
+<p>The port for ElasticSearch transport to use. This is <em>not</em> the ElasticSearch
+REST API port (normally 9200).</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "%{@type}" </li>
+</ul>
+
+<p>The type to write events to. Generally you should try to write only similar
+events to the same 'type'. String expansion '%{foo}' works here.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/master/lib/logstash/outputs/elasticsearch.rb">lib/logstash/outputs/elasticsearch.rb
