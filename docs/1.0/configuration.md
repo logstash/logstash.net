@@ -11,15 +11,15 @@ configurations for each plugin available in that section.
 
 Example:
 
-    input {
+    inputs {
       ...
     }
 
-    filter {
+    filters {
       ...
     }
 
-    output {
+    outputs {
       ...
     }
 
