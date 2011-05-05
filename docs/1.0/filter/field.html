@@ -1,5 +1,5 @@
 ---
-title: logstash docs for filter/field
+title: logstash docs for filters/field
 layout: content_right
 ---
 <h2>field</h2>
@@ -37,7 +37,7 @@ filter {
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_fields =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
@@ -62,7 +62,7 @@ Example:</p>
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_tags =&gt; [ "foo_%{somefield}" ]
   }

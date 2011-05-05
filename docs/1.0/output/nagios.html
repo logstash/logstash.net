@@ -1,5 +1,5 @@
 ---
-title: logstash docs for output/nagios
+title: logstash docs for outputs/nagios
 layout: content_right
 ---
 <h2>nagios</h2>
@@ -19,7 +19,7 @@ Presumably, you only want certain events matching a given pattern
 to send events to nagios. So use grep to match and also to add the required
 fields.</p>
 
-<pre><code>filters {
+<pre><code>filter {
   grep {
     type =&gt; "linux-syslog"
     match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
@@ -33,7 +33,7 @@ fields.</p>
 
 <p>   }</p>
 
-<p>   outputs {</p>
+<p>   output{</p>
 
 <pre><code> nagios { 
    # only process events with this tag

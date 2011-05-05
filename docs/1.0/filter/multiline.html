@@ -1,5 +1,5 @@
 ---
-title: logstash docs for filter/multiline
+title: logstash docs for filters/multiline
 layout: content_right
 ---
 <h2>multiline</h2>
@@ -18,7 +18,7 @@ stacktrace messages into a single event.</p>
 <p>TODO(sissel): Document any issues?
 The config looks like this:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   multiline {
     type =&gt; "type"
     pattern =&gt; "pattern, a regexp"
@@ -41,7 +41,7 @@ filter and the what will be applied. (vice-versa is also true)</p>
 <p>For example, java stack traces are multiline and usually have the message
 starting at the far-left, then each subsequent line indented. Do this:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   multiline {
     type =&gt; "somefiletype"
     pattern =&gt; "^\\s"
@@ -54,7 +54,7 @@ starting at the far-left, then each subsequent line indented. Do this:</p>
 
 <p>Another example is C line continuations (backslash). Here's how to do that:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   multiline {
     type =&gt; "somefiletype "
     pattern =&gt; "\\$"
@@ -97,7 +97,7 @@ filter {
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_fields =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
@@ -122,7 +122,7 @@ Example:</p>
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_tags =&gt; [ "foo_%{somefield}" ]
   }
