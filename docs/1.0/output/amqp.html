@@ -16,7 +16,7 @@ output {
   amqp {
     <a href="#setting_debug">debug</a> => ... # boolean
     <a href="#setting_durable">durable</a> => ... # boolean
-    <a href="#setting_exchange_type">exchange_type</a> => ... # string (required)
+    <a href="#setting_exchange_type">exchange_type</a> => ... # fanoutdirecttopic (required)
     <a href="#setting_host">host</a> => ... # string (required)
     <a href="#setting_name">name</a> => ... # string (required)
     <a href="#setting_password">password</a> => ... # password, default: "guest"
@@ -62,7 +62,7 @@ output {
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value can be any of: "fanout", "direct", "topic" </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
