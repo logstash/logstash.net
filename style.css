@@ -11,7 +11,7 @@ h1  {font-size: 36px;} h2  { font-size: 32px;} h3  {font-size: 24px;} h4  {font-
 p  { margin: 0; }
 a:link, a:visited  { color: #658F3D; text-decoration:none; }
 a:hover  { text-decoration:underline; }
-pre { white-space: pre; margin-left: 15px; border: 1px solid brown; background-color: #F6E3CE; padding: 5px; }
+pre { white-space: pre; margin-left: 15px; border: 1px solid #FFC280; background-color: #F7F0E9; padding: 5px; }
 code { font-family: monospace; }
 dl { margin-left: 20px; }
 dt { font-weight: bold; }
