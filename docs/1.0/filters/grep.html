@@ -15,7 +15,7 @@ then matching events are dropped.</p>
 This is what it might look like in your config file:
 
 <pre><code>
-filters {
+filter {
   grep {
     <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... # string
     <a href="#setting_add_field">add_field</a> => ... # hash, default: {}
@@ -58,7 +58,7 @@ filters {
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_fields =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
@@ -83,7 +83,7 @@ Example:</p>
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_tags =&gt; [ "foo_%{somefield}" ]
   }

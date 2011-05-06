@@ -13,7 +13,7 @@ that causes segfaults in libgrok.</p>
 This is what it might look like in your config file:
 
 <pre><code>
-filters {
+filter {
   grokdiscovery {
     <a href="#setting_add_field">add_field</a> => ... # hash, default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array, default: []
@@ -38,7 +38,7 @@ filters {
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_fields =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
@@ -63,7 +63,7 @@ Example:</p>
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
-<pre><code>filters {
+<pre><code>filter {
   myfilter {
     add_tags =&gt; [ "foo_%{somefield}" ]
   }
