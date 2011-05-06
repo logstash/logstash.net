@@ -1,6 +1,6 @@
 ---
 title: Getting Started (Standalone server) - logstash
-layout: default
+layout: content_right
 ---
 # Getting started with logstash (standalone server example)
 
@@ -21,8 +21,6 @@ Steps:
 
 If you have problems, feel free to email the users list
 (logstash-users@googlegroups.com) or join IRC (#logstash on irc.freenode.org)
-
-<div class="clear"></div>
 
 ## ElasticSearch
 
