@@ -1,5 +1,20 @@
 <html>
   <body>
-    <script src="/js/404.js"></script>
+    <script src="js/404.js"></script>
+    <script>
+      /* Do stuff I'd normally do in .htaccess with mod_rewrite. */
+      var route = new Route();
+      route.add("/issues/:number", function(number) {
+        redirect("https://logstash.jira.com/browse/LOGSTASH-" + number);
+      });
+      route.add("/issues/?", function() {
+        redirect("https://logstash.jira.com/");
+      });
+      //route.add("/home/:foo/.*", function(foo) {
+        //console.log("Hello from " + foo);
+      //});
+
+      route.run();
+    </script>
   </body>
 </html>

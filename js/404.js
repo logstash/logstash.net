@@ -1,17 +1,58 @@
+//for testing
+//var document = {
+  //location: { pathname: "/issues/79" },
+//};
+
 (function() {
   var path = document.location.pathname;
 
-  /* TODO(sissel): Refactor this to be route-like */
+  window.Route = function() { 
+    this.routes = [];
+  };
 
-  // Redirect /issues/NNN to jira.
-  var issues_match = /^\/issues\/([^/]+)/.exec(path);
-  if (issues_match) {
-    document.location.href = "https://logstash.jira.com/browse/LOGSTASH-" + issues_match[1];
-    return;
-  }
+  window.Route.prototype.add = function(path, callback) {
+    var pattern = path;
+    var new_pattern = "";
+    while (pattern !== new_pattern) {
+      if (new_pattern !== "") {
+        pattern = new_pattern;
+      }
 
-  if (path =~ /^\/issues\/?/) {
-    document.location.href = "https://logstash.jira.com/"
-    return;
-  }
+      new_pattern = pattern.replace(/\/:[A-z]+/, function(token) {
+        return "/([^/]+)";
+      });
+      //console.log(new_pattern);
+    };
+
+    var re = new RegExp("^" + pattern + "$");
+
+    this.routes.push(function(pathname) {
+      var m = re.exec(pathname)
+      if (m) {
+        m.shift(); // Skip matched full string
+        callback.apply(this, m);
+        return true;
+      }
+      return false;
+    });
+  } /* function Route#add */
+
+  window.Route.prototype.redirect = function(url) {
+    var redirect = function(url) {
+      document.location.href = url;
+    };
+  }; /* function Route#redirect */
+
+  window.Route.prototype.run = function() {
+    /* Try each route */
+    for (var r in this.routes) {
+      routemethod = this.routes[r]
+      //console.log(r + ": " + routemethod());
+      //console.log(document.location.pathname);
+      if (routemethod(document.location.pathname)) { 
+        break; 
+      }
+    }
+  }; /* function Route#run */
 })();
+
