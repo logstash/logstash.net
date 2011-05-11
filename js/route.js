@@ -38,9 +38,7 @@
   } /* function Route#add */
 
   window.Route.prototype.redirect = function(url) {
-    var redirect = function(url) {
-      document.location.href = url;
-    };
+    document.location.href = url;
   }; /* function Route#redirect */
 
   window.Route.prototype.run = function() {
