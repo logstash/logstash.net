@@ -10,6 +10,14 @@
     this.routes = [];
   };
 
+  /* Add a route.
+   *
+   * Arguments:
+   *   path: the path, can include :foo tokens, like:
+   *     "/issues/:foo/delete"
+   *   callback: function to call if route matches. 
+   *     arguments passed to the callback are any captured groups.
+   */
   window.Route.prototype.add = function(path, callback) {
     var pattern = path;
     var new_pattern = "";
@@ -37,10 +45,12 @@
     });
   } /* function Route#add */
 
+  /* Redirect to a url */
   window.Route.prototype.redirect = function(url) {
     document.location.href = url;
   }; /* function Route#redirect */
 
+  /* Run the routes. Breaks on the first route matched. */
   window.Route.prototype.run = function() {
     /* Try each route */
     for (var r in this.routes) {
