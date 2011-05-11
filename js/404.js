@@ -1,5 +1,5 @@
 (function() {
-  var path = document.href.pathname;
+  var path = document.location.pathname;
 
   // Redirect /issues/NNN to jira.
   var issues_match = /\/issues\/[^/]+/.exec(path)
