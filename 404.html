@@ -10,11 +10,21 @@
       route.add("/issues/?", function() {
         route.redirect("https://logstash.jira.com/");
       });
-      //route.add("/home/:foo/.*", function(foo) {
-        //console.log("Hello from " + foo);
-      //});
+      route.add(".*", function() {
+        // Actually, 404.
+        document.getElementById("four-oh-four").setAttribute("style", "display: block");
+      });
 
       route.run();
     </script>
+
+    <div style="display: hidden;" id="four-oh-four">
+      <h1> 404 </h1>
+      Page not found.
+
+      <p>
+      
+      <a href="/">Go home!</a>
+    </div>
   </body>
 </html>
