@@ -4,12 +4,19 @@
     <script>
       /* Do stuff I'd normally do in .htaccess with mod_rewrite. */
       var route = new Route();
+
       route.add("/issues/:number", function(number) {
         route.redirect("https://logstash.jira.com/browse/LOGSTASH-" + number);
       });
+
       route.add("/issues/?", function() {
         route.redirect("https://logstash.jira.com/");
       });
+
+      route.add("/docs/1.0/?", function() {
+        route.redirect("/docs/1.0.6");
+      });
+
       route.add(".*", function() {
         // Actually, 404.
         document.getElementById("four-oh-four").setAttribute("style", "display: block");
