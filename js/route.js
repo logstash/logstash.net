@@ -58,7 +58,7 @@
       //console.log(r + ": " + routemethod());
       //console.log(document.location.pathname);
       if (routemethod(document.location.pathname)) { 
-        break; 
+        return;
       }
     }
   }; /* function Route#run */
