@@ -1,0 +1,56 @@
+---
+title: logstash docs for outputs/stdout
+layout: content_right
+---
+<h2>stdout</h2>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  stdout {
+    <a href="#setting_debug">debug</a> => ... # boolean
+    <a href="#setting_debug_format">debug_format</a> => ... # , default: ["ruby"]
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable debugging. Tries to pretty-print the entire event object.</p>
+
+<h4> 
+  <a name="setting_debug_format">
+    debug_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is ["ruby"] </li>
+</ul>
+
+<p>Debug output format: ruby (default), json</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.12/lib/logstash/outputs/stdout.rb">lib/logstash/outputs/stdout.rb

@@ -1,0 +1,151 @@
+---
+title: logstash docs for inputs/file
+layout: content_right
+---
+<h2>file</h2>
+
+<p>Stream events from files.</p>
+
+<p>By default, each event is assumed to be one line. If you
+want to join lines, you'll want to use the multiline filter.</p>
+
+<p>Files are followed in a manner similar to "tail -0F". File rotation
+is detected and handled by this input.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+input {
+  file {
+    <a href="#setting_debug">debug</a> => ... # boolean
+    <a href="#setting_exclude">exclude</a> => ... # array
+    <a href="#setting_format">format</a> => ... # 
+    <a href="#setting_message_format">message_format</a> => ... # string
+    <a href="#setting_path">path</a> => ... # array (required)
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_exclude">
+    exclude
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Exclusions. Globs are valid here, too.
+For example, if you have</p>
+
+<pre><code>path =&gt; "/var/log/*"
+</code></pre>
+
+<p>you might want to exclude gzipped files:</p>
+
+<pre><code>exclude =&gt; "*.gz"
+</code></pre>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<h4> 
+  <a name="setting_path">
+    path (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The path to the file to use as an input.
+You can use globs here, such as "/var/log/*.log"</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.12/lib/logstash/inputs/file.rb">lib/logstash/inputs/file.rb
