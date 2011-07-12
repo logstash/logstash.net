@@ -4,15 +4,22 @@ layout: content_right
 ---
 <h2>zabbix</h2>
 
-<p>The zabbix output is used for sending item data to zavvux via the
-zabbix<em>sender executable.
-For this output to work, your event must have the following fields:
-  "zabbix</em>host"    (the host configured in Zabbix)
-  "zabbix_item"    (the item key on the host in Zabbix)
-In Zabbix, create your host with the same name (no spaces in the name of
+<p>The zabbix output is used for sending item data to zabbux via the
+zabbix_sender executable.</p>
+
+<p>For this output to work, your event must have the following fields:</p>
+
+<ul>
+<li>"zabbix_host"    (the host configured in Zabbix)</li>
+<li>"zabbix_item"    (the item key on the host in Zabbix)</li>
+</ul>
+
+
+<p>In Zabbix, create your host with the same name (no spaces in the name of
 the host supported) and create your item with the specified key as a
-Zabbix Trapper item.
-The easiest way to use this output is with the grep filter.
+Zabbix Trapper item.</p>
+
+<p>The easiest way to use this output is with the grep filter.
 Presumably, you only want certain events matching a given pattern
 to send events to zabbix, so use grep to match and also to add the required
 fields.</p>
@@ -29,17 +36,21 @@ fields.</p>
  }
 </code></pre>
 
-<p>   }
-   output{</p>
+<p>   }</p>
+
+<p>   output{</p>
 
 <pre><code> zabbix {
    # only process events with this tag
    tags =&gt; "zabbix-sender"
+
    # specify the hostname or ip of your zabbix server
    # (defaults to localhost)
    zabbix_server =&gt; "localhost"
+
    # specify the port to connect to (default 10051)
    zabbix_port =&gt; "10051"
+
    # specify the path to zabbix_sender
    # (defaults to "/usr/local/bin/zabbix_sender")
    zabbix_sender =&gt; "/usr/local/bin/zabbix_sender"
