@@ -21,7 +21,6 @@ This is what it might look like in your config file:
 <pre><code>
 filter {
   split {
-    <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... # array
     <a href="#setting_add_field">add_field</a> => ... # hash, default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array, default: []
     <a href="#setting_field">field</a> => ... # string, default: "@message"
@@ -32,20 +31,6 @@ filter {
 </code></pre>
 
 <h3> Details </h3>
-
-<h4> 
-  <a name="setting_(?-mix:[A-Za-z0-9_-]+)">
-    (?-mix:[A-Za-z0-9_-]+)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_add_field">
