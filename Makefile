@@ -1,5 +1,5 @@
 
-SOURCES=docs/latest.html.in _layouts/content_right.html.in _layouts/default.html.in
+SOURCES=docs/latest.html.in _layouts/content_right.html.in _layouts/default.html.in index.html.in
 OBJECTS=$(subst .html.in,.html,$(SOURCES))
 
 default: update
