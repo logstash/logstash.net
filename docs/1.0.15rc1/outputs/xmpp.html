@@ -1,0 +1,103 @@
+---
+title: logstash docs for outputs/xmpp
+layout: content_right
+---
+<h2>xmpp</h2>
+
+<p>This output allows you to pull metrics from your logs and ship them to
+XMPP/Jabber.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  xmpp {
+    <a href="#setting_host">host</a> => ... # string
+    <a href="#setting_message">message</a> => ... # string (required)
+    <a href="#setting_password">password</a> => ... # password (required)
+    <a href="#setting_resource">resource</a> => ... # string (required)
+    <a href="#setting_targets">targets</a> => ... # array (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The xmpp server to connect to. This is optional. If you omit this setting,
+the host on the JID is used. (foo.com for user@foo.com)</p>
+
+<h4> 
+  <a name="setting_message">
+    message (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The message to send. This supports dynamic strings like %{@source_host}</p>
+
+<h4> 
+  <a name="setting_password">
+    password (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The xmpp password for the JID.</p>
+
+<h4> 
+  <a name="setting_resource">
+    resource (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Connection information for server</p>
+
+<h4> 
+  <a name="setting_targets">
+    targets (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The targets to send messages to (users, chat rooms, etc)</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.15rc1/lib/logstash/outputs/xmpp.rb">lib/logstash/outputs/xmpp.rb
