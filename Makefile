@@ -15,7 +15,7 @@ clean:
 	-rm $(OBJECTS) > /dev/null 2>&1
 
 update: $(OBJECTS) | validate-version 
+	@echo "Don't forget to commit this"
 
 %.html: %.html.in | validate-version
-	sed -re "s/VERSION/$(VERSION)/" $< > $@
-
+	sed -re "s/%VERSION%/$(VERSION)/" $< > $@
