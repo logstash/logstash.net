@@ -1,0 +1,70 @@
+---
+title: logstash docs for outputs/loggly
+layout: content_right
+---
+<h2>loggly</h2>
+
+<p>TODO(sissel): Move to something that performs better than net/http
+Got a loggly account? Use logstash to ship logs to Loggly!</p>
+
+<p>This is most useful so you can use logstash to parse and structure
+your logs and ship structured, json events to your account at Loggly.</p>
+
+<p>To use this, you'll need to use a Loggly input with type 'http'
+and 'json logging' enabled.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  loggly {
+    <a href="#setting_host">host</a> => ... # string, default: "logs.loggly.com"
+    <a href="#setting_key">key</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logs.loggly.com" </li>
+</ul>
+
+<p>The hostname to send logs to. This should target the loggly http input
+server which is usually "logs.loggly.com"</p>
+
+<h4> 
+  <a name="setting_key">
+    key (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The loggly http input key to send to.
+This is usually visible in the Loggly 'Inputs' page as something like this</p>
+
+<pre><code>https://logs.hoover.loggly.net/inputs/abcdef12-3456-7890-abcd-ef0123456789
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      \----------&gt;   key   &lt;-------------/
+</code></pre>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.16/lib/logstash/outputs/loggly.rb">lib/logstash/outputs/loggly.rb

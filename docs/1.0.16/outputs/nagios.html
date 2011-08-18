@@ -1,0 +1,90 @@
+---
+title: logstash docs for outputs/nagios
+layout: content_right
+---
+<h2>nagios</h2>
+
+<p>The nagios output is used for sending passive check results to nagios via the
+nagios command file.</p>
+
+<p>For this output to work, your event must have the following fields:
+  "nagios<em>host"
+  "nagios</em>service"</p>
+
+<p>This field is supported, but optional:
+  "nagios_annotation"</p>
+
+<p>The easiest way to use this output is with the grep filter.
+Presumably, you only want certain events matching a given pattern
+to send events to nagios. So use grep to match and also to add the required
+fields.</p>
+
+<pre><code>filter {
+  grep {
+    type =&gt; "linux-syslog"
+    match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
+    add_tag =&gt; [ "nagios-update" ]
+    add_fields =&gt; [
+      "nagios_host", "%{@source_host}",
+      "nagios_service", "the name of your nagios service check"
+    ]
+  }
+}
+
+output{
+  nagios { 
+    # only process events with this tag
+    tags =&gt; "nagios-update"
+  }
+}
+</code></pre>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  nagios {
+    <a href="#setting_commandfile">commandfile</a> => ... # string, default: "/var/lib/nagios3/rw/nagios.cmd"
+    <a href="#setting_tags">tags</a> => ... # array, default: []
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_commandfile">
+    commandfile
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/var/lib/nagios3/rw/nagios.cmd" </li>
+</ul>
+
+<p>The path to your nagios command file</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with any of these tags. Optional.
+If not specified, will process all events.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.16/lib/logstash/outputs/nagios.rb">lib/logstash/outputs/nagios.rb
