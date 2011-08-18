@@ -16,9 +16,9 @@ This is what it might look like in your config file:
 output {
   xmpp {
     <a href="#setting_host">host</a> => ... # string
+    <a href="#setting_identity">identity</a> => ... # string (required)
     <a href="#setting_message">message</a> => ... # string (required)
     <a href="#setting_password">password</a> => ... # password (required)
-    <a href="#setting_resource">resource</a> => ... # string (required)
     <a href="#setting_targets">targets</a> => ... # array (required)
   }
 }
@@ -40,6 +40,20 @@ output {
 
 <p>The xmpp server to connect to. This is optional. If you omit this setting,
 the host on the JID is used. (foo.com for user@foo.com)</p>
+
+<h4> 
+  <a name="setting_identity">
+    identity (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The user or resource ID, like foo@example.com.</p>
 
 <h4> 
   <a name="setting_message">
@@ -68,20 +82,6 @@ the host on the JID is used. (foo.com for user@foo.com)</p>
 </ul>
 
 <p>The xmpp password for the JID.</p>
-
-<h4> 
-  <a name="setting_resource">
-    resource (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Connection information for server</p>
 
 <h4> 
   <a name="setting_targets">
