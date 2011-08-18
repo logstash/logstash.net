@@ -15,7 +15,7 @@ Logstash can help (and even replace some tools you might already be using).
 
 ## Keep it simple.
 
-[Etsy](https://github.com/etsy] has some excellent open source tools. One of
+(Etsy)[https://github.com/etsy] has some excellent open source tools. One of
 them, [logster](https://github.com/etsy/logster), is meant to help you pull
 metrics from logs and ship them to [graphite](http://graphite.wikidot.com/) so
 you can make pretty graphs of those metrics.
