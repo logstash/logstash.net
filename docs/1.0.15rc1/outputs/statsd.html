@@ -4,8 +4,24 @@ layout: content_right
 ---
 <h2>statsd</h2>
 
-<p>TODO(sissel): Document what statsd is and where to learn about it
-Also document an example.</p>
+<p>statsd is a server for aggregating counters and other metrics to ship to
+graphite.</p>
+
+<p>The general idea is that you send statsd count or latency data and every few
+seconds it will emit the aggregated values to graphite (aggregates like
+average, max, stddev, etc)</p>
+
+<p>You can learn about statsd here:</p>
+
+<ul>
+<li><a href="http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/">http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/</a></li>
+<li><a href="https://github.com/etsy/statsd">https://github.com/etsy/statsd</a></li>
+</ul>
+
+
+<p>A simple example usage of this is to count HTTP hits by response code; to learn
+more about that, check out the
+<a href="../../tutorials/metrics-from-logs">log metrics tutorial</a></p>
 
 
 <h3> Synopsis </h3>

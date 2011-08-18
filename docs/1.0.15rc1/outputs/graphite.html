@@ -54,10 +54,12 @@ output {
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The metric(s) to use. This supports dynamic strings like %{@source<em>host}
+<p>The metric(s) to use. This supports dynamic strings like %{@source_host}
 for metric names and also for values. This is a hash field with key
-of the metric name, value of the metric value. Example:
-[ "%{@source</em>host}/uptime", %{uptime_1m} " ]</p>
+of the metric name, value of the metric value. Example:</p>
+
+<pre><code>[ "%{@source_host}/uptime", %{uptime_1m} " ]
+</code></pre>
 
 <p>The value will be coerced to a floating point value. Values which cannot be
 coerced will zero (0)</p>
