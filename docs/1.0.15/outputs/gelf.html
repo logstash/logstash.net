@@ -1,0 +1,130 @@
+---
+title: logstash docs for outputs/gelf
+layout: content_right
+---
+<h2>gelf</h2>
+
+<p>GELF output. This is most useful if you want to use logstash
+to output events to graylog2.</p>
+
+<p>More information at <a href="http://www.graylog2.org/about/gelf">http://www.graylog2.org/about/gelf</a></p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+output {
+  gelf {
+    <a href="#setting_chunksize">chunksize</a> => ... # number, default: 1420
+    <a href="#setting_facility">facility</a> => ... # string, default: "logstash-gelf"
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_level">level</a> => ... # string, default: "INFO"
+    <a href="#setting_port">port</a> => ... # number, default: 12201
+    <a href="#setting_sender">sender</a> => ... # string, default: "%{@source_host}"
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_chunksize">
+    chunksize
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 1420 </li>
+</ul>
+
+<p>The GELF chunksize. You usually don't need to change this.</p>
+
+<h4> 
+  <a name="setting_facility">
+    facility
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash-gelf" </li>
+</ul>
+
+<p>The GELF facility. Dynamic values like %{foo} are permitted here; this
+is useful if you need to use a value from the event as the facility name.</p>
+
+<h4> 
+  <a name="setting_host">
+    host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>graylog2 server address</p>
+
+<h4> 
+  <a name="setting_level">
+    level
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "INFO" </li>
+</ul>
+
+<p>The GELF message level. Dynamic values like %{level} are permitted here;
+useful if you want to parse the 'log level' from an event and use that
+as the gelf level/severity.</p>
+
+<p>Values here can be integers [0..7] inclusive or any of
+"debug", "info", "warn", "error", "fatal", "unknown" (case insensitive).
+Single-character versions of these are also valid, "d", "i", "w", "e", "f",
+"u"</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 12201 </li>
+</ul>
+
+<p>graylog2 server port</p>
+
+<h4> 
+  <a name="setting_sender">
+    sender
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "%{@source_host}" </li>
+</ul>
+
+<p>Allow overriding of the gelf 'sender' field. This is useful if you
+want to use something other than the event's source host as the
+"sender" of an event. A common case for this is using the application name
+instead of the hostname.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.15/lib/logstash/outputs/gelf.rb">lib/logstash/outputs/gelf.rb
