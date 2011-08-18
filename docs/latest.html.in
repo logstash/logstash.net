@@ -1,11 +1,11 @@
 <html>
   <head>
     <title> Redirecting to latest docs... </title>
-    <meta http-equiv="refresh" content="0;VERSION"></meta>
+    <meta http-equiv="refresh" content="0;%VERSION%"></meta>
   </head>
   <body>
     Redirecting you to the latest docs...
 
-    <a href="VERSION">Click here</a> if redirection fails
+    <a href="%VERSION%">Click here</a> if redirection fails
   </body>
 </html>
