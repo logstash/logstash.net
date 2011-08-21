@@ -28,6 +28,8 @@ input {
     <a href="#setting_name">name</a> => ... # string (required)
     <a href="#setting_password">password</a> => ... # password, default: "guest"
     <a href="#setting_port">port</a> => ... # number, default: 5672
+    <a href="#setting_queue_durable">queue_durable</a> => ... # boolean
+    <a href="#setting_queue_name">queue_name</a> => ... # string
     <a href="#setting_ssl">ssl</a> => ... # boolean
     <a href="#setting_tags">tags</a> => ... # array
     <a href="#setting_type">type</a> => ... # string (required)
@@ -181,6 +183,35 @@ sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 </ul>
 
 <p>The AMQP port to connect on</p>
+
+<h4> 
+  <a name="setting_queue_durable">
+    queue_durable
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Is this queue durable? (aka; Should it survive a broker restart?).
+If you omit this setting, the 'durable' property will be used as default.</p>
+
+<h4> 
+  <a name="setting_queue_name">
+    queue_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the queue. If not set, defaults to the same name as the exchange.</p>
 
 <h4> 
   <a name="setting_ssl">
