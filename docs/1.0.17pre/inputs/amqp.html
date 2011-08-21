@@ -1,0 +1,281 @@
+---
+title: logstash docs for inputs/amqp
+layout: content_right
+---
+<h2>amqp</h2>
+
+<p>Pull events from an AMQP exchange.</p>
+
+<p>AMQP is a messaging system. It requires you to run an AMQP server or 'broker'
+Examples of AMQP servers are <a href="http://www.rabbitmq.com/">RabbitMQ</a> and
+<a href="http://qpid.apache.org/">QPid</a></p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>
+input {
+  amqp {
+    <a href="#setting_debug">debug</a> => ... # boolean
+    <a href="#setting_durable">durable</a> => ... # boolean, default: true
+    <a href="#setting_exchange_type">exchange_type</a> => ... # ["fanout", "direct", "topic"] (required)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"]
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_key">key</a> => ... # string
+    <a href="#setting_message_format">message_format</a> => ... # string
+    <a href="#setting_name">name</a> => ... # string (required)
+    <a href="#setting_password">password</a> => ... # password, default: "guest"
+    <a href="#setting_port">port</a> => ... # number, default: 5672
+    <a href="#setting_ssl">ssl</a> => ... # boolean
+    <a href="#setting_tags">tags</a> => ... # array
+    <a href="#setting_type">type</a> => ... # string (required)
+    <a href="#setting_user">user</a> => ... # string, default: "guest"
+    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean
+    <a href="#setting_vhost">vhost</a> => ... # string, default: "/"
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable or disable debugging</p>
+
+<h4> 
+  <a name="setting_durable">
+    durable
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
+
+<h4> 
+  <a name="setting_exchange_type">
+    exchange_type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "fanout", "direct", "topic" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The exchange type (fanout, topic, direct)</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_host">
+    host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your amqp server address</p>
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The routing key to bind to</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<h4> 
+  <a name="setting_name">
+    name (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the exchange</p>
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> Default value is "guest" </li>
+</ul>
+
+<p>Your amqp password</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 5672 </li>
+</ul>
+
+<p>The AMQP port to connect on</p>
+
+<h4> 
+  <a name="setting_ssl">
+    ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable or disable SSL</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "guest" </li>
+</ul>
+
+<p>Your amqp username</p>
+
+<h4> 
+  <a name="setting_verify_ssl">
+    verify_ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Validate SSL certificate</p>
+
+<h4> 
+  <a name="setting_vhost">
+    vhost
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/" </li>
+</ul>
+
+<p>The vhost to use</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.0.17pre/lib/logstash/inputs/amqp.rb">lib/logstash/inputs/amqp.rb</a>
