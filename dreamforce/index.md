@@ -67,7 +67,6 @@ Go to the logstash web interface in browser: <http://localhost:9292/>
 
 Type stuff on stdin on the agent, then search for it in the web interface.
 
-
 ## Step 5 - real world example
 
 Let's backfill some old apache logs.  First, let's use grok.
@@ -91,3 +90,9 @@ keep reading below.
 Logstash will now be listening on TCP port 3333. Send an apache log message at it:
 
     cat apache_log.1 | nc localhost 3333
+
+The expected output can be viewed here: [step-5-output.txt](step-5-output.txt)
+
+## Step 6 - real world example + search
+
+TBD
