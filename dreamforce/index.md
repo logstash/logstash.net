@@ -100,13 +100,15 @@ Same as the previous step, but we'll output to ElasticSearch now.
 ### Download
 
 * [apache-elasticsearch.conf](apache-elasticsearch.conf)
-* [apache_log.2](apache_log.2) (2 days of apache logs)
+* [apache_log.2.bz2](apache_log.2.bz2) (2 days of apache logs)
 
 ### Run it
 
     java -jar logstash-1.0.17-monolithic.jar agent -f apache-elasticsearch.conf -- web --backend 'elasticsearch:///?local'
 
 Logstash should be all set for you now. Start feeding it logs:
+
+    bzip2 -d apache_log.2.bz2
 
     nc localhost 3333 < apache_log.2 
 
