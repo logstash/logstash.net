@@ -81,7 +81,7 @@ keep reading below.
 ### Download
 
 * [apache-parse.conf](apache-parse.conf)
-* [apache_log.1](apache_log.1)
+* [apache_log.1](apache_log.1) (a single apache log line)
 
 ### Run it
 
@@ -89,10 +89,37 @@ keep reading below.
 
 Logstash will now be listening on TCP port 3333. Send an apache log message at it:
 
-    cat apache_log.1 | nc localhost 3333
+    nc localhost 3333 < apache_log.1
 
 The expected output can be viewed here: [step-5-output.txt](step-5-output.txt)
 
 ## Step 6 - real world example + search
 
-TBD
+Same as the previous step, but we'll output to ElasticSearch now.
+
+### Download
+
+* [apache-elasticsearch.conf](apache-elasticsearch.conf)
+* [apache_log.2](apache_log.2) (2 days of apache logs)
+
+### Run it
+
+    java -jar logstash-1.0.17-monolithic.jar agent -f apache-elasticsearch.conf -- web --backend 'elasticsearch:///?local'
+
+Logstash should be all set for you now. Start feeding it logs:
+
+    nc localhost 3333 < apache_log.2 
+
+Go to the logstash web interface in browser: <http://localhost:9292/>
+
+Try some search queries. Click on some results.
+
+## Want more?
+
+For further learning, try these:
+
+* [Watch a presentation on logstash](http://blip.tv/carolinacon/logstash-open-source-log-and-event-management-jordan-sissel-5123601)
+* [Getting started 'standalone' guide](http://logstash.net/docs/1.0.17/getting-started-simple)
+* [Getting started 'centralized' guide](http://logstash.net/docs/1.0.17/getting-started-centralized) - 
+  learn how to build out your logstash infrastructure and centralize your logs.
+* [Dive into the docs](http://logstash.net/docs/1.0.17/)
