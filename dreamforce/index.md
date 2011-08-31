@@ -64,3 +64,30 @@ process. Useful for simple deploys.
 ### Use it:
 
 Go to the logstash web interface in browser: <http://localhost:9292/>
+
+Type stuff on stdin on the agent, then search for it in the web interface.
+
+
+## Step 5 - real world example
+
+Let's backfill some old apache logs.  First, let's use grok.
+
+Requirements:
+
+* libgrok [INSTALL notes here](https://github.com/jordansissel/grok/blob/master/INSTALL)
+
+Use the 'grok' logstash filter to parse logs. Once you have libgrok installed,
+keep reading below.
+
+### Download
+
+* [apache-parse.conf](apache-parse.conf)
+* [apache_log.1](apache_log.1)
+
+### Run it
+
+    java -jar logstash-1.0.17-monolithic.jar agent -f apache-parse.conf
+
+Logstash will now be listening on TCP port 3333. Send an apache log message at it:
+
+    cat apache_log.1 | nc localhost 3333
