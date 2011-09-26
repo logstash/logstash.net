@@ -35,7 +35,7 @@ Requirements: java
 
 Paste this in your shell for easy downloadings.
 
-    ES_PACKAGE=elasticsearch-0.16.0.zip
+    ES_PACKAGE=elasticsearch-0.17.6.zip
     ES_DIR=${ES_PACKAGE%%.zip}
     SITE=http://github.com/downloads/elasticsearch/elasticsearch
     if [ ! -d "$ES_DIR" ] ; then
@@ -44,7 +44,7 @@ Paste this in your shell for easy downloadings.
     fi
 
 Otherwise - Download and unpack the elasticsearch yourself; you'll want version
-0.16.0 or newer. It's written in Java and requires Java (uses Lucene on the
+0.17.6. It's written in Java and requires Java (uses Lucene on the
 backend; if you want to know more read the elasticsearch docs).
 
 To start the service, run `bin/elasticsearch`. If you want to run it in the
