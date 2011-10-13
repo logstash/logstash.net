@@ -11,7 +11,7 @@ This guide shows how to get you going quickly with logstash with multiple
 servers. This guide is for folks who want to ship all their logstash logs to a
 central location for indexing and search.
 
-We'll have two classes of server. First, one that ships logs. Second, one that
+We'll have two classes of server. First, one that ships logs; second, one that
 collects and indexes logs.
 
 It's important to note that logstash itself has no concept of "shipper" and
