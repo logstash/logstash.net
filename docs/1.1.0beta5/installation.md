@@ -16,11 +16,11 @@ included. To use it, do the following:
 
 ### web interface
 
-    java -jar logstash-1.1.0beta4-monolithic.jar web
+    java -jar logstash-1.1.0beta5-monolithic.jar web
 
 ### agent 
 
-    java -jar logstash-1.1.0beta4-monolithic.jar agent -f youragent.conf
+    java -jar logstash-1.1.0beta5-monolithic.jar agent -f youragent.conf
 
 ### Combined
 
@@ -28,7 +28,7 @@ You can run both the agent and web interface (or any number of separate agents)
 in the same java process. Just use '--' indicate the start of a new command
 line:
 
-    java -jar logstash-1.1.0beta4-monolithic.jar agent -f myagent.conf -- web
+    java -jar logstash-1.1.0beta5-monolithic.jar agent -f myagent.conf -- web
 
 ## 'gem install logstash'
 

@@ -23,7 +23,7 @@ If you have problems, feel free to email the users list
 
 ## logstash
 
-You should download the logstash 'monolithic' jar - if you haven't yet, [download it now](http://semicomplete.com/files/logstash/logstash-1.1.0beta4-monolithic.jar). This package includes most
+You should download the logstash 'monolithic' jar - if you haven't yet, [download it now](http://semicomplete.com/files/logstash/logstash-1.1.0beta5-monolithic.jar). This package includes most
 of the dependencies for logstash in it and helps you get started quicker.
 
 The configuration of any logstash agent consists of specifying inputs, filters,
@@ -71,7 +71,7 @@ Put this in a file called "mylogstash.conf"
 
 Now run it all:
 
-    java -jar logstash-1.1.0beta4-monolithic.jar agent -f mylogstash.conf -- web --backend elasticsearch:///?local
+    java -jar logstash-1.1.0beta5-monolithic.jar agent -f mylogstash.conf -- web --backend elasticsearch:///?local
 
 Point your browser at <http://yourserver:9292> and start searching!
 
