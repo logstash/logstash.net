@@ -1,0 +1,78 @@
+---
+title: logstash docs for outputs/tcp
+layout: content_right
+---
+<h2>tcp</h2>
+
+<p>Write events over a TCP socket.</p>
+
+<p>Each event json is separated by a newline.</p>
+
+<p>Can either accept connections from clients or connect to a server,
+depending on <code>mode</code>.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  tcp {
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_mode">mode</a> => ... # ["server", "client"] (optional), default: "client"
+    <a href="#setting_port">port</a> => ... # number (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_host">
+    host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>When mode is <code>server</code>, the address to listen on.
+When mode is <code>client</code>, the address to connect to.</p>
+
+<h4> 
+  <a name="setting_mode">
+    mode
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "server", "client" </li>
+  <li> Default value is "client" </li>
+</ul>
+
+<p>Mode to operate in. <code>server</code> listens for client connections,
+<code>client</code> connects to a server.</p>
+
+<h4> 
+  <a name="setting_port">
+    port (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>When mode is <code>server</code>, the port to listen on.
+When mode is <code>client</code>, the port to connect to.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0beta6/lib/logstash/outputs/tcp.rb">lib/logstash/outputs/tcp.rb</a>

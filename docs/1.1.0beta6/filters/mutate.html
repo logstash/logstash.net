@@ -1,0 +1,161 @@
+---
+title: logstash docs for filters/mutate
+layout: content_right
+---
+<h2>mutate</h2>
+
+<p>The mutate filter allows you to do general mutations to fields. You
+can rename, remove, replace, and modify fields in your events.</p>
+
+<p>TODO(sissel): Support regexp replacements like String#gsub ?</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  mutate {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_convert">convert</a> => ... # hash (optional)
+    <a href="#setting_remove">remove</a> => ... # array (optional)
+    <a href="#setting_rename">rename</a> => ... # hash (optional)
+    <a href="#setting_replace">replace</a> => ... # hash (optional)
+    <a href="#setting_type">type</a> => ... # string (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_convert">
+    convert
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Convert a field's value to a different type, like turning a string to an
+integer. If the field value is an array, all members will be converted.
+If the field is a hash, no action will be taken.</p>
+
+<h4> 
+  <a name="setting_remove">
+    remove
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Remove one or more fields.</p>
+
+<h4> 
+  <a name="setting_rename">
+    rename
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Rename one or more fields.</p>
+
+<h4> 
+  <a name="setting_replace">
+    replace
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Replace a field with a new value. The new value can include %{foo} strings
+to help you build a new value from other parts of the event.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0beta6/lib/logstash/filters/mutate.rb">lib/logstash/filters/mutate.rb</a>

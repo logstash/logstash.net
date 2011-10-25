@@ -1,0 +1,160 @@
+---
+title: logstash docs for inputs/twitter
+layout: content_right
+---
+<h2>twitter</h2>
+
+<p>TODO(sissel): Instead of dropping the event, should we treat it as
+plain text and try to do the best we can with it?
+TODO(sissel): Instead of dropping the event, should we treat it as
+plain text and try to do the best we can with it?
+Read events from the twitter streaming api.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  twitter {
+    <a href="#setting_debug">debug</a> => ... # boolean (optional)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_keywords">keywords</a> => ... # array (required)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_password">password</a> => ... # password (required)
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_type">type</a> => ... # string (required)
+    <a href="#setting_user">user</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_keywords">
+    keywords (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Any keywords to track in the twitter stream</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<h4> 
+  <a name="setting_password">
+    password (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your twitter password</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+<h4> 
+  <a name="setting_user">
+    user (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your twitter username</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0beta6/lib/logstash/inputs/twitter.rb">lib/logstash/inputs/twitter.rb</a>
