@@ -35,7 +35,7 @@ Requirements: java
 
 Paste this in your shell for easy downloadings.
 
-    ES_PACKAGE=elasticsearch-0.16.0.zip
+    ES_PACKAGE=elasticsearch-0.17.6.zip
     ES_DIR=${ES_PACKAGE%%.zip}
     SITE=http://github.com/downloads/elasticsearch/elasticsearch
     if [ ! -d "$ES_DIR" ] ; then
