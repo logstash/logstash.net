@@ -13,7 +13,9 @@ title: Logstash
 
   <a class="awesome_button" href="http://semicomplete.com/files/logstash/logstash-%VERSION%-monolithic.jar">Download</a>
   <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
-  <a class="awesome_button" href="http://logstash.databits.net/">Try</a>
+  <!-- Demo is currently unmaintained, disable it.
+    <a class="awesome_button" href="http://logstash.databits.net/">Try</a>
+  -->
 
 </div>
 <div class="clear"></div>
@@ -32,10 +34,6 @@ title: Logstash
 
   <a href="http://carolinacon.blip.tv/file/5105901/">
     Watch logstash presentation @ CarolinaCon
-  </a><br/>
-
-  <a href="http://logstash.databits.net/">
-    Try out the latest logstash web interface (with 30 live qps of test apache logs)
   </a><br/>
 
 </div>
