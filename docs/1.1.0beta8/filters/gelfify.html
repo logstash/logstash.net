@@ -1,0 +1,114 @@
+---
+title: logstash docs for filters/gelfify
+layout: content_right
+---
+<h2>gelfify</h2>
+
+<p>The GELFify filter parses RFC3164 severity levels to
+corresponding GELF levels.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  gelfify {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0beta8/lib/logstash/filters/gelfify.rb">lib/logstash/filters/gelfify.rb</a>
