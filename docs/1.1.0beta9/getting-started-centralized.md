@@ -80,7 +80,7 @@ Download the monolithic logstash release package. By 'monolithic' I mean the
 package contains all required dependencies to save you time chasing down
 requirements.
 
-Follow [this link to download logstash-%VERSION%](http://semicomplete.com/files/logstash/logstash-%VERSION%-monolithic.jar).
+Follow [this link to download logstash-1.1.0beta9](http://semicomplete.com/files/logstash/logstash-1.1.0beta9-monolithic.jar).
 
 Since we're doing a centralized configuration, you'll have two main logstash
 agent roles: a shipper and an indexer. You will ship logs from all servers to a
@@ -126,7 +126,7 @@ Here's a good sample config:
 
 Put this in a file and call it 'myshipper.conf' (or anything, really), and run: 
 
-    java -jar logstash-%VERSION%-monolithic.jar agent -f myshipper.conf
+    java -jar logstash-1.1.0beta9-monolithic.jar agent -f myshipper.conf
 
 This should start tailing the file inputs specified above and ships them out
 over amqp. If you included the 'stdout' output you will see events written to
@@ -204,7 +204,7 @@ Run this on the same server as your elasticsearch server.
 To run the logstash web server, just run the jar with 'web' as the first
 argument. 
 
-    % java -jar logstash-%VERSION%-monolithic.jar web
+    % java -jar logstash-1.1.0beta9-monolithic.jar web
     >> Thin web server (v1.2.7 codename No Hup)
     >> Maximum connections set to 1024
     >> Listening on 0.0.0.0:9292, CTRL+C to stop
@@ -215,7 +215,7 @@ logs!
 Note: If your elasticsearch server is not discoverable with multicast, you can
 specify the host explicitly using the --backend flag:
 
-    % java -jar logstash-%VERSION%-monolithic.jar web --backend elasticsearch://myserver/
+    % java -jar logstash-1.1.0beta9-monolithic.jar web --backend elasticsearch://myserver/
 
 If you set a cluster name in ElasticSearch (ignore this if you don't know what
 that means), you must give the cluster name to logstash as well: --backend
