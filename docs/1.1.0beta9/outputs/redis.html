@@ -1,0 +1,205 @@
+---
+title: logstash docs for outputs/redis
+layout: content_right
+---
+<h2>redis</h2>
+<h3>Status: <a href="plugin-status">unstable</a></h3>
+
+<p>send events to a redis database using RPUSH</p>
+
+<p>For more information about redis, see <a href="http://redis.io/">http://redis.io/</a></p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  redis {
+    <a href="#setting_data_type">data_type</a> => ... # ["list", "channel"] (optional)
+    <a href="#setting_db">db</a> => ... # number (optional), default: 0
+    <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
+    <a href="#setting_key">key</a> => ... # string (optional)
+    <a href="#setting_password">password</a> => ... # password (optional)
+    <a href="#setting_port">port</a> => ... # number (optional), default: 6379
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_data_type">
+    data_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "list", "channel" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Either list or channel.  If redis<em>type is list, then we will RPUSH to key.
+If redis</em>type is channel, then we will PUBLISH to key.
+TODO set required true</p>
+
+<h4> 
+  <a name="setting_db">
+    db
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 0 </li>
+</ul>
+
+<p>The redis database number.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "127.0.0.1" </li>
+</ul>
+
+<p>The hostname of your redis server.</p>
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of a redis list or channel. Dynamic names are
+valid here, for example "logstash-%{@type}".
+TODO set required true</p>
+
+<h4> 
+  <a name="setting_name">
+    name
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> Default value is "default" </li>
+</ul>
+
+<p>Name is used for logging in case there are multiple instances.
+TODO: delete</p>
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Password to authenticate with.  There is no authentication by default.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 6379 </li>
+</ul>
+
+<p>The port to connect on.</p>
+
+<h4> 
+  <a name="setting_queue">
+    queue
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the redis queue (we'll use RPUSH on this). Dynamic names are
+valid here, for example "logstash-%{@type}"
+TODO: delete</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_timeout">
+    timeout
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 5 </li>
+</ul>
+
+<p>Redis initial connection timeout in seconds.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0beta9/lib/logstash/outputs/redis.rb">lib/logstash/outputs/redis.rb</a>
