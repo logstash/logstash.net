@@ -1,0 +1,194 @@
+---
+title: logstash docs for inputs/zeromq
+layout: content_right
+---
+<h2>zeromq</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Read events over a 0MQ SUB socket.</p>
+
+<p>You need to have the 0mq 2.1.x library installed to be able to use
+this input plugin.</p>
+
+<p>The default settings will create a subscriber binding to tcp://127.0.0.1:2120
+waiting for connecting publishers.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  zeromq {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_address">address</a> => ... # string (optional), default: "tcp://127.0.0.1:2120"
+    <a href="#setting_debug">debug</a> => ... # boolean (optional)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_mode">mode</a> => ... # ["server", "client"] (optional), default: "client"
+    <a href="#setting_queue">queue</a> => ... # string (optional), default: ""
+    <a href="#setting_queue_size">queue_size</a> => ... # number (optional), default: 20
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_type">type</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_address">
+    address
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "tcp://127.0.0.1:2120" </li>
+</ul>
+
+<p>0mq socket address to connect or bind to</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<h4> 
+  <a name="setting_mode">
+    mode
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "server", "client" </li>
+  <li> Default value is "client" </li>
+</ul>
+
+<p>wether to bind ("server") or connect ("client") to the socket</p>
+
+<h4> 
+  <a name="setting_queue">
+    queue
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>0mq topic (Used with ZMQ<em>SUBSCRIBE, see http://api.zeromq.org/2-1:zmq-setsockopt
+for 'ZMQ</em>SUBSCRIBE: Establish message filter')</p>
+
+<h4> 
+  <a name="setting_queue_size">
+    queue_size
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 20 </li>
+</ul>
+
+<p>0mq queue size</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0/lib/logstash/inputs/zeromq.rb">lib/logstash/inputs/zeromq.rb</a>

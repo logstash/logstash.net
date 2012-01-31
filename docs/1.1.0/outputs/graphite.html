@@ -1,0 +1,119 @@
+---
+title: logstash docs for outputs/graphite
+layout: content_right
+---
+<h2>graphite</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>This output allows you to pull metrics from your logs and ship them to
+graphite. Graphite is an open source tool for storing and graphing metrics.</p>
+
+<p>An example use case: At loggly, some of our applications emit aggregated
+stats in the logs every 10 seconds. Using the grok filter and this output,
+I can capture the metric values from the logs and emit them to graphite.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  graphite {
+    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#setting_metrics">metrics</a> => ... # hash (required)
+    <a href="#setting_port">port</a> => ... # number (optional), default: 2003
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "localhost" </li>
+</ul>
+
+<p>The address of the graphite server.</p>
+
+<h4> 
+  <a name="setting_metrics">
+    metrics (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The metric(s) to use. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value. Example:</p>
+
+<pre><code>[ "%{@source_host}/uptime", %{uptime_1m} " ]
+</code></pre>
+
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 2003 </li>
+</ul>
+
+<p>The port to connect on your graphite server.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.0/lib/logstash/outputs/graphite.rb">lib/logstash/outputs/graphite.rb</a>
