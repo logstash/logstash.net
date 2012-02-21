@@ -33,11 +33,7 @@ for such things, that works for me, too.)
 
 ## Download it
 
-logstash releases come in a few flavors.
-
-* [Monolithic jar](http://semicomplete.com/files/logstash/logstash-1.1.0-monolithic.jar)
-* [rubygem](http://rubygems.org/gems/logstash/versions/1.1.0)
-* [`gem install logstash -v 1.1.0`](http://rubygems.org/gems/logstash)
+* [Java runnable jar release](http://semicomplete.com/files/logstash/logstash-1.1.0-monolithic.jar)
 
 ## What's next?
 
