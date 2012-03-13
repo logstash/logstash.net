@@ -9,6 +9,14 @@
         route.redirect("https://logstash.jira.com/browse/LOGSTASH-" + number);
       });
 
+      route.add("/code", function() {
+        route.redirect("https://github.com/logstash/logstash");
+      });
+
+      route.add("/code/:repo", function() {
+        route.redirect("https://github.com/logstash/" + repo);
+      });
+
       route.add("/commit/:commit", function(commit) {
         route.redirect("https://github.com/logstash/logstash/commit/" + commit);
       });
