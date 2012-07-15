@@ -1,0 +1,186 @@
+---
+title: logstash docs for outputs/zabbix
+layout: content_right
+---
+<h2>zabbix</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>The zabbix output is used for sending item data to zabbix via the
+zabbix_sender executable.</p>
+
+<p>For this output to work, your event must have the following fields:</p>
+
+<ul>
+<li>"zabbix_host"    (the host configured in Zabbix)</li>
+<li>"zabbix_item"    (the item key on the host in Zabbix)</li>
+</ul>
+
+
+<p>In Zabbix, create your host with the same name (no spaces in the name of
+the host supported) and create your item with the specified key as a
+Zabbix Trapper item.</p>
+
+<p>The easiest way to use this output is with the grep filter.
+Presumably, you only want certain events matching a given pattern
+to send events to zabbix, so use grep to match and also to add the required
+fields.</p>
+
+<pre><code> filter {
+   grep {
+     type =&gt; "linux-syslog"
+     match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
+     add_tag =&gt; [ "zabbix-sender" ]
+     add_field =&gt; [
+       "zabbix_host", "%{@source_host}",
+       "zabbix_item", "item.key"
+     ]
+  }
+}
+
+output {
+  zabbix {
+    # only process events with this tag
+    tags =&gt; "zabbix-sender"
+
+    # specify the hostname or ip of your zabbix server
+    # (defaults to localhost)
+    host =&gt; "localhost"
+
+    # specify the port to connect to (default 10051)
+    port =&gt; "10051"
+
+    # specify the path to zabbix_sender
+    # (defaults to "/usr/local/bin/zabbix_sender")
+    zabbix_sender =&gt; "/usr/local/bin/zabbix_sender"
+  }
+}
+</code></pre>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  zabbix {
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#setting_port">port</a> => ... # number (optional), default: 10051
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_zabbix_sender">zabbix_sender</a> => ... # string (optional), default: "/usr/local/bin/zabbix_sender"
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "localhost" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 10051 </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_zabbix_sender">
+    zabbix_sender
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/usr/local/bin/zabbix_sender" </li>
+</ul>
+
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.1/lib/logstash/outputs/zabbix.rb">lib/logstash/outputs/zabbix.rb</a>

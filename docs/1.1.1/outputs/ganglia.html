@@ -1,0 +1,216 @@
+---
+title: logstash docs for outputs/ganglia
+layout: content_right
+---
+<h2>ganglia</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>This output allows you to pull metrics from your logs and ship them to
+ganglia's gmond. This is heavily based on the graphite output.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  ganglia {
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#setting_lifetime">lifetime</a> => ... # number (optional), default: 300
+    <a href="#setting_max_interval">max_interval</a> => ... # number (optional), default: 60
+    <a href="#setting_metric">metric</a> => ... # string (required)
+    <a href="#setting_metric_type">metric_type</a> => ... # ["string", "int8", "uint8", "int16", "uint16", "int32", "uint32", "float", "double"] (optional), default: "uint8"
+    <a href="#setting_port">port</a> => ... # number (optional), default: 8649
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_units">units</a> => ... # string (optional), default: ""
+    <a href="#setting_value">value</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "localhost" </li>
+</ul>
+
+<p>The address of the graphite server.</p>
+
+<h4> 
+  <a name="setting_lifetime">
+    lifetime
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 300 </li>
+</ul>
+
+<p>Lifetime in seconds of this metric</p>
+
+<h4> 
+  <a name="setting_max_interval">
+    max_interval
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 60 </li>
+</ul>
+
+<p>Maximum time in seconds between gmetric calls for this metric.</p>
+
+<h4> 
+  <a name="setting_metric">
+    metric (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The metric to use. This supports dynamic strings like %{@source_host}</p>
+
+<h4> 
+  <a name="setting_metric_type">
+    metric_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "string", "int8", "uint8", "int16", "uint16", "int32", "uint32", "float", "double" </li>
+  <li> Default value is "uint8" </li>
+</ul>
+
+<p>The type of value for this metric.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 8649 </li>
+</ul>
+
+<p>The port to connect on your graphite server.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_units">
+    units
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Gmetric units for metric, such as "kb/sec" or "ms" or whatever unit
+this metric uses.</p>
+
+<h4> 
+  <a name="setting_value">
+    value (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The value to use. This supports dynamic strings like %{bytes}
+It will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.1/lib/logstash/outputs/ganglia.rb">lib/logstash/outputs/ganglia.rb</a>

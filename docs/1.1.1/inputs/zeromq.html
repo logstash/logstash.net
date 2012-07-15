@@ -1,0 +1,261 @@
+---
+title: logstash docs for inputs/zeromq
+layout: content_right
+---
+<h2>zeromq</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>Read events over a 0MQ SUB socket.</p>
+
+<p>You need to have the 0mq 2.1.x library installed to be able to use
+this input plugin.</p>
+
+<p>The default settings will create a subscriber binding to tcp://127.0.0.1:2120
+waiting for connecting publishers.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  zeromq {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_address">address</a> => ... # array (optional), default: ["tcp://*:2120"]
+    <a href="#setting_debug">debug</a> => ... # boolean (optional)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_mode">mode</a> => ... # ["server", "client"] (optional), default: "server"
+    <a href="#setting_sender">sender</a> => ... # string (optional)
+    <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_topic">topic</a> => ... # array (optional)
+    <a href="#setting_topology">topology</a> => ... # ["pushpull", "pubsub", "pair"] (optional)
+    <a href="#setting_type">type</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_address">
+    address
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is ["tcp://*:2120"] </li>
+</ul>
+
+<p>0mq socket address to connect or bind
+Please note that <code>inproc://</code> will not work with logstash
+as each we use a context per thread.
+By default, inputs bind/listen
+and outputs connect</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+<h4> 
+  <a name="setting_mode">
+    mode
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "server", "client" </li>
+  <li> Default value is "server" </li>
+</ul>
+
+<p>mode
+server mode binds/listens
+client mode connects</p>
+
+<h4> 
+  <a name="setting_sender">
+    sender
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>sender
+overrides the sender to
+set the source of the event
+default is "zmq+topology://type/"</p>
+
+<h4> 
+  <a name="setting_sockopt">
+    sockopt
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>0mq socket options
+This exposes zmq_setsockopt
+for advanced tuning
+see http://api.zeromq.org/2-1:zmq-setsockopt for details</p>
+
+<p>This is where you would set values like:
+ZMQ::HWM - high water mark
+ZMQ::IDENTITY - named queues
+ZMQ::SWAP_SIZE - space for disk overflow</p>
+
+<p>example: sockopt => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "my<em>named</em>queue"]</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_topic">
+    topic
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>0mq topic
+This is used for the 'pubsub' topology only
+On inputs, this allows you to filter messages by topic
+On outputs, this allows you to tag a message for routing
+NOTE: ZeroMQ does subscriber side filtering.
+NOTE: All topics have an implicit wildcard at the end
+You can specify multiple topics here</p>
+
+<h4> 
+  <a name="setting_topology">
+    topology
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "pushpull", "pubsub", "pair" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>0mq topology
+The default logstash topologies work as follows:
+* pushpull - inputs are pull, outputs are push
+* pubsub - inputs are subscribers, outputs are publishers
+* pair - inputs are clients, inputs are servers</p>
+
+<p>If the predefined topology flows don't work for you,
+you can change the 'mode' setting
+TODO (lusis) add req/rep MAYBE
+TODO (lusis) add router/dealer</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.1/lib/logstash/inputs/zeromq.rb">lib/logstash/inputs/zeromq.rb</a>
