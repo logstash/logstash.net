@@ -58,7 +58,12 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metrics to send. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value.</p>
 
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 <h4> 
   <a name="setting_counter">
@@ -72,7 +77,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metrics to send. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value. Example:</p>
 
+<p>  counter => [ "%{@source_host}.apache.hits.%{response}, "1" ]</p>
+
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -117,10 +129,7 @@ Optional.</p>
 
 <p>The metrics to send. This supports dynamic strings like %{@source_host}
 for metric names and also for values. This is a hash field with key
-of the metric name, value of the metric value. Example:</p>
-
-<p>  counter => [ "%{@source<em>host}.apache.hits", "1", "widgets.served.doubled", "2" ]
-  meter => [ "%{@source</em>host}.apache.response.%{response}", "1" ]</p>
+of the metric name, value of the metric value.</p>
 
 <p>The value will be coerced to a floating point value. Values which cannot be
 coerced will zero (0)</p>
@@ -151,7 +160,12 @@ coerced will zero (0)</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metrics to send. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value.</p>
 
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 <h4> 
   <a name="setting_port">
@@ -195,7 +209,14 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metrics to send. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value. Example:</p>
 
+<p>  timer => [ "%{@source<em>host}.apache.response</em>time, "%{response_time}" ]</p>
+
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 <h4> 
   <a name="setting_type">
@@ -226,7 +247,12 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metrics to send. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value.</p>
 
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 
 <hr>
