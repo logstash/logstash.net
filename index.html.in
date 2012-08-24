@@ -13,7 +13,7 @@ title: Logstash
 
   <a class="awesome_button" href="http://semicomplete.com/files/logstash/logstash-%VERSION%-monolithic.jar">Download</a>
   <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
-  <a class="awesome_button" href="https://github.com/logstash/logstash/wiki">Wiki</a>
+  <a class="awesome_button" href="http://cookbook.logstash.net">Cookbook</a>
   <!-- Demo is currently unmaintained, disable it.
     <a class="awesome_button" href="http://logstash.databits.net/">Try</a>
   -->
