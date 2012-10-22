@@ -23,10 +23,11 @@ This is what it might look like in your config file:
     <a href="#setting_db">db</a> => ... # number (optional), default: 0
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
+    <a href="#setting_host">host</a> => ... # array (optional), default: ["127.0.0.1"]
     <a href="#setting_key">key</a> => ... # string (optional)
     <a href="#setting_password">password</a> => ... # password (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 6379
+    <a href="#setting_shuffle_hosts">shuffle_hosts</a> => ... # boolean (optional), default: false
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
@@ -151,11 +152,19 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> Default value is "127.0.0.1" </li>
+  <li> Value type is array </li>
+  <li> Default value is ["127.0.0.1"] </li>
 </ul>
 
-<p>The hostname of your redis server.</p>
+<p>The hostname(s) of your redis server(s). Ports may be specified on any
+hostname, which will override the global port config.</p>
+
+<p>For example:</p>
+
+<pre><code>"127.0.0.1"
+["127.0.0.1", "127.0.0.2"]
+["127.0.0.1:6380", "127.0.0.1"]
+</code></pre>
 
 <h4> 
   <a name="setting_key">
@@ -215,7 +224,7 @@ TODO: delete</p>
   <li> Default value is 6379 </li>
 </ul>
 
-<p>The port to connect on.</p>
+<p>The default port to connect on. Can be overridden on any hostname.</p>
 
 <h4> 
   <a name="setting_queue">
@@ -233,6 +242,20 @@ TODO: delete</p>
 <p>The name of the redis queue (we'll use RPUSH on this). Dynamic names are
 valid here, for example "logstash-%{@type}"
 TODO: delete</p>
+
+<h4> 
+  <a name="setting_shuffle_hosts">
+    shuffle_hosts
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Shuffle the host list during logstash startup.</p>
 
 <h4> 
   <a name="setting_tags">
