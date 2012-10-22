@@ -14,7 +14,9 @@ validate-version:
 clean:
 	-rm $(OBJECTS) > /dev/null 2>&1
 
-update: $(OBJECTS) | validate-version 
+update: | validate-version 
+	rm $(OBJECTS)
+	make $(OBJECTS)
 	@echo "Don't forget to commit this"
 
 %.html: %.html.in | validate-version
