@@ -1,0 +1,220 @@
+---
+title: logstash docs for outputs/librato
+layout: content_right
+---
+<h2>librato</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  librato {
+    <a href="#setting_account_id">account_id</a> => ... # string (required)
+    <a href="#setting_annotation">annotation</a> => ... # hash (optional), default: {}
+    <a href="#setting_api_token">api_token</a> => ... # string (required)
+    <a href="#setting_batch_size">batch_size</a> => ... # string (optional), default: "10"
+    <a href="#setting_counter">counter</a> => ... # hash (optional), default: {}
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_gauge">gauge</a> => ... # hash (optional), default: {}
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_account_id">
+    account_id (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>This output lets you send metrics, annotations and alerts to
+Librato based on Logstash events</p>
+
+<p>This is VERY experimental and inefficient right now.
+Your Librato account
+usually an email address</p>
+
+<h4> 
+  <a name="setting_annotation">
+    annotation
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Annotations
+Registers an annotation with Librato
+The only required field is <code>title</code> and <code>name</code>.
+<code>start_time</code> and <code>end_time</code> will be set to <code>event.unix_timestamp</code>
+You can add any other optional annotation values as well.
+All values will be passed through <code>event.sprintf</code></p>
+
+<p>Example:
+  ["title":"Logstash event on %{@source<em>host}", "name":"logstash</em>stream"]
+or
+  ["title":"Logstash event", "description":"%{@message}", "name":"logstash_stream"]</p>
+
+<h4> 
+  <a name="setting_api_token">
+    api_token (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your Librato API Token</p>
+
+<h4> 
+  <a name="setting_batch_size">
+    batch_size
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "10" </li>
+</ul>
+
+<p>Named metrics (NYI)
+These allow multiple metrics/annotations in the same output
+Examples:
+(Gauge)
+<code>apache_bytes =&gt; ["type", "gauge", "source", "%{@source_host}", "value", "%{bytes_received}"]</code>
+(Counter)
+<code>messages_received =&gt; ["type", "counter", "source", "%{@source_host}", "value", "1"]</code>
+config /[A-Za-z0-9.:_-]+/, :validate => :hash
+Batch size
+Number of events to batch up before sending to Librato.</p>
+
+<h4> 
+  <a name="setting_counter">
+    counter
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Counters
+Send data to Librato as a counter</p>
+
+<p>Example:
+  ["value", "1", "source", "%{@source<em>host}", "name", "messages</em>received"]
+Additionally, you can override the <code>measure_time</code> for the event. Must be a unix timestamp:
+  ["value", "1", "source", "%{@source<em>host}", "name", "messages</em>received", "measure<em>time", "%{my</em>unixtime_field}"]
+Default is to use the event's timestamp</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_gauge">
+    gauge
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Gauges
+Send data to Librato as a gauge</p>
+
+<p>Example:
+  ["value", "%{bytes<em>recieved}", "source", "%{@source</em>host}", "name", "apache<em>bytes"]
+Additionally, you can override the <code>measure_time</code> for the event. Must be a unix timestamp:
+  ["value", "%{bytes</em>recieved}", "source", "%{@source<em>host}", "name", "apache</em>bytes","measure<em>time", "%{my</em>unixtime_field}]
+Default is to use the event's timestamp</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.2.dev/lib/logstash/outputs/librato.rb">lib/logstash/outputs/librato.rb</a>

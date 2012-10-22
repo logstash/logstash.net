@@ -1,0 +1,291 @@
+---
+title: logstash docs for inputs/redis
+layout: content_right
+---
+<h2>redis</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>If event source is unknown, this json<em>event is missing a @source, set it
+from the to</em>event source value.
+This is the threadable class for logstash inputs.
+Use this class in your inputs if it can support multiple threads</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  redis {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_data_type">data_type</a> => ... # ["list", "channel", "pattern_channel"] (optional)
+    <a href="#setting_db">db</a> => ... # number (optional), default: 0
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
+    <a href="#setting_key">key</a> => ... # string (optional)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_password">password</a> => ... # password (optional)
+    <a href="#setting_port">port</a> => ... # number (optional), default: 6379
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_threads">threads</a> => ... # number (optional), default: 1
+    <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
+    <a href="#setting_type">type</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_data_type">
+    data_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "list", "channel", "pattern_channel" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Either list or channel.  If redis_type is list, then we will BLPOP the
+key.  If redis_type is channel, then we will SUBSCRIBE to the key.
+If redis_type is pattern_channel, then we will PSUBSCRIBE to the key.
+TODO: change required to true</p>
+
+<h4> 
+  <a name="setting_db">
+    db
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 0 </li>
+</ul>
+
+<p>The redis database number.</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "127.0.0.1" </li>
+</ul>
+
+<p>The hostname of your redis server.</p>
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of a redis list or channel.
+TODO: change required to true</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+<h4> 
+  <a name="setting_name">
+    name
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> Default value is "default" </li>
+</ul>
+
+<p>Name is used for logging in case there are multiple instances.
+This feature has no real function and will be removed in future versions.</p>
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Password to authenticate with. There is no authentication by default.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 6379 </li>
+</ul>
+
+<p>The port to connect on.</p>
+
+<h4> 
+  <a name="setting_queue">
+    queue
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the redis queue (we'll use BLPOP against this).
+TODO: remove soon.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_threads">
+    threads
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 1 </li>
+</ul>
+
+<p>Set this to the number of threads you want this input to spawn.
+This is the same as declaring the input multiple times</p>
+
+<h4> 
+  <a name="setting_timeout">
+    timeout
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 5 </li>
+</ul>
+
+<p>Initial connection timeout in seconds.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.2.dev/lib/logstash/inputs/redis.rb">lib/logstash/inputs/redis.rb</a>

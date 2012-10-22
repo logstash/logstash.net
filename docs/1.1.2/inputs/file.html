@@ -1,0 +1,267 @@
+---
+title: logstash docs for inputs/file
+layout: content_right
+---
+<h2>file</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>If event source is unknown, this json<em>event is missing a @source, set it
+from the to</em>event source value.
+Stream events from files.</p>
+
+<p>By default, each event is assumed to be one line. If you
+want to join lines, you'll want to use the multiline filter.</p>
+
+<p>Files are followed in a manner similar to "tail -0F". File rotation
+is detected and handled by this input.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  file {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_discover_interval">discover_interval</a> => ... # number (optional), default: 15
+    <a href="#setting_exclude">exclude</a> => ... # array (optional)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_path">path</a> => ... # array (required)
+    <a href="#setting_sincedb_path">sincedb_path</a> => ... # string (optional)
+    <a href="#setting_sincedb_write_interval">sincedb_write_interval</a> => ... # number (optional), default: 15
+    <a href="#setting_start_position">start_position</a> => ... # ["beginning", "end"] (optional), default: "end"
+    <a href="#setting_stat_interval">stat_interval</a> => ... # number (optional), default: 1
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_type">type</a> => ... # string (required)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_discover_interval">
+    discover_interval
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 15 </li>
+</ul>
+
+<p>How often we expand globs to discover new files to watch.</p>
+
+<h4> 
+  <a name="setting_exclude">
+    exclude
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Exclusions (matched against the filename, not full path). Globs
+are valid here, too. For example, if you have</p>
+
+<pre><code>path =&gt; "/var/log/*"
+</code></pre>
+
+<p>you might want to exclude gzipped files:</p>
+
+<pre><code>exclude =&gt; "*.gz"
+</code></pre>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+<h4> 
+  <a name="setting_path">
+    path (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The path to the file to use as an input.
+You can use globs here, such as "/var/log/*.log"
+Paths must be absolute and cannot be relative.</p>
+
+<h4> 
+  <a name="setting_sincedb_path">
+    sincedb_path
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Where to write the since database (keeps track of the current
+position of monitored log files). Defaults to the value of
+environment variable "$SINCEDB_PATH" or "$HOME/.sincedb".</p>
+
+<h4> 
+  <a name="setting_sincedb_write_interval">
+    sincedb_write_interval
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 15 </li>
+</ul>
+
+<p>How often to write a since database with the current position of
+monitored log files.</p>
+
+<h4> 
+  <a name="setting_start_position">
+    start_position
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "beginning", "end" </li>
+  <li> Default value is "end" </li>
+</ul>
+
+<p>Choose where logstash starts initially reading files - at the beginning or
+at the end. The default behavior treats files like live streams and thus
+starts at the end. If you have old data you want to import, set this
+to 'beginning'</p>
+
+<p>This option only modifieds "first contact" situations where a file is new
+and not seen before. If a file has already been seen before, this option
+has no effect.</p>
+
+<h4> 
+  <a name="setting_stat_interval">
+    stat_interval
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 1 </li>
+</ul>
+
+<p>How often we stat files to see if they have been modified. Increasing
+this interval will decrease the number of system calls we make, but
+increase the time to detect new log lines.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.2.dev/lib/logstash/inputs/file.rb">lib/logstash/inputs/file.rb</a>
