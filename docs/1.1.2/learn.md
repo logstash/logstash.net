@@ -33,7 +33,7 @@ for such things, that works for me, too.)
 
 ## Download It
 
-[Download logstash-1.1.2.dev](http://semicomplete.com/files/logstash/logstash-1.1.2.dev-monolithic.jar)
+[Download logstash-1.1.2](http://semicomplete.com/files/logstash/logstash-1.1.2-monolithic.jar)
 
 ## What's next?
 

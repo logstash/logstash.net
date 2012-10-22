@@ -185,7 +185,7 @@ class LogStashConfigDocGenerator
       Dir.mkdir(dir) if !File.directory?(dir)
       File.open(path, "w") do |out|
         html = template.result(binding)
-        html.gsub!("1.1.2.dev", LOGSTASH_VERSION)
+        html.gsub!("1.1.2", LOGSTASH_VERSION)
         out.puts(html)
       end
     else 
