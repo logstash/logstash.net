@@ -1,0 +1,144 @@
+---
+title: logstash docs for outputs/nagios
+layout: content_right
+---
+<h2>nagios</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>The nagios output is used for sending passive check results to nagios via the
+nagios command file.</p>
+
+<p>For this output to work, your event must have the following fields:</p>
+
+<ul>
+<li>"nagios_host"</li>
+<li>"nagios_service"</li>
+</ul>
+
+
+<p>This field is supported, but optional:
+  "nagios_annotation"</p>
+
+<p>The easiest way to use this output is with the grep filter.
+Presumably, you only want certain events matching a given pattern
+to send events to nagios. So use grep to match and also to add the required
+fields.</p>
+
+<pre><code>filter {
+  grep {
+    type =&gt; "linux-syslog"
+    match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
+    add_tag =&gt; [ "nagios-update" ]
+    add_field =&gt; [
+      "nagios_host", "%{@source_host}",
+      "nagios_service", "the name of your nagios service check"
+    ]
+  }
+}
+
+output{
+  nagios { 
+    # only process events with this tag
+    tags =&gt; "nagios-update"
+  }
+}
+</code></pre>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  nagios {
+    <a href="#setting_commandfile">commandfile</a> => ... # string (optional), default: "/var/lib/nagios3/rw/nagios.cmd"
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_commandfile">
+    commandfile
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/var/lib/nagios3/rw/nagios.cmd" </li>
+</ul>
+
+<p>The path to your nagios command file</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.3/lib/logstash/outputs/nagios.rb">lib/logstash/outputs/nagios.rb</a>
