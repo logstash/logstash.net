@@ -1,0 +1,230 @@
+---
+title: logstash docs for filters/date
+layout: content_right
+---
+<h2>date</h2>
+<h3>Status: <a href="../plugin-status">stable</a></h3>
+
+<p>The date filter is used for parsing dates from fields and using that
+date or timestamp as the timestamp for the event.</p>
+
+<p>For example, syslog events usually have timestamps like this:
+  "Apr 17 09:32:01"</p>
+
+<p>You would use the date format "MMM dd HH:mm:ss" to parse this.</p>
+
+<p>The date filter is especially important for sorting events and for
+backfilling old data. If you don't get the date correct in your
+event, then searching for them later will likely sort out of order.</p>
+
+<p>In the absence of this filter, logstash will choose a timestamp based on the
+first time it sees the event (at input time), if the timestamp is not already
+set in the event. For example, with file input, the timestamp is set to the
+time of reading.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  date {
+    <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # array (optional)
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_locale">locale</a> => ... # string (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_/[A-Za-z0-9_-]+/">
+    /[A-Za-z0-9_-]+/
+    
+</a>
+</h4>
+
+<ul>
+  <li> The configuration attribute name here is anything that matches the above regular expression. </li>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for date is:
+  fieldname => dateformat</p>
+
+<p>The same field can be specified multiple times (or multiple dateformats for
+the same field) do try different time formats; first success wins.</p>
+
+<p>The date formats allowed are anything allowed by Joda-Time (java time
+library), generally: <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">java.text.SimpleDateFormat</a></p>
+
+<p>There are a few special exceptions, the following format literals exist
+to help you save time and ensure correctness of date parsing.</p>
+
+<ul>
+<li>"ISO8601" - should parse any valid ISO8601 timestamp, such as
+2011-04-19T03:44:01.103Z</li>
+<li>"UNIX" - will parse unix time in seconds since epoch</li>
+<li>"UNIX_MS" - will parse unix time in milliseconds since epoch</li>
+</ul>
+
+
+<p>For example, if you have a field 'logdate' and with a value that looks like 'Aug 13 2010 00:03:44'
+you would use this configuration:</p>
+
+<pre><code>logdate =&gt; "MMM dd yyyy HH:mm:ss"
+</code></pre>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_locale">
+    locale
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>specify a locale to be used for date parsing. If this is not specified the platform default will be
+used</p>
+
+<p>The locale is mostly necessary to be set for parsing month names and weekday names</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.4/lib/logstash/filters/date.rb">lib/logstash/filters/date.rb</a>
