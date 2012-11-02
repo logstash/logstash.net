@@ -2,6 +2,6 @@
 
 . $HOME/.rvm/scripts/rvm
 git pull --rebase
-jekyll  --redcarpet --no-auto
+jekyll  --kramdown --no-auto
 
 
