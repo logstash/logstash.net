@@ -34,9 +34,13 @@ title: Logstash
   with the word &lsquo;404&rsquo; or &lsquo;critical&rsquo; in the wrong place.
   </p>
 
-  <a href="http://www.youtube.com/watch?v=RuUFnog29M4">
-    Watch logstash presentation @ puppetconf 2012
+   <a href="http://www.youtube.com/watch?v=RuUFnog29M4">
+     [36 mins] logstash @ puppetconf (September 2012)
+   </a><br/>
+   <a href="http://vimeo.com/52657948">
+     [30 mins] logstash @ SF Metrics (October 2012)
   </a><br/>
+
   <!--
   <a href="http://carolinacon.blip.tv/file/5105901/">
     Watch logstash presentation @ CarolinaCon
@@ -45,6 +49,6 @@ title: Logstash
 
 </div>
 
-<img src="images/screenshot.png" alt="logstash screenshot"/>
+<iframe width="439" height="225" src="http://www.youtube.com/embed/RuUFnog29M4" frameborder="0" allowfullscreen></iframe>
 
 </div>
