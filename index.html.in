@@ -11,7 +11,8 @@ title: Logstash
   <p>It is fully free and fully open source. The license is Apache 2.0, meaning
   you are pretty much free to use it however you want in whatever way.</p>
 
-  <a class="awesome_button" href="http://semicomplete.com/files/logstash/logstash-%VERSION%-monolithic.jar">Download</a>
+  <a class="awesome_button" href="https://logstash.objects.dreamhost.com/release/logstash-%VERSION%-monolithic.jar">Download</a>
+
   <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
   <a class="awesome_button" href="https://github.com/logstash/logstash/wiki">Wiki</a>
   <!-- Demo is currently unmaintained, disable it.
@@ -33,9 +34,14 @@ title: Logstash
   with the word &lsquo;404&rsquo; or &lsquo;critical&rsquo; in the wrong place.
   </p>
 
+  <a href="http://www.youtube.com/watch?v=RuUFnog29M4">
+    Watch logstash presentation @ puppetconf 2012
+  </a><br/>
+  <!--
   <a href="http://carolinacon.blip.tv/file/5105901/">
     Watch logstash presentation @ CarolinaCon
   </a><br/>
+  -->
 
 </div>
 
