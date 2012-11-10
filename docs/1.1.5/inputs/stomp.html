@@ -1,0 +1,208 @@
+---
+title: logstash docs for inputs/stomp
+layout: content_right
+---
+<h2>stomp</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  stomp {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_destination">destination</a> => ... # string (required)
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_host">host</a> => ... # string (required), default: "localhost"
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_password">password</a> => ... # password (optional), default: ""
+    <a href="#setting_port">port</a> => ... # number (optional), default: 61613
+    <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_type">type</a> => ... # string (required)
+    <a href="#setting_user">user</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Enable debugging output?</p>
+
+<h4> 
+  <a name="setting_destination">
+    destination (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The destination to read events from.</p>
+
+<p>Example: "/topic/logstash"</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_host">
+    host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "localhost" </li>
+</ul>
+
+<p>The address of the STOMP server.</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The password to authenticate with.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 61613 </li>
+</ul>
+
+<p>The port to connet to on your STOMP server.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The username to authenticate with.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.5.dev/lib/logstash/inputs/stomp.rb">lib/logstash/inputs/stomp.rb</a>
