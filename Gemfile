@@ -8,3 +8,5 @@ gem "haml"
 
 # For a better markdown parser
 gem "kramdown"
+gem "rdiscount"
+gem "redcarpet"
