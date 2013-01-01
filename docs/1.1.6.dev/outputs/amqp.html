@@ -19,29 +19,76 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   amqp {
-    <a href="#setting_debug">debug</a> => ... #  (optional)
-    <a href="#setting_durable">durable</a> => ... #  (optional)
-    <a href="#setting_exchange">exchange</a> => ... #  (optional)
-    <a href="#setting_exchange_type">exchange_type</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
-    <a href="#setting_host">host</a> => ... #  (optional)
-    <a href="#setting_key">key</a> => ... #  (optional)
-    <a href="#setting_name">name</a> => ... #  (optional)
-    <a href="#setting_password">password</a> => ... #  (optional)
-    <a href="#setting_persistent">persistent</a> => ... #  (optional)
-    <a href="#setting_port">port</a> => ... #  (optional)
-    <a href="#setting_ssl">ssl</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_user">user</a> => ... #  (optional)
-    <a href="#setting_verify_ssl">verify_ssl</a> => ... #  (optional)
-    <a href="#setting_vhost">vhost</a> => ... #  (optional)
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_charset">charset</a> => ... # ["ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal"] (optional), default: "UTF-8"
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_durable">durable</a> => ... # boolean (optional), default: true
+    <a href="#setting_exchange">exchange</a> => ... # string (optional)
+    <a href="#setting_exchange_type">exchange_type</a> => ... # ["fanout", "direct", "topic"] (required)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_key">key</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_password">password</a> => ... # password (optional), default: "guest"
+    <a href="#setting_persistent">persistent</a> => ... # boolean (optional), default: true
+    <a href="#setting_port">port</a> => ... # number (optional), default: 5672
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (required), default: ""
+    <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
+    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
+    <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_charset">
+    charset
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal" </li>
+  <li> Default value is "UTF-8" </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_debug">
@@ -51,8 +98,8 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
 </ul>
 
 <p>Enable or disable debugging</p>
@@ -65,8 +112,8 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
 </ul>
 
 <p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
@@ -87,13 +134,13 @@ This is what it might look like in your config file:
 
 <h4> 
   <a name="setting_exchange_type">
-    exchange_type
+    exchange_type (required setting)
     
 </a>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value can be any of: "fanout", "direct", "topic" </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -107,8 +154,8 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
@@ -121,16 +168,30 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
 
 <h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_host">
-    host
+    host (required setting)
     
 </a>
 </h4>
@@ -151,7 +212,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "logstash" </li>
 </ul>
 
 <p>Key to route to by default. Defaults to 'logstash'</p>
@@ -162,13 +223,28 @@ Optional.</p>
 
 
 <h4> 
-  <a name="setting_name">
-    name
+  <a name="setting_message_format">
+    message_format
     
 </a>
 </h4>
 
 <ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_name">
+    name
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
@@ -184,8 +260,8 @@ Replaced by 'exchange' variable. See LOGSTASH-755</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is password </li>
+  <li> Default value is "guest" </li>
 </ul>
 
 <p>Your amqp password</p>
@@ -198,8 +274,8 @@ Replaced by 'exchange' variable. See LOGSTASH-755</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
 </ul>
 
 <p>Should messages persist to disk on the AMQP broker until they are read by a
@@ -213,11 +289,25 @@ consumer?</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is number </li>
+  <li> Default value is 5672 </li>
 </ul>
 
 <p>The AMQP port to connect on</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_ssl">
@@ -227,8 +317,8 @@ consumer?</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
 </ul>
 
 <p>Enable or disable SSL</p>
@@ -241,8 +331,8 @@ consumer?</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -251,14 +341,14 @@ Optional.</p>
 
 <h4> 
   <a name="setting_type">
-    type
+    type (required setting)
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only
@@ -275,7 +365,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "guest" </li>
 </ul>
 
 <p>Your amqp username</p>
@@ -288,8 +378,8 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
 </ul>
 
 <p>Validate SSL certificate</p>
@@ -303,7 +393,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "/" </li>
 </ul>
 
 <p>The vhost to use</p>

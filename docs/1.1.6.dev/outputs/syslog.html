@@ -17,26 +17,61 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   syslog {
-    <a href="#setting_appname">appname</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_facility">facility</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
-    <a href="#setting_host">host</a> => ... #  (optional)
-    <a href="#setting_msgid">msgid</a> => ... #  (optional)
-    <a href="#setting_port">port</a> => ... #  (optional)
-    <a href="#setting_procid">procid</a> => ... #  (optional)
-    <a href="#setting_protocol">protocol</a> => ... #  (optional)
-    <a href="#setting_rfc">rfc</a> => ... #  (optional)
-    <a href="#setting_severity">severity</a> => ... #  (optional)
-    <a href="#setting_sourcehost">sourcehost</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_timestamp">timestamp</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_appname">appname</a> => ... # string (optional), default: "LOGSTASH"
+    <a href="#setting_charset">charset</a> => ... # ["ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal"] (optional), default: "UTF-8"
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_facility">facility</a> => ... # ["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7"] (required)
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_format">format</a> => ... # ["plain", "json", "json_event"] (optional)
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_msgid">msgid</a> => ... # string (optional), default: "-"
+    <a href="#setting_port">port</a> => ... # number (required)
+    <a href="#setting_procid">procid</a> => ... # string (optional), default: "-"
+    <a href="#setting_protocol">protocol</a> => ... # ["tcp", "udp"] (optional), default: "udp"
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_rfc">rfc</a> => ... # ["rfc3164", "rfc5424"] (optional), default: "rfc3164"
+    <a href="#setting_severity">severity</a> => ... # ["emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"] (required)
+    <a href="#setting_sourcehost">sourcehost</a> => ... # string (optional), default: "%{@source_host}"
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_timestamp">timestamp</a> => ... # string (optional), default: "%{@timestamp}"
+    <a href="#setting_type">type</a> => ... # string (required), default: ""
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_appname">
@@ -47,10 +82,38 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "LOGSTASH" </li>
 </ul>
 
 <p>application name for syslog message</p>
+
+<h4> 
+  <a name="setting_charset">
+    charset
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal" </li>
+  <li> Default value is "UTF-8" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -60,21 +123,21 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_facility">
-    facility
+    facility (required setting)
     
 </a>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value can be any of: "kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7" </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -88,16 +151,30 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
 
 <h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "plain", "json", "json_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_host">
-    host
+    host (required setting)
     
 </a>
 </h4>
@@ -110,8 +187,8 @@ Optional.</p>
 <p>syslog server address to connect to</p>
 
 <h4> 
-  <a name="setting_msgid">
-    msgid
+  <a name="setting_message_format">
+    message_format
     
 </a>
 </h4>
@@ -121,17 +198,31 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>message id for syslog message</p>
+
 
 <h4> 
-  <a name="setting_port">
-    port
+  <a name="setting_msgid">
+    msgid
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is string </li>
+  <li> Default value is "-" </li>
+</ul>
+
+<p>message id for syslog message</p>
+
+<h4> 
+  <a name="setting_port">
+    port (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -146,7 +237,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "-" </li>
 </ul>
 
 <p>process id for syslog message</p>
@@ -159,11 +250,25 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value can be any of: "tcp", "udp" </li>
+  <li> Default value is "udp" </li>
 </ul>
 
 <p>syslog server protocol. you can choose between udp and tcp</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_rfc">
@@ -173,21 +278,21 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value can be any of: "rfc3164", "rfc5424" </li>
+  <li> Default value is "rfc3164" </li>
 </ul>
 
 <p>syslog message format: you can choose between rfc3164 or rfc5424</p>
 
 <h4> 
   <a name="setting_severity">
-    severity
+    severity (required setting)
     
 </a>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value can be any of: "emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug" </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -202,7 +307,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "%{@source_host}" </li>
 </ul>
 
 <p>source host for syslog message</p>
@@ -215,8 +320,8 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -232,21 +337,21 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "%{@timestamp}" </li>
 </ul>
 
 <p>timestamp for syslog message</p>
 
 <h4> 
   <a name="setting_type">
-    type
+    type (required setting)
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

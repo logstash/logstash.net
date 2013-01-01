@@ -28,18 +28,6 @@ class LogStashConfigDocGenerator
       /^ *flag[( ].*/ => lambda { |m| add_flag(m[0]) },
       /^ *(class|def|module) / => lambda { |m| clear_comments },
     }
-    @comments = []
-    @settings = {}
-    @flags = {}
-
-    require "logstash/config/mixin"
-    settings = @settings
-    LogStash::Config::Mixin::DSL.instance_eval do
-      define_method(:config) do |name, opts={}|
-        settings[name] ||= {}
-        settings[name].merge!(opts)
-      end
-    end
   end
 
   def parse(string)
@@ -86,16 +74,16 @@ class LogStashConfigDocGenerator
     name, opts = eval(code)
 
     description = BlueCloth.new(@comments.join("\n")).to_html
-    @settings[name] = opts.merge(:description => description)
+    @attributes[name][:description] = description
     clear_comments
   end # def add_config
 
   def add_flag(code)
     # call the code, which calls 'config' in this class.
     # This will let us align comments with config options.
-    p :code => code
+    #p :code => code
     fixed_code = code.gsub(/ do .*/, "")
-    p :fixedcode => fixed_code
+    #p :fixedcode => fixed_code
     name, description = eval(fixed_code)
     @flags[name] = description
     clear_comments
@@ -138,15 +126,32 @@ class LogStashConfigDocGenerator
   end # def clear_comments
 
   def generate(file, settings)
+    @class_description = ""
+    @plugin_status = ""
+    @comments = []
+    @attributes = Hash.new { |h,k| h[k] = {} }
+    @flags = {}
+
+    require "logstash/config/mixin"
+    # local scoping for the monkeypatch belowg
+    attributes = @attributes
+    # Monkeypatch the 'config' method to capture
+    # Note, this monkeypatch requires us do the config processing
+    # one at a time.
+    LogStash::Config::Mixin::DSL.instance_eval do
+      define_method(:config) do |name, opts={}|
+        p name => opts
+        attributes[name].merge!(opts)
+      end
+    end
+
     require "logstash/inputs/base"
     require "logstash/filters/base"
     require "logstash/outputs/base"
-    require file
 
-    @comments = []
-    @settings = {}
-    @class_description = ""
-    @plugin_status = ""
+    # Loading the file will trigger the config dsl which should
+    # collect all the config settings.
+    load file
 
     # parse base first
     parse(File.new(File.join(File.dirname(file), "base.rb"), "r").read)
@@ -183,7 +188,7 @@ class LogStashConfigDocGenerator
     # descriptions are assumed to be markdown
     description = BlueCloth.new(@class_description).to_html
 
-    sorted_settings = @settings.sort { |a,b| a.first.to_s <=> b.first.to_s }
+    sorted_settings = @attributes.sort { |a,b| a.first.to_s <=> b.first.to_s }
     klassname = LogStash::Config::Registry.registry[@name].to_s
     name = @name
 
