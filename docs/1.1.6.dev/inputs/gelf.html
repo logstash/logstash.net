@@ -1,0 +1,221 @@
+---
+title: logstash docs for inputs/gelf
+layout: content_right
+---
+<h2>gelf</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>Convert to UTF-8 if not in that character set.
+JSON must be valid UTF-8, and many inputs come from ruby IO
+instances, which almost all default to ASCII-8BIT. Force UTF-8
+JSON must be valid UTF-8, and many inputs come from ruby IO
+instances, which almost all default to ASCII-8BIT. Force UTF-8
+Read gelf messages as events over the network.</p>
+
+<p>This input is a good choice if you already use graylog2 today.</p>
+
+<p>The main reasoning for this input is to leverage existing GELF
+logging libraries such as the gelf log4j appender</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  gelf {
+    <a href="#setting_add_field">add_field</a> => ... #  (optional)
+    <a href="#setting_charset">charset</a> => ... #  (optional)
+    <a href="#setting_debug">debug</a> => ... #  (optional)
+    <a href="#setting_format">format</a> => ... #  (optional)
+    <a href="#setting_host">host</a> => ... #  (optional)
+    <a href="#setting_message_format">message_format</a> => ... #  (optional)
+    <a href="#setting_port">port</a> => ... #  (optional)
+    <a href="#setting_remap">remap</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... #  (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_charset">
+    charset
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
+
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The address to listen on</p>
+
+<h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The port to listen on. Remember that ports less than 1024 (privileged
+ports) may require root to use.</p>
+
+<h4> 
+  <a name="setting_remap">
+    remap
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Whether or not to remap the gelf message fields to logstash event fields or
+leave them intact.</p>
+
+<p>Default is true</p>
+
+<p>Remapping converts the following gelf fields to logstash equivalents:</p>
+
+<ul>
+<li>event.message becomes full<em>message
+if no full</em>message, use event.message becomes short<em>message
+if no short</em>message, event.message is the raw json input</li>
+<li>host + file to event.source</li>
+</ul>
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
+
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.6.dev/lib/logstash/inputs/gelf.rb">lib/logstash/inputs/gelf.rb</a>

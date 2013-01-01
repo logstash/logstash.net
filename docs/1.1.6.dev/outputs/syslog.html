@@ -1,0 +1,260 @@
+---
+title: logstash docs for outputs/syslog
+layout: content_right
+---
+<h2>syslog</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Send events to a syslog server.</p>
+
+<p>You can send messages compliant with RFC3164 or RFC5424
+UDP or TCP syslog transport is supported</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  syslog {
+    <a href="#setting_appname">appname</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
+    <a href="#setting_facility">facility</a> => ... #  (optional)
+    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_host">host</a> => ... #  (optional)
+    <a href="#setting_msgid">msgid</a> => ... #  (optional)
+    <a href="#setting_port">port</a> => ... #  (optional)
+    <a href="#setting_procid">procid</a> => ... #  (optional)
+    <a href="#setting_protocol">protocol</a> => ... #  (optional)
+    <a href="#setting_rfc">rfc</a> => ... #  (optional)
+    <a href="#setting_severity">severity</a> => ... #  (optional)
+    <a href="#setting_sourcehost">sourcehost</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_timestamp">timestamp</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... #  (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_appname">
+    appname
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>application name for syslog message</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_facility">
+    facility
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>facility label for syslog message</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>syslog server address to connect to</p>
+
+<h4> 
+  <a name="setting_msgid">
+    msgid
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>message id for syslog message</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>syslog server port to connect to</p>
+
+<h4> 
+  <a name="setting_procid">
+    procid
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>process id for syslog message</p>
+
+<h4> 
+  <a name="setting_protocol">
+    protocol
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>syslog server protocol. you can choose between udp and tcp</p>
+
+<h4> 
+  <a name="setting_rfc">
+    rfc
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>syslog message format: you can choose between rfc3164 or rfc5424</p>
+
+<h4> 
+  <a name="setting_severity">
+    severity
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>severity label for syslog message</p>
+
+<h4> 
+  <a name="setting_sourcehost">
+    sourcehost
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>source host for syslog message</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_timestamp">
+    timestamp
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>timestamp for syslog message</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.6.dev/lib/logstash/outputs/syslog.rb">lib/logstash/outputs/syslog.rb</a>

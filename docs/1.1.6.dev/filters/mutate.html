@@ -1,0 +1,422 @@
+---
+title: logstash docs for filters/mutate
+layout: content_right
+---
+<h2>mutate</h2>
+<h3>Status: <a href="../plugin-status">stable</a></h3>
+
+<p>The mutate filter allows you to do general mutations to fields. You
+can rename, remove, replace, and modify fields in your events.</p>
+
+<p>TODO(sissel): Support regexp replacements like String#gsub ?</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  mutate {
+    <a href="#setting_add_field">add_field</a> => ... #  (optional)
+    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
+    <a href="#setting_convert">convert</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
+    <a href="#setting_gsub">gsub</a> => ... #  (optional)
+    <a href="#setting_join">join</a> => ... #  (optional)
+    <a href="#setting_lowercase">lowercase</a> => ... #  (optional)
+    <a href="#setting_remove">remove</a> => ... #  (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
+    <a href="#setting_rename">rename</a> => ... #  (optional)
+    <a href="#setting_replace">replace</a> => ... #  (optional)
+    <a href="#setting_split">split</a> => ... #  (optional)
+    <a href="#setting_strip">strip</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_uppercase">uppercase</a> => ... #  (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_convert">
+    convert
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Convert a field's value to a different type, like turning a string to an
+integer. If the field value is an array, all members will be converted.
+If the field is a hash, no action will be taken.</p>
+
+<p>Valid conversion targets are: integer, float, string</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    convert =&gt; [ "fieldname", "integer" ]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_gsub">
+    gsub
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Convert a string field by applying a regular expression and a replacement
+if the field is not a string, no action will be taken</p>
+
+<p>This configuration takes an array consisting of 3 elements per
+field/substitution.</p>
+
+<p>be aware of escaping any backslash in the config file</p>
+
+<p>for example:</p>
+
+<pre><code>filter {
+  mutate {
+    gsub =&gt; [
+      # replace all forward slashes with underscore
+      "fieldname", "\\/", "_",
+
+      # replace backslashes, question marks, hashes and minuses with
+      # underscore
+      "fieldname", "[\\?#-]", "_"
+    ]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_join">
+    join
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Join an array with a separator character, does nothing on non-array fields</p>
+
+<p>Example:</p>
+
+<p>   filter {</p>
+
+<pre><code> mutate { 
+   join =&gt; ["fieldname", ","]
+ }
+</code></pre>
+
+<p>   }</p>
+
+<h4> 
+  <a name="setting_lowercase">
+    lowercase
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Convert a string to its lowercase equivalent</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    lowercase =&gt; [ "fieldname" ]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_remove">
+    remove
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Remove one or more fields.</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    remove =&gt; [ "client" ]  # Removes the 'client' field
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  myfilter {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_rename">
+    rename
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Rename one or more fields.</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    # Renames the 'HOSTORIP' field to 'client_ip'
+    rename =&gt; [ "HOSTORIP", "client_ip" ]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_replace">
+    replace
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Replace a field with a new value. The new value can include %{foo} strings
+to help you build a new value from other parts of the event.</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    replace =&gt; [ "@message", "%{source_host}: My new message" ]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_split">
+    split
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Split a field to an array using a separator character. Only works on string
+fields.</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate { 
+     split =&gt; ["fieldname", ","]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_strip">
+    strip
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Strip whitespaces</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate { 
+     strip =&gt; ["field1", "field2"]
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_uppercase">
+    uppercase
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Convert a string to its uppercase equivalent</p>
+
+<p>Example:</p>
+
+<pre><code>filter {
+  mutate {
+    uppercase =&gt; [ "fieldname" ]
+  }
+}
+</code></pre>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.6.dev/lib/logstash/filters/mutate.rb">lib/logstash/filters/mutate.rb</a>

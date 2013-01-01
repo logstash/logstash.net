@@ -1,0 +1,365 @@
+---
+title: logstash docs for outputs/cloudwatch
+layout: content_right
+---
+<h2>cloudwatch</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>This output lets you aggregate and send metric data to AWS CloudWatch</p>
+
+<p>Configuration is done partly in this output and partly using fields added
+to your events by other input &amp; filter plugins.</p>
+
+<p>Events which do not have a "CW<em>metric" field will be ignored, so to send
+events to CloudWatch you must at least add the "CW</em>metric" field to the
+desired events (using grep for example)</p>
+
+<p>Other fields which can be added to events to modify the behavior of this
+plugin are, "CW<em>namespace", "CW</em>unit", "CW<em>value", and the pair of
+"CW</em>dimensionName" &amp; "CW_dimensionValue".  All of these field names are
+configurable in this output.  See below for details.</p>
+
+<p>You can read more about AWS CloudWatch here: http://aws.amazon.com/cloudwatch/</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  cloudwatch {
+    <a href="#setting_access_key">access_key</a> => ... #  (optional)
+    <a href="#setting_dimensions">dimensions</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
+    <a href="#setting_field_dimensions">field_dimensions</a> => ... #  (optional)
+    <a href="#setting_field_metricname">field_metricname</a> => ... #  (optional)
+    <a href="#setting_field_namespace">field_namespace</a> => ... #  (optional)
+    <a href="#setting_field_unit">field_unit</a> => ... #  (optional)
+    <a href="#setting_field_value">field_value</a> => ... #  (optional)
+    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_metricname">metricname</a> => ... #  (optional)
+    <a href="#setting_namespace">namespace</a> => ... #  (optional)
+    <a href="#setting_queue_size">queue_size</a> => ... #  (optional)
+    <a href="#setting_region">region</a> => ... #  (optional)
+    <a href="#setting_secret_key">secret_key</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_timeframe">timeframe</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_unit">unit</a> => ... #  (optional)
+    <a href="#setting_value">value</a> => ... #  (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_access_key">
+    access_key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The AWS Access Key ID</p>
+
+<h4> 
+  <a name="setting_dimensions">
+    dimensions
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The default dimensions [ name, value, ... ] to use for events which do not have a "CW_dimensions" field</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_field_dimensions">
+    field_dimensions
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field used to set the dimensions on an event metric
+this field named here, if present in an event, must have an array of
+one or more key &amp; value pairs, for example...</p>
+
+<pre><code>add_field =&gt; [ "CW_dimensions", "Environment", "CW_dimensions", "prod" ]
+</code></pre>
+
+<p>or, equivalently...</p>
+
+<pre><code>add_field =&gt; [ "CW_dimensions", "Environment" ]
+add_field =&gt; [ "CW_dimensions", "prod" ]
+</code></pre>
+
+<h4> 
+  <a name="setting_field_metricname">
+    field_metricname
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field used to set the metric name on an event</p>
+
+<h4> 
+  <a name="setting_field_namespace">
+    field_namespace
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field used to set a different namespace per event</p>
+
+<h4> 
+  <a name="setting_field_unit">
+    field_unit
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field used to set the unit on an event metric</p>
+
+<h4> 
+  <a name="setting_field_value">
+    field_value
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field used to set the value (float) on an event metric</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_metricname">
+    metricname
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The default metric name to use for events which do not have a "CW_metricname" field.
+If this is provided then all events which pass through this output will be aggregated and
+sent to CloudWatch, so use this carefully.  Furthermore, when providing this option, you
+will probably want to also restrict events from passing through this output using event
+type, tag, and field matching</p>
+
+<p>At a minimum events must have a "metric name" to be sent to CloudWatch. This can be achieved
+either by providing a default here, as described above, OR by adding a "CW<em>metricname" field
+to the events themselves, as described below.  By default, if no other configuration is
+provided besides a metric name, then events will be counted (Unit: Count, Value: 1)
+by their metric name (either this default or from their CW</em>metricname field)</p>
+
+<h4> 
+  <a name="setting_namespace">
+    namespace
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The default namespace to use for events which do not have a "CW_namespace" field</p>
+
+<h4> 
+  <a name="setting_queue_size">
+    queue_size
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>How many events to queue before forcing a call to the CloudWatch API ahead of "timeframe" schedule
+Set this to the number of events-per-timeframe you will be sending to CloudWatch to avoid extra API calls</p>
+
+<h4> 
+  <a name="setting_region">
+    region
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Constants
+aggregate_key members
+Units
+The AWS Region to send logs to.</p>
+
+<h4> 
+  <a name="setting_secret_key">
+    secret_key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The AWS Secret Access Key</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_timeframe">
+    timeframe
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>How often to send data to CloudWatch
+This does not affect the event timestamps, events will always have their
+actual timestamp (to-the-minute) sent to CloudWatch.</p>
+
+<p>Increasing this may reduce the number of CloudWatch API calls, which would
+reduce costs in heavy usage.</p>
+
+<p>See here for allowed values: https://github.com/jmettraux/rufus-scheduler#the-time-strings-understood-by-rufus-scheduler</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_unit">
+    unit
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The default unit to use for events which do not have a "CW_unit" field</p>
+
+<h4> 
+  <a name="setting_value">
+    value
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The default value to use for events which do not have a "CW_value" field
+If provided, this must be a string which can be converted to a float, for example...
+"1", "2.34", ".5", and "0.67"</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.6.dev/lib/logstash/outputs/cloudwatch.rb">lib/logstash/outputs/cloudwatch.rb</a>
