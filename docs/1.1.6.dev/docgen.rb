@@ -3,15 +3,13 @@ require "erb"
 require "optparse"
 require "bluecloth" # for markdown parsing
 
-# TODO(sissel): Currently this doc generator doesn't follow ancestry, so
-# LogStash::Input::Amqp inherits Base, but we don't parse the base file.
-# We need this, though.
-#
-# TODO(sissel): Convert this to use ERB, not random bits of 'puts'
-
 $: << Dir.pwd
 $: << File.join(File.dirname(__FILE__), "..", "lib")
 
+require "logstash/config/mixin"
+require "logstash/inputs/base"
+require "logstash/filters/base"
+require "logstash/outputs/base"
 require "logstash/version"
 
 class LogStashConfigDocGenerator
@@ -132,7 +130,6 @@ class LogStashConfigDocGenerator
     @attributes = Hash.new { |h,k| h[k] = {} }
     @flags = {}
 
-    require "logstash/config/mixin"
     # local scoping for the monkeypatch belowg
     attributes = @attributes
     # Monkeypatch the 'config' method to capture
@@ -140,14 +137,10 @@ class LogStashConfigDocGenerator
     # one at a time.
     LogStash::Config::Mixin::DSL.instance_eval do
       define_method(:config) do |name, opts={}|
-        p name => opts
+        #p name => opts
         attributes[name].merge!(opts)
       end
     end
-
-    require "logstash/inputs/base"
-    require "logstash/filters/base"
-    require "logstash/outputs/base"
 
     # Loading the file will trigger the config dsl which should
     # collect all the config settings.
@@ -188,7 +181,7 @@ class LogStashConfigDocGenerator
     # descriptions are assumed to be markdown
     description = BlueCloth.new(@class_description).to_html
 
-    sorted_settings = @attributes.sort { |a,b| a.first.to_s <=> b.first.to_s }
+    sorted_attributes = @attributes.sort { |a,b| a.first.to_s <=> b.first.to_s }
     klassname = LogStash::Config::Registry.registry[@name].to_s
     name = @name
 
