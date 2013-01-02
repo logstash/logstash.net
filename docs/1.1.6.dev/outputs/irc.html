@@ -14,23 +14,49 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   irc {
+    <a href="#setting_channels">channels</a> => ... #  (optional)
     <a href="#setting_channels">channels</a> => ... # array (required)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_format">format</a> => ... # string (optional), default: "%{@message}"
+    <a href="#setting_format">format</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_host">host</a> => ... #  (optional)
+    <a href="#setting_nick">nick</a> => ... #  (optional)
     <a href="#setting_nick">nick</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_password">password</a> => ... # password (optional)
     <a href="#setting_port">port</a> => ... # number (required)
+    <a href="#setting_port">port</a> => ... #  (optional)
+    <a href="#setting_real">real</a> => ... #  (optional)
     <a href="#setting_real">real</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (optional), default: "logstash"
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_channels">
+    channels
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Channels to broadcast to</p>
 
 <h4> 
   <a name="setting_channels">
@@ -44,7 +70,21 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Channels to broadcast to</p>
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -58,7 +98,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -70,6 +110,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -87,11 +141,39 @@ Optional.</p>
   <li> Default value is "%{@message}" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Message format to send, event tokens are usable here</p>
 
 <h4> 
   <a name="setting_host">
     host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_host">
+    host
     
 </a>
 </h4>
@@ -112,10 +194,38 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "logstash" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>IRC Nickname</p>
+
+<h4> 
+  <a name="setting_nick">
+    nick
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>IRC server password</p>
 
 <h4> 
   <a name="setting_password">
@@ -129,7 +239,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>IRC server password</p>
+
 
 <h4> 
   <a name="setting_port">
@@ -140,6 +250,20 @@ Optional.</p>
 
 <ul>
   <li> Value type is number </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -154,10 +278,40 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "logstash" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>IRC Real name</p>
+
+<h4> 
+  <a name="setting_real">
+    real
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -171,9 +325,7 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -185,6 +337,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only
@@ -201,10 +367,24 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "logstash" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>IRC Username</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+
 
 
 <hr>

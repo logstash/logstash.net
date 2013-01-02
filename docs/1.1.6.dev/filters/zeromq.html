@@ -26,15 +26,25 @@ This is what it might look like in your config file:
 <pre><code>filter {
   zeromq {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_field">add_field</a> => ... #  (optional)
+    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_address">address</a> => ... #  (optional)
     <a href="#setting_address">address</a> => ... # string (optional), default: "tcp://127.0.0.1:2121"
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_field">field</a> => ... #  (optional)
     <a href="#setting_field">field</a> => ... # string (optional)
     <a href="#setting_mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
+    <a href="#setting_mode">mode</a> => ... #  (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_sockopt">sockopt</a> => ... #  (optional)
     <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -51,6 +61,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -74,8 +98,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -93,6 +117,37 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_address">
+    address
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>0mq socket address to connect or bind
+Please note that inproc:// will not work with logstash
+as we use a context per thread
+By default, filters connect</p>
+
+<h4> 
   <a name="setting_address">
     address
     
@@ -104,10 +159,22 @@ would add a tag "foo_hello"</p>
   <li> Default value is "tcp://127.0.0.1:2121" </li>
 </ul>
 
-<p>0mq socket address to connect or bind
-Please note that inproc:// will not work with logstash
-as we use a context per thread
-By default, filters connect</p>
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -121,8 +188,7 @@ By default, filters connect</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is
-additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_field">
@@ -142,6 +208,20 @@ TODO (lusis)
 Allow filtering multiple fields</p>
 
 <h4> 
+  <a name="setting_field">
+    field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_mode">
     mode
     
@@ -151,6 +231,20 @@ Allow filtering multiple fields</p>
 <ul>
   <li> Value can be any of: "server", "client" </li>
   <li> Default value is "client" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_mode">
+    mode
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>0mq mode
@@ -165,8 +259,8 @@ client mode connects</p>
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -184,6 +278,20 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_sockopt">
     sockopt
     
@@ -191,7 +299,7 @@ would remove the tag "foo_hello" if it is present</p>
 </h4>
 
 <ul>
-  <li> Value type is hash </li>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -209,6 +317,36 @@ ZMQ::SUBSCRIBE - topic filters for pubsub</p>
 <p>example: sockopt => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "my<em>named</em>queue"]</p>
 
 <h4> 
+  <a name="setting_sockopt">
+    sockopt
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
   <a name="setting_tags">
     tags
     
@@ -220,9 +358,7 @@ ZMQ::SUBSCRIBE - topic filters for pubsub</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -234,6 +370,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only

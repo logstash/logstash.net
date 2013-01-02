@@ -20,15 +20,24 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   zeromq {
+    <a href="#setting_address">address</a> => ... #  (optional)
     <a href="#setting_address">address</a> => ... # array (optional), default: ["tcp://127.0.0.1:2120"]
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_mode">mode</a> => ... #  (optional)
     <a href="#setting_mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
     <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
+    <a href="#setting_sockopt">sockopt</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_topic">topic</a> => ... # string (optional), default: ""
+    <a href="#setting_topic">topic</a> => ... #  (optional)
     <a href="#setting_topology">topology</a> => ... # string, one of ["pushpull", "pubsub", "pair"] (required)
+    <a href="#setting_topology">topology</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -43,14 +52,42 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is ["tcp://127.0.0.1:2120"] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>0mq socket address to connect or bind.
 Please note that <code>inproc://</code> will not work with logstashi.
 For each we use a context per thread.
 By default, inputs bind/listen and outputs connect.</p>
+
+<h4> 
+  <a name="setting_address">
+    address
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is ["tcp://127.0.0.1:2120"] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -64,7 +101,22 @@ By default, inputs bind/listen and outputs connect.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -78,8 +130,21 @@ By default, inputs bind/listen and outputs connect.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
+
+<h4> 
+  <a name="setting_mode">
+    mode
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Server mode binds/listens. Client mode connects.</p>
 
 <h4> 
   <a name="setting_mode">
@@ -93,7 +158,7 @@ Optional.</p>
   <li> Default value is "client" </li>
 </ul>
 
-<p>Server mode binds/listens. Client mode connects.</p>
+
 
 <h4> 
   <a name="setting_sockopt">
@@ -104,6 +169,20 @@ Optional.</p>
 
 <ul>
   <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_sockopt">
+    sockopt
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -133,6 +212,20 @@ See http://api.zeromq.org/2-1:zmq-setsockopt for details.</p>
   <li> Default value is [] </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
@@ -147,6 +240,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_topic">
+    topic
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>This is used for the 'pubsub' topology only.
@@ -164,6 +271,20 @@ NOTE: Topic is evaluated with <code>event.sprintf</code> so macros are valid her
 
 <ul>
   <li> Value can be any of: "pushpull", "pubsub", "pair" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_topology">
+    topology
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -191,6 +312,20 @@ TODO (lusis) add router/dealer</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

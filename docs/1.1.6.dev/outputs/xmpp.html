@@ -17,16 +17,26 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   xmpp {
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional)
+    <a href="#setting_host">host</a> => ... #  (optional)
+    <a href="#setting_message">message</a> => ... #  (optional)
     <a href="#setting_message">message</a> => ... # string (required)
     <a href="#setting_password">password</a> => ... # password (required)
+    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_rooms">rooms</a> => ... # array (optional)
+    <a href="#setting_rooms">rooms</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (required)
     <a href="#setting_users">users</a> => ... # array (optional)
+    <a href="#setting_users">users</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -41,11 +51,25 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -59,8 +83,36 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Only handle events with all of these fields.
 Optional.</p>
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_host">
@@ -79,7 +131,7 @@ the host on the user/identity is used. (foo.com for user@foo.com)</p>
 
 <h4> 
   <a name="setting_message">
-    message (required setting)
+    message
     
 </a>
 </h4>
@@ -92,6 +144,20 @@ the host on the user/identity is used. (foo.com for user@foo.com)</p>
 <p>The message to send. This supports dynamic strings like %{@source_host}</p>
 
 <h4> 
+  <a name="setting_message">
+    message (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_password">
     password (required setting)
     
@@ -100,6 +166,20 @@ the host on the user/identity is used. (foo.com for user@foo.com)</p>
 
 <ul>
   <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -117,8 +197,38 @@ the host on the user/identity is used. (foo.com for user@foo.com)</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_rooms">
+    rooms
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>if muc/multi-user-chat required, give the name of the room that
 you want to join: room@conference.domain/nick</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -132,9 +242,7 @@ you want to join: room@conference.domain/nick</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -148,10 +256,38 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
 Optional.</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The user or resource ID, like foo@example.com.</p>
 
 <h4> 
   <a name="setting_user">
@@ -165,7 +301,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The user or resource ID, like foo@example.com.</p>
+
 
 <h4> 
   <a name="setting_users">
@@ -176,6 +312,20 @@ Optional.</p>
 
 <ul>
   <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_users">
+    users
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 

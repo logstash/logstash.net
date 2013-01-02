@@ -21,12 +21,19 @@ This is what it might look like in your config file:
 <pre><code>output {
   loggly {
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional), default: "logs.loggly.com"
+    <a href="#setting_host">host</a> => ... #  (optional)
+    <a href="#setting_key">key</a> => ... #  (optional)
     <a href="#setting_key">key</a> => ... # string (required)
+    <a href="#setting_proto">proto</a> => ... #  (optional)
     <a href="#setting_proto">proto</a> => ... # string (optional), default: "http"
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -45,6 +52,20 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
@@ -57,6 +78,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -74,12 +109,26 @@ Optional.</p>
   <li> Default value is "logs.loggly.com" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The hostname to send logs to. This should target the loggly http input
 server which is usually "logs.loggly.com"</p>
 
 <h4> 
   <a name="setting_key">
-    key (required setting)
+    key
     
 </a>
 </h4>
@@ -102,6 +151,35 @@ the event. This is mainly aimed at multitenant hosting providers who want
 to offer shipping a customer's logs to that customer's loggly account.</p>
 
 <h4> 
+  <a name="setting_key">
+    key (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_proto">
+    proto
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Should the log action be sent over https instead of plain http
+Defaults to https</p>
+
+<h4> 
   <a name="setting_proto">
     proto
     
@@ -113,8 +191,23 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
   <li> Default value is "http" </li>
 </ul>
 
-<p>Should the log action be sent over https instead of plain http
-Defaults to https</p>
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -128,9 +221,7 @@ Defaults to https</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -142,6 +233,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

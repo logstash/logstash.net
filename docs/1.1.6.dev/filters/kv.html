@@ -39,16 +39,28 @@ This is what it might look like in your config file:
 <pre><code>filter {
   kv {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_container">container</a> => ... # string (optional), default: "@fields"
+    <a href="#setting_container">container</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_field_split">field_split</a> => ... #  (optional)
     <a href="#setting_field_split">field_split</a> => ... # string (optional), default: " "
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: ["@message"]
     <a href="#setting_prefix">prefix</a> => ... # string (optional), default: ""
+    <a href="#setting_prefix">prefix</a> => ... #  (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_trim">trim</a> => ... #  (optional)
     <a href="#setting_trim">trim</a> => ... # string (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_value_split">value_split</a> => ... #  (optional)
     <a href="#setting_value_split">value_split</a> => ... # string (optional), default: "="
   }
 }
@@ -66,6 +78,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -91,6 +117,20 @@ Example:</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -119,6 +159,20 @@ would add a tag "foo_hello"</p>
   <li> Default value is "@fields" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_container">
+    container
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The name of the container to put all of the key-value pairs into</p>
 
 <p>Example, to place all keys into container kv:</p>
@@ -134,12 +188,26 @@ would add a tag "foo_hello"</p>
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is
 additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_field_split">
@@ -150,7 +218,7 @@ additional to type and tags.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is " " </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>A string of characters to use as delimiters for parsing out key-value pairs.</p>
@@ -180,6 +248,34 @@ fields:</p>
 
 
 <h4> 
+  <a name="setting_field_split">
+    field_split
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is " " </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The fields to perform 'key=value' searching on</p>
+
+<h4> 
   <a name="setting_fields">
     fields
     
@@ -191,7 +287,7 @@ fields:</p>
   <li> Default value is ["@message"] </li>
 </ul>
 
-<p>The fields to perform 'key=value' searching on</p>
+
 
 <h4> 
   <a name="setting_prefix">
@@ -203,6 +299,20 @@ fields:</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_prefix">
+    prefix
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>A string to prepend to all of the extracted keys</p>
@@ -220,8 +330,8 @@ fields:</p>
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -239,6 +349,20 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_tags">
     tags
     
@@ -248,6 +372,20 @@ would remove the tag "foo_hello" if it is present</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -280,6 +418,20 @@ logs)</p>
 </code></pre>
 
 <h4> 
+  <a name="setting_trim">
+    trim
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_type">
     type
     
@@ -289,6 +441,20 @@ logs)</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only
@@ -305,7 +471,7 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "=" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>A string of characters to use as delimiters for identifying key-value relations.</p>
@@ -315,6 +481,20 @@ Optional.</p>
 
 <pre><code>filter { kv { value_split =&gt; ":" } }
 </code></pre>
+
+<h4> 
+  <a name="setting_value_split">
+    value_split
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "=" </li>
+</ul>
+
+
 
 
 <hr>

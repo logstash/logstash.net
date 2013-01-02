@@ -14,16 +14,27 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   mongodb {
+    <a href="#setting_collection">collection</a> => ... #  (optional)
     <a href="#setting_collection">collection</a> => ... # string (required)
+    <a href="#setting_database">database</a> => ... #  (optional)
     <a href="#setting_database">database</a> => ... # string (required)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_isodate">isodate</a> => ... #  (optional)
     <a href="#setting_isodate">isodate</a> => ... # boolean (optional), default: false
     <a href="#setting_password">password</a> => ... # password (optional)
+    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 27017
+    <a href="#setting_port">port</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (optional)
   }
 }
@@ -33,7 +44,7 @@ This is what it might look like in your config file:
 
 <h4> 
   <a name="setting_collection">
-    collection (required setting)
+    collection
     
 </a>
 </h4>
@@ -47,6 +58,34 @@ This is what it might look like in your config file:
 select a collection based on data in the event.</p>
 
 <h4> 
+  <a name="setting_collection">
+    collection (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_database">
+    database
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The database to use</p>
+
+<h4> 
   <a name="setting_database">
     database (required setting)
     
@@ -58,7 +97,21 @@ select a collection based on data in the event.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The database to use</p>
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -72,7 +125,22 @@ select a collection based on data in the event.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -86,8 +154,21 @@ select a collection based on data in the event.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
+
+<h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>your mongodb host</p>
 
 <h4> 
   <a name="setting_host">
@@ -101,7 +182,23 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>your mongodb host</p>
+
+
+<h4> 
+  <a name="setting_isodate">
+    isodate
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If true, store the @timestamp field in mongodb as an ISODate type instead
+of an ISO8601 string.  For more information about this, see
+http://www.mongodb.org/display/DOCS/Dates</p>
 
 <h4> 
   <a name="setting_isodate">
@@ -115,9 +212,7 @@ Optional.</p>
   <li> Default value is false </li>
 </ul>
 
-<p>If true, store the @timestamp field in mongodb as an ISODate type instead
-of an ISO8601 string.  For more information about this, see
-http://www.mongodb.org/display/DOCS/Dates</p>
+
 
 <h4> 
   <a name="setting_password">
@@ -128,6 +223,20 @@ http://www.mongodb.org/display/DOCS/Dates</p>
 
 <ul>
   <li> Value type is password </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -145,7 +254,37 @@ http://www.mongodb.org/display/DOCS/Dates</p>
   <li> Default value is 27017 </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>the mongodb port</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -159,9 +298,7 @@ http://www.mongodb.org/display/DOCS/Dates</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -175,10 +312,38 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
 Optional.</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_user">

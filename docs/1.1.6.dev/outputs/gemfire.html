@@ -21,14 +21,23 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   gemfire {
+    <a href="#setting_cache_name">cache_name</a> => ... #  (optional)
     <a href="#setting_cache_name">cache_name</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_cache_xml_file">cache_xml_file</a> => ... #  (optional)
     <a href="#setting_cache_xml_file">cache_xml_file</a> => ... # string (optional), default: nil
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_key_format">key_format</a> => ... #  (optional)
     <a href="#setting_key_format">key_format</a> => ... # string (optional), default: "%{@source}-%{@timestamp}"
+    <a href="#setting_name">name</a> => ... #  (optional)
+    <a href="#setting_region_name">region_name</a> => ... #  (optional)
     <a href="#setting_region_name">region_name</a> => ... # string (optional), default: "Logstash"
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -44,10 +53,24 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "logstash" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Your client cache name</p>
+
+<h4> 
+  <a name="setting_cache_name">
+    cache_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_cache_xml_file">
@@ -58,7 +81,7 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is nil </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The path to a GemFire client cache XML file.</p>
@@ -77,6 +100,34 @@ This is what it might look like in your config file:
 </code></pre>
 
 <h4> 
+  <a name="setting_cache_xml_file">
+    cache_xml_file
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is nil </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -88,7 +139,22 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -102,8 +168,21 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
+
+<h4> 
+  <a name="setting_key_format">
+    key_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>A sprintf format to use when building keys</p>
 
 <h4> 
   <a name="setting_key_format">
@@ -117,7 +196,7 @@ Optional.</p>
   <li> Default value is "%{@source}-%{@timestamp}" </li>
 </ul>
 
-<p>A sprintf format to use when building keys</p>
+
 
 <h4> 
   <a name="setting_name">
@@ -128,6 +207,20 @@ Optional.</p>
 
 <ul>
   <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_name">
+    name
+    
+</a>
+</h4>
+
+<ul>
   <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
@@ -143,10 +236,24 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "Logstash" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The region name</p>
+
+<h4> 
+  <a name="setting_region_name">
+    region_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "Logstash" </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_tags">
@@ -158,6 +265,20 @@ Optional.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -174,6 +295,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

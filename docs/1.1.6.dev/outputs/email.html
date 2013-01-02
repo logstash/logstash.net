@@ -14,20 +14,35 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   email {
+    <a href="#setting_attachments">attachments</a> => ... #  (optional)
     <a href="#setting_attachments">attachments</a> => ... # array (optional), default: []
     <a href="#setting_body">body</a> => ... # string (optional), default: ""
+    <a href="#setting_body">body</a> => ... #  (optional)
     <a href="#setting_cc">cc</a> => ... # string (optional), default: ""
+    <a href="#setting_cc">cc</a> => ... #  (optional)
     <a href="#setting_contenttype">contenttype</a> => ... # string (optional), default: "text/html; charset=UTF-8"
+    <a href="#setting_contenttype">contenttype</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_from">from</a> => ... # string (optional), default: "logstash.alert@nowhere.com"
+    <a href="#setting_from">from</a> => ... #  (optional)
+    <a href="#setting_htmlbody">htmlbody</a> => ... #  (optional)
     <a href="#setting_htmlbody">htmlbody</a> => ... # string (optional), default: ""
     <a href="#setting_match">match</a> => ... # hash (required)
+    <a href="#setting_match">match</a> => ... #  (optional)
+    <a href="#setting_options">options</a> => ... #  (optional)
     <a href="#setting_options">options</a> => ... # hash (optional), default: {}
+    <a href="#setting_subject">subject</a> => ... #  (optional)
     <a href="#setting_subject">subject</a> => ... # string (optional), default: ""
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_to">to</a> => ... # string (required)
+    <a href="#setting_to">to</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_via">via</a> => ... #  (optional)
     <a href="#setting_via">via</a> => ... # string (optional), default: "smtp"
   }
 }
@@ -43,11 +58,25 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>attachments - has of name of file and file location</p>
+
+<h4> 
+  <a name="setting_attachments">
+    attachments
+    
+</a>
+</h4>
+
+<ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
 </ul>
 
-<p>attachments - has of name of file and file location</p>
+
 
 <h4> 
   <a name="setting_body">
@@ -59,6 +88,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_body">
+    body
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>body for email - just plain text</p>
@@ -75,6 +118,20 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_cc">
+    cc
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>cc - send to others</p>
 
 <h4> 
@@ -87,6 +144,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is string </li>
   <li> Default value is "text/html; charset=UTF-8" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_contenttype">
+    contenttype
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>contenttype : for multipart messages, set the content type and/or charset of the html part</p>
@@ -103,6 +174,20 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
@@ -115,6 +200,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -132,7 +231,35 @@ Optional.</p>
   <li> Default value is "logstash.alert@nowhere.com" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_from">
+    from
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The From setting for email - fully qualified email address for the From:</p>
+
+<h4> 
+  <a name="setting_htmlbody">
+    htmlbody
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>body for email - can contain html markup</p>
 
 <h4> 
   <a name="setting_htmlbody">
@@ -146,7 +273,7 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
-<p>body for email - can contain html markup</p>
+
 
 <h4> 
   <a name="setting_match">
@@ -157,6 +284,20 @@ Optional.</p>
 
 <ul>
   <li> Value type is hash </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_match">
+    match
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -177,8 +318,8 @@ Takes the form of:</p>
 </h4>
 
 <ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>the options to use:
@@ -227,6 +368,34 @@ assigned the mail object.  So the above example will change only the :address va
 of the global smtp_settings to be 'some.host', keeping all other values</p>
 
 <h4> 
+  <a name="setting_options">
+    options
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_subject">
+    subject
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>subject for email</p>
+
+<h4> 
   <a name="setting_subject">
     subject
     
@@ -238,7 +407,23 @@ of the global smtp_settings to be 'some.host', keeping all other values</p>
   <li> Default value is "" </li>
 </ul>
 
-<p>subject for email</p>
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -252,13 +437,25 @@ of the global smtp_settings to be 'some.host', keeping all other values</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_to">
     to (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_to">
+    to
     
 </a>
 </h4>
@@ -282,6 +479,20 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
@@ -296,10 +507,24 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "smtp" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>how to send email: either smtp or sendmail - default to 'smtp'</p>
+
+<h4> 
+  <a name="setting_via">
+    via
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "smtp" </li>
+</ul>
+
+
 
 
 <hr>

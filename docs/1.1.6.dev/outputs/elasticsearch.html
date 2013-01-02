@@ -35,21 +35,36 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   elasticsearch {
+    <a href="#setting_bind_host">bind_host</a> => ... #  (optional)
     <a href="#setting_bind_host">bind_host</a> => ... # string (optional)
+    <a href="#setting_cluster">cluster</a> => ... #  (optional)
     <a href="#setting_cluster">cluster</a> => ... # string (optional)
     <a href="#setting_document_id">document_id</a> => ... # string (optional), default: nil
+    <a href="#setting_document_id">document_id</a> => ... #  (optional)
     <a href="#setting_embedded">embedded</a> => ... # boolean (optional), default: false
+    <a href="#setting_embedded">embedded</a> => ... #  (optional)
     <a href="#setting_embedded_http_port">embedded_http_port</a> => ... # string (optional), default: "9200-9300"
+    <a href="#setting_embedded_http_port">embedded_http_port</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional)
     <a href="#setting_index">index</a> => ... # string (optional), default: "logstash-%{+YYYY.MM.dd}"
+    <a href="#setting_index">index</a> => ... #  (optional)
+    <a href="#setting_index_type">index_type</a> => ... #  (optional)
     <a href="#setting_index_type">index_type</a> => ... # string (optional), default: "%{@type}"
+    <a href="#setting_max_inflight_requests">max_inflight_requests</a> => ... #  (optional)
     <a href="#setting_max_inflight_requests">max_inflight_requests</a> => ... # number (optional), default: 50
+    <a href="#setting_node_name">node_name</a> => ... #  (optional)
     <a href="#setting_node_name">node_name</a> => ... # string (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 9300
+    <a href="#setting_port">port</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -71,6 +86,20 @@ This is what it might look like in your config file:
 <p>The name/address of the host to bind to for ElasticSearch clustering</p>
 
 <h4> 
+  <a name="setting_bind_host">
+    bind_host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_cluster">
     cluster
     
@@ -86,6 +115,20 @@ This is what it might look like in your config file:
 for discovery.</p>
 
 <h4> 
+  <a name="setting_cluster">
+    cluster
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_document_id">
     document_id
     
@@ -95,6 +138,20 @@ for discovery.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is nil </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_document_id">
+    document_id
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The document ID for the index. Useful for overwriting existing entries in
@@ -110,6 +167,20 @@ elasticsearch with the same ID.</p>
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is false </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_embedded">
+    embedded
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Run the elasticsearch server embedded in this process.
@@ -129,6 +200,20 @@ a separate elasticsearch process.</p>
   <li> Default value is "9200-9300" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_embedded_http_port">
+    embedded_http_port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>If you are running the embedded elasticsearch server, you can set the http
 port it listens on here; it is not common to need this setting changed from
 default.</p>
@@ -145,6 +230,20 @@ default.</p>
   <li> Default value is [] </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
@@ -157,6 +256,20 @@ default.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -179,6 +292,20 @@ This is only required if the normal multicast/cluster discovery stuff won't
 work in your environment.</p>
 
 <h4> 
+  <a name="setting_host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_index">
     index
     
@@ -188,6 +315,20 @@ work in your environment.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_index">
+    index
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The index to write events to. This can be dynamic using the %{foo} syntax.
@@ -203,11 +344,41 @@ delete old data or only search specific date ranges.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "%{@type}" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The index type to write events to. Generally you should try to write only
 similar events to the same 'type'. String expansion '%{foo}' works here.</p>
+
+<h4> 
+  <a name="setting_index_type">
+    index_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "%{@type}" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_max_inflight_requests">
+    max_inflight_requests
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Configure the maximum number of in-flight requests to ElasticSearch.</p>
+
+<p>Note: This setting may be removed in the future.</p>
 
 <h4> 
   <a name="setting_max_inflight_requests">
@@ -221,9 +392,7 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
   <li> Default value is 50 </li>
 </ul>
 
-<p>Configure the maximum number of in-flight requests to ElasticSearch.</p>
 
-<p>Note: This setting may be removed in the future.</p>
 
 <h4> 
   <a name="setting_node_name">
@@ -242,6 +411,20 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 <p>By default, this is generated internally by the ES client.</p>
 
 <h4> 
+  <a name="setting_node_name">
+    node_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
   <a name="setting_port">
     port
     
@@ -251,6 +434,20 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 <ul>
   <li> Value type is number </li>
   <li> Default value is 9300 </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The port for ElasticSearch transport to use. This is <em>not</em> the ElasticSearch
@@ -264,13 +461,27 @@ REST API port (normally 9200).</p>
 </h4>
 
 <ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_type">
@@ -282,6 +493,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

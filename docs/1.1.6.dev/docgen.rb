@@ -73,7 +73,7 @@ class LogStashConfigDocGenerator
     name, opts = eval(code)
 
     description = BlueCloth.new(@comments.join("\n")).to_html
-    @attributes[name.to_s][:description] = description
+    @attributes[name][:description] = description
     clear_comments
   end # def add_config
 

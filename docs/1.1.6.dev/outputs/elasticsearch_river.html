@@ -22,34 +22,72 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   elasticsearch_river {
+    <a href="#setting_amqp_host">amqp_host</a> => ... #  (optional)
     <a href="#setting_amqp_host">amqp_host</a> => ... # string (required)
     <a href="#setting_amqp_port">amqp_port</a> => ... # number (optional), default: 5672
+    <a href="#setting_amqp_port">amqp_port</a> => ... #  (optional)
     <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_debug">debug</a> => ... #  (optional)
+    <a href="#setting_document_id">document_id</a> => ... #  (optional)
     <a href="#setting_document_id">document_id</a> => ... # string (optional), default: nil
     <a href="#setting_durable">durable</a> => ... # boolean (optional), default: true
+    <a href="#setting_durable">durable</a> => ... #  (optional)
     <a href="#setting_es_bulk_size">es_bulk_size</a> => ... # number (optional), default: 1000
+    <a href="#setting_es_bulk_size">es_bulk_size</a> => ... #  (optional)
+    <a href="#setting_es_bulk_timeout_ms">es_bulk_timeout_ms</a> => ... #  (optional)
     <a href="#setting_es_bulk_timeout_ms">es_bulk_timeout_ms</a> => ... # number (optional), default: 100
+    <a href="#setting_es_host">es_host</a> => ... #  (optional)
     <a href="#setting_es_host">es_host</a> => ... # string (required)
+    <a href="#setting_es_port">es_port</a> => ... #  (optional)
     <a href="#setting_es_port">es_port</a> => ... # number (optional), default: 9200
     <a href="#setting_exchange">exchange</a> => ... # string (optional), default: "elasticsearch"
+    <a href="#setting_exchange">exchange</a> => ... #  (optional)
     <a href="#setting_exchange_type">exchange_type</a> => ... # string, one of ["fanout", "direct", "topic"] (optional), default: "direct"
+    <a href="#setting_exchange_type">exchange_type</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_index">index</a> => ... #  (optional)
     <a href="#setting_index">index</a> => ... # string (optional), default: "logstash-%{+YYYY.MM.dd}"
+    <a href="#setting_index_type">index_type</a> => ... #  (optional)
     <a href="#setting_index_type">index_type</a> => ... # string (optional), default: "%{@type}"
     <a href="#setting_key">key</a> => ... # string (optional), default: "elasticsearch"
+    <a href="#setting_key">key</a> => ... #  (optional)
+    <a href="#setting_name">name</a> => ... #  (optional)
     <a href="#setting_password">password</a> => ... # string (optional), default: "guest"
+    <a href="#setting_password">password</a> => ... #  (optional)
+    <a href="#setting_persistent">persistent</a> => ... #  (optional)
     <a href="#setting_persistent">persistent</a> => ... # boolean (optional), default: true
+    <a href="#setting_queue">queue</a> => ... #  (optional)
     <a href="#setting_queue">queue</a> => ... # string (optional), default: "elasticsearch"
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
     <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
+    <a href="#setting_vhost">vhost</a> => ... #  (optional)
   }
 }
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="setting_amqp_host">
+    amqp_host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Hostname of AMQP server</p>
 
 <h4> 
   <a name="setting_amqp_host">
@@ -63,7 +101,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Hostname of AMQP server</p>
+
 
 <h4> 
   <a name="setting_amqp_port">
@@ -75,6 +113,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is number </li>
   <li> Default value is 5672 </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_amqp_port">
+    amqp_port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Port of AMQP server</p>
@@ -94,6 +146,35 @@ This is what it might look like in your config file:
 
 
 <h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_document_id">
+    document_id
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The document ID for the index. Useful for overwriting existing entries in
+elasticsearch with the same ID.</p>
+
+<h4> 
   <a name="setting_document_id">
     document_id
     
@@ -105,8 +186,7 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
-<p>The document ID for the index. Useful for overwriting existing entries in
-elasticsearch with the same ID.</p>
+
 
 <h4> 
   <a name="setting_durable">
@@ -118,6 +198,20 @@ elasticsearch with the same ID.</p>
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_durable">
+    durable
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>AMQP durability setting. Also used for ElasticSearch setting</p>
@@ -134,7 +228,35 @@ elasticsearch with the same ID.</p>
   <li> Default value is 1000 </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_es_bulk_size">
+    es_bulk_size
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>ElasticSearch river configuration: bulk fetch size</p>
+
+<h4> 
+  <a name="setting_es_bulk_timeout_ms">
+    es_bulk_timeout_ms
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>ElasticSearch river configuration: bulk timeout in milliseconds</p>
 
 <h4> 
   <a name="setting_es_bulk_timeout_ms">
@@ -148,7 +270,21 @@ elasticsearch with the same ID.</p>
   <li> Default value is 100 </li>
 </ul>
 
-<p>ElasticSearch river configuration: bulk timeout in milliseconds</p>
+
+
+<h4> 
+  <a name="setting_es_host">
+    es_host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name/address of an ElasticSearch host to use for river creation</p>
 
 <h4> 
   <a name="setting_es_host">
@@ -162,7 +298,21 @@ elasticsearch with the same ID.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name/address of an ElasticSearch host to use for river creation</p>
+
+
+<h4> 
+  <a name="setting_es_port">
+    es_port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>ElasticSearch API port</p>
 
 <h4> 
   <a name="setting_es_port">
@@ -176,7 +326,7 @@ elasticsearch with the same ID.</p>
   <li> Default value is 9200 </li>
 </ul>
 
-<p>ElasticSearch API port</p>
+
 
 <h4> 
   <a name="setting_exchange">
@@ -188,6 +338,20 @@ elasticsearch with the same ID.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "elasticsearch" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_exchange">
+    exchange
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>AMQP exchange name</p>
@@ -204,7 +368,35 @@ elasticsearch with the same ID.</p>
   <li> Default value is "direct" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_exchange_type">
+    exchange_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The exchange type (fanout, topic, direct)</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -218,7 +410,7 @@ elasticsearch with the same ID.</p>
   <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -230,6 +422,20 @@ elasticsearch with the same ID.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -244,12 +450,41 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The index to write events to. This can be dynamic using the %{foo} syntax.
 The default value will partition your indeces by day so you can more easily
 delete old data or only search specific date ranges.</p>
+
+<h4> 
+  <a name="setting_index">
+    index
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_index_type">
+    index_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The index type to write events to. Generally you should try to write only
+similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 
 <h4> 
   <a name="setting_index_type">
@@ -263,8 +498,7 @@ delete old data or only search specific date ranges.</p>
   <li> Default value is "%{@type}" </li>
 </ul>
 
-<p>The index type to write events to. Generally you should try to write only
-similar events to the same 'type'. String expansion '%{foo}' works here.</p>
+
 
 <h4> 
   <a name="setting_key">
@@ -278,7 +512,36 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
   <li> Default value is "elasticsearch" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>AMQP routing key</p>
+
+<h4> 
+  <a name="setting_name">
+    name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>AMQP queue name. Depricated due to conflicts with puppet naming convention.
+Replaced by 'queue' variable. See LOGSTASH-755</p>
 
 <h4> 
   <a name="setting_name">
@@ -293,8 +556,7 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>AMQP queue name. Depricated due to conflicts with puppet naming convention.
-Replaced by 'queue' variable. See LOGSTASH-755</p>
+
 
 <h4> 
   <a name="setting_password">
@@ -308,7 +570,35 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is "guest" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>AMQP password</p>
+
+<h4> 
+  <a name="setting_persistent">
+    persistent
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>AMQP persistence setting</p>
 
 <h4> 
   <a name="setting_persistent">
@@ -322,7 +612,21 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is true </li>
 </ul>
 
-<p>AMQP persistence setting</p>
+
+
+<h4> 
+  <a name="setting_queue">
+    queue
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>AMQP queue name</p>
 
 <h4> 
   <a name="setting_queue">
@@ -336,7 +640,7 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is "elasticsearch" </li>
 </ul>
 
-<p>AMQP queue name</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -348,6 +652,20 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -366,6 +684,20 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
@@ -380,10 +712,24 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> Default value is "guest" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>AMQP user</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "guest" </li>
+</ul>
+
+
 
 <h4> 
   <a name="setting_vhost">
@@ -395,6 +741,20 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "/" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_vhost">
+    vhost
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>AMQP vhost</p>

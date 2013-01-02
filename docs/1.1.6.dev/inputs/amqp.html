@@ -23,29 +23,55 @@ This is what it might look like in your config file:
 <pre><code>input {
   amqp {
     <a href="#setting_ack">ack</a> => ... # boolean (optional), default: true
+    <a href="#setting_ack">ack</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_field">add_field</a> => ... #  (optional)
+    <a href="#setting_arguments">arguments</a> => ... #  (optional)
     <a href="#setting_arguments">arguments</a> => ... # array (optional), default: []
     <a href="#setting_auto_delete">auto_delete</a> => ... # boolean (optional), default: true
+    <a href="#setting_auto_delete">auto_delete</a> => ... #  (optional)
     <a href="#setting_charset">charset</a> => ... # string, one of ["ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal"] (optional), default: "UTF-8"
+    <a href="#setting_charset">charset</a> => ... #  (optional)
+    <a href="#setting_debug">debug</a> => ... #  (optional)
     <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_durable">durable</a> => ... #  (optional)
     <a href="#setting_durable">durable</a> => ... # boolean (optional), default: false
     <a href="#setting_exchange">exchange</a> => ... # string (required)
+    <a href="#setting_exchange">exchange</a> => ... #  (optional)
     <a href="#setting_exclusive">exclusive</a> => ... # boolean (optional), default: true
+    <a href="#setting_exclusive">exclusive</a> => ... #  (optional)
     <a href="#setting_format">format</a> => ... # string, one of ["plain", "json", "json_event"] (optional)
+    <a href="#setting_format">format</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_key">key</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_key">key</a> => ... #  (optional)
+    <a href="#setting_message_format">message_format</a> => ... #  (optional)
     <a href="#setting_message_format">message_format</a> => ... # string (optional)
+    <a href="#setting_name">name</a> => ... #  (optional)
+    <a href="#setting_passive">passive</a> => ... #  (optional)
     <a href="#setting_passive">passive</a> => ... # boolean (optional), default: false
     <a href="#setting_password">password</a> => ... # password (optional), default: "guest"
+    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 5672
+    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_prefetch_count">prefetch_count</a> => ... # number (optional), default: 1
+    <a href="#setting_prefetch_count">prefetch_count</a> => ... #  (optional)
     <a href="#setting_queue">queue</a> => ... # string (optional), default: ""
+    <a href="#setting_queue">queue</a> => ... #  (optional)
+    <a href="#setting_ssl">ssl</a> => ... #  (optional)
     <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
     <a href="#setting_tags">tags</a> => ... # array (optional)
+    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_threads">threads</a> => ... # number (optional), default: 1
+    <a href="#setting_threads">threads</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (required)
+    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
+    <a href="#setting_verify_ssl">verify_ssl</a> => ... #  (optional)
     <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
+    <a href="#setting_vhost">vhost</a> => ... #  (optional)
     <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
   }
 }
@@ -65,6 +91,20 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_ack">
+    ack
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Enable message acknowledgement</p>
 
 <h4> 
@@ -79,7 +119,35 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Add a field to an event</p>
+
+<h4> 
+  <a name="setting_arguments">
+    arguments
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your amqp broker's custom arguments. For mirrored queues in RabbitMQ: [ "x-ha-policy", "all" ]</p>
 
 <h4> 
   <a name="setting_arguments">
@@ -93,7 +161,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-<p>Your amqp broker's custom arguments. For mirrored queues in RabbitMQ: [ "x-ha-policy", "all" ]</p>
+
 
 <h4> 
   <a name="setting_auto_delete">
@@ -105,6 +173,20 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_auto_delete">
+    auto_delete
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Should the queue be deleted on the broker when the last consumer
@@ -124,6 +206,20 @@ consume them.</p>
   <li> Default value is "UTF-8" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_charset">
+    charset
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The character encoding used in this input. Examples include "UTF-8"
 and "cp1252"</p>
 
@@ -140,11 +236,39 @@ or in another character set other than UTF-8.</p>
 </h4>
 
 <ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable or disable debugging</p>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
   <li> Value type is boolean </li>
   <li> Default value is false </li>
 </ul>
 
-<p>Enable or disable debugging</p>
+
+
+<h4> 
+  <a name="setting_durable">
+    durable
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Is this queue durable? (aka; Should it survive a broker restart?)</p>
 
 <h4> 
   <a name="setting_durable">
@@ -158,11 +282,25 @@ or in another character set other than UTF-8.</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Is this queue durable? (aka; Should it survive a broker restart?)</p>
+
 
 <h4> 
   <a name="setting_exchange">
     exchange (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_exchange">
+    exchange
     
 </a>
 </h4>
@@ -187,6 +325,20 @@ output' <a href="../outputs/amqp">config 'name'</a></p>
   <li> Default value is true </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_exclusive">
+    exclusive
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Is the queue exclusive? (aka: Will other clients connect to this named queue?)</p>
 
 <h4> 
@@ -201,11 +353,39 @@ output' <a href="../outputs/amqp">config 'name'</a></p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_host">
     host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_host">
+    host
     
 </a>
 </h4>
@@ -227,6 +407,20 @@ output' <a href="../outputs/amqp">config 'name'</a></p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "logstash" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The routing key to use. This is only valid for direct or fanout exchanges</p>
@@ -258,6 +452,35 @@ are expected to be present. Not receiving all fields
 will cause unexpected results.</p>
 
 <h4> 
+  <a name="setting_message_format">
+    message_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_name">
+    name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the queue. Depricated due to conflicts with puppet naming convention.
+Replaced by 'queue' variable. See LOGSTASH-755</p>
+
+<h4> 
   <a name="setting_name">
     name
      <strong>DEPRECATED</strong>
@@ -270,8 +493,21 @@ will cause unexpected results.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of the queue. Depricated due to conflicts with puppet naming convention.
-Replaced by 'queue' variable. See LOGSTASH-755</p>
+
+
+<h4> 
+  <a name="setting_passive">
+    passive
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Passive queue creation? Useful for checking queue existance without modifying server state</p>
 
 <h4> 
   <a name="setting_passive">
@@ -285,7 +521,7 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Passive queue creation? Useful for checking queue existance without modifying server state</p>
+
 
 <h4> 
   <a name="setting_password">
@@ -297,6 +533,20 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
 <ul>
   <li> Value type is password </li>
   <li> Default value is "guest" </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Your amqp password</p>
@@ -313,6 +563,20 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is 5672 </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The AMQP port to connect on</p>
 
 <h4> 
@@ -325,6 +589,20 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
 <ul>
   <li> Value type is number </li>
   <li> Default value is 1 </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_prefetch_count">
+    prefetch_count
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Prefetch count. Number of messages to prefetch</p>
@@ -341,7 +619,35 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is "" </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_queue">
+    queue
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>The name of the queue.</p>
+
+<h4> 
+  <a name="setting_ssl">
+    ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable or disable SSL</p>
 
 <h4> 
   <a name="setting_ssl">
@@ -355,7 +661,7 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Enable or disable SSL</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -366,6 +672,20 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
 
 <ul>
   <li> Value type is array </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -385,12 +705,26 @@ Replaced by 'queue' variable. See LOGSTASH-755</p>
   <li> Default value is 1 </li>
 </ul>
 
+
+
+<h4> 
+  <a name="setting_threads">
+    threads
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
 <p>Set this to the number of threads you want this input to spawn.
 This is the same as declaring the input multiple times</p>
 
 <h4> 
   <a name="setting_type">
-    type (required setting)
+    type
     
 </a>
 </h4>
@@ -410,6 +744,34 @@ which also have type "foobar" will act on them.</p>
 can also use the type to search for in the web interface.</p>
 
 <h4> 
+  <a name="setting_type">
+    type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your amqp username</p>
+
+<h4> 
   <a name="setting_user">
     user
     
@@ -421,7 +783,21 @@ can also use the type to search for in the web interface.</p>
   <li> Default value is "guest" </li>
 </ul>
 
-<p>Your amqp username</p>
+
+
+<h4> 
+  <a name="setting_verify_ssl">
+    verify_ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Validate SSL certificate</p>
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -435,7 +811,21 @@ can also use the type to search for in the web interface.</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Validate SSL certificate</p>
+
+
+<h4> 
+  <a name="setting_vhost">
+    vhost
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The vhost to use. If you don't know what this is, leave the default.</p>
 
 <h4> 
   <a name="setting_vhost">
@@ -449,7 +839,7 @@ can also use the type to search for in the web interface.</p>
   <li> Default value is "/" </li>
 </ul>
 
-<p>The vhost to use. If you don't know what this is, leave the default.</p>
+
 
 
 <hr>
