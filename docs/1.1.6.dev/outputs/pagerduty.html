@@ -17,7 +17,7 @@ This is what it might look like in your config file:
   pagerduty {
     <a href="#setting_description">description</a> => ... # string (optional), default: "Logstash event for %{@source_host}"
     <a href="#setting_details">details</a> => ... # hash (optional), default: {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"}
-    <a href="#setting_event_type">event_type</a> => ... # ["trigger", "acknowledge", "resolve"] (optional), default: "trigger"
+    <a href="#setting_event_type">event_type</a> => ... # string, one of ["trigger", "acknowledge", "resolve"] (optional), default: "trigger"
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_incident_key">incident_key</a> => ... # string (optional), default: "logstash/%{@source_host}/%{@type}"

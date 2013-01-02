@@ -19,15 +19,15 @@ This is what it might look like in your config file:
   syslog {
     <a href="#setting_appname">appname</a> => ... # string (optional), default: "LOGSTASH"
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_facility">facility</a> => ... # ["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7"] (required)
+    <a href="#setting_facility">facility</a> => ... # string, one of ["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd"] ... (required)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_host">host</a> => ... # string (required)
     <a href="#setting_msgid">msgid</a> => ... # string (optional), default: "-"
     <a href="#setting_port">port</a> => ... # number (required)
     <a href="#setting_procid">procid</a> => ... # string (optional), default: "-"
-    <a href="#setting_protocol">protocol</a> => ... # ["tcp", "udp"] (optional), default: "udp"
-    <a href="#setting_rfc">rfc</a> => ... # ["rfc3164", "rfc5424"] (optional), default: "rfc3164"
-    <a href="#setting_severity">severity</a> => ... # ["emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"] (required)
+    <a href="#setting_protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "udp"
+    <a href="#setting_rfc">rfc</a> => ... # string, one of ["rfc3164", "rfc5424"] (optional), default: "rfc3164"
+    <a href="#setting_severity">severity</a> => ... # string, one of ["emergency", "alert", "critical", "error", "warning", "notice"] ... (required)
     <a href="#setting_sourcehost">sourcehost</a> => ... # string (optional), default: "%{@source_host}"
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_timestamp">timestamp</a> => ... # string (optional), default: "%{@timestamp}"

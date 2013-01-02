@@ -84,12 +84,12 @@ This is what it might look like in your config file:
     <a href="#setting_metricname">metricname</a> => ... # string (optional)
     <a href="#setting_namespace">namespace</a> => ... # string (optional), default: "Logstash"
     <a href="#setting_queue_size">queue_size</a> => ... # number (optional), default: 10000
-    <a href="#setting_region">region</a> => ... # ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1", "us-gov-west-1"] (optional), default: "us-east-1"
+    <a href="#setting_region">region</a> => ... # string, one of ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2"] ... (optional), default: "us-east-1"
     <a href="#setting_secret_key">secret_key</a> => ... # string (required)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_timeframe">timeframe</a> => ... # string (optional), default: "1m"
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_unit">unit</a> => ... # ["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"] (optional), default: "Count"
+    <a href="#setting_unit">unit</a> => ... # string, one of ["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes"] ... (optional), default: "Count"
     <a href="#setting_value">value</a> => ... # string (optional), default: "1"
   }
 }

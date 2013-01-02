@@ -23,11 +23,11 @@ This is what it might look like in your config file:
     <a href="#setting_address">address</a> => ... # array (optional), default: ["tcp://127.0.0.1:2120"]
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_mode">mode</a> => ... # ["server", "client"] (optional), default: "client"
+    <a href="#setting_mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
     <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_topic">topic</a> => ... # string (optional), default: ""
-    <a href="#setting_topology">topology</a> => ... # ["pushpull", "pubsub", "pair"] (required)
+    <a href="#setting_topology">topology</a> => ... # string, one of ["pushpull", "pubsub", "pair"] (required)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
