@@ -5,14 +5,144 @@ layout: content_right
 <h2>grok</h2>
 <h3>Status: <a href="../plugin-status">stable</a></h3>
 
-<p>Parse arbitrary text and structure it.
-Grok is currently the best way in logstash to parse crappy unstructured log
-data (like syslog or apache logs) into something structured and queryable.</p>
+<p>Parse arbitrary text and structure it.</p>
 
-<p>Grok allows you to match text without needing to be a regular expressions
-ninja. Logstash ships with about 120 patterns by default. You can find them here:
+<p>Grok is currently the best way in logstash to parse crappy unstructured log
+data into something structured and queryable.</p>
+
+<p>This tool is perfect for syslog logs, apache and other webserver logs, mysql
+logs, and in general, any log format that is generally written for humans
+and not computer consumption.</p>
+
+<p>Logstash ships with about 120 patterns by default. You can find them here:
 <a href="https://github.com/logstash/logstash/tree/v1.1.6.dev/patterns">https://github.com/logstash/logstash/tree/v1.1.6.dev/patterns</a>. You can add
 your own trivially. (See the patterns_dir setting)</p>
+
+<p>If you need help building patterns to match your logs, you will find the
+<a href="http://grokdebug.herokuapp.com">http://grokdebug.herokuapp.com</a> too quite useful!</p>
+
+<h4>Grok Basics</h4>
+
+<p>Grok works by using combining text patterns into something that matches your
+logs.</p>
+
+<p>The syntax for a grok pattern is '%{SYNTAX:SEMANTIC}'</p>
+
+<p>The 'SYNTAX' is the name of the pattern that will match your text. For
+example, "3.44" will be matched by the NUMBER pattern and "55.3.244.1" will
+be matched by the IP pattern. The syntax is how you match.</p>
+
+<p>The 'SEMANTIC' is the identifier you give to the piece of text being matched.
+For example, "3.44" could be the duration of an event, so you could call it
+simply 'duration'. Further, a string "55.3.244.1" might identify the client
+making a request.</p>
+
+<h4>Example</h4>
+
+<p>Combining the two above, we can pull out useful fields from a sample log like
+this fictional http request log:</p>
+
+<pre><code>55.3.244.1 GET /index.html 15824 0.043
+</code></pre>
+
+<p>The pattern for this could be:</p>
+
+<pre><code>%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}
+</code></pre>
+
+<p>A more realistic example, let's read these logs from a file:</p>
+
+<pre><code>input {
+  file {
+    path =&gt; "/var/log/http.log"
+    type =&gt; "examplehttp"
+  }
+}
+filter {
+  grok {
+    type =&gt; "examplehttp"
+    pattern =&gt; "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}"
+  }
+}
+</code></pre>
+
+<p>After the grok filter, the event will have a few extra fields in it:</p>
+
+<ul>
+<li>client: 55.3.244.1</li>
+<li>method: GET</li>
+<li>request: /index.html</li>
+<li>bytes: 15824</li>
+<li>duration: 0.043</li>
+</ul>
+
+
+<h4>Regular Expressions</h4>
+
+<p>Grok sits on top of regular expressions, so any regular expressions are valid
+in grok as well. The regular expression library is Oniguruma, and you can see
+the full supported regexp syntax <a href="http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt">on the Onigiruma
+site</a></p>
+
+<h4>Custom Patterns</h4>
+
+<p>Sometimes logstash doesn't have a pattern you need. For this, you have
+a few options.</p>
+
+<p>First, you can use the Oniguruma syntax for 'named capture' which will
+let you match a piece of text and save it as a field:</p>
+
+<pre><code>(?&lt;field_name&gt;the pattern here)
+</code></pre>
+
+<p>For example, postfix logs have a 'queue id' that is an 11-character
+hexadecimal value. I can capture that easily like this:</p>
+
+<pre><code>(?&lt;queue_id&gt;[0-9A-F]{11})
+</code></pre>
+
+<p>Alternately, you can create a custom patterns file.</p>
+
+<ul>
+<li>Create a directory called 'patterns' with a file in it called 'extra'
+(the file name doesn't matter, but name it meaningfully for yourself)</li>
+<li>In that file, write the pattern you need as the pattern name, a space, then
+the regexp for that pattern.</li>
+</ul>
+
+
+<p>For example, doing the postfix queue id example as above:</p>
+
+<pre><code># in ./patterns/postfix 
+POSTFIX_QUEUEID [0-9A-F]{11}
+</code></pre>
+
+<p>Then use the 'patterns_dir' setting in this plugin to tell logstash where
+your custom patterns directory is. Here's a full example with a sample log:</p>
+
+<pre><code>Jan  1 06:25:43 mailserver14 postfix/cleanup[21403]: BEF25A72965: message-id=&lt;20130101142543.5828399CCAF@mailserver14.example.com&gt;
+
+filter {
+  grok {
+    patterns_dir =&gt; "./patterns"
+    pattern =&gt; "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}: %{GREEDYDATA:message}"
+  }
+}
+</code></pre>
+
+<p>The above will match and result in the following fields:</p>
+
+<ul>
+<li>timestamp: Jan  1 06:25:43</li>
+<li>logsource: mailserver14</li>
+<li>program: postfix/cleanup</li>
+<li>pid: 21403</li>
+<li>queue_id: BEF25A72965</li>
+</ul>
+
+
+<p>The 'timestamp', 'logsource', 'program', and 'pid' fields come from the
+SYSLOGBASE pattern which itself is defined by other patterns.</p>
 
 <h3> Flags </h3>
 
@@ -31,7 +161,6 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   grok {
-    <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # string (optional)
     <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_break_on_match">break_on_match</a> => ... # boolean (optional), default: true
@@ -55,11 +184,12 @@ This is what it might look like in your config file:
 <h4> 
   <a name="setting_/[A-Za-z0-9_-]+/">
     /[A-Za-z0-9_-]+/
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> The configuration attribute name here is anything that matches the above regular expression. </li>
   <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
@@ -74,6 +204,9 @@ foo =&gt; "some pattern"
 # same as:
 match =&gt; [ "foo", "some pattern" ]
 </code></pre>
+
+<p>It is preferable to use the 'match' setting instead of this one, because
+this one is going to be removed..</p>
 
 <h4> 
   <a name="setting_add_field">
