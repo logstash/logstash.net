@@ -5,8 +5,15 @@ layout: content_right
 <h2>gemfire</h2>
 <h3>Status: <a href="../plugin-status">experimental</a></h3>
 
-<p>This is the threadable class for logstash inputs.
-Use this class in your inputs if it can support multiple threads</p>
+<p>Push events to a GemFire region.</p>
+
+<p>GemFire is an object database.</p>
+
+<p>To use this plugin you need to add gemfire.jar to your CLASSPATH.
+Using format=json requires jackson.jar too; use of continuous
+queries requires antlr.jar.</p>
+
+<p>Note: this plugin has only been tested with GemFire 7.0.</p>
 
 
 <h3> Synopsis </h3>

@@ -5,8 +5,15 @@ layout: content_right
 <h2>amqp</h2>
 <h3>Status: <a href="../plugin-status">unsupported</a></h3>
 
-<p>This is the threadable class for logstash inputs.
-Use this class in your inputs if it can support multiple threads</p>
+<p>Pull events from an AMQP exchange.</p>
+
+<p><b> NOTE: THIS IS ONLY KNOWN TO WORK WITH RECENT RELEASES OF RABBITMQ. Any
+other amqp broker will not work with this plugin. I do not know why. If you
+need support for brokers other than rabbitmq, please file bugs here:
+<a href="https://github.com/ruby-amqp/bunny">https://github.com/ruby-amqp/bunny</a> </b></p>
+
+<p>The default settings will create an entirely transient queue and listen for all messages by default.
+If you need durability or any other advanced settings, please set the appropriate options</p>
 
 
 <h3> Synopsis </h3>
