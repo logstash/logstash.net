@@ -49,7 +49,12 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
+<p>Set to true if you want redis to batch up values and send 1 RPUSH command
+instead of one command per value to push on the list.  Note that this only
+works with data_type="list" mode right now.</p>
 
+<p>If true, we send an RPUSH every "batch<em>events" events or
+"batch</em>timeout" seconds (whichever comes first).</p>
 
 <h4> 
   <a name="setting_batch_events">
@@ -63,7 +68,7 @@ This is what it might look like in your config file:
   <li> Default value is 50 </li>
 </ul>
 
-
+<p>If batch is set to true, the number of events we queue up for an RPUSH.</p>
 
 <h4> 
   <a name="setting_batch_timeout">
@@ -77,7 +82,8 @@ This is what it might look like in your config file:
   <li> Default value is 5 </li>
 </ul>
 
-
+<p>If batch is set to true, the maximum amount of time between RPUSH commands
+when there are pending events to flush.</p>
 
 <h4> 
   <a name="setting_data_type">
@@ -91,7 +97,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Either list or channel.  If redis<em>type is list, then we will RPUSH to key.
+If redis</em>type is channel, then we will PUBLISH to key.
+TODO set required true</p>
 
 <h4> 
   <a name="setting_db">
@@ -105,7 +113,7 @@ This is what it might look like in your config file:
   <li> Default value is 0 </li>
 </ul>
 
-
+<p>The redis database number.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -119,7 +127,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -133,7 +141,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -147,7 +156,15 @@ This is what it might look like in your config file:
   <li> Default value is ["127.0.0.1"] </li>
 </ul>
 
+<p>The hostname(s) of your redis server(s). Ports may be specified on any
+hostname, which will override the global port config.</p>
 
+<p>For example:</p>
+
+<pre><code>"127.0.0.1"
+["127.0.0.1", "127.0.0.2"]
+["127.0.0.1:6380", "127.0.0.1"]
+</code></pre>
 
 <h4> 
   <a name="setting_key">
@@ -161,7 +178,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of a redis list or channel. Dynamic names are
+valid here, for example "logstash-%{@type}".
+TODO set required true</p>
 
 <h4> 
   <a name="setting_name">
@@ -176,7 +195,8 @@ This is what it might look like in your config file:
   <li> Default value is "default" </li>
 </ul>
 
-
+<p>Name is used for logging in case there are multiple instances.
+TODO: delete</p>
 
 <h4> 
   <a name="setting_password">
@@ -190,7 +210,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Password to authenticate with.  There is no authentication by default.</p>
 
 <h4> 
   <a name="setting_port">
@@ -204,7 +224,7 @@ This is what it might look like in your config file:
   <li> Default value is 6379 </li>
 </ul>
 
-
+<p>The default port to connect on. Can be overridden on any hostname.</p>
 
 <h4> 
   <a name="setting_queue">
@@ -219,7 +239,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of the redis queue (we'll use RPUSH on this). Dynamic names are
+valid here, for example "logstash-%{@type}"
+TODO: delete</p>
 
 <h4> 
   <a name="setting_shuffle_hosts">
@@ -233,7 +255,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Shuffle the host list during logstash startup.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -247,7 +269,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_timeout">
@@ -261,7 +285,7 @@ This is what it might look like in your config file:
   <li> Default value is 5 </li>
 </ul>
 
-
+<p>Redis initial connection timeout in seconds.</p>
 
 <h4> 
   <a name="setting_type">
@@ -275,7 +299,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

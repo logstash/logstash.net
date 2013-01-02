@@ -57,7 +57,18 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
   <a name="setting_add_tag">
@@ -71,7 +82,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
 
 <h4> 
   <a name="setting_container">
@@ -85,7 +108,12 @@ This is what it might look like in your config file:
   <li> Default value is "@fields" </li>
 </ul>
 
+<p>The name of the container to put all of the key-value pairs into</p>
 
+<p>Example, to place all keys into container kv:</p>
+
+<pre><code>filter { kv { conatiner =&gt; "kv" } }
+</code></pre>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -99,7 +127,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
 
 <h4> 
   <a name="setting_field_split">
@@ -113,7 +142,15 @@ This is what it might look like in your config file:
   <li> Default value is " " </li>
 </ul>
 
+<p>A string of characters to use as delimiters for parsing out key-value pairs.</p>
 
+<p>Example, to split out the args from a string such as
+'?pin=12345~0&amp;d=123&amp;e=foo@bar.com&amp;oq=bobo&amp;ss=12345':</p>
+
+<p>Default to space character for backward compatibility</p>
+
+<pre><code>filter { kv { field_split =&gt; "&amp;?" } }
+</code></pre>
 
 <h4> 
   <a name="setting_fields">
@@ -127,7 +164,7 @@ This is what it might look like in your config file:
   <li> Default value is ["@message"] </li>
 </ul>
 
-
+<p>The fields to perform 'key=value' searching on</p>
 
 <h4> 
   <a name="setting_prefix">
@@ -141,7 +178,12 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
+<p>A string to prepend to all of the extracted keys</p>
 
+<p>Example, to prepend arg_ to all keys:</p>
+
+<pre><code>filter { kv { prefix =&gt; "arg_" } }
+</code></pre>
 
 <h4> 
   <a name="setting_remove_tag">
@@ -155,7 +197,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
   <a name="setting_tags">
@@ -169,7 +223,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_trim">
@@ -183,7 +239,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>A string of characters to trim from the value. This is useful if your
+values are wrapped in brackets or are terminated by comma (like postfix
+logs)</p>
 
+<p>Example, to strip '&lt;' '>' and ',' characters from values:</p>
+
+<pre><code>filter { kv { trim =&gt; "&lt;&gt;," } }
+</code></pre>
 
 <h4> 
   <a name="setting_type">
@@ -197,7 +260,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_value_split">
@@ -211,7 +277,13 @@ This is what it might look like in your config file:
   <li> Default value is "=" </li>
 </ul>
 
+<p>A string of characters to use as delimiters for identifying key-value relations.</p>
 
+<p>Example, to identify key-values such as
+'key1:value1 key2:value2':</p>
+
+<pre><code>filter { kv { value_split =&gt; ":" } }
+</code></pre>
 
 
 <hr>

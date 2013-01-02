@@ -53,7 +53,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>List of channels to which to publish. Dynamic names are
+valid here, for example "logstash-%{@type}".</p>
 
 <h4> 
   <a name="setting_db">
@@ -67,7 +68,7 @@ This is what it might look like in your config file:
   <li> Default value is 0 </li>
 </ul>
 
-
+<p>The redis database number.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -81,7 +82,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -95,7 +96,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -109,7 +111,7 @@ This is what it might look like in your config file:
   <li> Default value is "127.0.0.1" </li>
 </ul>
 
-
+<p>The hostname of the redis server to which juggernaut is listening.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -123,7 +125,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>How should the message be formatted before pushing to the websocket.</p>
 
 <h4> 
   <a name="setting_password">
@@ -137,7 +139,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Password to authenticate with.  There is no authentication by default.</p>
 
 <h4> 
   <a name="setting_port">
@@ -151,7 +153,7 @@ This is what it might look like in your config file:
   <li> Default value is 6379 </li>
 </ul>
 
-
+<p>The port to connect on.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -165,7 +167,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_timeout">
@@ -179,7 +183,7 @@ This is what it might look like in your config file:
   <li> Default value is 5 </li>
 </ul>
 
-
+<p>Redis initial connection timeout in seconds.</p>
 
 <h4> 
   <a name="setting_type">
@@ -193,7 +197,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

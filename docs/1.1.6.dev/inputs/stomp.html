@@ -44,7 +44,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_charset">
@@ -58,7 +58,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -72,7 +78,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable debugging output?</p>
 
 <h4> 
   <a name="setting_destination">
@@ -86,7 +92,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The destination to read events from.</p>
 
+<p>Example: "/topic/logstash"</p>
 
 <h4> 
   <a name="setting_format">
@@ -100,7 +108,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_host">
@@ -114,7 +122,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The address of the STOMP server.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -128,7 +136,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_password">
@@ -142,7 +156,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The password to authenticate with.</p>
 
 <h4> 
   <a name="setting_port">
@@ -156,7 +170,7 @@ This is what it might look like in your config file:
   <li> Default value is 61613 </li>
 </ul>
 
-
+<p>The port to connet to on your STOMP server.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -170,7 +184,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_type">
@@ -184,7 +200,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 <h4> 
   <a name="setting_user">
@@ -198,7 +221,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The username to authenticate with.</p>
 
 
 <hr>

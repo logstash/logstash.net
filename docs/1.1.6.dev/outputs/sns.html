@@ -64,7 +64,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Amazon API credentials.</p>
 
 <h4> 
   <a name="setting_arn">
@@ -78,7 +78,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>SNS topic ARN.</p>
 
 <h4> 
   <a name="setting_credentials">
@@ -92,7 +92,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Path to YAML file containing a hash of AWS credentials.  This file
+will be loaded if <code>access_key_id</code> and <code>secret_access_key</code> aren't
+set. The contents of the file should look like this:</p>
 
+<pre><code>---
+:access_key_id: "12345"
+:secret_access_key: "54321"
+</code></pre>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -106,7 +113,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -120,7 +127,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_format">
@@ -134,7 +142,7 @@ This is what it might look like in your config file:
   <li> Default value is "plain" </li>
 </ul>
 
-
+<p>Message format.  Defaults to plain text.</p>
 
 <h4> 
   <a name="setting_publish_boot_message_arn">
@@ -148,7 +156,11 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>When an ARN for an SNS topic is specified here, the message
+"Logstash successfully booted" will be sent to it when this plugin
+is registered.</p>
 
+<p>Example: arn:aws:sns:us-east-1:770975001275:logstash-testing</p>
 
 <h4> 
   <a name="setting_secret_access_key">
@@ -176,7 +188,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -190,7 +204,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

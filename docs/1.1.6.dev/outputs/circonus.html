@@ -39,7 +39,17 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+<p>Annotations
+Registers an annotation with Circonus
+The only required field is <code>title</code> and <code>description</code>.
+<code>start</code> and <code>stop</code> will be set to <code>event.unix_timestamp</code>
+You can add any other optional annotation values as well.
+All values will be passed through <code>event.sprintf</code></p>
 
+<p>Example:
+  ["title":"Logstash event", "description":"Logstash event for %{@source<em>host}"]
+or
+  ["title":"Logstash event", "description":"Logstash event for %{@source</em>host}", "parent_id", "1"]</p>
 
 <h4> 
   <a name="setting_api_token">
@@ -53,7 +63,10 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>This output lets you send annotations to
+Circonus based on Logstash events</p>
 
+<p>Your Circonus API Token</p>
 
 <h4> 
   <a name="setting_app_name">
@@ -67,7 +80,12 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Your Circonus App name
+This will be passed through <code>event.sprintf</code>
+so variables are allowed here:</p>
 
+<p>Example:
+ <code>app_name =&gt; "%{myappname}"</code></p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -81,7 +99,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -95,7 +113,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -109,7 +128,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -123,7 +144,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

@@ -19,6 +19,7 @@ This is what it might look like in your config file:
 <pre><code>filter {
   grep {
     <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # string (optional)
+    <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
     <a href="#setting_drop">drop</a> => ... # boolean (optional), default: true
@@ -50,6 +51,22 @@ This is what it might look like in your config file:
 
 
 <h4> 
+  <a name="setting_(?-mix:[A-Za-z0-9_-]+)">
+    (?-mix:[A-Za-z0-9_-]+)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for grep is:
+  fieldname: pattern
+  Allow arbitrary keys for this config.</p>
+
+<h4> 
   <a name="setting_add_field">
     add_field
     
@@ -61,7 +78,18 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
   <a name="setting_add_tag">
@@ -75,7 +103,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
 
 <h4> 
   <a name="setting_drop">
@@ -89,7 +129,11 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
+<p>Drop events that don't match</p>
 
+<p>If this is set to false, no events will be dropped at all. Rather, the
+requested tags and fields will be added to matching events, and
+non-matching events will be passed through unchanged.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -103,7 +147,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
 
 <h4> 
   <a name="setting_match">
@@ -117,7 +162,9 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>A hash of matches of field => regexp.  If multiple matches are specified,
+all must match for the grep to be considered successful.
+Normal regular expressions are supported here.</p>
 
 <h4> 
   <a name="setting_negate">
@@ -131,7 +178,11 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
+<p>Negate the match. Similar to 'grep -v'</p>
 
+<p>If this is set to true, then any positive matches will result in the
+event being cancelled and dropped. Non-matching will be allowed
+through.</p>
 
 <h4> 
   <a name="setting_remove_tag">
@@ -145,7 +196,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
   <a name="setting_tags">
@@ -159,7 +222,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -173,7 +238,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

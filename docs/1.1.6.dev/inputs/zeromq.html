@@ -51,7 +51,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_address">
@@ -65,7 +65,11 @@ This is what it might look like in your config file:
   <li> Default value is ["tcp://*:2120"] </li>
 </ul>
 
-
+<p>0mq socket address to connect or bind
+Please note that <code>inproc://</code> will not work with logstash
+as each we use a context per thread.
+By default, inputs bind/listen
+and outputs connect</p>
 
 <h4> 
   <a name="setting_charset">
@@ -79,7 +83,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -93,7 +103,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
   <a name="setting_format">
@@ -107,7 +117,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -121,7 +131,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_mode">
@@ -135,7 +151,9 @@ This is what it might look like in your config file:
   <li> Default value is "server" </li>
 </ul>
 
-
+<p>mode
+server mode binds/listens
+client mode connects</p>
 
 <h4> 
   <a name="setting_sender">
@@ -149,7 +167,10 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>sender
+overrides the sender to
+set the source of the event
+default is "zmq+topology://type/"</p>
 
 <h4> 
   <a name="setting_sockopt">
@@ -163,7 +184,17 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>0mq socket options
+This exposes zmq_setsockopt
+for advanced tuning
+see http://api.zeromq.org/2-1:zmq-setsockopt for details</p>
 
+<p>This is where you would set values like:
+ZMQ::HWM - high water mark
+ZMQ::IDENTITY - named queues
+ZMQ::SWAP_SIZE - space for disk overflow</p>
+
+<p>example: sockopt => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "my<em>named</em>queue"]</p>
 
 <h4> 
   <a name="setting_tags">
@@ -177,7 +208,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_topic">
@@ -191,7 +224,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>0mq topic
+This is used for the 'pubsub' topology only
+On inputs, this allows you to filter messages by topic
+On outputs, this allows you to tag a message for routing
+NOTE: ZeroMQ does subscriber side filtering.
+NOTE: All topics have an implicit wildcard at the end
+You can specify multiple topics here</p>
 
 <h4> 
   <a name="setting_topology">
@@ -205,7 +244,16 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>0mq topology
+The default logstash topologies work as follows:
+* pushpull - inputs are pull, outputs are push
+* pubsub - inputs are subscribers, outputs are publishers
+* pair - inputs are clients, inputs are servers</p>
 
+<p>If the predefined topology flows don't work for you,
+you can change the 'mode' setting
+TODO (lusis) add req/rep MAYBE
+TODO (lusis) add router/dealer</p>
 
 <h4> 
   <a name="setting_type">
@@ -219,7 +267,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 
 <hr>

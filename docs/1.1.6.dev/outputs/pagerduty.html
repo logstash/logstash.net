@@ -43,7 +43,7 @@ This is what it might look like in your config file:
   <li> Default value is "Logstash event for %{@source_host}" </li>
 </ul>
 
-
+<p>Custom description</p>
 
 <h4> 
   <a name="setting_details">
@@ -57,7 +57,9 @@ This is what it might look like in your config file:
   <li> Default value is {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"} </li>
 </ul>
 
-
+<p>Event details
+These might be keys from the logstash event you wish to include
+tags are automatically included if detected so no need to add them here</p>
 
 <h4> 
   <a name="setting_event_type">
@@ -71,7 +73,7 @@ This is what it might look like in your config file:
   <li> Default value is "trigger" </li>
 </ul>
 
-
+<p>Event type</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -85,7 +87,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -99,7 +101,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_incident_key">
@@ -113,7 +116,8 @@ This is what it might look like in your config file:
   <li> Default value is "logstash/%{@source_host}/%{@type}" </li>
 </ul>
 
-
+<p>The service key to use
+You'll need to set this up in PD beforehand</p>
 
 <h4> 
   <a name="setting_pdurl">
@@ -127,7 +131,11 @@ This is what it might look like in your config file:
   <li> Default value is "https://events.pagerduty.com/generic/2010-04-15/create_event.json" </li>
 </ul>
 
-
+<p>PagerDuty API url
+You shouldn't need to change this
+This allows for flexibility
+should PD iterate the API
+and Logstash hasn't updated yet</p>
 
 <h4> 
   <a name="setting_service_key">
@@ -141,7 +149,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Service API Key</p>
 
 <h4> 
   <a name="setting_tags">
@@ -155,7 +163,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -169,7 +179,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

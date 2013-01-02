@@ -42,7 +42,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable debugging output?</p>
 
 <h4> 
   <a name="setting_destination">
@@ -56,7 +56,10 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The destination to read events from. Supports string expansion, meaning
+%{foo} values will expand to the field value.</p>
 
+<p>Example: "/topic/logstash"</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -70,7 +73,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -84,7 +87,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -98,7 +102,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The address of the STOMP server.</p>
 
 <h4> 
   <a name="setting_password">
@@ -112,7 +116,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The password to authenticate with.</p>
 
 <h4> 
   <a name="setting_port">
@@ -126,7 +130,7 @@ This is what it might look like in your config file:
   <li> Default value is 61613 </li>
 </ul>
 
-
+<p>The port to connect to on your STOMP server.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -140,7 +144,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -154,7 +160,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_user">
@@ -168,7 +177,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The username to authenticate with.</p>
 
 
 <hr>

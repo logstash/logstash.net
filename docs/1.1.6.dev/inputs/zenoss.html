@@ -71,7 +71,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_arguments">
@@ -113,7 +113,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -127,7 +133,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
   <a name="setting_durable">
@@ -155,7 +161,8 @@ This is what it might look like in your config file:
   <li> Default value is "zenoss.zenevents" </li>
 </ul>
 
-
+<p>The name of the exchange to bind the queue. This is analogous to the 'amqp
+output' <a href="../outputs/amqp">config 'name'</a></p>
 
 <h4> 
   <a name="setting_exclusive">
@@ -183,7 +190,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_host">
@@ -197,7 +204,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>Your amqp server address</p>
 
 <h4> 
   <a name="setting_key">
@@ -211,6 +218,12 @@ This is what it might look like in your config file:
   <li> Default value is "zenoss.zenevent.#" </li>
 </ul>
 
+<p>The routing key to use. This is only valid for direct or fanout exchanges</p>
+
+<ul>
+<li>Routing keys are ignored on topic exchanges.</li>
+<li>Wildcards are not valid on direct exchanges.</li>
+</ul>
 
 
 <h4> 
@@ -225,7 +238,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_name">
@@ -268,7 +287,7 @@ This is what it might look like in your config file:
   <li> Default value is "zenoss" </li>
 </ul>
 
-
+<p>Your amqp password</p>
 
 <h4> 
   <a name="setting_port">
@@ -338,7 +357,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_threads">
@@ -366,7 +387,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 <h4> 
   <a name="setting_user">
@@ -380,7 +408,7 @@ This is what it might look like in your config file:
   <li> Default value is "zenoss" </li>
 </ul>
 
-
+<p>Your amqp username</p>
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -408,7 +436,7 @@ This is what it might look like in your config file:
   <li> Default value is "/zenoss" </li>
 </ul>
 
-
+<p>The vhost to use. If you don't know what this is, leave the default.</p>
 
 
 <hr>

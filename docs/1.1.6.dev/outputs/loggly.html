@@ -45,7 +45,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -59,7 +59,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -73,7 +74,8 @@ This is what it might look like in your config file:
   <li> Default value is "logs.loggly.com" </li>
 </ul>
 
-
+<p>The hostname to send logs to. This should target the loggly http input
+server which is usually "logs.loggly.com"</p>
 
 <h4> 
   <a name="setting_key">
@@ -87,7 +89,17 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The loggly http input key to send to.
+This is usually visible in the Loggly 'Inputs' page as something like this</p>
 
+<pre><code>https://logs.hoover.loggly.net/inputs/abcdef12-3456-7890-abcd-ef0123456789
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      \----------&gt;   key   &lt;-------------/
+</code></pre>
+
+<p>You can use %{foo} field lookups here if you need to pull the api key from
+the event. This is mainly aimed at multitenant hosting providers who want
+to offer shipping a customer's logs to that customer's loggly account.</p>
 
 <h4> 
   <a name="setting_proto">
@@ -101,7 +113,8 @@ This is what it might look like in your config file:
   <li> Default value is "http" </li>
 </ul>
 
-
+<p>Should the log action be sent over https instead of plain http
+Defaults to https</p>
 
 <h4> 
   <a name="setting_tags">
@@ -115,7 +128,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -129,7 +144,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

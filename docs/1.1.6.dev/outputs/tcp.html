@@ -45,7 +45,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -59,7 +59,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -73,7 +74,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>When mode is <code>server</code>, the address to listen on.
+When mode is <code>client</code>, the address to connect to.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -87,7 +89,12 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The format to use when writing events to the file. This value
+supports any string and can include %{name} and other dynamic
+strings.</p>
 
+<p>If this setting is omitted, the full json representation of the
+event will be written as a single line.</p>
 
 <h4> 
   <a name="setting_mode">
@@ -101,7 +108,8 @@ This is what it might look like in your config file:
   <li> Default value is "client" </li>
 </ul>
 
-
+<p>Mode to operate in. <code>server</code> listens for client connections,
+<code>client</code> connects to a server.</p>
 
 <h4> 
   <a name="setting_port">
@@ -115,7 +123,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>When mode is <code>server</code>, the port to listen on.
+When mode is <code>client</code>, the port to connect to.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -129,7 +138,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -143,7 +154,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

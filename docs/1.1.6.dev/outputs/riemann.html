@@ -57,7 +57,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable debugging output?</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -71,7 +71,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -85,7 +85,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -99,7 +100,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The address of the Riemann server.</p>
 
 <h4> 
   <a name="setting_port">
@@ -113,7 +114,7 @@ This is what it might look like in your config file:
   <li> Default value is 5555 </li>
 </ul>
 
-
+<p>The port to connect to on your Riemann server.</p>
 
 <h4> 
   <a name="setting_protocol">
@@ -127,7 +128,13 @@ This is what it might look like in your config file:
   <li> Default value is "tcp" </li>
 </ul>
 
+<p>The protocol to use
+UDP is non-blocking
+TCP is blocking</p>
 
+<p>Logstash's default output behaviour
+is to never lose events
+As such, we use tcp as default here</p>
 
 <h4> 
   <a name="setting_riemann_event">
@@ -141,7 +148,27 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>A Hash to set Riemann event fields
+(<a href="http://aphyr.github.com/riemann/concepts.html">http://aphyr.github.com/riemann/concepts.html</a>).</p>
 
+<p>The following event fields are supported:
+<code>description</code>, <code>state</code>, <code>metric</code>, <code>ttl</code>, <code>service</code></p>
+
+<p>Example:</p>
+
+<pre><code>riemann {
+    riemann_event =&gt; [ 
+        "metric", "%{metric}",
+        "service", "%{service}"
+    ]
+}
+</code></pre>
+
+<p><code>metric</code> and <code>ttl</code> values will be coerced to a floating point value.
+Values which cannot be coerced will zero (0.0).</p>
+
+<p><code>description</code>, by default, will be set to the event message
+but can be overridden here.</p>
 
 <h4> 
   <a name="setting_sender">
@@ -155,7 +182,9 @@ This is what it might look like in your config file:
   <li> Default value is "%{@source_host}" </li>
 </ul>
 
-
+<p>The name of the sender.
+This sets the <code>host</code> value
+in the Riemann event</p>
 
 <h4> 
   <a name="setting_tags">
@@ -169,7 +198,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -183,7 +214,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

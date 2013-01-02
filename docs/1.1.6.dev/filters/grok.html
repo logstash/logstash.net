@@ -164,6 +164,7 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   grok {
+    <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
     <a href="#setting_break_on_match">break_on_match</a> => ... # boolean (optional), default: true
@@ -201,6 +202,31 @@ This is what it might look like in your config file:
 
 
 <h4> 
+  <a name="setting_(?-mix:[A-Za-z0-9_-]+)">
+    (?-mix:[A-Za-z0-9_-]+)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Any existing field name can be used as a config name here for matching
+against.</p>
+
+<pre><code># this config:
+foo =&gt; "some pattern"
+
+# same as:
+match =&gt; [ "foo", "some pattern" ]
+</code></pre>
+
+<p>It is preferable to use the 'match' setting instead of this one, because
+this one is going to be removed..</p>
+
+<h4> 
   <a name="setting_add_field">
     add_field
     
@@ -212,7 +238,18 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, myfilter will then add field 'sample' with the value above
+ and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
   <a name="setting_add_tag">
@@ -226,7 +263,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
 
 <h4> 
   <a name="setting_break_on_match">
@@ -240,7 +289,9 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Break on first match. The first successful match by grok will result in the
+filter being finished. If you want grok to try all patterns (maybe you are
+parsing different things), then set this to false.</p>
 
 <h4> 
   <a name="setting_drop_if_match">
@@ -254,7 +305,10 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
+<p>Drop if matched. Note, this feature may not stay. It is preferable to combine
+grok + grep filters to do parsing + dropping.</p>
 
+<p>requested in: googlecode/issue/26</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -268,7 +322,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
 
 <h4> 
   <a name="setting_keep_empty_captures">
@@ -282,7 +337,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>If true, keep empty captures as event fields.</p>
 
 <h4> 
   <a name="setting_match">
@@ -296,7 +351,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>A hash of matches of field => value</p>
 
 <h4> 
   <a name="setting_named_captures_only">
@@ -310,7 +365,7 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>If true, only store named captures from grok.</p>
 
 <h4> 
   <a name="setting_pattern">
@@ -324,7 +379,10 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Specify a pattern to parse with. This will match the '@message' field.</p>
 
+<p>If you want to match other fields than @message, use the 'match' setting.
+Multiple patterns is fine.</p>
 
 <h4> 
   <a name="setting_patterns_dir">
@@ -338,7 +396,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>logstash ships by default with a bunch of patterns, so you don't
+necessarily need to define this yourself unless you are adding additional
+patterns.</p>
 
+<p>Pattern files are plain text with format:</p>
+
+<pre><code>NAME PATTERN
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>NUMBER \d+
+</code></pre>
 
 <h4> 
   <a name="setting_remove_tag">
@@ -352,7 +422,19 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
 
+<pre><code>filter {
+  myfilter {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
   <a name="setting_singles">
@@ -366,7 +448,8 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>If true, make single-value fields simply that value, not an array
+containing that one value.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -380,7 +463,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -394,7 +479,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

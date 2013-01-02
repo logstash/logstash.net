@@ -41,7 +41,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Enable debugging. Tries to pretty-print the entire event object.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -55,7 +55,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -69,7 +69,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -83,7 +84,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The address of the opentsdb server.</p>
 
 <h4> 
   <a name="setting_metrics">
@@ -97,7 +98,22 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The metric(s) to use. This supports dynamic strings like %{@source_host}
+for metric names and also for values. This is an array field with key
+of the metric name, value of the metric value, and multiple tag,values . Example:</p>
 
+<pre><code>[
+  "%{@source_host}/uptime",
+  %{uptime_1m} " ,
+  "hostname" ,
+  "%{@source_host}
+  "anotherhostname" ,
+  "%{@source_host}
+]
+</code></pre>
+
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 <h4> 
   <a name="setting_port">
@@ -111,7 +127,7 @@ This is what it might look like in your config file:
   <li> Default value is 4242 </li>
 </ul>
 
-
+<p>The port to connect on your graphite server.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -125,7 +141,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -139,7 +157,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

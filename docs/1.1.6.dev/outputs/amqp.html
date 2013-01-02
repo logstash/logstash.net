@@ -54,7 +54,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable or disable debugging</p>
 
 <h4> 
   <a name="setting_durable">
@@ -68,7 +68,7 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
 
 <h4> 
   <a name="setting_exchange">
@@ -82,7 +82,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of the exchange</p>
 
 <h4> 
   <a name="setting_exchange_type">
@@ -96,7 +96,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The exchange type (fanout, topic, direct)</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -110,7 +110,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -124,7 +124,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -138,7 +139,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Your amqp server address</p>
 
 <h4> 
   <a name="setting_key">
@@ -152,6 +153,11 @@ This is what it might look like in your config file:
   <li> Default value is "logstash" </li>
 </ul>
 
+<p>Key to route to by default. Defaults to 'logstash'</p>
+
+<ul>
+<li>Routing keys are ignored on fanout exchanges.</li>
+</ul>
 
 
 <h4> 
@@ -167,7 +173,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of the exchange. Depricated due to conflicts with puppet naming convention.
+Replaced by 'exchange' variable. See LOGSTASH-755</p>
 
 <h4> 
   <a name="setting_password">
@@ -181,7 +188,7 @@ This is what it might look like in your config file:
   <li> Default value is "guest" </li>
 </ul>
 
-
+<p>Your amqp password</p>
 
 <h4> 
   <a name="setting_persistent">
@@ -195,7 +202,8 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Should messages persist to disk on the AMQP broker until they are read by a
+consumer?</p>
 
 <h4> 
   <a name="setting_port">
@@ -209,7 +217,7 @@ This is what it might look like in your config file:
   <li> Default value is 5672 </li>
 </ul>
 
-
+<p>The AMQP port to connect on</p>
 
 <h4> 
   <a name="setting_ssl">
@@ -223,7 +231,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable or disable SSL</p>
 
 <h4> 
   <a name="setting_tags">
@@ -237,7 +245,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -251,7 +261,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_user">
@@ -265,7 +278,7 @@ This is what it might look like in your config file:
   <li> Default value is "guest" </li>
 </ul>
 
-
+<p>Your amqp username</p>
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -279,7 +292,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Validate SSL certificate</p>
 
 <h4> 
   <a name="setting_vhost">
@@ -293,7 +306,7 @@ This is what it might look like in your config file:
   <li> Default value is "/" </li>
 </ul>
 
-
+<p>The vhost to use</p>
 
 
 <hr>

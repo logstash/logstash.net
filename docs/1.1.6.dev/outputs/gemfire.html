@@ -47,7 +47,7 @@ This is what it might look like in your config file:
   <li> Default value is "logstash" </li>
 </ul>
 
-
+<p>Your client cache name</p>
 
 <h4> 
   <a name="setting_cache_xml_file">
@@ -61,7 +61,20 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
+<p>The path to a GemFire client cache XML file.</p>
 
+<p>Example:</p>
+
+<pre><code> &lt;client-cache&gt;
+   &lt;pool name="client-pool"&gt;
+       &lt;locator host="localhost" port="31331"/&gt;
+   &lt;/pool&gt;
+   &lt;region name="Logstash"&gt;
+       &lt;region-attributes refid="CACHING_PROXY" pool-name="client-pool" &gt;
+       &lt;/region-attributes&gt;
+   &lt;/region&gt;
+ &lt;/client-cache&gt;
+</code></pre>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -75,7 +88,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -89,7 +102,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_key_format">
@@ -103,7 +117,7 @@ This is what it might look like in your config file:
   <li> Default value is "%{@source}-%{@timestamp}" </li>
 </ul>
 
-
+<p>A sprintf format to use when building keys</p>
 
 <h4> 
   <a name="setting_name">
@@ -118,7 +132,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Your client cache name</p>
 
 <h4> 
   <a name="setting_region_name">
@@ -132,7 +146,7 @@ This is what it might look like in your config file:
   <li> Default value is "Logstash" </li>
 </ul>
 
-
+<p>The region name</p>
 
 <h4> 
   <a name="setting_tags">
@@ -146,7 +160,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -160,7 +176,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

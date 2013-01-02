@@ -43,7 +43,16 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>This output lets you send annotations to
+Boundary based on Logstash events</p>
 
+<p>Note that since Logstash maintains no state
+these will be one-shot events</p>
+
+<p>By default the start and stop time will be
+the event timestamp</p>
+
+<p>Your Boundary API key</p>
 
 <h4> 
   <a name="setting_bsubtype">
@@ -57,7 +66,7 @@ This is what it might look like in your config file:
   <li> Default value is "%{@type}" </li>
 </ul>
 
-
+<p>Sub-Type</p>
 
 <h4> 
   <a name="setting_btags">
@@ -71,7 +80,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Tags
+Set any custom tags for this event
+Default are the Logstash tags if any</p>
 
 <h4> 
   <a name="setting_btype">
@@ -85,7 +96,7 @@ This is what it might look like in your config file:
   <li> Default value is "%{@message}" </li>
 </ul>
 
-
+<p>Type</p>
 
 <h4> 
   <a name="setting_end_time">
@@ -99,7 +110,11 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>End time
+Override the stop time
+Note that Boundary requires this to be seconds since epoch
+If overriding, it is your responsibility to type this correctly
+By default this is set to <code>event.unix_timestamp.to_i</code></p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -113,7 +128,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -127,7 +142,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_org_id">
@@ -141,7 +157,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Your Boundary Org ID</p>
 
 <h4> 
   <a name="setting_start_time">
@@ -155,7 +171,11 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Start time
+Override the start time
+Note that Boundary requires this to be seconds since epoch
+If overriding, it is your responsibility to type this correctly
+By default this is set to <code>event.unix_timestamp.to_i</code></p>
 
 <h4> 
   <a name="setting_tags">
@@ -169,7 +189,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -183,7 +205,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

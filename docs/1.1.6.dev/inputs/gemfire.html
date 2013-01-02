@@ -47,7 +47,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_cache_name">
@@ -61,7 +61,7 @@ This is what it might look like in your config file:
   <li> Default value is "logstash" </li>
 </ul>
 
-
+<p>Your client cache name</p>
 
 <h4> 
   <a name="setting_cache_xml_file">
@@ -75,7 +75,20 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
+<p>The path to a GemFire client cache XML file.</p>
 
+<p>Example:</p>
+
+<pre><code> &lt;client-cache&gt;
+   &lt;pool name="client-pool" subscription-enabled="true" subscription-redundancy="1"&gt;
+       &lt;locator host="localhost" port="31331"/&gt;
+   &lt;/pool&gt;
+   &lt;region name="Logstash"&gt;
+       &lt;region-attributes refid="CACHING_PROXY" pool-name="client-pool" &gt;
+       &lt;/region-attributes&gt;
+   &lt;/region&gt;
+ &lt;/client-cache&gt;
+</code></pre>
 
 <h4> 
   <a name="setting_charset">
@@ -89,7 +102,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -103,7 +122,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
   <a name="setting_format">
@@ -117,7 +136,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_interest_regexp">
@@ -131,7 +150,8 @@ This is what it might look like in your config file:
   <li> Default value is ".*" </li>
 </ul>
 
-
+<p>A regexp to use when registering interest for cache events.
+Ignored if a :query is specified.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -145,7 +165,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_name">
@@ -160,7 +186,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Your client cache name</p>
 
 <h4> 
   <a name="setting_query">
@@ -174,7 +200,10 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
+<p>A query to run as a GemFire "continuous query"; if specified it takes
+precedence over :interest_regexp which will be ignore.</p>
 
+<p>Important: use of continuous queries requires subscriptions to be enabled on the client pool.</p>
 
 <h4> 
   <a name="setting_region_name">
@@ -188,7 +217,7 @@ This is what it might look like in your config file:
   <li> Default value is "Logstash" </li>
 </ul>
 
-
+<p>The region name</p>
 
 <h4> 
   <a name="setting_serialization">
@@ -202,7 +231,7 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
-
+<p>How the message is serialized in the cache. Can be one of "json" or "plain"; default is plain</p>
 
 <h4> 
   <a name="setting_tags">
@@ -216,7 +245,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_threads">
@@ -230,7 +261,8 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-
+<p>Set this to the number of threads you want this input to spawn.
+This is the same as declaring the input multiple times</p>
 
 <h4> 
   <a name="setting_type">
@@ -244,7 +276,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 
 <hr>

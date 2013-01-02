@@ -58,7 +58,7 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Enable message acknowledgement</p>
 
 <h4> 
   <a name="setting_add_field">
@@ -72,7 +72,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_arguments">
@@ -86,7 +86,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Your amqp broker's custom arguments. For mirrored queues in RabbitMQ: [ "x-ha-policy", "all" ]</p>
 
 <h4> 
   <a name="setting_auto_delete">
@@ -100,7 +100,10 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Should the queue be deleted on the broker when the last consumer
+disconnects? Set this option to 'false' if you want the queue to remain
+on the broker, queueing up messages until a consumer comes along to
+consume them.</p>
 
 <h4> 
   <a name="setting_charset">
@@ -114,7 +117,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -128,7 +137,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable or disable debugging</p>
 
 <h4> 
   <a name="setting_durable">
@@ -142,7 +151,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Is this queue durable? (aka; Should it survive a broker restart?)</p>
 
 <h4> 
   <a name="setting_exchange">
@@ -156,7 +165,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of the exchange to bind the queue. This is analogous to the 'amqp
+output' <a href="../outputs/amqp">config 'name'</a></p>
 
 <h4> 
   <a name="setting_exclusive">
@@ -170,7 +180,7 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-
+<p>Is the queue exclusive? (aka: Will other clients connect to this named queue?)</p>
 
 <h4> 
   <a name="setting_format">
@@ -184,7 +194,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_host">
@@ -198,7 +208,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Your amqp server address</p>
 
 <h4> 
   <a name="setting_key">
@@ -212,6 +222,12 @@ This is what it might look like in your config file:
   <li> Default value is "logstash" </li>
 </ul>
 
+<p>The routing key to use. This is only valid for direct or fanout exchanges</p>
+
+<ul>
+<li>Routing keys are ignored on topic exchanges.</li>
+<li>Wildcards are not valid on direct exchanges.</li>
+</ul>
 
 
 <h4> 
@@ -226,7 +242,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_name">
@@ -241,7 +263,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The name of the queue. Depricated due to conflicts with puppet naming convention.
+Replaced by 'queue' variable. See LOGSTASH-755</p>
 
 <h4> 
   <a name="setting_passive">
@@ -255,7 +278,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Passive queue creation? Useful for checking queue existance without modifying server state</p>
 
 <h4> 
   <a name="setting_password">
@@ -269,7 +292,7 @@ This is what it might look like in your config file:
   <li> Default value is "guest" </li>
 </ul>
 
-
+<p>Your amqp password</p>
 
 <h4> 
   <a name="setting_port">
@@ -283,7 +306,7 @@ This is what it might look like in your config file:
   <li> Default value is 5672 </li>
 </ul>
 
-
+<p>The AMQP port to connect on</p>
 
 <h4> 
   <a name="setting_prefetch_count">
@@ -297,7 +320,7 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-
+<p>Prefetch count. Number of messages to prefetch</p>
 
 <h4> 
   <a name="setting_queue">
@@ -311,7 +334,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The name of the queue.</p>
 
 <h4> 
   <a name="setting_ssl">
@@ -325,7 +348,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Enable or disable SSL</p>
 
 <h4> 
   <a name="setting_tags">
@@ -339,7 +362,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_threads">
@@ -353,7 +378,8 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-
+<p>Set this to the number of threads you want this input to spawn.
+This is the same as declaring the input multiple times</p>
 
 <h4> 
   <a name="setting_type">
@@ -367,7 +393,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 <h4> 
   <a name="setting_user">
@@ -381,7 +414,7 @@ This is what it might look like in your config file:
   <li> Default value is "guest" </li>
 </ul>
 
-
+<p>Your amqp username</p>
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -395,7 +428,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Validate SSL certificate</p>
 
 <h4> 
   <a name="setting_vhost">
@@ -409,7 +442,7 @@ This is what it might look like in your config file:
   <li> Default value is "/" </li>
 </ul>
 
-
+<p>The vhost to use. If you don't know what this is, leave the default.</p>
 
 
 <hr>

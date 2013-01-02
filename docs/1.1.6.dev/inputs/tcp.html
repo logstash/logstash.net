@@ -48,7 +48,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_charset">
@@ -62,7 +62,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_data_timeout">
@@ -76,7 +82,10 @@ This is what it might look like in your config file:
   <li> Default value is -1 </li>
 </ul>
 
+<p>The 'read' timeout in seconds. If a particular tcp connection is idle for
+more than this timeout period, we will assume it is dead and close it.</p>
 
+<p>If you never want to timeout, use -1.</p>
 
 <h4> 
   <a name="setting_debug">
@@ -90,7 +99,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
   <a name="setting_format">
@@ -104,7 +113,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_host">
@@ -118,7 +127,8 @@ This is what it might look like in your config file:
   <li> Default value is "0.0.0.0" </li>
 </ul>
 
-
+<p>When mode is <code>server</code>, the address to listen on.
+When mode is <code>client</code>, the address to connect to.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -132,7 +142,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_mode">
@@ -146,7 +162,8 @@ This is what it might look like in your config file:
   <li> Default value is "server" </li>
 </ul>
 
-
+<p>Mode to operate in. <code>server</code> listens for client connections,
+<code>client</code> connects to a server.</p>
 
 <h4> 
   <a name="setting_port">
@@ -160,7 +177,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>When mode is <code>server</code>, the port to listen on.
+When mode is <code>client</code>, the port to connect to.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -174,7 +192,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_type">
@@ -188,7 +208,14 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 
 <hr>

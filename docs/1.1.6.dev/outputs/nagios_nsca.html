@@ -62,7 +62,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -76,7 +76,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -90,7 +91,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The nagios host or IP to send logs to. It should have a NSCA daemon running.</p>
 
 <h4> 
   <a name="setting_nagios_host">
@@ -104,7 +105,9 @@ This is what it might look like in your config file:
   <li> Default value is "%{@source_host}" </li>
 </ul>
 
-
+<p>The nagios 'host' you want to submit a passive check result to. This
+parameter accepts interpolation, e.g. you can use @source_host or other
+logstash internal variables.</p>
 
 <h4> 
   <a name="setting_nagios_service">
@@ -118,7 +121,9 @@ This is what it might look like in your config file:
   <li> Default value is "LOGSTASH" </li>
 </ul>
 
-
+<p>The nagios 'service' you want to submit a passive check result to. This
+parameter accepts interpolation, e.g. you can use @source_host or other
+logstash internal variables.</p>
 
 <h4> 
   <a name="setting_nagios_status">
@@ -132,7 +137,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The status to send to nagios. Should be 0 = OK, 1 = WARNING, 2 = CRITICAL, 3 = UNKNOWN</p>
 
 <h4> 
   <a name="setting_port">
@@ -146,7 +151,7 @@ This is what it might look like in your config file:
   <li> Default value is 5667 </li>
 </ul>
 
-
+<p>The port where the NSCA daemon on the nagios host listens.</p>
 
 <h4> 
   <a name="setting_send_nsca_bin">
@@ -160,7 +165,7 @@ This is what it might look like in your config file:
   <li> Default value is "/usr/sbin/send_nsca" </li>
 </ul>
 
-
+<p>The path to the 'send_nsca' binary on the local host.</p>
 
 <h4> 
   <a name="setting_send_nsca_config">
@@ -174,7 +179,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The path to the send_nsca config file on the local host.
+Leave blank if you don't want to provide a config file.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -188,7 +194,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -202,7 +210,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

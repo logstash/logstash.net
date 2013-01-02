@@ -50,7 +50,7 @@ This is what it might look like in your config file:
   <li> Default value is "LOGSTASH" </li>
 </ul>
 
-
+<p>application name for syslog message</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -64,7 +64,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_facility">
@@ -78,7 +78,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>facility label for syslog message</p>
 
 <h4> 
   <a name="setting_fields">
@@ -92,7 +92,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -106,7 +107,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>syslog server address to connect to</p>
 
 <h4> 
   <a name="setting_msgid">
@@ -120,7 +121,7 @@ This is what it might look like in your config file:
   <li> Default value is "-" </li>
 </ul>
 
-
+<p>message id for syslog message</p>
 
 <h4> 
   <a name="setting_port">
@@ -134,7 +135,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>syslog server port to connect to</p>
 
 <h4> 
   <a name="setting_procid">
@@ -148,7 +149,7 @@ This is what it might look like in your config file:
   <li> Default value is "-" </li>
 </ul>
 
-
+<p>process id for syslog message</p>
 
 <h4> 
   <a name="setting_protocol">
@@ -162,7 +163,7 @@ This is what it might look like in your config file:
   <li> Default value is "udp" </li>
 </ul>
 
-
+<p>syslog server protocol. you can choose between udp and tcp</p>
 
 <h4> 
   <a name="setting_rfc">
@@ -176,7 +177,7 @@ This is what it might look like in your config file:
   <li> Default value is "rfc3164" </li>
 </ul>
 
-
+<p>syslog message format: you can choose between rfc3164 or rfc5424</p>
 
 <h4> 
   <a name="setting_severity">
@@ -190,7 +191,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>severity label for syslog message</p>
 
 <h4> 
   <a name="setting_sourcehost">
@@ -204,7 +205,7 @@ This is what it might look like in your config file:
   <li> Default value is "%{@source_host}" </li>
 </ul>
 
-
+<p>source host for syslog message</p>
 
 <h4> 
   <a name="setting_tags">
@@ -218,7 +219,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_timestamp">
@@ -232,7 +235,7 @@ This is what it might look like in your config file:
   <li> Default value is "%{@timestamp}" </li>
 </ul>
 
-
+<p>timestamp for syslog message</p>
 
 <h4> 
   <a name="setting_type">
@@ -246,7 +249,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

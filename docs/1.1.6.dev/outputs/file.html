@@ -44,7 +44,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -58,7 +58,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_flush_interval">
@@ -72,7 +73,7 @@ This is what it might look like in your config file:
   <li> Default value is 2 </li>
 </ul>
 
-
+<p>Flush interval for flushing writes to log files. 0 will flush on every meesage</p>
 
 <h4> 
   <a name="setting_gzip">
@@ -86,7 +87,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Gzip output stream</p>
 
 <h4> 
   <a name="setting_max_size">
@@ -100,7 +101,12 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The maximum size of file to write. When the file exceeds this
+threshold, it will be rotated to the current filename + ".1"
+If that file already exists, the previous .1 will shift to .2
+and so forth.</p>
 
+<p>NOT YET SUPPORTED</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -114,7 +120,12 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>The format to use when writing events to the file. This value
+supports any string and can include %{name} and other dynamic
+strings.</p>
 
+<p>If this setting is omitted, the full json representation of the
+event will be written as a single line.</p>
 
 <h4> 
   <a name="setting_path">
@@ -128,7 +139,8 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The path to the file to write. Event fields can be used here,
+like "/var/log/logstash/%{@source_host}/%{application}"</p>
 
 <h4> 
   <a name="setting_tags">
@@ -142,7 +154,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -156,7 +170,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

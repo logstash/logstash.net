@@ -54,7 +54,8 @@ This is what it might look like in your config file:
   <li> Default value is 60 </li>
 </ul>
 
-
+<p>the number of metrics to send to GraphTastic at one time. 60 seems to be the perfect
+amount for UDP, with default packet size.</p>
 
 <h4> 
   <a name="setting_context">
@@ -68,7 +69,12 @@ This is what it might look like in your config file:
   <li> Default value is "graphtastic" </li>
 </ul>
 
-
+<p>if using rest as your end point you need to also provide the application url
+it defaults to localhost/graphtastic.  You can customize the application url
+by changing the name of the .war file.  There are other ways to change the
+application context, but they vary depending on the Application Server in use.
+Please consult your application server documentation for more on application
+contexts.</p>
 
 <h4> 
   <a name="setting_error_file">
@@ -82,7 +88,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>setting allows you to specify where we save errored transactions
+this makes the most sense at this point - will need to decide
+on how we reintegrate these error metrics
+NOT IMPLEMENTED!</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -96,7 +105,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -110,7 +119,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -124,7 +134,7 @@ This is what it might look like in your config file:
   <li> Default value is "127.0.0.1" </li>
 </ul>
 
-
+<p>host for the graphtastic server - defaults to 127.0.0.1</p>
 
 <h4> 
   <a name="setting_integration">
@@ -138,7 +148,7 @@ This is what it might look like in your config file:
   <li> Default value is "udp" </li>
 </ul>
 
-
+<p>options are udp(fastest - default) - rmi(faster) - rest(fast) - tcp(don't use TCP yet - some problems - errors out on linux)</p>
 
 <h4> 
   <a name="setting_metrics">
@@ -152,7 +162,16 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
+<p>metrics hash - you will provide a name for your metric and the metric
+data as key value pairs.  so for example:</p>
 
+<p>metrics => { "Response" => "%{response}" }</p>
+
+<p>example for the logstash config</p>
+
+<p>metrics => [ "Response", "%{response}" ]</p>
+
+<p>NOTE: you can also use the dynamic fields for the key value as well as the actual value</p>
 
 <h4> 
   <a name="setting_port">
@@ -166,7 +185,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>port for the graphtastic instance - defaults to 1199 for RMI, 1299 for TCP, 1399 for UDP, and 8080 for REST</p>
 
 <h4> 
   <a name="setting_retries">
@@ -180,7 +199,10 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-
+<p>number of attempted retry after send error - currently only way to integrate
+errored transactions - should try and save to a file or later consumption
+either by graphtastic utility or by this program after connectivity is
+ensured to be established.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -194,7 +216,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -208,7 +232,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

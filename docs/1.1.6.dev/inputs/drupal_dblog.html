@@ -52,7 +52,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>Add a field to an event</p>
 
 <h4> 
   <a name="setting_add_usernames">
@@ -66,7 +66,8 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>By default, the event only contains the current user id as a field.
+If you whish to add the username as an additional field, set this to true.</p>
 
 <h4> 
   <a name="setting_bulksize">
@@ -80,7 +81,9 @@ This is what it might look like in your config file:
   <li> Default value is 5000 </li>
 </ul>
 
-
+<p>The amount of log messages that should be fetched with each query.
+Bulk fetching is done to prevent querying huge data sets when lots of
+messages are in the database.</p>
 
 <h4> 
   <a name="setting_charset">
@@ -94,7 +97,13 @@ This is what it might look like in your config file:
   <li> Default value is "UTF-8" </li>
 </ul>
 
+<p>The character encoding used in this input. Examples include "UTF-8"
+and "cp1252"</p>
 
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
   <a name="setting_databases">
@@ -108,7 +117,17 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Specify all drupal databases that you whish to import from.
+This can be as many as you whish.
+The format is a hash, with a unique site name as the key, and a databse
+url as the value.</p>
 
+<p>Example:
+[
+  "site1", "mysql://user1:password@host1.com/databasename",
+  "other_site", "mysql://user2:password@otherhost.com/databasename",
+  ...
+]</p>
 
 <h4> 
   <a name="setting_debug">
@@ -122,7 +141,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
+<p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
   <a name="setting_format">
@@ -136,7 +155,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
   <a name="setting_interval">
@@ -150,7 +169,7 @@ This is what it might look like in your config file:
   <li> Default value is 10 </li>
 </ul>
 
-
+<p>Time between checks in minutes.</p>
 
 <h4> 
   <a name="setting_message_format">
@@ -164,7 +183,13 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>If format is "json", an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname} or %{@metadata}.</p>
 
+<p>If format is "json_event", ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -178,7 +203,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Add any number of arbitrary tags to your event.</p>
 
+<p>This can help with processing later.</p>
 
 <h4> 
   <a name="setting_type">
@@ -192,7 +219,14 @@ This is what it might look like in your config file:
   <li> Default value is "watchdog" </li>
 </ul>
 
+<p>Label this input with a type.
+Types are used mainly for filter activation.</p>
 
+<p>If you create an input with type "foobar", then only filters
+which also have type "foobar" will act on them.</p>
+
+<p>The type is also stored as part of the event itself, so you
+can also use the type to search for in the web interface.</p>
 
 
 <hr>

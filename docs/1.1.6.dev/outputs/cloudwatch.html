@@ -109,7 +109,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The AWS Access Key ID</p>
 
 <h4> 
   <a name="setting_dimensions">
@@ -123,7 +123,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The default dimensions [ name, value, ... ] to use for events which do not have a "CW_dimensions" field</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -137,7 +137,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_field_dimensions">
@@ -151,7 +151,18 @@ This is what it might look like in your config file:
   <li> Default value is "CW_dimensions" </li>
 </ul>
 
+<p>The name of the field used to set the dimensions on an event metric <br/>
+The field named here, if present in an event, must have an array of
+one or more key &amp; value pairs, for example...</p>
 
+<pre><code>add_field =&gt; [ "CW_dimensions", "Environment", "CW_dimensions", "prod" ]
+</code></pre>
+
+<p>or, equivalently...</p>
+
+<pre><code>add_field =&gt; [ "CW_dimensions", "Environment" ]
+add_field =&gt; [ "CW_dimensions", "prod" ]
+</code></pre>
 
 <h4> 
   <a name="setting_field_metricname">
@@ -165,7 +176,11 @@ This is what it might look like in your config file:
   <li> Default value is "CW_metricname" </li>
 </ul>
 
-
+<p>The name of the field used to set the metric name on an event <br/>
+The author of this plugin recommends adding this field to events in inputs &amp;
+filters rather than using the per-output default setting so that one output
+plugin on your logstash indexer can serve all events (which of course had
+fields set on your logstash shippers.)</p>
 
 <h4> 
   <a name="setting_field_namespace">
@@ -179,7 +194,10 @@ This is what it might look like in your config file:
   <li> Default value is "CW_namespace" </li>
 </ul>
 
-
+<p>The name of the field used to set a different namespace per event <br/>
+Note: Only one namespace can be sent to CloudWatch per API call
+so setting different namespaces will increase the number of API calls
+and those cost money.</p>
 
 <h4> 
   <a name="setting_field_unit">
@@ -193,7 +211,7 @@ This is what it might look like in your config file:
   <li> Default value is "CW_unit" </li>
 </ul>
 
-
+<p>The name of the field used to set the unit on an event metric</p>
 
 <h4> 
   <a name="setting_field_value">
@@ -207,7 +225,7 @@ This is what it might look like in your config file:
   <li> Default value is "CW_value" </li>
 </ul>
 
-
+<p>The name of the field used to set the value (float) on an event metric</p>
 
 <h4> 
   <a name="setting_fields">
@@ -221,7 +239,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_metricname">
@@ -235,7 +254,11 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The default metric name to use for events which do not have a "CW_metricname" field. <br/>
+Beware: If this is provided then all events which pass through this output will be aggregated and
+sent to CloudWatch, so use this carefully.  Furthermore, when providing this option, you
+will probably want to also restrict events from passing through this output using event
+type, tag, and field matching</p>
 
 <h4> 
   <a name="setting_namespace">
@@ -249,7 +272,7 @@ This is what it might look like in your config file:
   <li> Default value is "Logstash" </li>
 </ul>
 
-
+<p>The default namespace to use for events which do not have a "CW_namespace" field</p>
 
 <h4> 
   <a name="setting_queue_size">
@@ -263,7 +286,8 @@ This is what it might look like in your config file:
   <li> Default value is 10000 </li>
 </ul>
 
-
+<p>How many events to queue before forcing a call to the CloudWatch API ahead of "timeframe" schedule <br/>
+Set this to the number of events-per-timeframe you will be sending to CloudWatch to avoid extra API calls</p>
 
 <h4> 
   <a name="setting_region">
@@ -277,7 +301,10 @@ This is what it might look like in your config file:
   <li> Default value is "us-east-1" </li>
 </ul>
 
-
+<p>Constants
+aggregate_key members
+Units
+The AWS Region to send logs to.</p>
 
 <h4> 
   <a name="setting_secret_key">
@@ -291,7 +318,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The AWS Secret Access Key</p>
 
 <h4> 
   <a name="setting_tags">
@@ -305,7 +332,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_timeframe">
@@ -319,7 +348,13 @@ This is what it might look like in your config file:
   <li> Default value is "1m" </li>
 </ul>
 
+<p>How often to send data to CloudWatch <br/>
+This does not affect the event timestamps, events will always have their
+actual timestamp (to-the-minute) sent to CloudWatch.</p>
 
+<p>We only call the API if there is data to send.</p>
+
+<p>See the Rufus Scheduler docs for an <a href="https://github.com/jmettraux/rufus-scheduler#the-time-strings-understood-by-rufus-scheduler">explanation of allowed values</a></p>
 
 <h4> 
   <a name="setting_type">
@@ -333,7 +368,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_unit">
@@ -347,7 +385,8 @@ This is what it might look like in your config file:
   <li> Default value is "Count" </li>
 </ul>
 
-
+<p>The default unit to use for events which do not have a "CW_unit" field <br/>
+If you set this option you should probably set the "value" option along with it</p>
 
 <h4> 
   <a name="setting_value">
@@ -361,7 +400,13 @@ This is what it might look like in your config file:
   <li> Default value is "1" </li>
 </ul>
 
+<p>The default value to use for events which do not have a "CW_value" field <br/>
+If provided, this must be a string which can be converted to a float, for example...</p>
 
+<pre><code>"1", "2.34", ".5", and "0.67"
+</code></pre>
+
+<p>If you set this option you should probably set the "unit" option along with it</p>
 
 
 <hr>

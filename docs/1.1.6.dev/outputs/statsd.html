@@ -63,7 +63,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>A count metric. metric_name => count as hash</p>
 
 <h4> 
   <a name="setting_debug">
@@ -77,7 +77,10 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
+<p>The final metric sent to statsd will look like the following (assuming defaults)
+logstash.sender.file_name</p>
 
+<p>Enable debugging output?</p>
 
 <h4> 
   <a name="setting_decrement">
@@ -91,7 +94,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>A decrement metric. metric names as array.</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -105,7 +108,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -119,7 +122,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -133,7 +137,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The address of the Statsd server.</p>
 
 <h4> 
   <a name="setting_increment">
@@ -147,7 +151,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>An increment metric. metric names as array.</p>
 
 <h4> 
   <a name="setting_namespace">
@@ -161,7 +165,7 @@ This is what it might look like in your config file:
   <li> Default value is "logstash" </li>
 </ul>
 
-
+<p>The statsd namespace to use for this metric</p>
 
 <h4> 
   <a name="setting_port">
@@ -175,7 +179,7 @@ This is what it might look like in your config file:
   <li> Default value is 8125 </li>
 </ul>
 
-
+<p>The port to connect to on your statsd server.</p>
 
 <h4> 
   <a name="setting_sample_rate">
@@ -189,7 +193,7 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-
+<p>The sample rate for the metric</p>
 
 <h4> 
   <a name="setting_sender">
@@ -203,7 +207,8 @@ This is what it might look like in your config file:
   <li> Default value is "%{@source_host}" </li>
 </ul>
 
-
+<p>The name of the sender.
+Dots will be replaced with underscores</p>
 
 <h4> 
   <a name="setting_tags">
@@ -217,7 +222,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_timing">
@@ -231,7 +238,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
+<p>A timing metric. metric_name => duration as hash</p>
 
 <h4> 
   <a name="setting_type">
@@ -245,7 +252,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 
 <hr>

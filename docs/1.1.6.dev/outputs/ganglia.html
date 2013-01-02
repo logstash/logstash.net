@@ -45,7 +45,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -59,7 +59,8 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
@@ -73,7 +74,7 @@ This is what it might look like in your config file:
   <li> Default value is "localhost" </li>
 </ul>
 
-
+<p>The address of the graphite server.</p>
 
 <h4> 
   <a name="setting_lifetime">
@@ -87,7 +88,7 @@ This is what it might look like in your config file:
   <li> Default value is 300 </li>
 </ul>
 
-
+<p>Lifetime in seconds of this metric</p>
 
 <h4> 
   <a name="setting_max_interval">
@@ -101,7 +102,7 @@ This is what it might look like in your config file:
   <li> Default value is 60 </li>
 </ul>
 
-
+<p>Maximum time in seconds between gmetric calls for this metric.</p>
 
 <h4> 
   <a name="setting_metric">
@@ -115,7 +116,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The metric to use. This supports dynamic strings like %{@source_host}</p>
 
 <h4> 
   <a name="setting_metric_type">
@@ -129,7 +130,7 @@ This is what it might look like in your config file:
   <li> Default value is "uint8" </li>
 </ul>
 
-
+<p>The type of value for this metric.</p>
 
 <h4> 
   <a name="setting_port">
@@ -143,7 +144,7 @@ This is what it might look like in your config file:
   <li> Default value is 8649 </li>
 </ul>
 
-
+<p>The port to connect on your graphite server.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -157,7 +158,9 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -171,7 +174,10 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_units">
@@ -185,7 +191,8 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-
+<p>Gmetric units for metric, such as "kb/sec" or "ms" or whatever unit
+this metric uses.</p>
 
 <h4> 
   <a name="setting_value">
@@ -199,7 +206,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The value to use. This supports dynamic strings like %{bytes}
+It will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
 
 
 <hr>
