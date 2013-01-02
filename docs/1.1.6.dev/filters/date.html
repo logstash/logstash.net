@@ -85,8 +85,9 @@ Example:</p>
 }
 </code></pre>
 
-<p> On success, myfilter will then add field 'sample' with the value above
- and the %{@source} piece replaced with that value from the event.</p>
+<p> On success, the date plugin will then add field 'sample' with the
+ value above and the %{@source} piece replaced with that value from the
+ event.</p>
 
 <h4> 
   <a name="setting_add_tag">
@@ -160,7 +161,9 @@ weekday names</p>
 </ul>
 
 <p>The date formats allowed are anything allowed by Joda-Time (java time
-library), generally: [java.text.SimpleDateFormat][dateformats]</p>
+library): You can see the docs for this format here:</p>
+
+<p><a href="http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html">joda.time.format.DateTimeFormat</a></p>
 
 <p>An array with field name first, and format patterns following, [ field,
 formats... ]</p>
