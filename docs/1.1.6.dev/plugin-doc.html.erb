@@ -34,12 +34,7 @@ This is what it might look like in your config file:
 <% sorted_attributes.each do |name, config|
      next if config[:deprecated]
      if config[:validate].is_a?(Array) 
-       annotation = "string, one of "
-       if config[:validate].size > 5
-         annotation += "#{config[:validate][0..5].inspect} ..."
-       else
-         annotation += "#{config[:validate].inspect}"
-       end
+       annotation = "string, one of #{config[:validate].inspect}"
      else 
        annotation = "#{config[:validate]}"
      end
