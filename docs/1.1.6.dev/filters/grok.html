@@ -39,8 +39,8 @@ making a request.</p>
 
 <h4>Example</h4>
 
-<p>Combining the two above, we can pull out useful fields from a sample log like
-this fictional http request log:</p>
+<p>With that idea of a syntax and semantic, we can pull out useful fields from a
+sample log like this fictional http request log:</p>
 
 <pre><code>55.3.244.1 GET /index.html 15824 0.043
 </code></pre>
@@ -144,6 +144,7 @@ filter {
 <p>The 'timestamp', 'logsource', 'program', and 'pid' fields come from the
 SYSLOGBASE pattern which itself is defined by other patterns.</p>
 
+<!-- Flags are deprecated 
 <h3> Flags </h3>
 
 This plugin provides the following flags:
@@ -153,6 +154,8 @@ This plugin provides the following flags:
   <dt> --grok-patterns-path PATH </dt>
   <dd> Colon-delimited path of patterns to load </dd>
 </dl>
+
+... flags are deprecated -->
 
 
 <h3> Synopsis </h3>
