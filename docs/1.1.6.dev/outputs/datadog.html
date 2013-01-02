@@ -15,29 +15,17 @@ This is what it might look like in your config file:
 <pre><code>output {
   datadog {
     <a href="#setting_alert_type">alert_type</a> => ... # string, one of ["info", "error", "warning", "success"] (optional)
-    <a href="#setting_alert_type">alert_type</a> => ... #  (optional)
     <a href="#setting_api_key">api_key</a> => ... # string (required)
-    <a href="#setting_api_key">api_key</a> => ... #  (optional)
     <a href="#setting_date_happened">date_happened</a> => ... # string (optional)
-    <a href="#setting_date_happened">date_happened</a> => ... #  (optional)
-    <a href="#setting_dd_tags">dd_tags</a> => ... #  (optional)
     <a href="#setting_dd_tags">dd_tags</a> => ... # array (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_priority">priority</a> => ... # string, one of ["normal", "low"] (optional)
-    <a href="#setting_priority">priority</a> => ... #  (optional)
     <a href="#setting_source_type_name">source_type_name</a> => ... # string, one of ["nagios", "hudson", "jenkins", "user", "my apps", "feed", "chef", "puppet", "git", "bitbucket"] (optional), default: "my apps"
-    <a href="#setting_source_type_name">source_type_name</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_text">text</a> => ... # string (optional), default: "%{@message}"
-    <a href="#setting_text">text</a> => ... #  (optional)
     <a href="#setting_title">title</a> => ... # string (optional), default: "Logstash event for %{@source_host}"
-    <a href="#setting_title">title</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -56,39 +44,11 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_alert_type">
-    alert_type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Alert type</p>
 
 <h4> 
   <a name="setting_api_key">
     api_key (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_api_key">
-    api_key
     
 </a>
 </h4>
@@ -118,20 +78,6 @@ these will be one-shot events</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_date_happened">
-    date_happened
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Date Happened</p>
 
 <h4> 
@@ -142,7 +88,7 @@ these will be one-shot events</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -151,20 +97,6 @@ Set any custom tags for this event
 Default are the Logstash tags if any</p>
 
 <h4> 
-  <a name="setting_dd_tags">
-    dd_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -172,27 +104,13 @@ Default are the Logstash tags if any</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -200,26 +118,12 @@ Default are the Logstash tags if any</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_priority">
@@ -230,20 +134,6 @@ Optional.</p>
 
 <ul>
   <li> Value can be any of: "normal", "low" </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_priority">
-    priority
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -261,20 +151,6 @@ Optional.</p>
   <li> Default value is "my apps" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_source_type_name">
-    source_type_name
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Source type name</p>
 
 <h4> 
@@ -287,20 +163,6 @@ Optional.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -319,20 +181,6 @@ Optional.</p>
   <li> Default value is "%{@message}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_text">
-    text
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Text</p>
 
 <h4> 
@@ -347,20 +195,6 @@ Optional.</p>
   <li> Default value is "Logstash event for %{@source_host}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_title">
-    title
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Title</p>
 
 <h4> 
@@ -373,20 +207,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

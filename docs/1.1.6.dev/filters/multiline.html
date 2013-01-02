@@ -71,27 +71,16 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   multiline {
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_negate">negate</a> => ... # boolean (optional), default: false
-    <a href="#setting_negate">negate</a> => ... #  (optional)
     <a href="#setting_pattern">pattern</a> => ... # string (optional)
-    <a href="#setting_pattern">pattern</a> => ... #  (optional)
-    <a href="#setting_patterns_dir">patterns_dir</a> => ... #  (optional)
     <a href="#setting_patterns_dir">patterns_dir</a> => ... # array (optional), default: []
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_stream_identity">stream_identity</a> => ... # string (optional), default: "%{@source}.%{@type}"
-    <a href="#setting_stream_identity">stream_identity</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_what">what</a> => ... #  (optional)
     <a href="#setting_what">what</a> => ... # string, one of ["previous", "next"] (optional)
   }
 }
@@ -107,8 +96,8 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -125,20 +114,6 @@ Example:</p>
  and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_add_tag">
     add_tag
     
@@ -146,8 +121,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -165,20 +140,6 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -186,26 +147,12 @@ would add a tag "foo_hello"</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is
 additional to type and tags.</p>
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_negate">
@@ -219,35 +166,7 @@ additional to type and tags.</p>
   <li> Default value is false </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_negate">
-    negate
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Negate the regexp pattern ('if not matched')</p>
-
-<h4> 
-  <a name="setting_pattern">
-    pattern
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_pattern">
@@ -271,8 +190,8 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>logstash ships by default with a bunch of patterns, so you don't
@@ -290,20 +209,6 @@ patterns.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_patterns_dir">
-    patterns_dir
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_remove_tag">
     remove_tag
     
@@ -313,20 +218,6 @@ patterns.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -355,20 +246,6 @@ would remove the tag "foo_hello" if it is present</p>
   <li> Default value is "%{@source}.%{@type}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_stream_identity">
-    stream_identity
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The stream identity is how the multiline filter determines which stream an
 event belongs. This is generally used for differentiating, say, events
 coming from multiple files in the same file input, or multiple connections
@@ -390,27 +267,13 @@ case, you can use "%{@source_host}.%{@type}" instead.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -422,20 +285,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only
@@ -451,25 +300,11 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>If the pattern matched, does event belong to the next or previous event?</p>
-
-<h4> 
-  <a name="setting_what">
-    what
-    
-</a>
-</h4>
-
-<ul>
   <li> Value can be any of: "previous", "next" </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>If the pattern matched, does event belong to the next or previous event?</p>
 
 
 <hr>

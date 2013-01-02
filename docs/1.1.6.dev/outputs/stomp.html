@@ -15,24 +15,14 @@ This is what it might look like in your config file:
 <pre><code>output {
   stomp {
     <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_debug">debug</a> => ... #  (optional)
     <a href="#setting_destination">destination</a> => ... # string (required)
-    <a href="#setting_destination">destination</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_host">host</a> => ... # string (required)
-    <a href="#setting_host">host</a> => ... #  (optional)
-    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_password">password</a> => ... # password (optional), default: ""
     <a href="#setting_port">port</a> => ... # number (optional), default: 61613
-    <a href="#setting_port">port</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_user">user</a> => ... #  (optional)
     <a href="#setting_user">user</a> => ... # string (optional), default: ""
   }
 }
@@ -52,39 +42,11 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_debug">
-    debug
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Enable debugging output?</p>
 
 <h4> 
   <a name="setting_destination">
     destination (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_destination">
-    destination
     
 </a>
 </h4>
@@ -111,36 +73,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events with all of these fields.
-Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -154,25 +87,12 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_host">
     host (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_host">
-    host
     
 </a>
 </h4>
@@ -192,25 +112,11 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The password to authenticate with.</p>
-
-<h4> 
-  <a name="setting_password">
-    password
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is password </li>
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The password to authenticate with.</p>
 
 <h4> 
   <a name="setting_port">
@@ -224,37 +130,7 @@ Optional.</p>
   <li> Default value is 61613 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The port to connect to on your STOMP server.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
 
 <h4> 
   <a name="setting_tags">
@@ -268,7 +144,9 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -280,20 +158,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only
@@ -310,24 +174,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The username to authenticate with.</p>
-
-<h4> 
-  <a name="setting_user">
-    user
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The username to authenticate with.</p>
 
 
 <hr>

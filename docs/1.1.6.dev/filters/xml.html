@@ -16,22 +16,14 @@ This is what it might look like in your config file:
 <pre><code>filter {
   xml {
     <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # string (optional)
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
     <a href="#setting_store_xml">store_xml</a> => ... # boolean (optional), default: true
-    <a href="#setting_store_xml">store_xml</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
     <a href="#setting_xpath">xpath</a> => ... # hash (optional), default: {}
-    <a href="#setting_xpath">xpath</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -80,8 +72,8 @@ document into the 'doc' field.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -98,20 +90,6 @@ Example:</p>
  and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_add_tag">
     add_tag
     
@@ -119,8 +97,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -138,20 +116,6 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -161,20 +125,6 @@ would add a tag "foo_hello"</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is
@@ -188,8 +138,8 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -207,20 +157,6 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_store_xml">
     store_xml
     
@@ -230,20 +166,6 @@ would remove the tag "foo_hello" if it is present</p>
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_store_xml">
-    store_xml
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>By default the filter will store the whole parsed xml in the destination
@@ -261,39 +183,8 @@ field as described above. Setting this to false will prevent that.</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
-Optional.</p>
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The type to act on. If a type is given, then this filter will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
 Optional.</p>
 
 <h4> 
@@ -308,7 +199,10 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
-
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_xpath">
@@ -320,20 +214,6 @@ Optional.</p>
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_xpath">
-    xpath
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>xpath will additionally select string values (.to_s on whatever is selected)

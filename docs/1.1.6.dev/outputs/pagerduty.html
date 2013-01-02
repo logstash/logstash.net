@@ -16,25 +16,15 @@ This is what it might look like in your config file:
 <pre><code>output {
   pagerduty {
     <a href="#setting_description">description</a> => ... # string (optional), default: "Logstash event for %{@source_host}"
-    <a href="#setting_description">description</a> => ... #  (optional)
     <a href="#setting_details">details</a> => ... # hash (optional), default: {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"}
-    <a href="#setting_details">details</a> => ... #  (optional)
     <a href="#setting_event_type">event_type</a> => ... # string, one of ["trigger", "acknowledge", "resolve"] (optional), default: "trigger"
-    <a href="#setting_event_type">event_type</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_incident_key">incident_key</a> => ... # string (optional), default: "logstash/%{@source_host}/%{@type}"
-    <a href="#setting_incident_key">incident_key</a> => ... #  (optional)
-    <a href="#setting_pdurl">pdurl</a> => ... #  (optional)
     <a href="#setting_pdurl">pdurl</a> => ... # string (optional), default: "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
     <a href="#setting_service_key">service_key</a> => ... # string (required)
-    <a href="#setting_service_key">service_key</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -53,20 +43,6 @@ This is what it might look like in your config file:
   <li> Default value is "Logstash event for %{@source_host}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_description">
-    description
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Custom description</p>
 
 <h4> 
@@ -79,20 +55,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_details">
-    details
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Event details
@@ -111,20 +73,6 @@ tags are automatically included if detected so no need to add them here</p>
   <li> Default value is "trigger" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_event_type">
-    event_type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Event type</p>
 
 <h4> 
@@ -139,36 +87,7 @@ tags are automatically included if detected so no need to add them here</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events with all of these fields.
-Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -182,7 +101,8 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_incident_key">
@@ -194,20 +114,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "logstash/%{@source_host}/%{@type}" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_incident_key">
-    incident_key
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The service key to use
@@ -222,7 +128,7 @@ You'll need to set this up in PD beforehand</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "https://events.pagerduty.com/generic/2010-04-15/create_event.json" </li>
 </ul>
 
 <p>PagerDuty API url
@@ -232,36 +138,8 @@ should PD iterate the API
 and Logstash hasn't updated yet</p>
 
 <h4> 
-  <a name="setting_pdurl">
-    pdurl
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> Default value is "https://events.pagerduty.com/generic/2010-04-15/create_event.json" </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_service_key">
     service_key (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_service_key">
-    service_key
     
 </a>
 </h4>
@@ -281,27 +159,13 @@ and Logstash hasn't updated yet</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -313,20 +177,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

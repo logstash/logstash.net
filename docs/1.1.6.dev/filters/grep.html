@@ -19,23 +19,14 @@ This is what it might look like in your config file:
 <pre><code>filter {
   grep {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
     <a href="#setting_drop">drop</a> => ... # boolean (optional), default: true
-    <a href="#setting_drop">drop</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_match">match</a> => ... #  (optional)
     <a href="#setting_match">match</a> => ... # hash (optional), default: {}
-    <a href="#setting_negate">negate</a> => ... #  (optional)
     <a href="#setting_negate">negate</a> => ... # boolean (optional), default: false
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -83,20 +74,6 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
@@ -118,8 +95,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -137,20 +114,6 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_drop">
     drop
     
@@ -160,20 +123,6 @@ would add a tag "foo_hello"</p>
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_drop">
-    drop
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Drop events that don't match</p>
@@ -190,26 +139,12 @@ non-matching events will be passed through unchanged.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events without any of these tags. Note this check is
-additional to type and tags.</p>
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
 
 <h4> 
   <a name="setting_match">
@@ -219,8 +154,8 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>A hash of matches of field => regexp.  If multiple matches are specified,
@@ -240,38 +175,6 @@ expressions are supported here.</p>
 a regular expression.</p>
 
 <h4> 
-  <a name="setting_match">
-    match
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_negate">
-    negate
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Negate the match. Similar to 'grep -v'</p>
-
-<p>If this is set to true, then any positive matches will result in the
-event being cancelled and dropped. Non-matching will be allowed
-through.</p>
-
-<h4> 
   <a name="setting_negate">
     negate
     
@@ -283,7 +186,11 @@ through.</p>
   <li> Default value is false </li>
 </ul>
 
+<p>Negate the match. Similar to 'grep -v'</p>
 
+<p>If this is set to true, then any positive matches will result in the
+event being cancelled and dropped. Non-matching will be allowed
+through.</p>
 
 <h4> 
   <a name="setting_remove_tag">
@@ -293,8 +200,8 @@ through.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -312,20 +219,6 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_tags">
     tags
     
@@ -335,20 +228,6 @@ would remove the tag "foo_hello" if it is present</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -365,20 +244,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only

@@ -15,20 +15,12 @@ This is what it might look like in your config file:
 <pre><code>output {
   lumberjack {
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_hosts">hosts</a> => ... # array (required)
-    <a href="#setting_hosts">hosts</a> => ... #  (optional)
-    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (required)
     <a href="#setting_ssl_certificate">ssl_certificate</a> => ... # string (required)
-    <a href="#setting_ssl_certificate">ssl_certificate</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_window_size">window_size</a> => ... #  (optional)
     <a href="#setting_window_size">window_size</a> => ... # number (optional), default: 5000
   }
 }
@@ -48,20 +40,6 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
@@ -74,20 +52,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -105,35 +69,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_hosts">
-    hosts
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>list of addresses lumberjack can send to</p>
-
-<h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>the port to connect to</p>
 
 <h4> 
   <a name="setting_port">
@@ -147,25 +83,11 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>the port to connect to</p>
 
 <h4> 
   <a name="setting_ssl_certificate">
     ssl_certificate (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_ssl_certificate">
-    ssl_certificate
     
 </a>
 </h4>
@@ -189,39 +111,8 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
-Optional.</p>
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
 Optional.</p>
 
 <h4> 
@@ -236,21 +127,10 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_window_size">
-    window_size
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>window size</p>
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
 
 <h4> 
   <a name="setting_window_size">
@@ -264,7 +144,7 @@ Optional.</p>
   <li> Default value is 5000 </li>
 </ul>
 
-
+<p>window size</p>
 
 
 <hr>

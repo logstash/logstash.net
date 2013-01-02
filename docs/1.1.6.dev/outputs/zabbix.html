@@ -63,19 +63,12 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   zabbix {
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
-    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
     <a href="#setting_port">port</a> => ... # number (optional), default: 10051
-    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_zabbix_sender">zabbix_sender</a> => ... #  (optional)
     <a href="#setting_zabbix_sender">zabbix_sender</a> => ... # string (optional), default: "/usr/local/bin/zabbix_sender"
   }
 }
@@ -91,27 +84,13 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -121,38 +100,10 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
-
-<h4> 
-  <a name="setting_host">
-    host
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_host">
@@ -183,20 +134,6 @@ Optional.</p>
 
 
 <h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_tags">
     tags
     
@@ -206,20 +143,6 @@ Optional.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -235,41 +158,13 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
 Optional.</p>
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_zabbix_sender">
-    zabbix_sender
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_zabbix_sender">

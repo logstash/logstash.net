@@ -72,63 +72,30 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   cloudwatch {
-    <a href="#setting_access_key">access_key</a> => ... #  (optional)
     <a href="#setting_access_key">access_key</a> => ... # string (required)
-    <a href="#setting_dimensions">dimensions</a> => ... #  (optional)
     <a href="#setting_dimensions">dimensions</a> => ... # hash (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_field_dimensions">field_dimensions</a> => ... #  (optional)
     <a href="#setting_field_dimensions">field_dimensions</a> => ... # string (optional), default: "CW_dimensions"
-    <a href="#setting_field_metricname">field_metricname</a> => ... #  (optional)
     <a href="#setting_field_metricname">field_metricname</a> => ... # string (optional), default: "CW_metricname"
-    <a href="#setting_field_namespace">field_namespace</a> => ... #  (optional)
     <a href="#setting_field_namespace">field_namespace</a> => ... # string (optional), default: "CW_namespace"
     <a href="#setting_field_unit">field_unit</a> => ... # string (optional), default: "CW_unit"
-    <a href="#setting_field_unit">field_unit</a> => ... #  (optional)
     <a href="#setting_field_value">field_value</a> => ... # string (optional), default: "CW_value"
-    <a href="#setting_field_value">field_value</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_metricname">metricname</a> => ... #  (optional)
     <a href="#setting_metricname">metricname</a> => ... # string (optional)
-    <a href="#setting_namespace">namespace</a> => ... #  (optional)
     <a href="#setting_namespace">namespace</a> => ... # string (optional), default: "Logstash"
-    <a href="#setting_queue_size">queue_size</a> => ... #  (optional)
     <a href="#setting_queue_size">queue_size</a> => ... # number (optional), default: 10000
     <a href="#setting_region">region</a> => ... # string, one of ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1", "us-gov-west-1"] (optional), default: "us-east-1"
-    <a href="#setting_region">region</a> => ... #  (optional)
-    <a href="#setting_secret_key">secret_key</a> => ... #  (optional)
     <a href="#setting_secret_key">secret_key</a> => ... # string (required)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_timeframe">timeframe</a> => ... # string (optional), default: "1m"
-    <a href="#setting_timeframe">timeframe</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_unit">unit</a> => ... #  (optional)
     <a href="#setting_unit">unit</a> => ... # string, one of ["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"] (optional), default: "Count"
     <a href="#setting_value">value</a> => ... # string (optional), default: "1"
-    <a href="#setting_value">value</a> => ... #  (optional)
   }
 }
 </code></pre>
 
 <h3> Details </h3>
-
-<h4> 
-  <a name="setting_access_key">
-    access_key
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The AWS Access Key ID</p>
 
 <h4> 
   <a name="setting_access_key">
@@ -142,21 +109,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_dimensions">
-    dimensions
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The default dimensions [ name, value, ... ] to use for events which do not have a "CW_dimensions" field</p>
+<p>The AWS Access Key ID</p>
 
 <h4> 
   <a name="setting_dimensions">
@@ -170,21 +123,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+<p>The default dimensions [ name, value, ... ] to use for events which do not have a "CW_dimensions" field</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -198,7 +137,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_field_dimensions">
@@ -209,7 +148,7 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "CW_dimensions" </li>
 </ul>
 
 <p>The name of the field used to set the dimensions on an event metric <br/>
@@ -226,38 +165,6 @@ add_field =&gt; [ "CW_dimensions", "prod" ]
 </code></pre>
 
 <h4> 
-  <a name="setting_field_dimensions">
-    field_dimensions
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> Default value is "CW_dimensions" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_field_metricname">
-    field_metricname
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The name of the field used to set the metric name on an event <br/>
-The author of this plugin recommends adding this field to events in inputs &amp;
-filters rather than using the per-output default setting so that one output
-plugin on your logstash indexer can serve all events (which of course had
-fields set on your logstash shippers.)</p>
-
-<h4> 
   <a name="setting_field_metricname">
     field_metricname
     
@@ -269,24 +176,11 @@ fields set on your logstash shippers.)</p>
   <li> Default value is "CW_metricname" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_field_namespace">
-    field_namespace
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The name of the field used to set a different namespace per event <br/>
-Note: Only one namespace can be sent to CloudWatch per API call
-so setting different namespaces will increase the number of API calls
-and those cost money.</p>
+<p>The name of the field used to set the metric name on an event <br/>
+The author of this plugin recommends adding this field to events in inputs &amp;
+filters rather than using the per-output default setting so that one output
+plugin on your logstash indexer can serve all events (which of course had
+fields set on your logstash shippers.)</p>
 
 <h4> 
   <a name="setting_field_namespace">
@@ -300,7 +194,10 @@ and those cost money.</p>
   <li> Default value is "CW_namespace" </li>
 </ul>
 
-
+<p>The name of the field used to set a different namespace per event <br/>
+Note: Only one namespace can be sent to CloudWatch per API call
+so setting different namespaces will increase the number of API calls
+and those cost money.</p>
 
 <h4> 
   <a name="setting_field_unit">
@@ -312,20 +209,6 @@ and those cost money.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "CW_unit" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_field_unit">
-    field_unit
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The name of the field used to set the unit on an event metric</p>
@@ -342,36 +225,7 @@ and those cost money.</p>
   <li> Default value is "CW_value" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_field_value">
-    field_value
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The name of the field used to set the value (float) on an event metric</p>
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events with all of these fields.
-Optional.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -385,7 +239,8 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these fields.
+Optional.</p>
 
 <h4> 
   <a name="setting_metricname">
@@ -406,34 +261,6 @@ will probably want to also restrict events from passing through this output usin
 type, tag, and field matching</p>
 
 <h4> 
-  <a name="setting_metricname">
-    metricname
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_namespace">
-    namespace
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The default namespace to use for events which do not have a "CW_namespace" field</p>
-
-<h4> 
   <a name="setting_namespace">
     namespace
     
@@ -445,22 +272,7 @@ type, tag, and field matching</p>
   <li> Default value is "Logstash" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_queue_size">
-    queue_size
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>How many events to queue before forcing a call to the CloudWatch API ahead of "timeframe" schedule <br/>
-Set this to the number of events-per-timeframe you will be sending to CloudWatch to avoid extra API calls</p>
+<p>The default namespace to use for events which do not have a "CW_namespace" field</p>
 
 <h4> 
   <a name="setting_queue_size">
@@ -474,7 +286,8 @@ Set this to the number of events-per-timeframe you will be sending to CloudWatch
   <li> Default value is 10000 </li>
 </ul>
 
-
+<p>How many events to queue before forcing a call to the CloudWatch API ahead of "timeframe" schedule <br/>
+Set this to the number of events-per-timeframe you will be sending to CloudWatch to avoid extra API calls</p>
 
 <h4> 
   <a name="setting_region">
@@ -488,38 +301,10 @@ Set this to the number of events-per-timeframe you will be sending to CloudWatch
   <li> Default value is "us-east-1" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_region">
-    region
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Constants
 aggregate_key members
 Units
 The AWS Region to send logs to.</p>
-
-<h4> 
-  <a name="setting_secret_key">
-    secret_key
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The AWS Secret Access Key</p>
 
 <h4> 
   <a name="setting_secret_key">
@@ -533,7 +318,7 @@ The AWS Region to send logs to.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>The AWS Secret Access Key</p>
 
 <h4> 
   <a name="setting_tags">
@@ -545,20 +330,6 @@ The AWS Region to send logs to.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -575,20 +346,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "1m" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_timeframe">
-    timeframe
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>How often to send data to CloudWatch <br/>
@@ -611,20 +368,6 @@ actual timestamp (to-the-minute) sent to CloudWatch.</p>
   <li> Default value is "" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
@@ -638,26 +381,12 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The default unit to use for events which do not have a "CW_unit" field <br/>
-If you set this option you should probably set the "value" option along with it</p>
-
-<h4> 
-  <a name="setting_unit">
-    unit
-    
-</a>
-</h4>
-
-<ul>
   <li> Value can be any of: "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None" </li>
   <li> Default value is "Count" </li>
 </ul>
 
-
+<p>The default unit to use for events which do not have a "CW_unit" field <br/>
+If you set this option you should probably set the "value" option along with it</p>
 
 <h4> 
   <a name="setting_value">
@@ -669,20 +398,6 @@ If you set this option you should probably set the "value" option along with it<
 <ul>
   <li> Value type is string </li>
   <li> Default value is "1" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_value">
-    value
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The default value to use for events which do not have a "CW_value" field <br/>

@@ -21,25 +21,15 @@ This is what it might look like in your config file:
 <pre><code>output {
   elasticsearch_http {
     <a href="#setting_document_id">document_id</a> => ... # string (optional), default: nil
-    <a href="#setting_document_id">document_id</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_flush_size">flush_size</a> => ... #  (optional)
     <a href="#setting_flush_size">flush_size</a> => ... # number (optional), default: 100
-    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional)
-    <a href="#setting_index">index</a> => ... #  (optional)
     <a href="#setting_index">index</a> => ... # string (optional), default: "logstash-%{+YYYY.MM.dd}"
-    <a href="#setting_index_type">index_type</a> => ... #  (optional)
     <a href="#setting_index_type">index_type</a> => ... # string (optional), default: "%{@type}"
-    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 9200
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -58,20 +48,6 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_document_id">
-    document_id
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The document ID for the index. Useful for overwriting existing entries in
 elasticsearch with the same ID.</p>
 
@@ -83,27 +59,13 @@ elasticsearch with the same ID.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -111,46 +73,12 @@ elasticsearch with the same ID.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_flush_size">
-    flush_size
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Set the number of events to queue up before writing to elasticsearch.</p>
-
-<p>If this value is set to 1, the normal <a href="http://www.elasticsearch.org/guide/reference/api/index_.html">'index
-api'</a>.
-Otherwise, the <a href="http://www.elasticsearch.org/guide/reference/api/bulk.html">bulk
-api</a> will
-be used.</p>
 
 <h4> 
   <a name="setting_flush_size">
@@ -164,7 +92,13 @@ be used.</p>
   <li> Default value is 100 </li>
 </ul>
 
+<p>Set the number of events to queue up before writing to elasticsearch.</p>
 
+<p>If this value is set to 1, the normal <a href="http://www.elasticsearch.org/guide/reference/api/index_.html">'index
+api'</a>.
+Otherwise, the <a href="http://www.elasticsearch.org/guide/reference/api/bulk.html">bulk
+api</a> will
+be used.</p>
 
 <h4> 
   <a name="setting_host">
@@ -183,36 +117,6 @@ This is only required if the normal multicast/cluster discovery stuff won't
 work in your environment.</p>
 
 <h4> 
-  <a name="setting_host">
-    host
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_index">
-    index
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The index to write events to. This can be dynamic using the %{foo} syntax.
-The default value will partition your indices by day so you can more easily
-delete old data or only search specific date ranges.</p>
-
-<h4> 
   <a name="setting_index">
     index
     
@@ -224,22 +128,9 @@ delete old data or only search specific date ranges.</p>
   <li> Default value is "logstash-%{+YYYY.MM.dd}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_index_type">
-    index_type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The index type to write events to. Generally you should try to write only
-similar events to the same 'type'. String expansion '%{foo}' works here.</p>
+<p>The index to write events to. This can be dynamic using the %{foo} syntax.
+The default value will partition your indices by day so you can more easily
+delete old data or only search specific date ranges.</p>
 
 <h4> 
   <a name="setting_index_type">
@@ -253,22 +144,8 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
   <li> Default value is "%{@type}" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The port for ElasticSearch transport to use. This is <em>not</em> the ElasticSearch
-REST API port (normally 9200).</p>
+<p>The index type to write events to. Generally you should try to write only
+similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 
 <h4> 
   <a name="setting_port">
@@ -282,23 +159,8 @@ REST API port (normally 9200).</p>
   <li> Default value is 9200 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+<p>The port for ElasticSearch transport to use. This is <em>not</em> the ElasticSearch
+REST API port (normally 9200).</p>
 
 <h4> 
   <a name="setting_tags">
@@ -312,7 +174,9 @@ Optional.</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
 
 <h4> 
   <a name="setting_type">
@@ -324,20 +188,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

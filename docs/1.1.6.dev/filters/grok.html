@@ -165,33 +165,19 @@ This is what it might look like in your config file:
 <pre><code>filter {
   grok {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_break_on_match">break_on_match</a> => ... #  (optional)
     <a href="#setting_break_on_match">break_on_match</a> => ... # boolean (optional), default: true
-    <a href="#setting_drop_if_match">drop_if_match</a> => ... #  (optional)
     <a href="#setting_drop_if_match">drop_if_match</a> => ... # boolean (optional), default: false
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_keep_empty_captures">keep_empty_captures</a> => ... #  (optional)
     <a href="#setting_keep_empty_captures">keep_empty_captures</a> => ... # boolean (optional), default: false
     <a href="#setting_match">match</a> => ... # hash (optional), default: {}
-    <a href="#setting_match">match</a> => ... #  (optional)
-    <a href="#setting_named_captures_only">named_captures_only</a> => ... #  (optional)
     <a href="#setting_named_captures_only">named_captures_only</a> => ... # boolean (optional), default: true
-    <a href="#setting_pattern">pattern</a> => ... #  (optional)
     <a href="#setting_pattern">pattern</a> => ... # array (optional)
-    <a href="#setting_patterns_dir">patterns_dir</a> => ... #  (optional)
     <a href="#setting_patterns_dir">patterns_dir</a> => ... # array (optional), default: []
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_singles">singles</a> => ... # boolean (optional), default: false
-    <a href="#setting_singles">singles</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -239,20 +225,6 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If this filter is successful, add any arbitrary fields to this event.
 Example:</p>
 
@@ -274,8 +246,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -293,36 +265,6 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_break_on_match">
-    break_on_match
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Break on first match. The first successful match by grok will result in the
-filter being finished. If you want grok to try all patterns (maybe you are
-parsing different things), then set this to false.</p>
-
-<h4> 
   <a name="setting_break_on_match">
     break_on_match
     
@@ -334,24 +276,9 @@ parsing different things), then set this to false.</p>
   <li> Default value is true </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_drop_if_match">
-    drop_if_match
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Drop if matched. Note, this feature may not stay. It is preferable to combine
-grok + grep filters to do parsing + dropping.</p>
-
-<p>requested in: googlecode/issue/26</p>
+<p>Break on first match. The first successful match by grok will result in the
+filter being finished. If you want grok to try all patterns (maybe you are
+parsing different things), then set this to false.</p>
 
 <h4> 
   <a name="setting_drop_if_match">
@@ -365,7 +292,10 @@ grok + grep filters to do parsing + dropping.</p>
   <li> Default value is false </li>
 </ul>
 
+<p>Drop if matched. Note, this feature may not stay. It is preferable to combine
+grok + grep filters to do parsing + dropping.</p>
 
+<p>requested in: googlecode/issue/26</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -377,20 +307,6 @@ grok + grep filters to do parsing + dropping.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is
@@ -404,25 +320,11 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>If true, keep empty captures as event fields.</p>
-
-<h4> 
-  <a name="setting_keep_empty_captures">
-    keep_empty_captures
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is boolean </li>
   <li> Default value is false </li>
 </ul>
 
-
+<p>If true, keep empty captures as event fields.</p>
 
 <h4> 
   <a name="setting_match">
@@ -434,20 +336,6 @@ additional to type and tags.</p>
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_match">
-    match
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>A hash of matches of field => value</p>
@@ -469,42 +357,11 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>If true, only store named captures from grok.</p>
-
-<h4> 
-  <a name="setting_named_captures_only">
-    named_captures_only
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_pattern">
-    pattern
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Specify a pattern to parse with. This will match the '@message' field.</p>
-
-<p>If you want to match other fields than @message, use the 'match' setting.
-Multiple patterns is fine.</p>
+<p>If true, only store named captures from grok.</p>
 
 <h4> 
   <a name="setting_pattern">
@@ -518,7 +375,10 @@ Multiple patterns is fine.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
+<p>Specify a pattern to parse with. This will match the '@message' field.</p>
 
+<p>If you want to match other fields than @message, use the 'match' setting.
+Multiple patterns is fine.</p>
 
 <h4> 
   <a name="setting_patterns_dir">
@@ -528,8 +388,8 @@ Multiple patterns is fine.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>logstash ships by default with a bunch of patterns, so you don't
@@ -547,20 +407,6 @@ patterns.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_patterns_dir">
-    patterns_dir
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_remove_tag">
     remove_tag
     
@@ -570,20 +416,6 @@ patterns.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -612,20 +444,6 @@ would remove the tag "foo_hello" if it is present</p>
   <li> Default value is false </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_singles">
-    singles
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If true, make single-value fields simply that value, not an array
 containing that one value.</p>
 
@@ -639,20 +457,6 @@ containing that one value.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -669,20 +473,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only

@@ -20,21 +20,13 @@ This is what it might look like in your config file:
 <pre><code>filter {
   checksum {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
-    <a href="#setting_algorithm">algorithm</a> => ... #  (optional)
     <a href="#setting_algorithm">algorithm</a> => ... # string, one of ["md5", "sha128", "sha256", "sha384"] (optional), default: "sha256"
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_keys">keys</a> => ... # array (optional), default: ["@message", "@source_host", "@timestamp", "@source_path", "@type", "@source"]
-    <a href="#setting_keys">keys</a> => ... #  (optional)
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -51,20 +43,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -92,20 +70,6 @@ Example:</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If this filter is successful, add arbitrary tags to the event.
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
@@ -119,20 +83,6 @@ syntax. Example:</p>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add a tag "foo_hello"</p>
-
-<h4> 
-  <a name="setting_algorithm">
-    algorithm
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_algorithm">
@@ -160,20 +110,6 @@ would add a tag "foo_hello"</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events without any of these tags. Note this check is
 additional to type and tags.</p>
 
@@ -189,20 +125,6 @@ additional to type and tags.</p>
   <li> Default value is ["@message", "@source_host", "@timestamp", "@source_path", "@type", "@source"] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_keys">
-    keys
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>A list of keys to use in creating the string to checksum
 Keys will be sorted before building the string
 keys and values will then be concatenated with pipe delimeters
@@ -216,8 +138,8 @@ and checksummed</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -235,20 +157,6 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_tags">
     tags
     
@@ -256,27 +164,13 @@ would remove the tag "foo_hello" if it is present</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -288,20 +182,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only

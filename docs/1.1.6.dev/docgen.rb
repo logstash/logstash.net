@@ -72,6 +72,10 @@ class LogStashConfigDocGenerator
     # This will let us align comments with config options.
     name, opts = eval(code)
 
+    # TODO(sissel): This hack is only required until regexp configs
+    # are gone from logstash.
+    name = name.to_s unless name.is_a?(Regexp)
+
     description = BlueCloth.new(@comments.join("\n")).to_html
     @attributes[name][:description] = description
     clear_comments

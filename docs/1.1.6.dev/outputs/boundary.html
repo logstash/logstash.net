@@ -14,28 +14,17 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   boundary {
-    <a href="#setting_api_key">api_key</a> => ... #  (optional)
     <a href="#setting_api_key">api_key</a> => ... # string (required)
-    <a href="#setting_bsubtype">bsubtype</a> => ... #  (optional)
     <a href="#setting_bsubtype">bsubtype</a> => ... # string (optional), default: "%{@type}"
     <a href="#setting_btags">btags</a> => ... # array (optional)
-    <a href="#setting_btags">btags</a> => ... #  (optional)
     <a href="#setting_btype">btype</a> => ... # string (optional), default: "%{@message}"
-    <a href="#setting_btype">btype</a> => ... #  (optional)
-    <a href="#setting_end_time">end_time</a> => ... #  (optional)
     <a href="#setting_end_time">end_time</a> => ... # string (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_org_id">org_id</a> => ... # string (required)
-    <a href="#setting_org_id">org_id</a> => ... #  (optional)
     <a href="#setting_start_time">start_time</a> => ... # string (optional)
-    <a href="#setting_start_time">start_time</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -44,7 +33,7 @@ This is what it might look like in your config file:
 
 <h4> 
   <a name="setting_api_key">
-    api_key
+    api_key (required setting)
     
 </a>
 </h4>
@@ -66,34 +55,6 @@ the event timestamp</p>
 <p>Your Boundary API key</p>
 
 <h4> 
-  <a name="setting_api_key">
-    api_key (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_bsubtype">
-    bsubtype
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Sub-Type</p>
-
-<h4> 
   <a name="setting_bsubtype">
     bsubtype
     
@@ -105,7 +66,7 @@ the event timestamp</p>
   <li> Default value is "%{@type}" </li>
 </ul>
 
-
+<p>Sub-Type</p>
 
 <h4> 
   <a name="setting_btags">
@@ -116,20 +77,6 @@ the event timestamp</p>
 
 <ul>
   <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_btags">
-    btags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -147,20 +94,6 @@ Default are the Logstash tags if any</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "%{@message}" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_btype">
-    btype
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Type</p>
@@ -184,20 +117,6 @@ If overriding, it is your responsibility to type this correctly
 By default this is set to <code>event.unix_timestamp.to_i</code></p>
 
 <h4> 
-  <a name="setting_end_time">
-    end_time
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -205,27 +124,13 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -235,20 +140,6 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -266,35 +157,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_org_id">
-    org_id
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Your Boundary Org ID</p>
-
-<h4> 
-  <a name="setting_start_time">
-    start_time
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_start_time">
@@ -322,27 +185,13 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -354,20 +203,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

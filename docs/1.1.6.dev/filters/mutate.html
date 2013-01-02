@@ -18,36 +18,20 @@ This is what it might look like in your config file:
 <pre><code>filter {
   mutate {
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_convert">convert</a> => ... # hash (optional)
-    <a href="#setting_convert">convert</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_gsub">gsub</a> => ... # array (optional)
-    <a href="#setting_gsub">gsub</a> => ... #  (optional)
-    <a href="#setting_join">join</a> => ... #  (optional)
     <a href="#setting_join">join</a> => ... # hash (optional)
-    <a href="#setting_lowercase">lowercase</a> => ... #  (optional)
     <a href="#setting_lowercase">lowercase</a> => ... # array (optional)
-    <a href="#setting_remove">remove</a> => ... #  (optional)
     <a href="#setting_remove">remove</a> => ... # array (optional)
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_rename">rename</a> => ... #  (optional)
     <a href="#setting_rename">rename</a> => ... # hash (optional)
     <a href="#setting_replace">replace</a> => ... # hash (optional)
-    <a href="#setting_replace">replace</a> => ... #  (optional)
-    <a href="#setting_split">split</a> => ... #  (optional)
     <a href="#setting_split">split</a> => ... # hash (optional)
     <a href="#setting_strip">strip</a> => ... # array (optional)
-    <a href="#setting_strip">strip</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_uppercase">uppercase</a> => ... #  (optional)
     <a href="#setting_uppercase">uppercase</a> => ... # array (optional)
   }
 }
@@ -65,20 +49,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -106,20 +76,6 @@ Example:</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If this filter is successful, add arbitrary tags to the event.
 Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
@@ -143,20 +99,6 @@ would add a tag "foo_hello"</p>
 
 <ul>
   <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_convert">
-    convert
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -187,20 +129,6 @@ If the field is a hash, no action will be taken.</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events without any of these tags. Note this check is
 additional to type and tags.</p>
 
@@ -213,20 +141,6 @@ additional to type and tags.</p>
 
 <ul>
   <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_gsub">
-    gsub
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -262,7 +176,7 @@ field/substitution.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is hash </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -280,20 +194,6 @@ field/substitution.</p>
 <p>   }</p>
 
 <h4> 
-  <a name="setting_join">
-    join
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_lowercase">
     lowercase
     
@@ -301,7 +201,7 @@ field/substitution.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -317,20 +217,6 @@ field/substitution.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_lowercase">
-    lowercase
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_remove">
     remove
     
@@ -338,7 +224,7 @@ field/substitution.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -354,20 +240,6 @@ field/substitution.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_remove">
-    remove
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_remove_tag">
     remove_tag
     
@@ -375,8 +247,8 @@ field/substitution.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -394,20 +266,6 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_rename">
     rename
     
@@ -415,7 +273,7 @@ would remove the tag "foo_hello" if it is present</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is hash </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -432,20 +290,6 @@ would remove the tag "foo_hello" if it is present</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_rename">
-    rename
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_replace">
     replace
     
@@ -454,20 +298,6 @@ would remove the tag "foo_hello" if it is present</p>
 
 <ul>
   <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_replace">
-    replace
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -491,7 +321,7 @@ to help you build a new value from other parts of the event.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is hash </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -508,20 +338,6 @@ fields.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_split">
-    split
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_strip">
     strip
     
@@ -530,20 +346,6 @@ fields.</p>
 
 <ul>
   <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_strip">
-    strip
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -566,27 +368,13 @@ fields.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -598,20 +386,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only
@@ -627,7 +401,7 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -641,20 +415,6 @@ Optional.</p>
   }
 }
 </code></pre>
-
-<h4> 
-  <a name="setting_uppercase">
-    uppercase
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 
 <hr>

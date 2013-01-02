@@ -18,39 +18,18 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   pipe {
-    <a href="#setting_command">command</a> => ... #  (optional)
     <a href="#setting_command">command</a> => ... # string (required)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
-    <a href="#setting_message_format">message_format</a> => ... #  (optional)
     <a href="#setting_message_format">message_format</a> => ... # string (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_ttl">ttl</a> => ... #  (optional)
     <a href="#setting_ttl">ttl</a> => ... # number (optional), default: 10
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
 
 <h3> Details </h3>
-
-<h4> 
-  <a name="setting_command">
-    command
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Command line to launch and pipe to</p>
 
 <h4> 
   <a name="setting_command">
@@ -64,7 +43,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-
+<p>Command line to launch and pipe to</p>
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -74,27 +53,13 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -104,20 +69,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -143,20 +94,6 @@ strings.</p>
 event will be written as a single line.</p>
 
 <h4> 
-  <a name="setting_message_format">
-    message_format
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_tags">
     tags
     
@@ -166,20 +103,6 @@ event will be written as a single line.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -194,25 +117,11 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Close pipe that hasn't been used for TTL seconds. -1 or 0 means never close.</p>
-
-<h4> 
-  <a name="setting_ttl">
-    ttl
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is number </li>
   <li> Default value is 10 </li>
 </ul>
 
-
+<p>Close pipe that hasn't been used for TTL seconds. -1 or 0 means never close.</p>
 
 <h4> 
   <a name="setting_type">
@@ -224,20 +133,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

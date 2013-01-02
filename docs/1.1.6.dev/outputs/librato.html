@@ -15,25 +15,15 @@ This is what it might look like in your config file:
 <pre><code>output {
   librato {
     <a href="#setting_account_id">account_id</a> => ... # string (required)
-    <a href="#setting_account_id">account_id</a> => ... #  (optional)
-    <a href="#setting_annotation">annotation</a> => ... #  (optional)
     <a href="#setting_annotation">annotation</a> => ... # hash (optional), default: {}
     <a href="#setting_api_token">api_token</a> => ... # string (required)
-    <a href="#setting_api_token">api_token</a> => ... #  (optional)
     <a href="#setting_batch_size">batch_size</a> => ... # string (optional), default: "10"
-    <a href="#setting_batch_size">batch_size</a> => ... #  (optional)
-    <a href="#setting_counter">counter</a> => ... #  (optional)
     <a href="#setting_counter">counter</a> => ... # hash (optional), default: {}
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_gauge">gauge</a> => ... # hash (optional), default: {}
-    <a href="#setting_gauge">gauge</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -43,20 +33,6 @@ This is what it might look like in your config file:
 <h4> 
   <a name="setting_account_id">
     account_id (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_account_id">
-    account_id
     
 </a>
 </h4>
@@ -81,8 +57,8 @@ usually an email address</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>Annotations
@@ -98,36 +74,8 @@ or
   ["title":"Logstash event", "description":"%{@message}", "name":"logstash_stream"]</p>
 
 <h4> 
-  <a name="setting_annotation">
-    annotation
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_api_token">
     api_token (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_api_token">
-    api_token
     
 </a>
 </h4>
@@ -151,20 +99,6 @@ or
   <li> Default value is "10" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_batch_size">
-    batch_size
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Named metrics (NYI)
 These allow multiple metrics/annotations in the same output
 Examples:
@@ -184,8 +118,8 @@ Number of events to batch up before sending to Librato.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>Counters
@@ -198,34 +132,6 @@ Additionally, you can override the <code>measure_time</code> for the event. Must
 Default is to use the event's timestamp</p>
 
 <h4> 
-  <a name="setting_counter">
-    counter
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -237,7 +143,7 @@ Default is to use the event's timestamp</p>
   <li> Default value is [] </li>
 </ul>
 
-
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
   <a name="setting_fields">
@@ -247,28 +153,14 @@ Default is to use the event's timestamp</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these fields.
 Optional.</p>
 
 <h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_gauge">
     gauge
     
@@ -278,20 +170,6 @@ Optional.</p>
 <ul>
   <li> Value type is hash </li>
   <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_gauge">
-    gauge
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Gauges
@@ -315,20 +193,6 @@ Default is to use the event's timestamp</p>
   <li> Default value is [] </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
@@ -343,20 +207,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

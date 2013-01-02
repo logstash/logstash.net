@@ -30,25 +30,15 @@ This is what it might look like in your config file:
 <pre><code>output {
   riemann {
     <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_debug">debug</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
-    <a href="#setting_host">host</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 5555
-    <a href="#setting_protocol">protocol</a> => ... #  (optional)
     <a href="#setting_protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "tcp"
-    <a href="#setting_riemann_event">riemann_event</a> => ... #  (optional)
     <a href="#setting_riemann_event">riemann_event</a> => ... # hash (optional)
     <a href="#setting_sender">sender</a> => ... # string (optional), default: "%{@source_host}"
-    <a href="#setting_sender">sender</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -67,20 +57,6 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_debug">
-    debug
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Enable debugging output?</p>
 
 <h4> 
@@ -91,27 +67,13 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -121,20 +83,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -149,38 +97,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The address of the Riemann server.</p>
-
-<h4> 
-  <a name="setting_host">
-    host
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> Default value is "localhost" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The port to connect to on your Riemann server.</p>
+<p>The address of the Riemann server.</p>
 
 <h4> 
   <a name="setting_port">
@@ -194,27 +114,7 @@ Optional.</p>
   <li> Default value is 5555 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_protocol">
-    protocol
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The protocol to use
-UDP is non-blocking
-TCP is blocking</p>
-
-<p>Logstash's default output behaviour
-is to never lose events
-As such, we use tcp as default here</p>
+<p>The port to connect to on your Riemann server.</p>
 
 <h4> 
   <a name="setting_protocol">
@@ -228,7 +128,13 @@ As such, we use tcp as default here</p>
   <li> Default value is "tcp" </li>
 </ul>
 
+<p>The protocol to use
+UDP is non-blocking
+TCP is blocking</p>
 
+<p>Logstash's default output behaviour
+is to never lose events
+As such, we use tcp as default here</p>
 
 <h4> 
   <a name="setting_riemann_event">
@@ -238,7 +144,7 @@ As such, we use tcp as default here</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is hash </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -265,20 +171,6 @@ Values which cannot be coerced will zero (0.0).</p>
 but can be overridden here.</p>
 
 <h4> 
-  <a name="setting_riemann_event">
-    riemann_event
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_sender">
     sender
     
@@ -288,20 +180,6 @@ but can be overridden here.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "%{@source_host}" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_sender">
-    sender
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The name of the sender.
@@ -316,27 +194,13 @@ in the Riemann event</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -348,20 +212,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

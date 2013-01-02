@@ -14,28 +14,17 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   http {
-    <a href="#setting_content_type">content_type</a> => ... #  (optional)
     <a href="#setting_content_type">content_type</a> => ... # string (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_format">format</a> => ... # string, one of ["json", "form"] (optional), default: "json"
-    <a href="#setting_format">format</a> => ... #  (optional)
-    <a href="#setting_headers">headers</a> => ... #  (optional)
     <a href="#setting_headers">headers</a> => ... # hash (optional)
     <a href="#setting_http_method">http_method</a> => ... # string, one of ["put", "post"] (required)
-    <a href="#setting_http_method">http_method</a> => ... #  (optional)
     <a href="#setting_mapping">mapping</a> => ... # hash (optional)
-    <a href="#setting_mapping">mapping</a> => ... #  (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
-    <a href="#setting_url">url</a> => ... #  (optional)
     <a href="#setting_url">url</a> => ... # string (required)
     <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: true
-    <a href="#setting_verify_ssl">verify_ssl</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -65,20 +54,6 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_content_type">
-    content_type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -86,27 +61,13 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -116,20 +77,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -147,20 +94,6 @@ Optional.</p>
   <li> Default value is "json" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_format">
-    format
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Set the format of the http body.</p>
 
 <p>If form, then the body will be the mapping (or whole event) converted
@@ -176,26 +109,12 @@ into a query parameter string (foo=bar&amp;baz=fizz...)</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is hash </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Custom headers to use
 format is `headers => ["X-My-Header", "%{@source_host}"]</p>
-
-<h4> 
-  <a name="setting_headers">
-    headers
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_http_method">
@@ -206,20 +125,6 @@ format is `headers => ["X-My-Header", "%{@source_host}"]</p>
 
 <ul>
   <li> Value can be any of: "put", "post" </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_http_method">
-    http_method
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -238,20 +143,6 @@ only put and post are supported for now</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_mapping">
-    mapping
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>This lets you choose the structure and parts of the event that are sent.</p>
 
 <p>For example:</p>
@@ -266,27 +157,13 @@ only put and post are supported for now</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -300,20 +177,6 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The type to act on. If a type is given, then this output will only
 act on messages with the same type. See any input plugin's "type"
 attribute for more.
@@ -321,7 +184,7 @@ Optional.</p>
 
 <h4> 
   <a name="setting_url">
-    url
+    url (required setting)
     
 </a>
 </h4>
@@ -340,20 +203,6 @@ event json itself.
 URL to use</p>
 
 <h4> 
-  <a name="setting_url">
-    url (required setting)
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_verify_ssl">
     verify_ssl
     
@@ -363,20 +212,6 @@ URL to use</p>
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is true </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_verify_ssl">
-    verify_ssl
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>validate SSL?</p>

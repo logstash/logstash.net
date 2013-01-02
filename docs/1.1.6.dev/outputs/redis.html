@@ -17,37 +17,20 @@ This is what it might look like in your config file:
 <pre><code>output {
   redis {
     <a href="#setting_batch">batch</a> => ... # boolean (optional), default: false
-    <a href="#setting_batch">batch</a> => ... #  (optional)
     <a href="#setting_batch_events">batch_events</a> => ... # number (optional), default: 50
-    <a href="#setting_batch_events">batch_events</a> => ... #  (optional)
-    <a href="#setting_batch_timeout">batch_timeout</a> => ... #  (optional)
     <a href="#setting_batch_timeout">batch_timeout</a> => ... # number (optional), default: 5
     <a href="#setting_data_type">data_type</a> => ... # string, one of ["list", "channel"] (optional)
-    <a href="#setting_data_type">data_type</a> => ... #  (optional)
     <a href="#setting_db">db</a> => ... # number (optional), default: 0
-    <a href="#setting_db">db</a> => ... #  (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_fields">fields</a> => ... # array (optional), default: []
-    <a href="#setting_fields">fields</a> => ... #  (optional)
     <a href="#setting_host">host</a> => ... # array (optional), default: ["127.0.0.1"]
-    <a href="#setting_host">host</a> => ... #  (optional)
-    <a href="#setting_key">key</a> => ... #  (optional)
     <a href="#setting_key">key</a> => ... # string (optional)
-    <a href="#setting_name">name</a> => ... #  (optional)
-    <a href="#setting_password">password</a> => ... #  (optional)
     <a href="#setting_password">password</a> => ... # password (optional)
-    <a href="#setting_port">port</a> => ... #  (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 6379
-    <a href="#setting_queue">queue</a> => ... #  (optional)
     <a href="#setting_shuffle_hosts">shuffle_hosts</a> => ... # boolean (optional), default: false
-    <a href="#setting_shuffle_hosts">shuffle_hosts</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
-    <a href="#setting_timeout">timeout</a> => ... #  (optional)
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -64,20 +47,6 @@ This is what it might look like in your config file:
 <ul>
   <li> Value type is boolean </li>
   <li> Default value is false </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_batch">
-    batch
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Set to true if you want redis to batch up values and send 1 RPUSH command
@@ -99,36 +68,7 @@ works with data_type="list" mode right now.</p>
   <li> Default value is 50 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_batch_events">
-    batch_events
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>If batch is set to true, the number of events we queue up for an RPUSH.</p>
-
-<h4> 
-  <a name="setting_batch_timeout">
-    batch_timeout
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>If batch is set to true, the maximum amount of time between RPUSH commands
-when there are pending events to flush.</p>
 
 <h4> 
   <a name="setting_batch_timeout">
@@ -142,7 +82,8 @@ when there are pending events to flush.</p>
   <li> Default value is 5 </li>
 </ul>
 
-
+<p>If batch is set to true, the maximum amount of time between RPUSH commands
+when there are pending events to flush.</p>
 
 <h4> 
   <a name="setting_data_type">
@@ -153,20 +94,6 @@ when there are pending events to flush.</p>
 
 <ul>
   <li> Value can be any of: "list", "channel" </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_data_type">
-    data_type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -186,20 +113,6 @@ TODO set required true</p>
   <li> Default value is 0 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_db">
-    db
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>The redis database number.</p>
 
 <h4> 
@@ -210,27 +123,13 @@ TODO set required true</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_fields">
     fields
     
@@ -240,20 +139,6 @@ TODO set required true</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_fields">
-    fields
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these fields.
@@ -269,20 +154,6 @@ Optional.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is ["127.0.0.1"] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_host">
-    host
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The hostname(s) of your redis server(s). Ports may be specified on any
@@ -312,35 +183,6 @@ valid here, for example "logstash-%{@type}".
 TODO set required true</p>
 
 <h4> 
-  <a name="setting_key">
-    key
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_name">
-    name
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Name is used for logging in case there are multiple instances.
-TODO: delete</p>
-
-<h4> 
   <a name="setting_name">
     name
      <strong>DEPRECATED</strong>
@@ -353,21 +195,8 @@ TODO: delete</p>
   <li> Default value is "default" </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_password">
-    password
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>Password to authenticate with.  There is no authentication by default.</p>
+<p>Name is used for logging in case there are multiple instances.
+TODO: delete</p>
 
 <h4> 
   <a name="setting_password">
@@ -381,21 +210,7 @@ TODO: delete</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_port">
-    port
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-<p>The default port to connect on. Can be overridden on any hostname.</p>
+<p>Password to authenticate with.  There is no authentication by default.</p>
 
 <h4> 
   <a name="setting_port">
@@ -409,7 +224,7 @@ TODO: delete</p>
   <li> Default value is 6379 </li>
 </ul>
 
-
+<p>The default port to connect on. Can be overridden on any hostname.</p>
 
 <h4> 
   <a name="setting_queue">
@@ -420,20 +235,6 @@ TODO: delete</p>
 
 <ul>
   <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_queue">
-    queue
-    
-</a>
-</h4>
-
-<ul>
   <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
@@ -454,20 +255,6 @@ TODO: delete</p>
   <li> Default value is false </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_shuffle_hosts">
-    shuffle_hosts
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Shuffle the host list during logstash startup.</p>
 
 <h4> 
@@ -480,20 +267,6 @@ TODO: delete</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
@@ -512,20 +285,6 @@ Optional.</p>
   <li> Default value is 5 </li>
 </ul>
 
-
-
-<h4> 
-  <a name="setting_timeout">
-    timeout
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
 <p>Redis initial connection timeout in seconds.</p>
 
 <h4> 
@@ -538,20 +297,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this output will only

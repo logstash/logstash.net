@@ -18,24 +18,15 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   alter {
-    <a href="#setting_add_field">add_field</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... #  (optional)
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
     <a href="#setting_coalesce">coalesce</a> => ... # array (optional)
-    <a href="#setting_coalesce">coalesce</a> => ... #  (optional)
-    <a href="#setting_condrewrite">condrewrite</a> => ... #  (optional)
     <a href="#setting_condrewrite">condrewrite</a> => ... # array (optional)
-    <a href="#setting_condrewriteother">condrewriteother</a> => ... #  (optional)
     <a href="#setting_condrewriteother">condrewriteother</a> => ... # array (optional)
     <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_remove_tag">remove_tag</a> => ... #  (optional)
     <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_tags">tags</a> => ... #  (optional)
     <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_type">type</a> => ... # string (optional), default: ""
-    <a href="#setting_type">type</a> => ... #  (optional)
   }
 }
 </code></pre>
@@ -50,8 +41,8 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
 </ul>
 
 <p>If this filter is successful, add any arbitrary fields to this event.
@@ -68,20 +59,6 @@ Example:</p>
  and the %{@source} piece replaced with that value from the event.</p>
 
 <h4> 
-  <a name="setting_add_field">
-    add_field
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is hash </li>
-  <li> Default value is {} </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_add_tag">
     add_tag
     
@@ -89,8 +66,8 @@ Example:</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, add arbitrary tags to the event.
@@ -108,20 +85,6 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_add_tag">
-    add_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_coalesce">
     coalesce
     
@@ -130,20 +93,6 @@ would add a tag "foo_hello"</p>
 
 <ul>
   <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_coalesce">
-    coalesce
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -168,7 +117,7 @@ would add a tag "foo_hello"</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -189,20 +138,6 @@ if the actual content is equal to the expected one.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_condrewrite">
-    condrewrite
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_condrewriteother">
     condrewriteother
     
@@ -210,7 +145,7 @@ if the actual content is equal to the expected one.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
+  <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
@@ -231,20 +166,6 @@ if the content of another field is equal to the expected one.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_condrewriteother">
-    condrewriteother
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> There is no default value for this setting. </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_exclude_tags">
     exclude_tags
     
@@ -254,20 +175,6 @@ if the content of another field is equal to the expected one.</p>
 <ul>
   <li> Value type is array </li>
   <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_exclude_tags">
-    exclude_tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>Only handle events without any of these tags. Note this check is
@@ -281,8 +188,8 @@ additional to type and tags.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>If this filter is successful, remove arbitrary tags from the event.
@@ -300,20 +207,6 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
-    remove_tag
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
-
-<h4> 
   <a name="setting_tags">
     tags
     
@@ -321,27 +214,13 @@ would remove the tag "foo_hello" if it is present</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
 <p>Only handle events with all of these tags.  Note that if you specify
 a type, the event must also match that type.
 Optional.</p>
-
-<h4> 
-  <a name="setting_tags">
-    tags
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is array </li>
-  <li> Default value is [] </li>
-</ul>
-
-
 
 <h4> 
   <a name="setting_type">
@@ -353,20 +232,6 @@ Optional.</p>
 <ul>
   <li> Value type is string </li>
   <li> Default value is "" </li>
-</ul>
-
-
-
-<h4> 
-  <a name="setting_type">
-    type
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The type to act on. If a type is given, then this filter will only
