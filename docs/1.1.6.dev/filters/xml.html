@@ -95,7 +95,7 @@ document into the 'doc' field.</p>
 Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  xml {
     add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
 }
@@ -121,7 +121,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  xml {
     add_tag =&gt; [ "foo_%{somefield}" ]
   }
 }
@@ -162,7 +162,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  xml {
     remove_tag =&gt; [ "foo_%{somefield}" ]
   }
 }

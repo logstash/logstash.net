@@ -197,6 +197,7 @@ class LogStashConfigDocGenerator
       File.open(path, "w") do |out|
         html = template.result(binding)
         html.gsub!("1.1.6.dev", LOGSTASH_VERSION)
+        html.gsub!("%PLUGIN%", @name)
         out.puts(html)
       end
     else 

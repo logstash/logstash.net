@@ -52,7 +52,7 @@ This is what it might look like in your config file:
 Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  geoip {
     add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
   }
 }
@@ -78,7 +78,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  geoip {
     add_tag =&gt; [ "foo_%{somefield}" ]
   }
 }
@@ -152,7 +152,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  myfilter {
+  geoip {
     remove_tag =&gt; [ "foo_%{somefield}" ]
   }
 }
