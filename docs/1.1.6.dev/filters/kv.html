@@ -11,12 +11,10 @@ variety.</p>
 <p>For example, if you have a log message which contains 'ip=1.2.3.4
 error=REFUSED', you can parse those automatically by doing:</p>
 
-<p>   filter {</p>
-
-<pre><code> kv { }
+<pre><code>filter {
+  kv { }
+}
 </code></pre>
-
-<p>   }</p>
 
 <p>And you will get field 'ip' == "1.2.3.4" etc.</p>
 

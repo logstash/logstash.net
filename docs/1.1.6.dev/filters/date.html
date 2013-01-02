@@ -8,8 +8,10 @@ layout: content_right
 <p>The date filter is used for parsing dates from fields and using that
 date or timestamp as the timestamp for the event.</p>
 
-<p>For example, syslog events usually have timestamps like this:
-  "Apr 17 09:32:01"</p>
+<p>For example, syslog events usually have timestamps like this:</p>
+
+<pre><code>"Apr 17 09:32:01"
+</code></pre>
 
 <p>You would use the date format "MMM dd HH:mm:ss" to parse this.</p>
 
@@ -20,7 +22,7 @@ event, then searching for them later will likely sort out of order.</p>
 <p>In the absence of this filter, logstash will choose a timestamp based on the
 first time it sees the event (at input time), if the timestamp is not already
 set in the event. For example, with file input, the timestamp is set to the
-time of reading.</p>
+time of each read.</p>
 
 
 <h3> Synopsis </h3>
@@ -29,7 +31,6 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   date {
-    <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # array (optional)
     <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
@@ -48,11 +49,12 @@ This is what it might look like in your config file:
 <h4> 
   <a name="setting_/[A-Za-z0-9_-]+/">
     /[A-Za-z0-9_-]+/
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> The configuration attribute name here is anything that matches the above regular expression. </li>
   <li> Value type is array </li>
   <li> There is no default value for this setting. </li>
@@ -72,33 +74,9 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Config for date is:
-  fieldname => dateformat</p>
+<p>This is short-hand for <code>match =&gt; [ "fieldname", "dateformat" ]</code></p>
 
-<p>The same field can be specified multiple times (or multiple dateformats for
-the same field) do try different time formats; first success wins.</p>
-
-<p>The date formats allowed are anything allowed by Joda-Time (java time
-library), generally: <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">java.text.SimpleDateFormat</a></p>
-
-<p>There are a few special exceptions, the following format literals exist
-to help you save time and ensure correctness of date parsing.</p>
-
-<ul>
-<li>"ISO8601" - should parse any valid ISO8601 timestamp, such as
-2011-04-19T03:44:01.103Z</li>
-<li>"UNIX" - will parse unix time in seconds since epoch</li>
-<li>"UNIX_MS" - will parse unix time in milliseconds since epoch</li>
-<li>"TAI64N" - will parse tai64n time values</li>
-</ul>
-
-
-<p>For example, if you have a field 'logdate' and with a value that looks like
-'Aug 13 2010 00:03:44'
-you would use this configuration:</p>
-
-<pre><code>logdate =&gt; "MMM dd YYYY HH:mm:ss"
-</code></pre>
+<p>It is deprecated. Please use 'match' instead.</p>
 
 <h4> 
   <a name="setting_add_field">
@@ -178,10 +156,11 @@ additional to type and tags.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>specify a locale to be used for date parsing. If this is not specified the platform default will be
-used</p>
+<p>specify a locale to be used for date parsing. If this is not specified the
+platform default will be used</p>
 
-<p>The locale is mostly necessary to be set for parsing month names and weekday names</p>
+<p>The locale is mostly necessary to be set for parsing month names and
+weekday names</p>
 
 <h4> 
   <a name="setting_match">
@@ -203,9 +182,8 @@ formats... ]</p>
 
 <p>If your time field has multiple possible formats, you can do this:</p>
 
-<p>   match => [ "logdate", "MMM dd YYY HH:mm:ss",</p>
-
-<pre><code>          "MMM  d YYY HH:mm:ss", "ISO8601" ]
+<pre><code>match =&gt; [ "logdate", "MMM dd YYY HH:mm:ss",
+          "MMM  d YYY HH:mm:ss", "ISO8601" ]
 </code></pre>
 
 <p>The above will match a syslog (rfc3164) or iso8601 timestamp.</p>
@@ -225,14 +203,12 @@ to help you save time and ensure correctness of date parsing.</p>
 <p>For example, if you have a field 'logdate' and with a value that looks like
 'Aug 13 2010 00:03:44', you would use this configuration:</p>
 
-<p>   filter {</p>
-
-<pre><code> date {
-   match =&gt; [ "logdate", "MMM dd YYYY HH:mm:ss" ]
- }
+<pre><code>filter {
+  date {
+    match =&gt; [ "logdate", "MMM dd YYYY HH:mm:ss" ]
+  }
+}
 </code></pre>
-
-<p>   }</p>
 
 <h4> 
   <a name="setting_remove_tag">

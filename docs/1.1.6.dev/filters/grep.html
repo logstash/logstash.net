@@ -18,7 +18,6 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   grep {
-    <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # string (optional)
     <a href="#setting_(?-mix:[A-Za-z0-9_-]+)">(?-mix:[A-Za-z0-9_-]+)</a> => ... #  (optional)
     <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
     <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
@@ -38,11 +37,12 @@ This is what it might look like in your config file:
 <h4> 
   <a name="setting_/[A-Za-z0-9_-]+/">
     /[A-Za-z0-9_-]+/
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> The configuration attribute name here is anything that matches the above regular expression. </li>
   <li> Value type is string </li>
   <li> There is no default value for this setting. </li>
@@ -62,9 +62,20 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Config for grep is:
-  fieldname: pattern
-  Allow arbitrary keys for this config.</p>
+<p>Short-hand for matching</p>
+
+<pre><code>filter {
+  grep {
+    # This 'match' usage
+    match =&gt; [ "fieldname", "pattern" ]
+
+    # is the same as this:
+    fieldname =&gt; "pattern"
+  }
+}
+</code></pre>
+
+<p>It is recommended to use 'match' instead of this.</p>
 
 <h4> 
   <a name="setting_add_field">
@@ -163,8 +174,20 @@ additional to type and tags.</p>
 </ul>
 
 <p>A hash of matches of field => regexp.  If multiple matches are specified,
-all must match for the grep to be considered successful.
-Normal regular expressions are supported here.</p>
+all must match for the grep to be considered successful.  Normal regular
+expressions are supported here.</p>
+
+<p>For example:</p>
+
+<pre><code>filter {
+  grep {
+    match =&gt; [ "@message", "hello world" ]
+  }
+}
+</code></pre>
+
+<p>The above will drop all events with a message not matching "hello world" as
+a regular expression.</p>
 
 <h4> 
   <a name="setting_negate">

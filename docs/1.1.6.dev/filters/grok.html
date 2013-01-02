@@ -213,18 +213,20 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Any existing field name can be used as a config name here for matching
-against.</p>
+<p>Shorthand for 'match'</p>
 
-<pre><code># this config:
-foo =&gt; "some pattern"
+<pre><code>filter {
+  grok {
+    # This configuration
+    match =&gt; [ "foo", "some pattern" ]
 
-# same as:
-match =&gt; [ "foo", "some pattern" ]
+    # is the same as this:
+    foo =&gt; "some pattern"
+  }
+}
 </code></pre>
 
-<p>It is preferable to use the 'match' setting instead of this one, because
-this one is going to be removed..</p>
+<p>It is preferable to use the 'match' setting instead of this.</p>
 
 <h4> 
   <a name="setting_add_field">
@@ -352,6 +354,15 @@ additional to type and tags.</p>
 </ul>
 
 <p>A hash of matches of field => value</p>
+
+<p>For example:</p>
+
+<pre><code>filter {
+  grok {
+    match =&gt; [ "@message", "Duration: %{NUMBER:duration} ]
+  }
+}
+</code></pre>
 
 <h4> 
   <a name="setting_named_captures_only">
