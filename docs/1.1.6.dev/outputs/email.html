@@ -18,16 +18,16 @@ This is what it might look like in your config file:
     <a href="#setting_body">body</a> => ... # string (optional), default: ""
     <a href="#setting_cc">cc</a> => ... # string (optional), default: ""
     <a href="#setting_contenttype">contenttype</a> => ... # string (optional), default: "text/html; charset=UTF-8"
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_from">from</a> => ... # string (optional), default: "logstash.alert@nowhere.com"
     <a href="#setting_htmlbody">htmlbody</a> => ... # string (optional), default: ""
     <a href="#setting_match">match</a> => ... # hash (required)
     <a href="#setting_options">options</a> => ... # hash (optional), default: {}
     <a href="#setting_subject">subject</a> => ... # string (optional), default: ""
-    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_to">to</a> => ... # string (required)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
     <a href="#setting_via">via</a> => ... # string (optional), default: "smtp"
   }
 }
@@ -47,7 +47,7 @@ This is what it might look like in your config file:
   <li> Default value is [] </li>
 </ul>
 
-<p>attachments - has of name of file and file location</p>
+
 
 <h4> 
   <a name="setting_body">
@@ -61,7 +61,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-<p>body for email - just plain text</p>
+
 
 <h4> 
   <a name="setting_cc">
@@ -75,7 +75,7 @@ This is what it might look like in your config file:
   <li> Default value is "" </li>
 </ul>
 
-<p>cc - send to others</p>
+
 
 <h4> 
   <a name="setting_contenttype">
@@ -89,7 +89,7 @@ This is what it might look like in your config file:
   <li> Default value is "text/html; charset=UTF-8" </li>
 </ul>
 
-<p>contenttype : for multipart messages, set the content type and/or charset of the html part</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -99,11 +99,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -113,12 +113,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_from">
@@ -132,7 +131,7 @@ Optional.</p>
   <li> Default value is "logstash.alert@nowhere.com" </li>
 </ul>
 
-<p>The From setting for email - fully qualified email address for the From:</p>
+
 
 <h4> 
   <a name="setting_htmlbody">
@@ -146,7 +145,7 @@ Optional.</p>
   <li> Default value is "" </li>
 </ul>
 
-<p>body for email - can contain html markup</p>
+
 
 <h4> 
   <a name="setting_match">
@@ -160,14 +159,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The registered fields that we want to monitor
-A hash of matches of field => value
-Takes the form of:</p>
 
-<p>   { "match name", "field.in.event,value.expected, , operand(and/or),field.in.event,value.expected, , or...",
-   "match name", "..." }</p>
-
-<p>The match name can be referenced using the <code>%{matchName}</code> field.</p>
 
 <h4> 
   <a name="setting_options">
@@ -181,50 +173,7 @@ Takes the form of:</p>
   <li> Default value is {} </li>
 </ul>
 
-<p>the options to use:
-smtp: address, port, enable<em>starttls</em>auto, user_name, password, authentication(bool), domain
-sendmail: location, arguments
-If you do not specify anything, you will get the following equivalent code set in
-every new mail object:</p>
 
-<p>  Mail.defaults do</p>
-
-<pre><code>delivery_method :smtp, { :address              =&gt; "localhost",
-                         :port                 =&gt; 25,
-                         :domain               =&gt; 'localhost.localdomain',
-                         :user_name            =&gt; nil,
-                         :password             =&gt; nil,
-                         :authentication       =&gt; nil,(plain, login and cram_md5)
-                         :enable_starttls_auto =&gt; true  }
-
-retriever_method :pop3, { :address             =&gt; "localhost",
-                          :port                =&gt; 995,
-                          :user_name           =&gt; nil,
-                          :password            =&gt; nil,
-                          :enable_ssl          =&gt; true }
-</code></pre>
-
-<p>  end</p>
-
-<p>  Mail.delivery<em>method.new  #=> Mail::SMTP instance
-  Mail.retriever</em>method.new #=> Mail::POP3 instance</p>
-
-<p>Each mail object inherits the default set in Mail.delivery_method, however, on
-a per email basis, you can override the method:</p>
-
-<p>  mail.delivery_method :sendmail</p>
-
-<p>Or you can override the method and pass in settings:</p>
-
-<p>  mail.delivery_method :sendmail, { :address => 'some.host' }</p>
-
-<p>You can also just modify the settings:</p>
-
-<p>  mail.delivery_settings = { :address => 'some.host' }</p>
-
-<p>The passed in hash is just merged against the defaults with +merge!+ and the result
-assigned the mail object.  So the above example will change only the :address value
-of the global smtp_settings to be 'some.host', keeping all other values</p>
 
 <h4> 
   <a name="setting_subject">
@@ -238,7 +187,7 @@ of the global smtp_settings to be 'some.host', keeping all other values</p>
   <li> Default value is "" </li>
 </ul>
 
-<p>subject for email</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -248,13 +197,11 @@ of the global smtp_settings to be 'some.host', keeping all other values</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_to">
@@ -268,7 +215,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The To address setting - fully qualified email address to send to</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -279,13 +226,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_via">
@@ -299,7 +243,7 @@ Optional.</p>
   <li> Default value is "smtp" </li>
 </ul>
 
-<p>how to send email: either smtp or sendmail - default to 'smtp'</p>
+
 
 
 <hr>

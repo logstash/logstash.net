@@ -67,11 +67,11 @@ This is what it might look like in your config file:
 <pre><code>output {
   nagios {
     <a href="#setting_commandfile">commandfile</a> => ... # string (optional), default: "/var/lib/nagios3/rw/nagios.cmd"
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_nagios_level">nagios_level</a> => ... # ["0", "1", "2", "3"] (optional), default: "2"
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
 </code></pre>
@@ -90,7 +90,7 @@ This is what it might look like in your config file:
   <li> Default value is "/var/lib/nagios3/rw/nagios.cmd" </li>
 </ul>
 
-<p>The path to your nagios command file</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -100,11 +100,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -114,12 +114,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_nagios_level">
@@ -133,8 +132,7 @@ Optional.</p>
   <li> Default value is "2" </li>
 </ul>
 
-<p>The Nagios check level. Should be one of 0=OK, 1=WARNING, 2=CRITICAL,
-3=UNKNOWN. Defaults to 2 - CRITICAL.</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -144,13 +142,11 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -161,13 +157,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 
 <hr>

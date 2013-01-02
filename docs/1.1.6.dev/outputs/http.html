@@ -15,14 +15,14 @@ This is what it might look like in your config file:
 <pre><code>output {
   http {
     <a href="#setting_content_type">content_type</a> => ... # string (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_format">format</a> => ... # ["json", "form"] (optional), default: "json"
     <a href="#setting_headers">headers</a> => ... # hash (optional)
     <a href="#setting_http_method">http_method</a> => ... # ["put", "post"] (required)
     <a href="#setting_mapping">mapping</a> => ... # hash (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
     <a href="#setting_url">url</a> => ... # string (required)
     <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: true
   }
@@ -43,14 +43,6 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Content type</p>
-
-<p>If not specified, this defaults to the following:</p>
-
-<ul>
-<li>if format is "json", "application/json"</li>
-<li>if format is "form", "application/x-www-form-urlencoded"</li>
-</ul>
 
 
 <h4> 
@@ -61,11 +53,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -75,12 +67,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_format">
@@ -94,12 +85,7 @@ Optional.</p>
   <li> Default value is "json" </li>
 </ul>
 
-<p>Set the format of the http body.</p>
 
-<p>If form, then the body will be the mapping (or whole event) converted
-into a query parameter string (foo=bar&amp;baz=fizz...)</p>
-
-<p>Otherwise, the event is sent as json.</p>
 
 <h4> 
   <a name="setting_headers">
@@ -113,8 +99,7 @@ into a query parameter string (foo=bar&amp;baz=fizz...)</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Custom headers to use
-format is `headers => ["X-My-Header", "%{@source_host}"]</p>
+
 
 <h4> 
   <a name="setting_http_method">
@@ -128,8 +113,7 @@ format is `headers => ["X-My-Header", "%{@source_host}"]</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>What verb to use
-only put and post are supported for now</p>
+
 
 <h4> 
   <a name="setting_mapping">
@@ -143,11 +127,7 @@ only put and post are supported for now</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>This lets you choose the structure and parts of the event that are sent.</p>
 
-<p>For example:</p>
-
-<p>   mapping => ["foo", "%{@source_host}", "bar", "%{@type}"]</p>
 
 <h4> 
   <a name="setting_tags">
@@ -157,13 +137,11 @@ only put and post are supported for now</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -174,13 +152,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_url">
@@ -194,13 +169,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>This output lets you <code>PUT</code> or <code>POST</code> events to a
-generic HTTP(S) endpoint</p>
 
-<p>Additionally, you are given the option to customize
-the headers sent as well as basic customization of the
-event json itself.
-URL to use</p>
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -214,7 +183,7 @@ URL to use</p>
   <li> Default value is true </li>
 </ul>
 
-<p>validate SSL?</p>
+
 
 
 <hr>

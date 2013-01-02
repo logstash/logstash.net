@@ -19,15 +19,15 @@ This is what it might look like in your config file:
     <a href="#setting_bucket_props">bucket_props</a> => ... # hash (optional)
     <a href="#setting_enable_search">enable_search</a> => ... # boolean (optional), default: false
     <a href="#setting_enable_ssl">enable_ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_indices">indices</a> => ... # array (optional)
     <a href="#setting_key_name">key_name</a> => ... # string (optional)
     <a href="#setting_nodes">nodes</a> => ... # hash (optional), default: {"localhost"=>"8098"}
     <a href="#setting_proto">proto</a> => ... # ["http", "pb"] (optional), default: "http"
     <a href="#setting_ssl_opts">ssl_opts</a> => ... # hash (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
 </code></pre>
@@ -46,12 +46,7 @@ This is what it might look like in your config file:
   <li> Default value is ["logstash-%{+YYYY.MM.dd}"] </li>
 </ul>
 
-<p>The bucket name to write events to
-Expansion is supported here as values are
-passed through event.sprintf
-Multiple buckets can be specified here
-but any bucket-specific settings defined
-apply to ALL the buckets.</p>
+
 
 <h4> 
   <a name="setting_bucket_props">
@@ -65,15 +60,7 @@ apply to ALL the buckets.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Bucket properties (NYI)
-Logstash hash of properties for the bucket
-i.e.
-<code>bucket_props =&gt; ["r", "one", "w", "one", "dw", "one"]</code>
-or
-<code>bucket_props =&gt; ["n_val", "3"]</code>
-Note that the Logstash config language cannot support
-hash or array values
-Properties will be passed as-is</p>
+
 
 <h4> 
   <a name="setting_enable_search">
@@ -87,8 +74,7 @@ Properties will be passed as-is</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Search
-Enable search on the bucket defined above</p>
+
 
 <h4> 
   <a name="setting_enable_ssl">
@@ -102,8 +88,7 @@ Enable search on the bucket defined above</p>
   <li> Default value is false </li>
 </ul>
 
-<p>SSL
-Enable SSL</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -113,11 +98,11 @@ Enable SSL</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -127,12 +112,11 @@ Enable SSL</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_indices">
@@ -146,11 +130,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Indices
-Array of fields to add 2i on
-e.g.
-`indices => ["@source_host", "@type"]
-Off by default as not everyone runs eleveldb</p>
+
 
 <h4> 
   <a name="setting_key_name">
@@ -164,10 +144,7 @@ Off by default as not everyone runs eleveldb</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The event key name
-variables are valid here.</p>
 
-<p>Choose this carefully. Best to let riak decide....</p>
 
 <h4> 
   <a name="setting_nodes">
@@ -181,11 +158,7 @@ variables are valid here.</p>
   <li> Default value is {"localhost"=>"8098"} </li>
 </ul>
 
-<p>The nodes of your Riak cluster
-This can be a single host or
-a Logstash hash of node/port pairs
-e.g
-["node1", "8098", "node2", "8098"]</p>
+
 
 <h4> 
   <a name="setting_proto">
@@ -199,10 +172,7 @@ e.g
   <li> Default value is "http" </li>
 </ul>
 
-<p>The protocol to use
-HTTP or ProtoBuf
-Applies to ALL backends listed above
-No mix and match</p>
+
 
 <h4> 
   <a name="setting_ssl_opts">
@@ -216,15 +186,7 @@ No mix and match</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>SSL Options
-Options for SSL connections
-Only applied if SSL is enabled
-Logstash hash that maps to the riak-client options
-here: https://github.com/basho/riak-ruby-client/wiki/Connecting-to-Riak
-You'll likely want something like this:
-<code>ssl_opts =&gt; ["pem", "/etc/riak.pem", "ca_path", "/usr/share/certificates"]
-Per the riak client docs, the above sample options
-will turn on SSL</code>VERIFY_PEER`</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -234,13 +196,11 @@ will turn on SSL</code>VERIFY_PEER`</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -251,13 +211,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 
 <hr>

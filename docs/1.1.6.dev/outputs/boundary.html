@@ -19,12 +19,12 @@ This is what it might look like in your config file:
     <a href="#setting_btags">btags</a> => ... # array (optional)
     <a href="#setting_btype">btype</a> => ... # string (optional), default: "%{@message}"
     <a href="#setting_end_time">end_time</a> => ... # string (optional)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_org_id">org_id</a> => ... # string (required)
     <a href="#setting_start_time">start_time</a> => ... # string (optional)
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
 </code></pre>
@@ -43,16 +43,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>This output lets you send annotations to
-Boundary based on Logstash events</p>
 
-<p>Note that since Logstash maintains no state
-these will be one-shot events</p>
-
-<p>By default the start and stop time will be
-the event timestamp</p>
-
-<p>Your Boundary API key</p>
 
 <h4> 
   <a name="setting_bsubtype">
@@ -66,7 +57,7 @@ the event timestamp</p>
   <li> Default value is "%{@type}" </li>
 </ul>
 
-<p>Sub-Type</p>
+
 
 <h4> 
   <a name="setting_btags">
@@ -80,9 +71,7 @@ the event timestamp</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Tags
-Set any custom tags for this event
-Default are the Logstash tags if any</p>
+
 
 <h4> 
   <a name="setting_btype">
@@ -96,7 +85,7 @@ Default are the Logstash tags if any</p>
   <li> Default value is "%{@message}" </li>
 </ul>
 
-<p>Type</p>
+
 
 <h4> 
   <a name="setting_end_time">
@@ -110,11 +99,7 @@ Default are the Logstash tags if any</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>End time
-Override the stop time
-Note that Boundary requires this to be seconds since epoch
-If overriding, it is your responsibility to type this correctly
-By default this is set to <code>event.unix_timestamp.to_i</code></p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -124,11 +109,11 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -138,12 +123,11 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_org_id">
@@ -157,7 +141,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Your Boundary Org ID</p>
+
 
 <h4> 
   <a name="setting_start_time">
@@ -171,11 +155,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Start time
-Override the start time
-Note that Boundary requires this to be seconds since epoch
-If overriding, it is your responsibility to type this correctly
-By default this is set to <code>event.unix_timestamp.to_i</code></p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -185,13 +165,11 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -202,13 +180,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 
 <hr>

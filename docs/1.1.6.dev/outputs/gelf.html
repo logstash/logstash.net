@@ -19,9 +19,9 @@ This is what it might look like in your config file:
   gelf {
     <a href="#setting_chunksize">chunksize</a> => ... # number (optional), default: 1420
     <a href="#setting_custom_fields">custom_fields</a> => ... # hash (optional), default: {}
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
     <a href="#setting_facility">facility</a> => ... # string (optional), default: "logstash-gelf"
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_file">file</a> => ... # string (optional), default: "%{@source_path}"
     <a href="#setting_full_message">full_message</a> => ... # string (optional), default: "%{@message}"
     <a href="#setting_host">host</a> => ... # string (required)
@@ -30,8 +30,8 @@ This is what it might look like in your config file:
     <a href="#setting_port">port</a> => ... # number (optional), default: 12201
     <a href="#setting_sender">sender</a> => ... # string (optional), default: "%{@source_host}"
     <a href="#setting_ship_metadata">ship_metadata</a> => ... # boolean (optional), default: true
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
 </code></pre>
@@ -50,7 +50,7 @@ This is what it might look like in your config file:
   <li> Default value is 1420 </li>
 </ul>
 
-<p>The GELF chunksize. You usually don't need to change this.</p>
+
 
 <h4> 
   <a name="setting_custom_fields">
@@ -64,10 +64,7 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-<p>The GELF custom field mappings. GELF supports arbitrary attributes as custom
-fields. This exposes that. Exclude the <code>_</code> portion of the field name
-e.g. <code>custom_fields =&gt; ['foo_field', 'some_value']
-sets</code><em>foo</em>field<code>=</code>some_value`</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -77,11 +74,11 @@ sets</code><em>foo</em>field<code>=</code>some_value`</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_facility">
@@ -95,8 +92,7 @@ sets</code><em>foo</em>field<code>=</code>some_value`</p>
   <li> Default value is "logstash-gelf" </li>
 </ul>
 
-<p>The GELF facility. Dynamic values like %{foo} are permitted here; this
-is useful if you need to use a value from the event as the facility name.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -106,12 +102,11 @@ is useful if you need to use a value from the event as the facility name.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_file">
@@ -125,8 +120,7 @@ Optional.</p>
   <li> Default value is "%{@source_path}" </li>
 </ul>
 
-<p>The GELF file; this is usually the source code file in your program where
-the log event originated. Dynamic values like %{foo} are permitted here.</p>
+
 
 <h4> 
   <a name="setting_full_message">
@@ -140,7 +134,7 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
   <li> Default value is "%{@message}" </li>
 </ul>
 
-<p>The GELF full message. Dynamic values like %{foo} are permitted here.</p>
+
 
 <h4> 
   <a name="setting_host">
@@ -154,7 +148,7 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>graylog2 server address</p>
+
 
 <h4> 
   <a name="setting_level">
@@ -168,14 +162,7 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
   <li> Default value is ["%{severity}", "INFO"] </li>
 </ul>
 
-<p>The GELF message level. Dynamic values like %{level} are permitted here;
-useful if you want to parse the 'log level' from an event and use that
-as the gelf level/severity.</p>
 
-<p>Values here can be integers [0..7] inclusive or any of
-"debug", "info", "warn", "error", "fatal", "unknown" (case insensitive).
-Single-character versions of these are also valid, "d", "i", "w", "e", "f",
-"u"</p>
 
 <h4> 
   <a name="setting_line">
@@ -189,9 +176,7 @@ Single-character versions of these are also valid, "d", "i", "w", "e", "f",
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The GELF line number; this is usually the line number in your program where
-the log event originated. Dynamic values like %{foo} are permitted here, but the
-value should be a number.</p>
+
 
 <h4> 
   <a name="setting_port">
@@ -205,7 +190,7 @@ value should be a number.</p>
   <li> Default value is 12201 </li>
 </ul>
 
-<p>graylog2 server port</p>
+
 
 <h4> 
   <a name="setting_sender">
@@ -219,10 +204,7 @@ value should be a number.</p>
   <li> Default value is "%{@source_host}" </li>
 </ul>
 
-<p>Allow overriding of the gelf 'sender' field. This is useful if you
-want to use something other than the event's source host as the
-"sender" of an event. A common case for this is using the application name
-instead of the hostname.</p>
+
 
 <h4> 
   <a name="setting_ship_metadata">
@@ -236,9 +218,7 @@ instead of the hostname.</p>
   <li> Default value is true </li>
 </ul>
 
-<p>Ship metadata within event object? This will cause logstash to ship
-any fields in the event (such as those created by grok) in the GELF
-messages.</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -248,13 +228,11 @@ messages.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -265,13 +243,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 
 <hr>

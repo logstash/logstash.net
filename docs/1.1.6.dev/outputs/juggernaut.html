@@ -26,15 +26,15 @@ This is what it might look like in your config file:
   juggernaut {
     <a href="#setting_channels">channels</a> => ... # array (required)
     <a href="#setting_db">db</a> => ... # number (optional), default: 0
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
     <a href="#setting_message_format">message_format</a> => ... # string (optional)
     <a href="#setting_password">password</a> => ... # password (optional)
     <a href="#setting_port">port</a> => ... # number (optional), default: 6379
-    <a href="#setting_tags">tags</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
     <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
   }
 }
 </code></pre>
@@ -53,8 +53,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>List of channels to which to publish. Dynamic names are
-valid here, for example "logstash-%{@type}".</p>
+
 
 <h4> 
   <a name="setting_db">
@@ -68,7 +67,7 @@ valid here, for example "logstash-%{@type}".</p>
   <li> Default value is 0 </li>
 </ul>
 
-<p>The redis database number.</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -78,11 +77,11 @@ valid here, for example "logstash-%{@type}".</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -92,12 +91,11 @@ valid here, for example "logstash-%{@type}".</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_host">
@@ -111,7 +109,7 @@ Optional.</p>
   <li> Default value is "127.0.0.1" </li>
 </ul>
 
-<p>The hostname of the redis server to which juggernaut is listening.</p>
+
 
 <h4> 
   <a name="setting_message_format">
@@ -125,7 +123,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>How should the message be formatted before pushing to the websocket.</p>
+
 
 <h4> 
   <a name="setting_password">
@@ -139,7 +137,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Password to authenticate with.  There is no authentication by default.</p>
+
 
 <h4> 
   <a name="setting_port">
@@ -153,7 +151,7 @@ Optional.</p>
   <li> Default value is 6379 </li>
 </ul>
 
-<p>The port to connect on.</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -163,13 +161,11 @@ Optional.</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_timeout">
@@ -183,7 +179,7 @@ Optional.</p>
   <li> Default value is 5 </li>
 </ul>
 
-<p>Redis initial connection timeout in seconds.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -194,13 +190,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 
 <hr>

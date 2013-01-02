@@ -23,16 +23,16 @@ This is what it might look like in your config file:
     <a href="#setting_durable">durable</a> => ... # boolean (optional), default: true
     <a href="#setting_exchange">exchange</a> => ... # string (optional)
     <a href="#setting_exchange_type">exchange_type</a> => ... # ["fanout", "direct", "topic"] (required)
-    <a href="#setting_exclude_tags">exclude_tags</a> => ... #  (optional)
-    <a href="#setting_fields">fields</a> => ... #  (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
     <a href="#setting_host">host</a> => ... # string (required)
     <a href="#setting_key">key</a> => ... # string (optional), default: "logstash"
     <a href="#setting_password">password</a> => ... # password (optional), default: "guest"
     <a href="#setting_persistent">persistent</a> => ... # boolean (optional), default: true
     <a href="#setting_port">port</a> => ... # number (optional), default: 5672
     <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_tags">tags</a> => ... #  (optional)
-    <a href="#setting_type">type</a> => ... #  (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
     <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
     <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
     <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
@@ -54,7 +54,7 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-<p>Enable or disable debugging</p>
+
 
 <h4> 
   <a name="setting_durable">
@@ -68,7 +68,7 @@ This is what it might look like in your config file:
   <li> Default value is true </li>
 </ul>
 
-<p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
+
 
 <h4> 
   <a name="setting_exchange">
@@ -82,7 +82,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of the exchange</p>
+
 
 <h4> 
   <a name="setting_exchange_type">
@@ -96,7 +96,7 @@ This is what it might look like in your config file:
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The exchange type (fanout, topic, direct)</p>
+
 
 <h4> 
   <a name="setting_exclude_tags">
@@ -106,11 +106,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
 
 <h4> 
   <a name="setting_fields">
@@ -120,12 +120,11 @@ This is what it might look like in your config file:
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these fields.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_host">
@@ -139,7 +138,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Your amqp server address</p>
+
 
 <h4> 
   <a name="setting_key">
@@ -153,11 +152,6 @@ Optional.</p>
   <li> Default value is "logstash" </li>
 </ul>
 
-<p>Key to route to by default. Defaults to 'logstash'</p>
-
-<ul>
-<li>Routing keys are ignored on fanout exchanges.</li>
-</ul>
 
 
 <h4> 
@@ -173,8 +167,7 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of the exchange. Depricated due to conflicts with puppet naming convention.
-Replaced by 'exchange' variable. See LOGSTASH-755</p>
+
 
 <h4> 
   <a name="setting_password">
@@ -188,7 +181,7 @@ Replaced by 'exchange' variable. See LOGSTASH-755</p>
   <li> Default value is "guest" </li>
 </ul>
 
-<p>Your amqp password</p>
+
 
 <h4> 
   <a name="setting_persistent">
@@ -202,8 +195,7 @@ Replaced by 'exchange' variable. See LOGSTASH-755</p>
   <li> Default value is true </li>
 </ul>
 
-<p>Should messages persist to disk on the AMQP broker until they are read by a
-consumer?</p>
+
 
 <h4> 
   <a name="setting_port">
@@ -217,7 +209,7 @@ consumer?</p>
   <li> Default value is 5672 </li>
 </ul>
 
-<p>The AMQP port to connect on</p>
+
 
 <h4> 
   <a name="setting_ssl">
@@ -231,7 +223,7 @@ consumer?</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Enable or disable SSL</p>
+
 
 <h4> 
   <a name="setting_tags">
@@ -241,13 +233,11 @@ consumer?</p>
 </h4>
 
 <ul>
-  <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
 </ul>
 
-<p>Only handle events with all of these tags.  Note that if you specify
-a type, the event must also match that type.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_type">
@@ -258,13 +248,10 @@ Optional.</p>
 
 <ul>
   <li> Value type is string </li>
-  <li> There is no default value for this setting. </li>
+  <li> Default value is "" </li>
 </ul>
 
-<p>The type to act on. If a type is given, then this output will only
-act on messages with the same type. See any input plugin's "type"
-attribute for more.
-Optional.</p>
+
 
 <h4> 
   <a name="setting_user">
@@ -278,7 +265,7 @@ Optional.</p>
   <li> Default value is "guest" </li>
 </ul>
 
-<p>Your amqp username</p>
+
 
 <h4> 
   <a name="setting_verify_ssl">
@@ -292,7 +279,7 @@ Optional.</p>
   <li> Default value is false </li>
 </ul>
 
-<p>Validate SSL certificate</p>
+
 
 <h4> 
   <a name="setting_vhost">
@@ -306,7 +293,7 @@ Optional.</p>
   <li> Default value is "/" </li>
 </ul>
 
-<p>The vhost to use</p>
+
 
 
 <hr>
