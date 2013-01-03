@@ -1,0 +1,187 @@
+---
+title: logstash docs for outputs/gemfire
+layout: content_right
+---
+<h2>gemfire</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Push events to a GemFire region.</p>
+
+<p>GemFire is an object database.</p>
+
+<p>To use this plugin you need to add gemfire.jar to your CLASSPATH;
+using format=json requires jackson.jar too.</p>
+
+<p>Note: this plugin has only been tested with GemFire 7.0.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  gemfire {
+    <a href="#setting_cache_name">cache_name</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_cache_xml_file">cache_xml_file</a> => ... # string (optional), default: nil
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_key_format">key_format</a> => ... # string (optional), default: "%{@source}-%{@timestamp}"
+    <a href="#setting_region_name">region_name</a> => ... # string (optional), default: "Logstash"
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_cache_name">
+    cache_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+<p>Your client cache name</p>
+
+<h4> 
+  <a name="setting_cache_xml_file">
+    cache_xml_file
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is nil </li>
+</ul>
+
+<p>The path to a GemFire client cache XML file.</p>
+
+<p>Example:</p>
+
+<pre><code> &lt;client-cache&gt;
+   &lt;pool name="client-pool"&gt;
+       &lt;locator host="localhost" port="31331"/&gt;
+   &lt;/pool&gt;
+   &lt;region name="Logstash"&gt;
+       &lt;region-attributes refid="CACHING_PROXY" pool-name="client-pool" &gt;
+       &lt;/region-attributes&gt;
+   &lt;/region&gt;
+ &lt;/client-cache&gt;
+</code></pre>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_key_format">
+    key_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "%{@source}-%{@timestamp}" </li>
+</ul>
+
+<p>A sprintf format to use when building keys</p>
+
+<h4> 
+  <a name="setting_name">
+    name
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your client cache name</p>
+
+<h4> 
+  <a name="setting_region_name">
+    region_name
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "Logstash" </li>
+</ul>
+
+<p>The region name</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.7/lib/logstash/outputs/gemfire.rb">lib/logstash/outputs/gemfire.rb</a>
