@@ -1,0 +1,195 @@
+---
+title: logstash docs for outputs/sqs
+layout: content_right
+---
+<h2>sqs</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Push events to an Amazon Web Services Simple Queue Service (SQS) queue.</p>
+
+<p>SQS is a simple, scalable queue system that is part of the
+Amazon Web Services suite of tools.</p>
+
+<p>Although SQS is similar to other queuing systems like AMQP, it
+uses a custom API and requires that you have an AWS account.
+See http://aws.amazon.com/sqs/ for more details on how SQS works,
+what the pricing schedule looks like and how to setup a queue.</p>
+
+<p>To use this plugin, you <em>must</em>:</p>
+
+<ul>
+<li>Have an AWS account</li>
+<li>Setup an SQS queue</li>
+<li>Create an identify that has access to publish messages to the queue.</li>
+</ul>
+
+
+<p>The "consumer" identity must have the following permissions on the queue:</p>
+
+<ul>
+<li>sqs:ChangeMessageVisibility</li>
+<li>sqs:ChangeMessageVisibilityBatch</li>
+<li>sqs:GetQueueAttributes</li>
+<li>sqs:GetQueueUrl</li>
+<li>sqs:ListQueues</li>
+<li>sqs:SendMessage</li>
+<li>sqs:SendMessageBatch</li>
+</ul>
+
+
+<p>Typically, you should setup an IAM policy, create a user and apply the IAM policy to the user.
+A sample policy is as follows:</p>
+
+<pre><code> {
+   "Statement": [
+     {
+       "Sid": "Stmt1347986764948",
+       "Action": [
+         "sqs:ChangeMessageVisibility",
+         "sqs:ChangeMessageVisibilityBatch",
+         "sqs:DeleteMessage",
+         "sqs:DeleteMessageBatch",
+         "sqs:GetQueueAttributes",
+         "sqs:GetQueueUrl",
+         "sqs:ListQueues",
+         "sqs:ReceiveMessage"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+         "arn:aws:sqs:us-east-1:200850199751:Logstash"
+       ]
+     }
+   ]
+ }
+</code></pre>
+
+<p>See http://aws.amazon.com/iam/ for more details on setting up AWS identities.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  sqs {
+    <a href="#setting_access_key">access_key</a> => ... # string (required)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_queue">queue</a> => ... # string (required)
+    <a href="#setting_secret_key">secret_key</a> => ... # string (required)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_access_key">
+    access_key (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>AWS access key. Must have the appropriate permissions.</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_queue">
+    queue (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Name of SQS queue to push messages into. Note that this is just the name of the queue, not the URL or ARN.</p>
+
+<h4> 
+  <a name="setting_secret_key">
+    secret_key (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>AWS secret key. Must have the appropriate permissions.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.8/lib/logstash/outputs/sqs.rb">lib/logstash/outputs/sqs.rb</a>

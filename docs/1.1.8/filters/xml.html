@@ -1,0 +1,239 @@
+---
+title: logstash docs for filters/xml
+layout: content_right
+---
+<h2>xml</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>XML filter. Takes a field that contains XML and expands it into
+an actual datastructure.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  xml {
+    <a href="#setting_/[A-Za-z0-9_-]+/">/[A-Za-z0-9_-]+/</a> => ... # string (optional)
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_store_xml">store_xml</a> => ... # boolean (optional), default: true
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_xpath">xpath</a> => ... # hash (optional), default: {}
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_/[A-Za-z0-9_-]+/">
+    /[A-Za-z0-9_-]+/
+    
+</a>
+</h4>
+
+<ul>
+  <li> The configuration attribute name here is anything that matches the above regular expression. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for xml to hash is:</p>
+
+<pre><code>source_field =&gt; destination_field
+</code></pre>
+
+<p>XML in the value of the source field will be expanded into a
+datastructure in the "dest" field. Note: if the "dest" field
+already exists, it will be overridden.</p>
+
+<p>For example, if you have the whole xml document in your @message field:</p>
+
+<pre><code>filter {
+  xml {
+    "@message" =&gt; "doc"
+  }
+}
+</code></pre>
+
+<p>The above would parse the xml from @message and store the resulting
+document into the 'doc' field.</p>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  xml {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, the xml plugin will then add field 'sample' with the
+ value above and the %{@source} piece replaced with that value from the
+ event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  xml {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  xml {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_store_xml">
+    store_xml
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>By default the filter will store the whole parsed xml in the destination
+field as described above. Setting this to false will prevent that.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_xpath">
+    xpath
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is hash </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>xpath will additionally select string values (.to_s on whatever is selected)
+from parsed XML (using each source field defined using the method above)
+and place those values in the destination fields. Configuration:</p>
+
+<p>xpath => [ "xpath-syntax", "destination-field" ]</p>
+
+<p>Values returned by XPath parsring from xpath-synatx will be put in the
+destination field. Multiple values returned will be pushed onto the
+destination field as an array. As such, multiple matches across
+multiple source fields will produce duplicate entries in the field</p>
+
+<p>More on xpath: http://www.w3schools.com/xpath/</p>
+
+<p>The xpath functions are particularly powerful:
+http://www.w3schools.com/xpath/xpath_functions.asp</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.8/lib/logstash/filters/xml.rb">lib/logstash/filters/xml.rb</a>

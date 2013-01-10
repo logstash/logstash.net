@@ -1,0 +1,314 @@
+---
+title: logstash docs for outputs/amqp
+layout: content_right
+---
+<h2>amqp</h2>
+<h3>Status: <a href="../plugin-status">unsupported</a></h3>
+
+<p>Push events to an AMQP exchange.</p>
+
+<p><b> NOTE: THIS IS ONLY KNOWN TO WORK WITH RECENT RELEASES OF RABBITMQ. Any
+other amqp broker will not work with this plugin. I do not know why. If you
+need support for brokers other than rabbitmq, please file bugs here:
+<a href="https://github.com/ruby-amqp/bunny">https://github.com/ruby-amqp/bunny</a> </b></p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  amqp {
+    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#setting_durable">durable</a> => ... # boolean (optional), default: true
+    <a href="#setting_exchange">exchange</a> => ... # string (optional)
+    <a href="#setting_exchange_type">exchange_type</a> => ... # string, one of ["fanout", "direct", "topic"] (required)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_host">host</a> => ... # string (required)
+    <a href="#setting_key">key</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_password">password</a> => ... # password (optional), default: "guest"
+    <a href="#setting_persistent">persistent</a> => ... # boolean (optional), default: true
+    <a href="#setting_port">port</a> => ... # number (optional), default: 5672
+    <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
+    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
+    <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Enable or disable debugging</p>
+
+<h4> 
+  <a name="setting_durable">
+    durable
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
+
+<h4> 
+  <a name="setting_exchange">
+    exchange
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the exchange</p>
+
+<h4> 
+  <a name="setting_exchange_type">
+    exchange_type (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "fanout", "direct", "topic" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The exchange type (fanout, topic, direct)</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_host">
+    host (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Your amqp server address</p>
+
+<h4> 
+  <a name="setting_key">
+    key
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+<p>Key to route to by default. Defaults to 'logstash'</p>
+
+<ul>
+<li>Routing keys are ignored on fanout exchanges.</li>
+</ul>
+
+
+<h4> 
+  <a name="setting_name">
+    name
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is string </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the exchange. Depricated due to conflicts with puppet naming convention.
+Replaced by 'exchange' variable. See LOGSTASH-755</p>
+
+<h4> 
+  <a name="setting_password">
+    password
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is password </li>
+  <li> Default value is "guest" </li>
+</ul>
+
+<p>Your amqp password</p>
+
+<h4> 
+  <a name="setting_persistent">
+    persistent
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>Should messages persist to disk on the AMQP broker until they are read by a
+consumer?</p>
+
+<h4> 
+  <a name="setting_port">
+    port
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is number </li>
+  <li> Default value is 5672 </li>
+</ul>
+
+<p>The AMQP port to connect on</p>
+
+<h4> 
+  <a name="setting_ssl">
+    ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Enable or disable SSL</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_user">
+    user
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "guest" </li>
+</ul>
+
+<p>Your amqp username</p>
+
+<h4> 
+  <a name="setting_verify_ssl">
+    verify_ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Validate SSL certificate</p>
+
+<h4> 
+  <a name="setting_vhost">
+    vhost
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "/" </li>
+</ul>
+
+<p>The vhost to use</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.8/lib/logstash/outputs/amqp.rb">lib/logstash/outputs/amqp.rb</a>
