@@ -1,0 +1,137 @@
+---
+title: logstash docs for outputs/stdout
+layout: content_right
+---
+<h2>stdout</h2>
+<h3>Status: <a href="../plugin-status">stable</a></h3>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  stdout {
+    <a href="#setting_debug">debug</a> => ... # boolean (optional)
+    <a href="#setting_debug_format">debug_format</a> => ... # string, one of ["ruby", "json", "dots"] (optional), default: "ruby"
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_message">message</a> => ... # string (optional), default: "%{@timestamp} %{@source}: %{@message}"
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_debug">
+    debug
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is boolean </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Enable debugging. Tries to pretty-print the entire event object.</p>
+
+<h4> 
+  <a name="setting_debug_format">
+    debug_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "ruby", "json", "dots" </li>
+  <li> Default value is "ruby" </li>
+</ul>
+
+<p>Debug output format: ruby (default), json</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_message">
+    message
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "%{@timestamp} %{@source}: %{@message}" </li>
+</ul>
+
+<p>The message to emit to stdout.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is array </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is string </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.9/lib/logstash/outputs/stdout.rb">lib/logstash/outputs/stdout.rb</a>
