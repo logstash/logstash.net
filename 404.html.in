@@ -29,6 +29,10 @@
         route.redirect("/docs/latest/");
       });
 
+      route.add("/docs/latest($|/$|/.*$)", function(path) {
+        route.redirect("/docs/%VERSION%" + path);
+      });
+
       route.add(".*", function() {
         // Actually, 404.
         document.getElementById("four-oh-four").setAttribute("style", "display: block");
@@ -38,12 +42,13 @@
     </script>
 
     <div id="four-oh-four">
-      <h1> 404 </h1>
-      Page not found.
+      <h1> Oops! </h1>
+      
+      Sorry, this page doesn't exist.
 
       <p>
       
-      <a href="/">Go home!</a>
+      <a href="/">Go back to logstash.net</a>
     </div>
   </body>
 </html>
