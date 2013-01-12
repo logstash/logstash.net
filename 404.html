@@ -1,0 +1,54 @@
+<html>
+  <body>
+    <script src="/js/route.js"></script>
+    <script>
+      /* Do stuff I'd normally do in .htaccess with mod_rewrite. */
+      var route = new Route();
+
+      route.add("/issues/:number", function(number) {
+        route.redirect("https://logstash.jira.com/browse/LOGSTASH-" + number);
+      });
+
+      route.add("/code", function() {
+        route.redirect("https://github.com/logstash/logstash");
+      });
+
+      route.add("/code/:repo", function() {
+        route.redirect("https://github.com/logstash/" + repo);
+      });
+
+      route.add("/commit/:commit", function(commit) {
+        route.redirect("https://github.com/logstash/logstash/commit/" + commit);
+      });
+
+      route.add("/issues/?", function() {
+        route.redirect("https://logstash.jira.com/");
+      });
+
+      route.add("/docs/1.0/?", function() {
+        route.redirect("/docs/latest/");
+      });
+
+      route.add("/docs/latest($|/$|/.*$)", function(path) {
+        route.redirect("/docs/1.1.9" + path);
+      });
+
+      route.add(".*", function() {
+        // Actually, 404.
+        document.getElementById("four-oh-four").setAttribute("style", "display: block");
+      });
+
+      route.run();
+    </script>
+
+    <div id="four-oh-four">
+      <h1> Oops! </h1>
+      
+      Sorry, this page doesn't exist.
+
+      <p>
+      
+      <a href="/">Go back to logstash.net</a>
+    </div>
+  </body>
+</html>

@@ -15,7 +15,7 @@ clean:
 	-rm $(OBJECTS) > /dev/null 2>&1
 
 update: | validate-version 
-	rm $(OBJECTS)
+	-rm $(OBJECTS)
 	make $(OBJECTS)
 	@echo "Don't forget to commit this"
 
