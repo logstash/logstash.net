@@ -1,6 +1,6 @@
 
 SOURCES=docs/latest.html.in _layouts/content_right.html.in _layouts/default.html.in index.html.in 404.html.in js/patch.js.in
-OBJECTS=$(subst .html.in,.html,$(SOURCES))
+OBJECTS=$(subst .in,,$(SOURCES))
 
 default: update
 
