@@ -19,7 +19,7 @@
         "<p>NOTICE: This page documents logstash " + version
         + ", which is NOT the latest version. The latest version of "
         + "logstash is " + latest_version + ". Unless you are "
-        + "here on purpose, you probably want to be viewing the latest"
+        + "here on purpose, you probably want to be viewing the latest "
         + "documentation.</p>"
         + "<p>Go to the latest: <a href=\"" + recommended_path + "\">" 
         + recommended_path + "</a></p>");
