@@ -4,47 +4,47 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="container">
-	<div class="header">
-		<div class="nav">
-			<a href="/">home</a>
-      <a href="/docs/1.1.9">docs</a>
-			<a href="/docs/1.1.9/learn">about</a>
-      <a href="http://cookbook.logstash.net/">cookbook</a>
-			<a href="http://logstash.jira.com/">bugs</a>
-		</div>
-	</div>
-	<div class="mascot_and_logo">
-		<img src="/images/logstash.png" alt="logstash" class="mascot"/>
-		<a href="/"><img src="/images/logo.png" alt="logstash"/></a>
-	</div>
-	<div id="content_right">
-		<!--main content goes here, yo!-->
-		<div class="content_wrapper">
-			 {{ content }}
-		</div>
-		<div class="clear">
-		</div>
-	</div>
-</div>
-<!--closes main container div-->
-<div class="clear">
-</div>
-<div class="footer">
-	<p>
-		Hello! I'm your friendly footer. If you're actually reading this, I'm impressed.
-	</p>
-</div>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-6522917-5']);
-  _gaq.push(['_trackPageview']);
+  <div class="container">
+    <div class="header">
+      <div class="nav">
+        <a href="/">home</a>
+        <a href="/docs/1.1.9">docs</a>
+        <a href="/docs/1.1.9/learn">about</a>
+        <a href="http://cookbook.logstash.net/">cookbook</a>
+        <a href="http://logstash.jira.com/">bugs</a>
+      </div>
+    </div>
+    <div class="mascot_and_logo">
+      <img src="/images/logstash.png" alt="logstash" class="mascot"/>
+      <a href="/"><img src="/images/logo.png" alt="logstash"/></a>
+    </div>
+    <div id="content_right">
+      <!--main content goes here, yo!-->
+      <div class="content_wrapper">
+         {{ content }}
+      </div>
+      <div class="clear">
+      </div>
+    </div>
+  </div>
+  <!--closes main container div-->
+  <div class="clear">
+  </div>
+  <div class="footer">
+    <p>
+      Hello! I'm your friendly footer. If you're actually reading this, I'm impressed.
+    </p>
+  </div>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6522917-5']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  </body>
 </html>
