@@ -1,0 +1,29 @@
+(function() {
+  var latest_version = "%VERSION%";
+  var path = document.location.pathname;
+  var docs_path_re = new RegExp("/docs/([^/]+)(/.*|$)");
+  
+  var match = docs_path_re.exec(path);
+
+  if (match !== null) {
+    /* a docs path, check the version */
+    version = match[1]
+    if (version !== latest_version) {
+      /* Not latest version, put a warning. */
+      var wrapper = document.querySelector(".content_wrapper");
+      var first_child = wrapper.children[0];
+
+      var warning = document.createElement("div");
+      var recommended_path = "/docs/" + latest_version + match[2];
+      warning.innerHTML = \
+        "WARNING: This documentation is for logstash " + version 
+        + ", which is NOT the latest version. Unless you are "
+        "here on purpose, you probably want to be viewing "
+        "<a href=\"" + recommended_path "\">" + recommended_path + "</a>";
+
+      warning.setAttribute("class", "warning");
+      wrapper.insertBefore(warning, first_child);
+    }                 
+  }                   
+  
+})();

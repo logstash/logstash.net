@@ -72,3 +72,19 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
 
 .footer { font-size:80%; text-align:center;}
 
+.warning {
+  padding: 1em;
+  margin: 1em;
+  font-size: 100px;
+
+  border: 2px solid black;
+  border-radius: 5px;
+  background: #e59790; /* Old browsers */
+  background: -moz-linear-gradient(top, #e59790 0%, #f16f5c 83%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e59790), color-stop(83%,#f16f5c)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #e59790 0%,#f16f5c 83%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #e59790 0%,#f16f5c 83%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #e59790 0%,#f16f5c 83%); /* IE10+ */
+  background: linear-gradient(to bottom, #e59790 0%,#f16f5c 83%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e59790', endColorstr='#f16f5c',GradientType=0 ); /* IE6-9 */
+}
