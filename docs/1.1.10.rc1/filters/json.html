@@ -1,0 +1,252 @@
+---
+title: logstash docs for filters/json
+layout: content_right
+---
+<h2>json</h2>
+<h3>Status: <a href="../plugin-status">beta</a></h3>
+
+<p>JSON filter. Takes a field that contains JSON and expands it into
+an actual datastructure.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  json {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_source">source</a> => ... # string (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_target">target</a> => ... # string (optional)
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_/[A-Za-z0-9_@-]+/">
+    /[A-Za-z0-9_@-]+/
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> The configuration attribute name here is anything that matches the above regular expression. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for json is:</p>
+
+<ul>
+<li>source => dest</li>
+</ul>
+
+
+<p>For example, if you have a field named 'foo' that contains your json,
+and you want to store the evaluated json object in 'bar', do this:</p>
+
+<pre><code>filter {
+  json {
+    foo =&gt; bar
+  }
+}
+</code></pre>
+
+<p>JSON in the value of the source field will be expanded into a
+datastructure in the "dest" field.  Note: if the "dest" field
+already exists, it will be overridden.</p>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  json {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, the json plugin will then add field 'sample' with the
+ value above and the %{@source} piece replaced with that value from the
+ event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  json {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  json {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_source">
+    source
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for json is:</p>
+
+<pre><code>source =&gt; source_field
+</code></pre>
+
+<p>For example, if you have json data in the @message field:</p>
+
+<pre><code>filter {
+  json {
+    source =&gt; "@message"
+  }
+}
+</code></pre>
+
+<p>The above would parse the xml from the @message field</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_target">
+    target
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Define target for placing the data</p>
+
+<p>for example if you want the data to be put in the 'doc' field:</p>
+
+<pre><code>filter {
+  json {
+    target =&gt; "doc"
+  }
+}
+</code></pre>
+
+<p>json in the value of the source field will be expanded into a
+datastructure in the "target" field.
+Note: if the "target" field already exists, it will be overridden
+Required</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.10.rc1/lib/logstash/filters/json.rb">lib/logstash/filters/json.rb</a>
