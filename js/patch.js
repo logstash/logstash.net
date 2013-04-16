@@ -1,5 +1,5 @@
 (function() {
-  var latest_version = "1.1.9";
+  var latest_version = "1.1.10";
   var path = document.location.pathname;
   var docs_path_re = new RegExp("/docs/([^/]+)(/.*|$)");
   
@@ -16,10 +16,11 @@
       var warning = document.createElement("div");
       var recommended_path = "/docs/" + latest_version + match[2];
       warning.innerHTML = (
-        "<p>NOTICE: This page documents logstash " + version
+        "<p>OLD VERSION NOTICE</p>"
+        + "<p>NOTICE: This page documents logstash " + version
         + ", which is NOT the latest version. The latest version of "
         + "logstash is " + latest_version + ". Unless you are "
-        + "here on purpose, you probably want to be viewing the latest"
+        + "here on purpose, you probably want to be viewing the latest "
         + "documentation.</p>"
         + "<p>Go to the latest: <a href=\"" + recommended_path + "\">" 
         + recommended_path + "</a></p>");
