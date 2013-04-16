@@ -1,0 +1,236 @@
+---
+title: logstash docs for filters/geoip
+layout: content_right
+---
+<h2>geoip</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Add GeoIP fields from Maxmind database</p>
+
+<p>GeoIP filter, adds information about geographical location of IP addresses.
+This filter uses Maxmind GeoIP databases, have a look at
+https://www.maxmind.com/app/geolite</p>
+
+<p>Logstash releases ship with the GeoLiteCity database made available from
+Maxmind with a CCA-ShareAlike 3.0 license. For more details on geolite, see
+<a href="http://www.maxmind.com/en/geolite">http://www.maxmind.com/en/geolite</a>.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  geoip {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_database">database</a> => ... # a valid filesystem path (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_source">source</a> => ... # string (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  geoip {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, the geoip plugin will then add field 'sample' with the
+ value above and the %{@source} piece replaced with that value from the
+ event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  geoip {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_database">
+    database
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#path">path</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>GeoIP database file to use, Country, City, ASN, ISP and organization
+databases are supported</p>
+
+<p>If not specified, this will default to the GeoLiteCity database that ships
+with logstash.</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_field">
+    field
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The field containing IP address, hostname is also OK. If this field is an
+array, only the first value will be used.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Array of fields that we want to be included in our event
+Default it will include all fields.
+Possible fields depend on the database type
+For the built in GeoLiteCity database:
+city<em>name, continent</em>code, country<em>code2, country</em>code3, country<em>name, dma</em>code, ip, latitude, longitude, postal<em>code, region</em>name, timezone</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  geoip {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_source">
+    source
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The field containing IP address, hostname is also OK. If this field is an
+array, only the first value will be used.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.10.rc1/lib/logstash/filters/geoip.rb">lib/logstash/filters/geoip.rb</a>
