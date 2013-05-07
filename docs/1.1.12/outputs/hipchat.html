@@ -1,0 +1,184 @@
+---
+title: logstash docs for outputs/hipchat
+layout: content_right
+---
+<h2>hipchat</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>This output allows you to write events to <a href="https://www.hipchat.com/">HipChat</a>.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  hipchat {
+    <a href="#setting_color">color</a> => ... # string (optional), default: "yellow"
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_format">format</a> => ... # string (optional), default: "%{@message}"
+    <a href="#setting_from">from</a> => ... # string (optional), default: "logstash"
+    <a href="#setting_room_id">room_id</a> => ... # string (required)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_token">token</a> => ... # string (required)
+    <a href="#setting_trigger_notify">trigger_notify</a> => ... # boolean (optional), default: false
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_color">
+    color
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "yellow" </li>
+</ul>
+
+<p>Background color for message.
+HipChat currently supports one of "yellow", "red", "green", "purple",
+"gray", or "random". (default: yellow)</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "%{@message}" </li>
+</ul>
+
+<p>Message format to send, event tokens are usable here.</p>
+
+<h4> 
+  <a name="setting_from">
+    from
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "logstash" </li>
+</ul>
+
+<p>The name the message will appear be sent from.</p>
+
+<h4> 
+  <a name="setting_room_id">
+    room_id (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The ID or name of the room.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_token">
+    token (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The HipChat authentication token.</p>
+
+<h4> 
+  <a name="setting_trigger_notify">
+    trigger_notify
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Whether or not this message should trigger a notification for people in the room.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.12/lib/logstash/outputs/hipchat.rb">lib/logstash/outputs/hipchat.rb</a>
