@@ -1,0 +1,239 @@
+---
+title: logstash docs for outputs/http
+layout: content_right
+---
+<h2>http</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  http {
+    <a href="#setting_content_type">content_type</a> => ... # string (optional)
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_fields">fields</a> => ... # array (optional), default: []
+    <a href="#setting_format">format</a> => ... # string, one of ["json", "form", "message"] (optional), default: "json"
+    <a href="#setting_headers">headers</a> => ... # hash (optional)
+    <a href="#setting_http_method">http_method</a> => ... # string, one of ["put", "post"] (required)
+    <a href="#setting_mapping">mapping</a> => ... # hash (optional)
+    <a href="#setting_message">message</a> => ... # string (optional)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+    <a href="#setting_url">url</a> => ... # string (required)
+    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: true
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_content_type">
+    content_type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Content type</p>
+
+<p>If not specified, this defaults to the following:</p>
+
+<ul>
+<li>if format is "json", "application/json"</li>
+<li>if format is "form", "application/x-www-form-urlencoded"</li>
+</ul>
+
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these fields.
+Optional.</p>
+
+<h4> 
+  <a name="setting_format">
+    format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "json", "form", "message" </li>
+  <li> Default value is "json" </li>
+</ul>
+
+<p>Set the format of the http body.</p>
+
+<p>If form, then the body will be the mapping (or whole event) converted
+into a query parameter string (foo=bar&amp;baz=fizz...)</p>
+
+<p>If message, then the body will be the result of formatting the event according to message</p>
+
+<p>Otherwise, the event is sent as json.</p>
+
+<h4> 
+  <a name="setting_headers">
+    headers
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Custom headers to use
+format is `headers => ["X-My-Header", "%{@source_host}"]</p>
+
+<h4> 
+  <a name="setting_http_method">
+    http_method (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "put", "post" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>What verb to use
+only put and post are supported for now</p>
+
+<h4> 
+  <a name="setting_mapping">
+    mapping
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>This lets you choose the structure and parts of the event that are sent.</p>
+
+<p>For example:</p>
+
+<p>   mapping => ["foo", "%{@source_host}", "bar", "%{@type}"]</p>
+
+<h4> 
+  <a name="setting_message">
+    message
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="setting_url">
+    url (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>This output lets you <code>PUT</code> or <code>POST</code> events to a
+generic HTTP(S) endpoint</p>
+
+<p>Additionally, you are given the option to customize
+the headers sent as well as basic customization of the
+event json itself.
+URL to use</p>
+
+<h4> 
+  <a name="setting_verify_ssl">
+    verify_ssl
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>validate SSL?</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.11/lib/logstash/outputs/http.rb">lib/logstash/outputs/http.rb</a>
