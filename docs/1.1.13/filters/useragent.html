@@ -1,0 +1,214 @@
+---
+title: logstash docs for filters/useragent
+layout: content_right
+---
+<h2>useragent</h2>
+<h3>Status: <a href="../plugin-status">experimental</a></h3>
+
+<p>Parse user agent strings into structured data based on BrowserScope data</p>
+
+<p>UserAgent filter, adds information about user agent like family, operating
+system, version, and device</p>
+
+<p>Logstash releases ship with the regexes.yaml database made available from
+ua-parser with an Apache 2.0 license. For more details on ua-parser, see
+<a href="https://github.com/tobie/ua-parser/">https://github.com/tobie/ua-parser/</a>.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  useragent {
+    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#setting_exclude_tags">exclude_tags</a> => ... # array (optional), default: []
+    <a href="#setting_regexes">regexes</a> => ... # string (optional)
+    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#setting_source">source</a> => ... # string (required)
+    <a href="#setting_tags">tags</a> => ... # array (optional), default: []
+    <a href="#setting_target">target</a> => ... # string (optional), default: "ua"
+    <a href="#setting_type">type</a> => ... # string (optional), default: ""
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="setting_add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Example:</p>
+
+<pre><code>filter {
+  useragent {
+    add_field =&gt; [ "sample", "Hello world, from %{@source}" ]
+  }
+}
+</code></pre>
+
+<p> On success, the useragent plugin will then add field 'sample' with the
+ value above and the %{@source} piece replaced with that value from the
+ event.</p>
+
+<h4> 
+  <a name="setting_add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  useragent {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo_hello"</p>
+
+<h4> 
+  <a name="setting_exclude_tags">
+    exclude_tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is
+additional to type and tags.</p>
+
+<h4> 
+  <a name="setting_regexes">
+    regexes
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>regexes.yaml file to use</p>
+
+<p>If not specified, this will default to the regexes.yaml that ships
+with logstash.</p>
+
+<h4> 
+  <a name="setting_remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  useragent {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present</p>
+
+<h4> 
+  <a name="setting_source">
+    source (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The field containing the user agent string. If this field is an
+array, only the first value will be used.</p>
+
+<h4> 
+  <a name="setting_tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="setting_target">
+    target
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "ua" </li>
+</ul>
+
+<p>The name of the field to assign the UA data hash to</p>
+
+<h4> 
+  <a name="setting_type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.1.13/lib/logstash/filters/useragent.rb">lib/logstash/filters/useragent.rb</a>
