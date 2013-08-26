@@ -24,15 +24,15 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   graphtastic {
-    <a href="#setting_batch_number">batch_number</a> => ... # number (optional), default: 60
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_context">context</a> => ... # string (optional), default: "graphtastic"
-    <a href="#setting_error_file">error_file</a> => ... # string (optional), default: ""
-    <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
-    <a href="#setting_integration">integration</a> => ... # string, one of ["udp", "tcp", "rmi", "rest"] (optional), default: "udp"
-    <a href="#setting_metrics">metrics</a> => ... # hash (optional), default: {}
-    <a href="#setting_port">port</a> => ... # number (optional)
-    <a href="#setting_retries">retries</a> => ... # number (optional), default: 1
+    <a href="#batch_number">batch_number</a> => ... # number (optional), default: 60
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#context">context</a> => ... # string (optional), default: "graphtastic"
+    <a href="#error_file">error_file</a> => ... # string (optional), default: ""
+    <a href="#host">host</a> => ... # string (optional), default: "127.0.0.1"
+    <a href="#integration">integration</a> => ... # string, one of ["udp", "tcp", "rmi", "rest"] (optional), default: "udp"
+    <a href="#metrics">metrics</a> => ... # hash (optional), default: {}
+    <a href="#port">port</a> => ... # number (optional)
+    <a href="#retries">retries</a> => ... # number (optional), default: 1
   }
 }
 </code></pre>
@@ -40,7 +40,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_batch_number">
+  <a name="batch_number">
     batch_number
     
 </a>
@@ -55,7 +55,7 @@ This is what it might look like in your config file:
 amount for UDP, with default packet size.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -69,7 +69,7 @@ amount for UDP, with default packet size.</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_context">
+  <a name="context">
     context
     
 </a>
@@ -88,7 +88,7 @@ Please consult your application server documentation for more on application
 contexts.</p>
 
 <h4> 
-  <a name="setting_error_file">
+  <a name="error_file">
     error_file
     
 </a>
@@ -105,7 +105,7 @@ on how we reintegrate these error metrics
 NOT IMPLEMENTED!</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -120,7 +120,7 @@ NOT IMPLEMENTED!</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -134,7 +134,7 @@ NOT IMPLEMENTED!</p>
 <p>host for the graphtastic server - defaults to 127.0.0.1</p>
 
 <h4> 
-  <a name="setting_integration">
+  <a name="integration">
     integration
     
 </a>
@@ -148,7 +148,7 @@ NOT IMPLEMENTED!</p>
 <p>options are udp(fastest - default) - rmi(faster) - rest(fast) - tcp(don't use TCP yet - some problems - errors out on linux)</p>
 
 <h4> 
-  <a name="setting_metrics">
+  <a name="metrics">
     metrics
     
 </a>
@@ -171,7 +171,7 @@ data as key value pairs.  so for example:</p>
 <p>NOTE: you can also use the dynamic fields for the key value as well as the actual value</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -185,7 +185,7 @@ data as key value pairs.  so for example:</p>
 <p>port for the graphtastic instance - defaults to 1199 for RMI, 1299 for TCP, 1399 for UDP, and 8080 for REST</p>
 
 <h4> 
-  <a name="setting_retries">
+  <a name="retries">
     retries
     
 </a>
@@ -202,7 +202,7 @@ either by graphtastic utility or by this program after connectivity is
 ensured to be established.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -219,7 +219,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

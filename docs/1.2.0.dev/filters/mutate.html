@@ -17,21 +17,21 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   mutate {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_convert">convert</a> => ... # hash (optional)
-    <a href="#setting_gsub">gsub</a> => ... # array (optional)
-    <a href="#setting_join">join</a> => ... # hash (optional)
-    <a href="#setting_lowercase">lowercase</a> => ... # array (optional)
-    <a href="#setting_merge">merge</a> => ... # hash (optional)
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_rename">rename</a> => ... # hash (optional)
-    <a href="#setting_replace">replace</a> => ... # hash (optional)
-    <a href="#setting_split">split</a> => ... # hash (optional)
-    <a href="#setting_strip">strip</a> => ... # array (optional)
-    <a href="#setting_update">update</a> => ... # hash (optional)
-    <a href="#setting_uppercase">uppercase</a> => ... # array (optional)
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#convert">convert</a> => ... # hash (optional)
+    <a href="#gsub">gsub</a> => ... # array (optional)
+    <a href="#join">join</a> => ... # hash (optional)
+    <a href="#lowercase">lowercase</a> => ... # array (optional)
+    <a href="#merge">merge</a> => ... # hash (optional)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#rename">rename</a> => ... # hash (optional)
+    <a href="#replace">replace</a> => ... # hash (optional)
+    <a href="#split">split</a> => ... # hash (optional)
+    <a href="#strip">strip</a> => ... # array (optional)
+    <a href="#update">update</a> => ... # hash (optional)
+    <a href="#uppercase">uppercase</a> => ... # array (optional)
   }
 }
 </code></pre>
@@ -39,7 +39,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -56,18 +56,18 @@ Example:</p>
 
 <pre><code>filter {
   mutate {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -93,7 +93,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_convert">
+  <a name="convert">
     convert
     
 </a>
@@ -120,7 +120,7 @@ If the field is a hash, no action will be taken.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -137,7 +137,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_gsub">
+  <a name="gsub">
     gsub
     
 </a>
@@ -173,7 +173,7 @@ field/substitution.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_join">
+  <a name="join">
     join
     
 </a>
@@ -198,7 +198,7 @@ field/substitution.</p>
 <p>   }</p>
 
 <h4> 
-  <a name="setting_lowercase">
+  <a name="lowercase">
     lowercase
     
 </a>
@@ -221,7 +221,7 @@ field/substitution.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_merge">
+  <a name="merge">
     merge
     
 </a>
@@ -248,7 +248,7 @@ String fields will be converted in array, so
 </code></pre>
 
 <h4> 
-  <a name="setting_remove">
+  <a name="remove">
     remove
      <strong>DEPRECATED</strong>
 </a>
@@ -275,7 +275,7 @@ String fields will be converted in array, so
 filters.</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -301,7 +301,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -327,7 +327,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_rename">
+  <a name="rename">
     rename
     
 </a>
@@ -351,7 +351,7 @@ would remove the tag "foo_hello" if it is present</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_replace">
+  <a name="replace">
     replace
     
 </a>
@@ -375,7 +375,7 @@ to help you build a new value from other parts of the event.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_split">
+  <a name="split">
     split
     
 </a>
@@ -399,7 +399,7 @@ fields.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_strip">
+  <a name="strip">
     strip
     
 </a>
@@ -422,7 +422,7 @@ fields.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -438,7 +438,7 @@ fields.</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -458,7 +458,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_update">
+  <a name="update">
     update
     
 </a>
@@ -482,7 +482,7 @@ then no action will be taken.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_uppercase">
+  <a name="uppercase">
     uppercase
     
 </a>

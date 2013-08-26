@@ -14,15 +14,15 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   boundary {
-    <a href="#setting_api_key">api_key</a> => ... # string (required)
-    <a href="#setting_auto">auto</a> => ... # boolean (optional), default: false
-    <a href="#setting_bsubtype">bsubtype</a> => ... # string (optional)
-    <a href="#setting_btags">btags</a> => ... # array (optional)
-    <a href="#setting_btype">btype</a> => ... # string (optional)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_end_time">end_time</a> => ... # string (optional)
-    <a href="#setting_org_id">org_id</a> => ... # string (required)
-    <a href="#setting_start_time">start_time</a> => ... # string (optional)
+    <a href="#api_key">api_key</a> => ... # string (required)
+    <a href="#auto">auto</a> => ... # boolean (optional), default: false
+    <a href="#bsubtype">bsubtype</a> => ... # string (optional)
+    <a href="#btags">btags</a> => ... # array (optional)
+    <a href="#btype">btype</a> => ... # string (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#end_time">end_time</a> => ... # string (optional)
+    <a href="#org_id">org_id</a> => ... # string (required)
+    <a href="#start_time">start_time</a> => ... # string (optional)
   }
 }
 </code></pre>
@@ -30,7 +30,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_api_key">
+  <a name="api_key">
     api_key (required setting)
     
 </a>
@@ -53,7 +53,7 @@ the event timestamp</p>
 <p>Your Boundary API key</p>
 
 <h4> 
-  <a name="setting_auto">
+  <a name="auto">
     auto
     
 </a>
@@ -71,7 +71,7 @@ override these.
 ['type', 'subtype', 'creation<em>time', 'end</em>time', 'links', 'tags', 'loc']</p>
 
 <h4> 
-  <a name="setting_bsubtype">
+  <a name="bsubtype">
     bsubtype
     
 </a>
@@ -85,7 +85,7 @@ override these.
 <p>Sub-Type</p>
 
 <h4> 
-  <a name="setting_btags">
+  <a name="btags">
     btags
     
 </a>
@@ -101,7 +101,7 @@ Set any custom tags for this event
 Default are the Logstash tags if any</p>
 
 <h4> 
-  <a name="setting_btype">
+  <a name="btype">
     btype
     
 </a>
@@ -115,7 +115,7 @@ Default are the Logstash tags if any</p>
 <p>Type</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -129,7 +129,7 @@ Default are the Logstash tags if any</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_end_time">
+  <a name="end_time">
     end_time
     
 </a>
@@ -147,7 +147,7 @@ If overriding, it is your responsibility to type this correctly
 By default this is set to <code>event.unix_timestamp.to_i</code></p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -162,7 +162,7 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_org_id">
+  <a name="org_id">
     org_id (required setting)
     
 </a>
@@ -176,7 +176,7 @@ By default this is set to <code>event.unix_timestamp.to_i</code></p>
 <p>Your Boundary Org ID</p>
 
 <h4> 
-  <a name="setting_start_time">
+  <a name="start_time">
     start_time
     
 </a>
@@ -194,7 +194,7 @@ If overriding, it is your responsibility to type this correctly
 By default this is set to <code>event.unix_timestamp.to_i</code></p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -211,7 +211,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

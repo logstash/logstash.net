@@ -38,19 +38,20 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   kv {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_default_keys">default_keys</a> => ... # hash (optional), default: {}
-    <a href="#setting_exclude_keys">exclude_keys</a> => ... # array (optional), default: []
-    <a href="#setting_field_split">field_split</a> => ... # string (optional), default: " "
-    <a href="#setting_include_keys">include_keys</a> => ... # array (optional), default: []
-    <a href="#setting_prefix">prefix</a> => ... # string (optional), default: ""
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_source">source</a> => ... # string (optional), default: "message"
-    <a href="#setting_target">target</a> => ... # string (optional)
-    <a href="#setting_trim">trim</a> => ... # string (optional)
-    <a href="#setting_value_split">value_split</a> => ... # string (optional), default: "="
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#default_keys">default_keys</a> => ... # hash (optional), default: {}
+    <a href="#exclude_keys">exclude_keys</a> => ... # array (optional), default: []
+    <a href="#field_split">field_split</a> => ... # string (optional), default: " "
+    <a href="#include_keys">include_keys</a> => ... # array (optional), default: []
+    <a href="#prefix">prefix</a> => ... # string (optional), default: ""
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (optional), default: "message"
+    <a href="#target">target</a> => ... # string (optional)
+    <a href="#trim">trim</a> => ... # string (optional)
+    <a href="#trimkey">trimkey</a> => ... # string (optional)
+    <a href="#value_split">value_split</a> => ... # string (optional), default: "="
   }
 }
 </code></pre>
@@ -58,7 +59,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -75,18 +76,18 @@ Example:</p>
 
 <pre><code>filter {
   kv {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -112,7 +113,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_default_keys">
+  <a name="default_keys">
     default_keys
     
 </a>
@@ -135,7 +136,7 @@ in case these keys do no exist in the source field being parsed.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_exclude_keys">
+  <a name="exclude_keys">
     exclude_keys
     
 </a>
@@ -160,7 +161,7 @@ while "foo" key will be added to event.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -177,7 +178,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_field_split">
+  <a name="field_split">
     field_split
     
 </a>
@@ -218,7 +219,7 @@ fields:</p>
 
 
 <h4> 
-  <a name="setting_include_keys">
+  <a name="include_keys">
     include_keys
     
 </a>
@@ -243,7 +244,7 @@ while "foo" key will not be added to event.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_prefix">
+  <a name="prefix">
     prefix
     
 </a>
@@ -262,7 +263,7 @@ while "foo" key will not be added to event.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -288,7 +289,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -314,7 +315,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_source">
+  <a name="source">
     source
     
 </a>
@@ -333,7 +334,7 @@ would remove the tag "foo_hello" if it is present</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -349,7 +350,7 @@ would remove the tag "foo_hello" if it is present</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_target">
+  <a name="target">
     target
     
 </a>
@@ -371,7 +372,7 @@ event.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_trim">
+  <a name="trim">
     trim
     
 </a>
@@ -399,7 +400,34 @@ characters like [ or ] using .</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_type">
+  <a name="trimkey">
+    trimkey
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>A string of characters to trim from the key. This is useful if your
+key are wrapped in brackets or starts with space</p>
+
+<p>These characters form a regex character class and thus you must escape special regex
+characters like [ or ] using .</p>
+
+<p>Example, to strip '&lt;' '>' '[' ']' and ',' characters from keys:</p>
+
+<pre><code>filter {
+  kv {
+    trimkey =&gt; "&lt;&gt;\[\],"
+  }
+}
+</code></pre>
+
+<h4> 
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -419,7 +447,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_value_split">
+  <a name="value_split">
     value_split
     
 </a>

@@ -14,13 +14,13 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   hipchat {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_color">color</a> => ... # string (optional), default: "yellow"
-    <a href="#setting_format">format</a> => ... # string (optional), default: "%{@message}"
-    <a href="#setting_from">from</a> => ... # string (optional), default: "logstash"
-    <a href="#setting_room_id">room_id</a> => ... # string (required)
-    <a href="#setting_token">token</a> => ... # string (required)
-    <a href="#setting_trigger_notify">trigger_notify</a> => ... # boolean (optional), default: false
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#color">color</a> => ... # string (optional), default: "yellow"
+    <a href="#format">format</a> => ... # string (optional), default: "%{message}"
+    <a href="#from">from</a> => ... # string (optional), default: "logstash"
+    <a href="#room_id">room_id</a> => ... # string (required)
+    <a href="#token">token</a> => ... # string (required)
+    <a href="#trigger_notify">trigger_notify</a> => ... # boolean (optional), default: false
   }
 }
 </code></pre>
@@ -28,7 +28,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -42,7 +42,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_color">
+  <a name="color">
     color
     
 </a>
@@ -58,7 +58,7 @@ HipChat currently supports one of "yellow", "red", "green", "purple",
 "gray", or "random". (default: yellow)</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -73,7 +73,7 @@ HipChat currently supports one of "yellow", "red", "green", "purple",
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_format">
+  <a name="format">
     format
     
 </a>
@@ -81,13 +81,13 @@ HipChat currently supports one of "yellow", "red", "green", "purple",
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@message}" </li>
+  <li> Default value is "%{message}" </li>
 </ul>
 
 <p>Message format to send, event tokens are usable here.</p>
 
 <h4> 
-  <a name="setting_from">
+  <a name="from">
     from
     
 </a>
@@ -101,7 +101,7 @@ HipChat currently supports one of "yellow", "red", "green", "purple",
 <p>The name the message will appear be sent from.</p>
 
 <h4> 
-  <a name="setting_room_id">
+  <a name="room_id">
     room_id (required setting)
     
 </a>
@@ -115,7 +115,7 @@ HipChat currently supports one of "yellow", "red", "green", "purple",
 <p>The ID or name of the room.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -132,7 +132,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_token">
+  <a name="token">
     token (required setting)
     
 </a>
@@ -146,7 +146,7 @@ Optional.</p>
 <p>The HipChat authentication token.</p>
 
 <h4> 
-  <a name="setting_trigger_notify">
+  <a name="trigger_notify">
     trigger_notify
     
 </a>
@@ -160,7 +160,7 @@ Optional.</p>
 <p>Whether or not this message should trigger a notification for people in the room.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

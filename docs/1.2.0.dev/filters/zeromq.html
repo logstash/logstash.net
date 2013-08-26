@@ -25,14 +25,14 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   zeromq {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_address">address</a> => ... # string (optional), default: "tcp://127.0.0.1:2121"
-    <a href="#setting_field">field</a> => ... # string (optional)
-    <a href="#setting_mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#address">address</a> => ... # string (optional), default: "tcp://127.0.0.1:2121"
+    <a href="#field">field</a> => ... # string (optional)
+    <a href="#mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#sockopt">sockopt</a> => ... # hash (optional)
   }
 }
 </code></pre>
@@ -40,7 +40,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -57,18 +57,18 @@ Example:</p>
 
 <pre><code>filter {
   zeromq {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -94,7 +94,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_address">
+  <a name="address">
     address
     
 </a>
@@ -111,7 +111,7 @@ as we use a context per thread
 By default, filters connect</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -128,7 +128,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_field">
+  <a name="field">
     field
     
 </a>
@@ -145,7 +145,7 @@ TODO (lusis)
 Allow filtering multiple fields</p>
 
 <h4> 
-  <a name="setting_mode">
+  <a name="mode">
     mode
     
 </a>
@@ -161,7 +161,7 @@ server mode binds/listens
 client mode connects</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -187,7 +187,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -213,7 +213,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_sockopt">
+  <a name="sockopt">
     sockopt
     
 </a>
@@ -238,7 +238,7 @@ ZMQ::SUBSCRIBE - topic filters for pubsub</p>
 <p>example: sockopt => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "my<em>named</em>queue"]</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -254,7 +254,7 @@ ZMQ::SUBSCRIBE - topic filters for pubsub</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

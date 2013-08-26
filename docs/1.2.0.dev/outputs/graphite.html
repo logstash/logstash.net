@@ -19,17 +19,17 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   graphite {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_exclude_metrics">exclude_metrics</a> => ... # array (optional), default: ["%{[^}]+}"]
-    <a href="#setting_fields_are_metrics">fields_are_metrics</a> => ... # boolean (optional), default: false
-    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_include_metrics">include_metrics</a> => ... # array (optional), default: [".*"]
-    <a href="#setting_metrics">metrics</a> => ... # hash (optional), default: {}
-    <a href="#setting_metrics_format">metrics_format</a> => ... # string (optional), default: "*"
-    <a href="#setting_port">port</a> => ... # number (optional), default: 2003
-    <a href="#setting_reconnect_interval">reconnect_interval</a> => ... # number (optional), default: 2
-    <a href="#setting_resend_on_failure">resend_on_failure</a> => ... # boolean (optional), default: false
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#exclude_metrics">exclude_metrics</a> => ... # array (optional), default: ["%{[^}]+}"]
+    <a href="#fields_are_metrics">fields_are_metrics</a> => ... # boolean (optional), default: false
+    <a href="#host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#include_metrics">include_metrics</a> => ... # array (optional), default: [".*"]
+    <a href="#metrics">metrics</a> => ... # hash (optional), default: {}
+    <a href="#metrics_format">metrics_format</a> => ... # string (optional), default: "*"
+    <a href="#port">port</a> => ... # number (optional), default: 2003
+    <a href="#reconnect_interval">reconnect_interval</a> => ... # number (optional), default: 2
+    <a href="#resend_on_failure">resend_on_failure</a> => ... # boolean (optional), default: false
   }
 }
 </code></pre>
@@ -37,7 +37,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -51,7 +51,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -65,7 +65,7 @@ This is what it might look like in your config file:
 <p>Enable debug output</p>
 
 <h4> 
-  <a name="setting_exclude_metrics">
+  <a name="exclude_metrics">
     exclude_metrics
     
 </a>
@@ -79,7 +79,7 @@ This is what it might look like in your config file:
 <p>Exclude regex matched metric names, by default exclude unresolved %{field} strings</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -94,7 +94,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_fields_are_metrics">
+  <a name="fields_are_metrics">
     fields_are_metrics
     
 </a>
@@ -108,7 +108,7 @@ This is what it might look like in your config file:
 <p>Indicate that the event @fields should be treated as metrics and will be sent as is to graphite</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -122,7 +122,7 @@ This is what it might look like in your config file:
 <p>The address of the graphite server.</p>
 
 <h4> 
-  <a name="setting_include_metrics">
+  <a name="include_metrics">
     include_metrics
     
 </a>
@@ -136,7 +136,7 @@ This is what it might look like in your config file:
 <p>Include only regex matched metric names</p>
 
 <h4> 
-  <a name="setting_metrics">
+  <a name="metrics">
     metrics
     
 </a>
@@ -147,18 +147,18 @@ This is what it might look like in your config file:
   <li> Default value is {} </li>
 </ul>
 
-<p>The metric(s) to use. This supports dynamic strings like %{@source_host}
+<p>The metric(s) to use. This supports dynamic strings like %{source}
 for metric names and also for values. This is a hash field with key
 of the metric name, value of the metric value. Example:</p>
 
-<pre><code>[ "%{@source_host}/uptime", "%{uptime_1m}" ]
+<pre><code>[ "%{source}/uptime", "%{uptime_1m}" ]
 </code></pre>
 
 <p>The value will be coerced to a floating point value. Values which cannot be
 coerced will zero (0)</p>
 
 <h4> 
-  <a name="setting_metrics_format">
+  <a name="metrics_format">
     metrics_format
     
 </a>
@@ -178,7 +178,7 @@ replaced with the name of the actual metric.</p>
 <p>NOTE: If no metrics_format is defined the name of the metric will be used as fallback.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -192,7 +192,7 @@ replaced with the name of the actual metric.</p>
 <p>The port to connect on your graphite server.</p>
 
 <h4> 
-  <a name="setting_reconnect_interval">
+  <a name="reconnect_interval">
     reconnect_interval
     
 </a>
@@ -206,7 +206,7 @@ replaced with the name of the actual metric.</p>
 <p>Interval between reconnect attempts to carboon</p>
 
 <h4> 
-  <a name="setting_resend_on_failure">
+  <a name="resend_on_failure">
     resend_on_failure
     
 </a>
@@ -220,7 +220,7 @@ replaced with the name of the actual metric.</p>
 <p>Should metrics be resend on failure?</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -237,7 +237,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

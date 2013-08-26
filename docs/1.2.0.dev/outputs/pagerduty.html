@@ -15,13 +15,13 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   pagerduty {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_description">description</a> => ... # string (optional), default: "Logstash event for %{@source_host}"
-    <a href="#setting_details">details</a> => ... # hash (optional), default: {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"}
-    <a href="#setting_event_type">event_type</a> => ... # string, one of ["trigger", "acknowledge", "resolve"] (optional), default: "trigger"
-    <a href="#setting_incident_key">incident_key</a> => ... # string (optional), default: "logstash/%{@source_host}/%{@type}"
-    <a href="#setting_pdurl">pdurl</a> => ... # string (optional), default: "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
-    <a href="#setting_service_key">service_key</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#description">description</a> => ... # string (optional), default: "Logstash event for %{host}"
+    <a href="#details">details</a> => ... # hash (optional), default: {"timestamp"=>"%{@timestamp}", "message"=>"%{message}"}
+    <a href="#event_type">event_type</a> => ... # string, one of ["trigger", "acknowledge", "resolve"] (optional), default: "trigger"
+    <a href="#incident_key">incident_key</a> => ... # string (optional), default: "logstash/%{host}/%{type}"
+    <a href="#pdurl">pdurl</a> => ... # string (optional), default: "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
+    <a href="#service_key">service_key</a> => ... # string (required)
   }
 }
 </code></pre>
@@ -29,7 +29,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -43,7 +43,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_description">
+  <a name="description">
     description
     
 </a>
@@ -51,13 +51,13 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "Logstash event for %{@source_host}" </li>
+  <li> Default value is "Logstash event for %{host}" </li>
 </ul>
 
 <p>Custom description</p>
 
 <h4> 
-  <a name="setting_details">
+  <a name="details">
     details
     
 </a>
@@ -65,7 +65,7 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#hash">hash</a> </li>
-  <li> Default value is {"timestamp"=>"%{@timestamp}", "message"=>"%{@message}"} </li>
+  <li> Default value is {"timestamp"=>"%{@timestamp}", "message"=>"%{message}"} </li>
 </ul>
 
 <p>Event details
@@ -73,7 +73,7 @@ These might be keys from the logstash event you wish to include
 tags are automatically included if detected so no need to add them here</p>
 
 <h4> 
-  <a name="setting_event_type">
+  <a name="event_type">
     event_type
     
 </a>
@@ -87,7 +87,7 @@ tags are automatically included if detected so no need to add them here</p>
 <p>Event type</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -102,7 +102,7 @@ tags are automatically included if detected so no need to add them here</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_incident_key">
+  <a name="incident_key">
     incident_key
     
 </a>
@@ -110,14 +110,14 @@ tags are automatically included if detected so no need to add them here</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "logstash/%{@source_host}/%{@type}" </li>
+  <li> Default value is "logstash/%{host}/%{type}" </li>
 </ul>
 
 <p>The service key to use
 You'll need to set this up in PD beforehand</p>
 
 <h4> 
-  <a name="setting_pdurl">
+  <a name="pdurl">
     pdurl
     
 </a>
@@ -135,7 +135,7 @@ should PD iterate the API
 and Logstash hasn't updated yet</p>
 
 <h4> 
-  <a name="setting_service_key">
+  <a name="service_key">
     service_key (required setting)
     
 </a>
@@ -149,7 +149,7 @@ and Logstash hasn't updated yet</p>
 <p>Service API Key</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -166,7 +166,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

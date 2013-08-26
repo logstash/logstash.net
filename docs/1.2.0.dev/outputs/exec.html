@@ -29,8 +29,8 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   exec {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_command">command</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#command">command</a> => ... # string (required)
   }
 }
 </code></pre>
@@ -38,7 +38,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -52,7 +52,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_command">
+  <a name="command">
     command (required setting)
     
 </a>
@@ -66,7 +66,7 @@ This is what it might look like in your config file:
 <p>Command line to execute via subprocess. Use dtach or screen to make it non blocking</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -81,7 +81,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -98,7 +98,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

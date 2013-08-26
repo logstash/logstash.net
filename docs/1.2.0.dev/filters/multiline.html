@@ -16,16 +16,16 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   multiline {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_negate">negate</a> => ... # boolean (optional), default: false
-    <a href="#setting_pattern">pattern</a> => ... # string (required)
-    <a href="#setting_patterns_dir">patterns_dir</a> => ... # array (optional), default: []
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_source">source</a> => ... # string (optional), default: "message"
-    <a href="#setting_stream_identity">stream_identity</a> => ... # string (optional), default: "%{host}-%{path}-%{type}"
-    <a href="#setting_what">what</a> => ... # string, one of ["previous", "next"] (required)
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#negate">negate</a> => ... # boolean (optional), default: false
+    <a href="#pattern">pattern</a> => ... # string (required)
+    <a href="#patterns_dir">patterns_dir</a> => ... # array (optional), default: []
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (optional), default: "message"
+    <a href="#stream_identity">stream_identity</a> => ... # string (optional), default: "%{host}-%{path}-%{type}"
+    <a href="#what">what</a> => ... # string, one of ["previous", "next"] (required)
   }
 }
 </code></pre>
@@ -33,7 +33,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -50,18 +50,18 @@ Example:</p>
 
 <pre><code>filter {
   multiline {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -87,7 +87,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -104,7 +104,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_negate">
+  <a name="negate">
     negate
     
 </a>
@@ -118,7 +118,7 @@ Optional.</p>
 
 
 <h4> 
-  <a name="setting_pattern">
+  <a name="pattern">
     pattern (required setting)
     
 </a>
@@ -134,7 +134,7 @@ THe idea is that we want the register method to cause an abort
 giving the user a clue to use the codec instead of the filter.</p>
 
 <h4> 
-  <a name="setting_patterns_dir">
+  <a name="patterns_dir">
     patterns_dir
     
 </a>
@@ -148,7 +148,7 @@ giving the user a clue to use the codec instead of the filter.</p>
 
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -174,7 +174,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -200,7 +200,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_source">
+  <a name="source">
     source
     
 </a>
@@ -214,7 +214,7 @@ would remove the tag "foo_hello" if it is present</p>
 
 
 <h4> 
-  <a name="setting_stream_identity">
+  <a name="stream_identity">
     stream_identity
     
 </a>
@@ -228,7 +228,7 @@ would remove the tag "foo_hello" if it is present</p>
 
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -244,7 +244,7 @@ would remove the tag "foo_hello" if it is present</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -264,7 +264,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_what">
+  <a name="what">
     what (required setting)
     
 </a>

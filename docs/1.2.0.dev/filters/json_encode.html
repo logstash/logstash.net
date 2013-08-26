@@ -1,15 +1,11 @@
 ---
-title: logstash docs for filters/grep
+title: logstash docs for filters/json_encode
 layout: content_right
 ---
-<h2>grep</h2>
-<h3>Milestone: <a href="../plugin-milestones">3</a></h3>
+<h2>json_encode</h2>
+<h3>Milestone: <a href="../plugin-milestones"></a></h3>
 
-<p>Grep filter. Useful for dropping events you don't want to pass, or
-adding tags or fields to events that match.</p>
-
-<p>Events not matched are dropped. If 'negate' is set to true (defaults false),
-then matching events are dropped.</p>
+<p>JSON encode filter. Takes a field and serializes it into JSON</p>
 
 
 <h3> Synopsis </h3>
@@ -17,13 +13,10 @@ then matching events are dropped.</p>
 This is what it might look like in your config file:
 
 <pre><code>filter {
-  grep {
+  json_encode {
+    <a href="#/[A-Za-z0-9_@-]+/">/[A-Za-z0-9_@-]+/</a> => ... # string (optional)
     <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
     <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#drop">drop</a> => ... # boolean (optional), default: true
-    <a href="#ignore_case">ignore_case</a> => ... # boolean (optional), default: false
-    <a href="#match">match</a> => ... # hash (optional), default: {}
-    <a href="#negate">negate</a> => ... # boolean (optional), default: false
     <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
     <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
   }
@@ -31,6 +24,38 @@ This is what it might look like in your config file:
 </code></pre>
 
 <h3> Details </h3>
+
+<h4> 
+  <a name="/[A-Za-z0-9_@-]+/">
+    /[A-Za-z0-9_@-]+/
+    
+</a>
+</h4>
+
+<ul>
+  <li> The configuration attribute name here is anything that matches the above regular expression. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Config for json_encode is:</p>
+
+<ul>
+<li>source => dest</li>
+</ul>
+
+
+<p>For example, if you have a field named 'foo', and you want to store the
+JSON encoded string in 'bar', do this:</p>
+
+<pre><code>filter {
+  json_encode {
+    foo =&gt; bar
+  }
+}
+</code></pre>
+
+<p>Note: if the "dest" field already exists, it will be overridden.</p>
 
 <h4> 
   <a name="add_field">
@@ -49,7 +74,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 Example:</p>
 
 <pre><code>filter {
-  grep {
+  json_encode {
     add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
@@ -77,7 +102,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  grep {
+  json_encode {
     add_tag =&gt; [ "foo_%{somefield}" ]
   }
 }
@@ -85,24 +110,6 @@ syntax. Example:</p>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add a tag "foo_hello"</p>
-
-<h4> 
-  <a name="drop">
-    drop
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
-  <li> Default value is true </li>
-</ul>
-
-<p>Drop events that don't match</p>
-
-<p>If this is set to false, no events will be dropped at all. Rather, the
-requested tags and fields will be added to matching events, and
-non-matching events will be passed through unchanged.</p>
 
 <h4> 
   <a name="exclude_tags">
@@ -122,68 +129,6 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="ignore_case">
-    ignore_case
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
-  <li> Default value is false </li>
-</ul>
-
-<p>Use case-insensitive matching. Similar to 'grep -i'</p>
-
-<p>If enabled, ignore case distinctions in the patterns.</p>
-
-<h4> 
-  <a name="match">
-    match
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#hash">hash</a> </li>
-  <li> Default value is {} </li>
-</ul>
-
-<p>A hash of matches of field => regexp.  If multiple matches are specified,
-all must match for the grep to be considered successful.  Normal regular
-expressions are supported here.</p>
-
-<p>For example:</p>
-
-<pre><code>filter {
-  grep {
-    match =&gt; [ "message", "hello world" ]
-  }
-}
-</code></pre>
-
-<p>The above will drop all events with a message not matching "hello world" as
-a regular expression.</p>
-
-<h4> 
-  <a name="negate">
-    negate
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
-  <li> Default value is false </li>
-</ul>
-
-<p>Negate the match. Similar to 'grep -v'</p>
-
-<p>If this is set to true, then any positive matches will result in the
-event being cancelled and dropped. Non-matching will be allowed
-through.</p>
-
-<h4> 
   <a name="remove_field">
     remove_field
     
@@ -200,7 +145,7 @@ Fields names can be dynamic and include parts of the event using the %{field}
 Example:</p>
 
 <pre><code>filter {
-  grep {
+  json_encode {
     remove_field =&gt; [ "foo_%{somefield}" ]
   }
 }
@@ -226,7 +171,7 @@ Tags can be dynamic and include parts of the event using the %{field}
 syntax. Example:</p>
 
 <pre><code>filter {
-  grep {
+  json_encode {
     remove_tag =&gt; [ "foo_%{somefield}" ]
   }
 }
@@ -274,4 +219,4 @@ Optional.</p>
 
 <hr>
 
-This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/filters/grep.rb">lib/logstash/filters/grep.rb</a>
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/filters/json_encode.rb">lib/logstash/filters/json_encode.rb</a>

@@ -17,18 +17,18 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   syslog {
-    <a href="#setting_appname">appname</a> => ... # string (optional), default: "LOGSTASH"
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_facility">facility</a> => ... # string, one of ["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7"] (required)
-    <a href="#setting_host">host</a> => ... # string (required)
-    <a href="#setting_msgid">msgid</a> => ... # string (optional), default: "-"
-    <a href="#setting_port">port</a> => ... # number (required)
-    <a href="#setting_procid">procid</a> => ... # string (optional), default: "-"
-    <a href="#setting_protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "udp"
-    <a href="#setting_rfc">rfc</a> => ... # string, one of ["rfc3164", "rfc5424"] (optional), default: "rfc3164"
-    <a href="#setting_severity">severity</a> => ... # string, one of ["emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"] (required)
-    <a href="#setting_sourcehost">sourcehost</a> => ... # string (optional), default: "%{@source_host}"
-    <a href="#setting_timestamp">timestamp</a> => ... # string (optional), default: "%{@timestamp}"
+    <a href="#appname">appname</a> => ... # string (optional), default: "LOGSTASH"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#facility">facility</a> => ... # string, one of ["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7"] (required)
+    <a href="#host">host</a> => ... # string (required)
+    <a href="#msgid">msgid</a> => ... # string (optional), default: "-"
+    <a href="#port">port</a> => ... # number (required)
+    <a href="#procid">procid</a> => ... # string (optional), default: "-"
+    <a href="#protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "udp"
+    <a href="#rfc">rfc</a> => ... # string, one of ["rfc3164", "rfc5424"] (optional), default: "rfc3164"
+    <a href="#severity">severity</a> => ... # string, one of ["emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"] (required)
+    <a href="#sourcehost">sourcehost</a> => ... # string (optional), default: "%{source}"
+    <a href="#timestamp">timestamp</a> => ... # string (optional), default: "%{@timestamp}"
   }
 }
 </code></pre>
@@ -36,7 +36,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_appname">
+  <a name="appname">
     appname
     
 </a>
@@ -50,7 +50,7 @@ This is what it might look like in your config file:
 <p>application name for syslog message</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -64,7 +64,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -79,7 +79,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_facility">
+  <a name="facility">
     facility (required setting)
     
 </a>
@@ -93,7 +93,7 @@ This is what it might look like in your config file:
 <p>facility label for syslog message</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host (required setting)
     
 </a>
@@ -107,7 +107,7 @@ This is what it might look like in your config file:
 <p>syslog server address to connect to</p>
 
 <h4> 
-  <a name="setting_msgid">
+  <a name="msgid">
     msgid
     
 </a>
@@ -121,7 +121,7 @@ This is what it might look like in your config file:
 <p>message id for syslog message</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port (required setting)
     
 </a>
@@ -135,7 +135,7 @@ This is what it might look like in your config file:
 <p>syslog server port to connect to</p>
 
 <h4> 
-  <a name="setting_procid">
+  <a name="procid">
     procid
     
 </a>
@@ -149,7 +149,7 @@ This is what it might look like in your config file:
 <p>process id for syslog message</p>
 
 <h4> 
-  <a name="setting_protocol">
+  <a name="protocol">
     protocol
     
 </a>
@@ -163,7 +163,7 @@ This is what it might look like in your config file:
 <p>syslog server protocol. you can choose between udp and tcp</p>
 
 <h4> 
-  <a name="setting_rfc">
+  <a name="rfc">
     rfc
     
 </a>
@@ -177,7 +177,7 @@ This is what it might look like in your config file:
 <p>syslog message format: you can choose between rfc3164 or rfc5424</p>
 
 <h4> 
-  <a name="setting_severity">
+  <a name="severity">
     severity (required setting)
     
 </a>
@@ -191,7 +191,7 @@ This is what it might look like in your config file:
 <p>severity label for syslog message</p>
 
 <h4> 
-  <a name="setting_sourcehost">
+  <a name="sourcehost">
     sourcehost
     
 </a>
@@ -199,13 +199,13 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source_host}" </li>
+  <li> Default value is "%{source}" </li>
 </ul>
 
 <p>source host for syslog message</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -222,7 +222,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_timestamp">
+  <a name="timestamp">
     timestamp
     
 </a>
@@ -236,7 +236,7 @@ Optional.</p>
 <p>timestamp for syslog message</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

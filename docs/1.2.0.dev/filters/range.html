@@ -23,12 +23,12 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   range {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_negate">negate</a> => ... # boolean (optional), default: false
-    <a href="#setting_ranges">ranges</a> => ... # array (optional), default: []
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#negate">negate</a> => ... # boolean (optional), default: false
+    <a href="#ranges">ranges</a> => ... # array (optional), default: []
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
   }
 }
 </code></pre>
@@ -36,7 +36,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -53,18 +53,18 @@ Example:</p>
 
 <pre><code>filter {
   range {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -90,7 +90,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -107,7 +107,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_negate">
+  <a name="negate">
     negate
     
 </a>
@@ -121,7 +121,7 @@ Optional.</p>
 <p>Negate the range match logic, events should be outsize of the specificed range to match.</p>
 
 <h4> 
-  <a name="setting_ranges">
+  <a name="ranges">
     ranges
     
 </a>
@@ -145,7 +145,7 @@ Example:</p>
                 "duration", 101, 200, "field:latency:normal",
                 "duration", 201, 1000, "field:latency:slow",
                 "duration", 1001, 1e1000, "field:latency:outlier" 
-                "requests", 0, 10, "tag:to_few_%{@host_source}_requests" ]
+                "requests", 0, 10, "tag:to_few_%{source}_requests" ]
   }
 }
 </code></pre>
@@ -157,7 +157,7 @@ Added tag names and field names and field values can have %{dynamic} values.</p>
 TODO(piavlo): simple not nested hashses as values in addition to numaric and string values to prettify the syntax.</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -183,7 +183,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -209,7 +209,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -225,7 +225,7 @@ would remove the tag "foo_hello" if it is present</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

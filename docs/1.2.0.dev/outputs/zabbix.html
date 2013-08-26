@@ -31,7 +31,7 @@ fields.</p>
      match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
      add_tag =&gt; [ "zabbix-sender" ]
      add_field =&gt; [
-       "zabbix_host", "%{@source_host}",
+       "zabbix_host", "%{source_host}",
        "zabbix_item", "item.key"
      ]
   }
@@ -63,10 +63,10 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   zabbix {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_port">port</a> => ... # number (optional), default: 10051
-    <a href="#setting_zabbix_sender">zabbix_sender</a> => ... # a valid filesystem path (optional), default: "/usr/local/bin/zabbix_sender"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#port">port</a> => ... # number (optional), default: 10051
+    <a href="#zabbix_sender">zabbix_sender</a> => ... # a valid filesystem path (optional), default: "/usr/local/bin/zabbix_sender"
   }
 }
 </code></pre>
@@ -74,7 +74,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -88,7 +88,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -103,7 +103,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -117,7 +117,7 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -131,7 +131,7 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -148,7 +148,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -166,7 +166,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_zabbix_sender">
+  <a name="zabbix_sender">
     zabbix_sender
     
 </a>

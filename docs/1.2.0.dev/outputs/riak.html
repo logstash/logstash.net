@@ -15,16 +15,16 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   riak {
-    <a href="#setting_bucket">bucket</a> => ... # array (optional), default: ["logstash-%{+YYYY.MM.dd}"]
-    <a href="#setting_bucket_props">bucket_props</a> => ... # hash (optional)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_enable_search">enable_search</a> => ... # boolean (optional), default: false
-    <a href="#setting_enable_ssl">enable_ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_indices">indices</a> => ... # array (optional)
-    <a href="#setting_key_name">key_name</a> => ... # string (optional)
-    <a href="#setting_nodes">nodes</a> => ... # hash (optional), default: {"localhost"=>"8098"}
-    <a href="#setting_proto">proto</a> => ... # string, one of ["http", "pb"] (optional), default: "http"
-    <a href="#setting_ssl_opts">ssl_opts</a> => ... # hash (optional)
+    <a href="#bucket">bucket</a> => ... # array (optional), default: ["logstash-%{+YYYY.MM.dd}"]
+    <a href="#bucket_props">bucket_props</a> => ... # hash (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#enable_search">enable_search</a> => ... # boolean (optional), default: false
+    <a href="#enable_ssl">enable_ssl</a> => ... # boolean (optional), default: false
+    <a href="#indices">indices</a> => ... # array (optional)
+    <a href="#key_name">key_name</a> => ... # string (optional)
+    <a href="#nodes">nodes</a> => ... # hash (optional), default: {"localhost"=>"8098"}
+    <a href="#proto">proto</a> => ... # string, one of ["http", "pb"] (optional), default: "http"
+    <a href="#ssl_opts">ssl_opts</a> => ... # hash (optional)
   }
 }
 </code></pre>
@@ -32,7 +32,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_bucket">
+  <a name="bucket">
     bucket
     
 </a>
@@ -51,7 +51,7 @@ but any bucket-specific settings defined
 apply to ALL the buckets.</p>
 
 <h4> 
-  <a name="setting_bucket_props">
+  <a name="bucket_props">
     bucket_props
     
 </a>
@@ -73,7 +73,7 @@ hash or array values
 Properties will be passed as-is</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -87,7 +87,7 @@ Properties will be passed as-is</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_enable_search">
+  <a name="enable_search">
     enable_search
     
 </a>
@@ -102,7 +102,7 @@ Properties will be passed as-is</p>
 Enable search on the bucket defined above</p>
 
 <h4> 
-  <a name="setting_enable_ssl">
+  <a name="enable_ssl">
     enable_ssl
     
 </a>
@@ -117,7 +117,7 @@ Enable search on the bucket defined above</p>
 Enable SSL</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -132,7 +132,7 @@ Enable SSL</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_indices">
+  <a name="indices">
     indices
     
 </a>
@@ -150,7 +150,7 @@ e.g.
 Off by default as not everyone runs eleveldb</p>
 
 <h4> 
-  <a name="setting_key_name">
+  <a name="key_name">
     key_name
     
 </a>
@@ -167,7 +167,7 @@ variables are valid here.</p>
 <p>Choose this carefully. Best to let riak decide....</p>
 
 <h4> 
-  <a name="setting_nodes">
+  <a name="nodes">
     nodes
     
 </a>
@@ -185,7 +185,7 @@ e.g
 ["node1", "8098", "node2", "8098"]</p>
 
 <h4> 
-  <a name="setting_proto">
+  <a name="proto">
     proto
     
 </a>
@@ -202,7 +202,7 @@ Applies to ALL backends listed above
 No mix and match</p>
 
 <h4> 
-  <a name="setting_ssl_opts">
+  <a name="ssl_opts">
     ssl_opts
     
 </a>
@@ -224,7 +224,7 @@ Per the riak client docs, the above sample options
 will turn on SSL</code>VERIFY_PEER`</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -241,7 +241,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

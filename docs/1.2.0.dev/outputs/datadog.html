@@ -14,15 +14,15 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   datadog {
-    <a href="#setting_alert_type">alert_type</a> => ... # string, one of ["info", "error", "warning", "success"] (optional)
-    <a href="#setting_api_key">api_key</a> => ... # string (required)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_date_happened">date_happened</a> => ... # string (optional)
-    <a href="#setting_dd_tags">dd_tags</a> => ... # array (optional)
-    <a href="#setting_priority">priority</a> => ... # string, one of ["normal", "low"] (optional)
-    <a href="#setting_source_type_name">source_type_name</a> => ... # string, one of ["nagios", "hudson", "jenkins", "user", "my apps", "feed", "chef", "puppet", "git", "bitbucket", "fabric", "capistrano"] (optional), default: "my apps"
-    <a href="#setting_text">text</a> => ... # string (optional), default: "%{@message}"
-    <a href="#setting_title">title</a> => ... # string (optional), default: "Logstash event for %{@source_host}"
+    <a href="#alert_type">alert_type</a> => ... # string, one of ["info", "error", "warning", "success"] (optional)
+    <a href="#api_key">api_key</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#date_happened">date_happened</a> => ... # string (optional)
+    <a href="#dd_tags">dd_tags</a> => ... # array (optional)
+    <a href="#priority">priority</a> => ... # string, one of ["normal", "low"] (optional)
+    <a href="#source_type_name">source_type_name</a> => ... # string, one of ["nagios", "hudson", "jenkins", "user", "my apps", "feed", "chef", "puppet", "git", "bitbucket", "fabric", "capistrano"] (optional), default: "my apps"
+    <a href="#text">text</a> => ... # string (optional), default: "%{message}"
+    <a href="#title">title</a> => ... # string (optional), default: "Logstash event for %{source}"
   }
 }
 </code></pre>
@@ -30,7 +30,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_alert_type">
+  <a name="alert_type">
     alert_type
     
 </a>
@@ -44,7 +44,7 @@ This is what it might look like in your config file:
 <p>Alert type</p>
 
 <h4> 
-  <a name="setting_api_key">
+  <a name="api_key">
     api_key (required setting)
     
 </a>
@@ -64,7 +64,7 @@ these will be one-shot events</p>
 <p>Your DatadogHQ API key</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -78,7 +78,7 @@ these will be one-shot events</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_date_happened">
+  <a name="date_happened">
     date_happened
     
 </a>
@@ -92,7 +92,7 @@ these will be one-shot events</p>
 <p>Date Happened</p>
 
 <h4> 
-  <a name="setting_dd_tags">
+  <a name="dd_tags">
     dd_tags
     
 </a>
@@ -108,7 +108,7 @@ Set any custom tags for this event
 Default are the Logstash tags if any</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -123,7 +123,7 @@ Default are the Logstash tags if any</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_priority">
+  <a name="priority">
     priority
     
 </a>
@@ -137,7 +137,7 @@ Default are the Logstash tags if any</p>
 <p>Priority</p>
 
 <h4> 
-  <a name="setting_source_type_name">
+  <a name="source_type_name">
     source_type_name
     
 </a>
@@ -151,7 +151,7 @@ Default are the Logstash tags if any</p>
 <p>Source type name</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -168,7 +168,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_text">
+  <a name="text">
     text
     
 </a>
@@ -176,13 +176,13 @@ Optional.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@message}" </li>
+  <li> Default value is "%{message}" </li>
 </ul>
 
 <p>Text</p>
 
 <h4> 
-  <a name="setting_title">
+  <a name="title">
     title
     
 </a>
@@ -190,13 +190,13 @@ Optional.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "Logstash event for %{@source_host}" </li>
+  <li> Default value is "Logstash event for %{source}" </li>
 </ul>
 
 <p>Title</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

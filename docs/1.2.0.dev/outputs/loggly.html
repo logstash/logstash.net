@@ -20,14 +20,14 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   loggly {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_host">host</a> => ... # string (optional), default: "logs.loggly.com"
-    <a href="#setting_key">key</a> => ... # string (required)
-    <a href="#setting_proto">proto</a> => ... # string (optional), default: "http"
-    <a href="#setting_proxy_host">proxy_host</a> => ... # string (optional)
-    <a href="#setting_proxy_password">proxy_password</a> => ... # password (optional), default: ""
-    <a href="#setting_proxy_port">proxy_port</a> => ... # number (optional)
-    <a href="#setting_proxy_user">proxy_user</a> => ... # string (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#host">host</a> => ... # string (optional), default: "logs.loggly.com"
+    <a href="#key">key</a> => ... # string (required)
+    <a href="#proto">proto</a> => ... # string (optional), default: "http"
+    <a href="#proxy_host">proxy_host</a> => ... # string (optional)
+    <a href="#proxy_password">proxy_password</a> => ... # password (optional), default: ""
+    <a href="#proxy_port">proxy_port</a> => ... # number (optional)
+    <a href="#proxy_user">proxy_user</a> => ... # string (optional)
   }
 }
 </code></pre>
@@ -35,7 +35,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -49,7 +49,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -64,7 +64,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -79,7 +79,7 @@ This is what it might look like in your config file:
 server which is usually "logs.loggly.com"</p>
 
 <h4> 
-  <a name="setting_key">
+  <a name="key">
     key (required setting)
     
 </a>
@@ -103,7 +103,7 @@ the event. This is mainly aimed at multitenant hosting providers who want
 to offer shipping a customer's logs to that customer's loggly account.</p>
 
 <h4> 
-  <a name="setting_proto">
+  <a name="proto">
     proto
     
 </a>
@@ -117,7 +117,7 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
 <p>Should the log action be sent over https instead of plain http</p>
 
 <h4> 
-  <a name="setting_proxy_host">
+  <a name="proxy_host">
     proxy_host
     
 </a>
@@ -131,7 +131,7 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
 <p>Proxy Host</p>
 
 <h4> 
-  <a name="setting_proxy_password">
+  <a name="proxy_password">
     proxy_password
     
 </a>
@@ -145,7 +145,7 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
 <p>Proxy Password</p>
 
 <h4> 
-  <a name="setting_proxy_port">
+  <a name="proxy_port">
     proxy_port
     
 </a>
@@ -159,7 +159,7 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
 <p>Proxy Port</p>
 
 <h4> 
-  <a name="setting_proxy_user">
+  <a name="proxy_user">
     proxy_user
     
 </a>
@@ -173,7 +173,7 @@ to offer shipping a customer's logs to that customer's loggly account.</p>
 <p>Proxy Username</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -190,7 +190,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

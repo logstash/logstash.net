@@ -24,20 +24,20 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   rabbitmq {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_durable">durable</a> => ... # boolean (optional), default: true
-    <a href="#setting_exchange">exchange</a> => ... # string (required)
-    <a href="#setting_exchange_type">exchange_type</a> => ... # string, one of ["fanout", "direct", "topic"] (required)
-    <a href="#setting_host">host</a> => ... # string (required)
-    <a href="#setting_key">key</a> => ... # string (optional), default: "logstash"
-    <a href="#setting_password">password</a> => ... # password (optional), default: "guest"
-    <a href="#setting_persistent">persistent</a> => ... # boolean (optional), default: true
-    <a href="#setting_port">port</a> => ... # number (optional), default: 5672
-    <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_user">user</a> => ... # string (optional), default: "guest"
-    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#durable">durable</a> => ... # boolean (optional), default: true
+    <a href="#exchange">exchange</a> => ... # string (required)
+    <a href="#exchange_type">exchange_type</a> => ... # string, one of ["fanout", "direct", "topic"] (required)
+    <a href="#host">host</a> => ... # string (required)
+    <a href="#key">key</a> => ... # string (optional), default: "logstash"
+    <a href="#password">password</a> => ... # password (optional), default: "guest"
+    <a href="#persistent">persistent</a> => ... # boolean (optional), default: true
+    <a href="#port">port</a> => ... # number (optional), default: 5672
+    <a href="#ssl">ssl</a> => ... # boolean (optional), default: false
+    <a href="#user">user</a> => ... # string (optional), default: "guest"
+    <a href="#verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
+    <a href="#vhost">vhost</a> => ... # string (optional), default: "/"
   }
 }
 </code></pre>
@@ -45,7 +45,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -59,7 +59,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -73,7 +73,7 @@ This is what it might look like in your config file:
 <p>Enable or disable logging</p>
 
 <h4> 
-  <a name="setting_durable">
+  <a name="durable">
     durable
     
 </a>
@@ -87,7 +87,7 @@ This is what it might look like in your config file:
 <p>Is this exchange durable? (aka; Should it survive a broker restart?)</p>
 
 <h4> 
-  <a name="setting_exchange">
+  <a name="exchange">
     exchange (required setting)
     
 </a>
@@ -101,7 +101,7 @@ This is what it might look like in your config file:
 <p>The name of the exchange</p>
 
 <h4> 
-  <a name="setting_exchange_type">
+  <a name="exchange_type">
     exchange_type (required setting)
     
 </a>
@@ -117,7 +117,7 @@ This is what it might look like in your config file:
 <p>The exchange type (fanout, topic, direct)</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -132,7 +132,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host (required setting)
     
 </a>
@@ -148,7 +148,7 @@ This is what it might look like in your config file:
 <p>RabbitMQ server address</p>
 
 <h4> 
-  <a name="setting_key">
+  <a name="key">
     key
     
 </a>
@@ -167,7 +167,7 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_password">
+  <a name="password">
     password
     
 </a>
@@ -181,7 +181,7 @@ This is what it might look like in your config file:
 <p>RabbitMQ password</p>
 
 <h4> 
-  <a name="setting_persistent">
+  <a name="persistent">
     persistent
     
 </a>
@@ -195,7 +195,7 @@ This is what it might look like in your config file:
 <p>Should RabbitMQ persist messages to disk?</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -209,7 +209,7 @@ This is what it might look like in your config file:
 <p>RabbitMQ port to connect on</p>
 
 <h4> 
-  <a name="setting_ssl">
+  <a name="ssl">
     ssl
     
 </a>
@@ -223,7 +223,7 @@ This is what it might look like in your config file:
 <p>Enable or disable SSL</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -240,7 +240,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -258,7 +258,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_user">
+  <a name="user">
     user
     
 </a>
@@ -272,7 +272,7 @@ Optional.</p>
 <p>RabbitMQ username</p>
 
 <h4> 
-  <a name="setting_verify_ssl">
+  <a name="verify_ssl">
     verify_ssl
     
 </a>
@@ -286,7 +286,7 @@ Optional.</p>
 <p>Validate SSL certificate</p>
 
 <h4> 
-  <a name="setting_vhost">
+  <a name="vhost">
     vhost
     
 </a>

@@ -14,31 +14,29 @@ This is what it might look like in your config file:
 
 <pre><code>input {
   zenoss {
-    <a href="#setting_ack">ack</a> => ... # boolean (optional), default: true
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_arguments">arguments</a> => ... # array (optional), default: {}
-    <a href="#setting_auto_delete">auto_delete</a> => ... # boolean (optional), default: true
-    <a href="#setting_charset">charset</a> => ... # string, one of ["ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-31J", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "EUC-JP-2004", "EUC-JISX0213", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP932", "csWindows31J", "SJIS", "PCK", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal"] (optional), default: "UTF-8"
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_durable">durable</a> => ... # boolean (optional), default: false
-    <a href="#setting_exchange">exchange</a> => ... # string (optional), default: "zenoss.zenevents"
-    <a href="#setting_exclusive">exclusive</a> => ... # boolean (optional), default: true
-    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_key">key</a> => ... # string (optional), default: "zenoss.zenevent.#"
-    <a href="#setting_message_format">message_format</a> => ... # string (optional)
-    <a href="#setting_passive">passive</a> => ... # boolean (optional), default: false
-    <a href="#setting_password">password</a> => ... # password (optional), default: "zenoss"
-    <a href="#setting_port">port</a> => ... # number (optional), default: 5672
-    <a href="#setting_prefetch_count">prefetch_count</a> => ... # number (optional), default: 256
-    <a href="#setting_queue">queue</a> => ... # string (optional), default: ""
-    <a href="#setting_ssl">ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_tags">tags</a> => ... # array (optional)
-    <a href="#setting_threads">threads</a> => ... # number (optional), default: 1
-    <a href="#setting_type">type</a> => ... # string (optional)
-    <a href="#setting_user">user</a> => ... # string (optional), default: "zenoss"
-    <a href="#setting_verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
-    <a href="#setting_vhost">vhost</a> => ... # string (optional), default: "/zenoss"
+    <a href="#ack">ack</a> => ... # boolean (optional), default: true
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#arguments">arguments</a> => ... # array (optional), default: {}
+    <a href="#auto_delete">auto_delete</a> => ... # boolean (optional), default: true
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#durable">durable</a> => ... # boolean (optional), default: false
+    <a href="#exchange">exchange</a> => ... # string (optional), default: "zenoss.zenevents"
+    <a href="#exclusive">exclusive</a> => ... # boolean (optional), default: true
+    <a href="#host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#key">key</a> => ... # string (optional), default: "zenoss.zenevent.#"
+    <a href="#passive">passive</a> => ... # boolean (optional), default: false
+    <a href="#password">password</a> => ... # password (optional), default: "zenoss"
+    <a href="#port">port</a> => ... # number (optional), default: 5672
+    <a href="#prefetch_count">prefetch_count</a> => ... # number (optional), default: 256
+    <a href="#queue">queue</a> => ... # string (optional), default: ""
+    <a href="#ssl">ssl</a> => ... # boolean (optional), default: false
+    <a href="#tags">tags</a> => ... # array (optional)
+    <a href="#threads">threads</a> => ... # number (optional), default: 1
+    <a href="#type">type</a> => ... # string (optional)
+    <a href="#user">user</a> => ... # string (optional), default: "zenoss"
+    <a href="#verify_ssl">verify_ssl</a> => ... # boolean (optional), default: false
+    <a href="#vhost">vhost</a> => ... # string (optional), default: "/zenoss"
   }
 }
 </code></pre>
@@ -46,7 +44,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_ack">
+  <a name="ack">
     ack
     
 </a>
@@ -60,7 +58,7 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -74,7 +72,7 @@ This is what it might look like in your config file:
 <p>Add a field to an event</p>
 
 <h4> 
-  <a name="setting_arguments">
+  <a name="arguments">
     arguments
     
 </a>
@@ -88,7 +86,7 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_auto_delete">
+  <a name="auto_delete">
     auto_delete
     
 </a>
@@ -102,15 +100,16 @@ This is what it might look like in your config file:
 
 
 <h4> 
-  <a name="setting_charset">
+  <a name="charset">
     charset
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
-  <li> Value can be any of: "ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-31J", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "EUC-JP-2004", "EUC-JISX0213", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP932", "csWindows31J", "SJIS", "PCK", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal" </li>
-  <li> Default value is "UTF-8" </li>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value can be any of: "ASCII-8BIT", "UTF-8", "US-ASCII", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "BINARY", "IBM437", "CP437", "IBM737", "CP737", "IBM775", "CP775", "CP850", "IBM850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "CP857", "IBM860", "CP860", "IBM861", "CP861", "IBM862", "CP862", "IBM863", "CP863", "IBM864", "CP864", "IBM865", "CP865", "IBM866", "CP866", "IBM869", "CP869", "Windows-1258", "CP1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "Big5-HKSCS:2008", "CP951", "stateless-ISO-2022-JP", "eucJP", "eucJP-ms", "euc-jp-ms", "CP51932", "eucKR", "eucTW", "GB2312", "EUC-CN", "eucCN", "GB12345", "CP936", "ISO-2022-JP", "ISO2022-JP", "ISO-2022-JP-2", "ISO2022-JP2", "CP50220", "CP50221", "ISO8859-1", "Windows-1252", "CP1252", "ISO8859-2", "Windows-1250", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "Windows-1256", "CP1256", "ISO8859-7", "Windows-1253", "CP1253", "ISO8859-8", "Windows-1255", "CP1255", "ISO8859-9", "Windows-1254", "CP1254", "ISO8859-10", "ISO8859-11", "TIS-620", "Windows-874", "CP874", "ISO8859-13", "Windows-1257", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "Windows-31J", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapanese", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "UTF-7", "CP65000", "CP65001", "UTF8-MAC", "UTF-8-MAC", "UTF-8-HFS", "UTF-16", "UTF-32", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "locale", "external", "filesystem", "internal" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
 <p>The character encoding used in this input. Examples include "UTF-8"
@@ -122,7 +121,7 @@ or in another character set other than UTF-8.</p>
 <p>This only affects "plain" format logs since json is UTF-8 already.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -136,7 +135,7 @@ or in another character set other than UTF-8.</p>
 <p>The codec used for input data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -150,7 +149,7 @@ or in another character set other than UTF-8.</p>
 <p>Set this to true to enable debugging on an input.</p>
 
 <h4> 
-  <a name="setting_durable">
+  <a name="durable">
     durable
     
 </a>
@@ -164,7 +163,7 @@ or in another character set other than UTF-8.</p>
 
 
 <h4> 
-  <a name="setting_exchange">
+  <a name="exchange">
     exchange
     
 </a>
@@ -179,7 +178,7 @@ or in another character set other than UTF-8.</p>
 output' <a href="../outputs/rabbitmq">config 'name'</a></p>
 
 <h4> 
-  <a name="setting_exclusive">
+  <a name="exclusive">
     exclusive
     
 </a>
@@ -193,7 +192,7 @@ output' <a href="../outputs/rabbitmq">config 'name'</a></p>
 
 
 <h4> 
-  <a name="setting_format">
+  <a name="format">
     format
      <strong>DEPRECATED</strong>
 </a>
@@ -208,7 +207,7 @@ output' <a href="../outputs/rabbitmq">config 'name'</a></p>
 <p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -222,7 +221,7 @@ output' <a href="../outputs/rabbitmq">config 'name'</a></p>
 <p>Your rabbitmq server address</p>
 
 <h4> 
-  <a name="setting_key">
+  <a name="key">
     key
     
 </a>
@@ -242,27 +241,28 @@ output' <a href="../outputs/rabbitmq">config 'name'</a></p>
 
 
 <h4> 
-  <a name="setting_message_format">
+  <a name="message_format">
     message_format
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> Value type is <a href="../configuration#string">string</a> </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
 <p>If format is "json", an event sprintf string to build what
 the display @message should be given (defaults to the raw JSON).
-sprintf format strings look like %{fieldname} or %{@metadata}.</p>
+sprintf format strings look like %{fieldname}</p>
 
 <p>If format is "json_event", ALL fields except for @type
 are expected to be present. Not receiving all fields
 will cause unexpected results.</p>
 
 <h4> 
-  <a name="setting_passive">
+  <a name="passive">
     passive
     
 </a>
@@ -276,7 +276,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_password">
+  <a name="password">
     password
     
 </a>
@@ -290,7 +290,7 @@ will cause unexpected results.</p>
 <p>Your rabbitmq password</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -304,7 +304,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_prefetch_count">
+  <a name="prefetch_count">
     prefetch_count
     
 </a>
@@ -318,7 +318,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_queue">
+  <a name="queue">
     queue
     
 </a>
@@ -332,7 +332,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_ssl">
+  <a name="ssl">
     ssl
     
 </a>
@@ -346,7 +346,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
     
 </a>
@@ -362,7 +362,7 @@ will cause unexpected results.</p>
 <p>This can help with processing later.</p>
 
 <h4> 
-  <a name="setting_threads">
+  <a name="threads">
     threads
     
 </a>
@@ -376,7 +376,7 @@ will cause unexpected results.</p>
 
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
     
 </a>
@@ -404,7 +404,7 @@ the shipper stays with that event for its life even
 when sent to another LogStash server.</p>
 
 <h4> 
-  <a name="setting_user">
+  <a name="user">
     user
     
 </a>
@@ -418,7 +418,7 @@ when sent to another LogStash server.</p>
 <p>Your rabbitmq username</p>
 
 <h4> 
-  <a name="setting_verify_ssl">
+  <a name="verify_ssl">
     verify_ssl
     
 </a>
@@ -432,7 +432,7 @@ when sent to another LogStash server.</p>
 
 
 <h4> 
-  <a name="setting_vhost">
+  <a name="vhost">
     vhost
     
 </a>

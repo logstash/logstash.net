@@ -16,13 +16,13 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   sleep {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_every">every</a> => ... # string (optional), default: 1
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_replay">replay</a> => ... # boolean (optional), default: false
-    <a href="#setting_time">time</a> => ... # string (optional)
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#every">every</a> => ... # string (optional), default: 1
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#replay">replay</a> => ... # boolean (optional), default: false
+    <a href="#time">time</a> => ... # string (optional)
   }
 }
 </code></pre>
@@ -30,7 +30,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -47,18 +47,18 @@ Example:</p>
 
 <pre><code>filter {
   sleep {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -84,7 +84,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_every">
+  <a name="every">
     every
     
 </a>
@@ -108,7 +108,7 @@ would add a tag "foo_hello"</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -125,7 +125,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -151,7 +151,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -177,7 +177,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_replay">
+  <a name="replay">
     replay
     
 </a>
@@ -215,7 +215,7 @@ value of 0.25 will replay at 1/4th speed.</p>
 replay 2-times faster than the original time speed.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -231,7 +231,7 @@ replay 2-times faster than the original time speed.</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_time">
+  <a name="time">
     time
     
 </a>
@@ -260,7 +260,7 @@ to indicate the amount of time to sleep.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

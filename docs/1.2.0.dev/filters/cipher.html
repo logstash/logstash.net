@@ -15,20 +15,20 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   cipher {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_algorithm">algorithm</a> => ... # string (required)
-    <a href="#setting_base64">base64</a> => ... # boolean (optional), default: true
-    <a href="#setting_cipher_padding">cipher_padding</a> => ... # string (optional)
-    <a href="#setting_iv">iv</a> => ... # string (optional)
-    <a href="#setting_key">key</a> => ... # string (optional)
-    <a href="#setting_key_pad">key_pad</a> => ... #  (optional), default: "\u0000"
-    <a href="#setting_key_size">key_size</a> => ... # number (optional), default: 32
-    <a href="#setting_mode">mode</a> => ... # string (required)
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_source">source</a> => ... # string (optional), default: "message"
-    <a href="#setting_target">target</a> => ... # string (optional), default: "message"
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#algorithm">algorithm</a> => ... # string (required)
+    <a href="#base64">base64</a> => ... # boolean (optional), default: true
+    <a href="#cipher_padding">cipher_padding</a> => ... # string (optional)
+    <a href="#iv">iv</a> => ... # string (optional)
+    <a href="#key">key</a> => ... # string (optional)
+    <a href="#key_pad">key_pad</a> => ... #  (optional), default: "\x00"
+    <a href="#key_size">key_size</a> => ... # number (optional), default: 32
+    <a href="#mode">mode</a> => ... # string (required)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (optional), default: "message"
+    <a href="#target">target</a> => ... # string (optional), default: "message"
   }
 }
 </code></pre>
@@ -36,7 +36,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -53,18 +53,18 @@ Example:</p>
 
 <pre><code>filter {
   cipher {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -90,7 +90,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_algorithm">
+  <a name="algorithm">
     algorithm (required setting)
     
 </a>
@@ -109,7 +109,7 @@ would add a tag "foo_hello"</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_base64">
+  <a name="base64">
     base64
     
 </a>
@@ -126,7 +126,7 @@ would add a tag "foo_hello"</p>
 If we are encrypting, base64 will be done after.</p>
 
 <h4> 
-  <a name="setting_cipher_padding">
+  <a name="cipher_padding">
     cipher_padding
     
 </a>
@@ -155,7 +155,7 @@ it, Set this parameter to 0</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -172,7 +172,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_iv">
+  <a name="iv">
     iv
     
 </a>
@@ -191,7 +191,7 @@ an IV, but there is almost no legitimate use case for this mode
 because of the fact that it does not sufficiently hide plaintext patterns.</p>
 
 <h4> 
-  <a name="setting_key">
+  <a name="key">
     key
     
 </a>
@@ -205,7 +205,7 @@ because of the fact that it does not sufficiently hide plaintext patterns.</p>
 <p>The key to use</p>
 
 <h4> 
-  <a name="setting_key_pad">
+  <a name="key_pad">
     key_pad
     
 </a>
@@ -213,13 +213,13 @@ because of the fact that it does not sufficiently hide plaintext patterns.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "\u0000" </li>
+  <li> Default value is "\x00" </li>
 </ul>
 
 <p>The character used to pad the key</p>
 
 <h4> 
-  <a name="setting_key_size">
+  <a name="key_size">
     key_size
     
 </a>
@@ -241,7 +241,7 @@ padding, don't set this parameter</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_mode">
+  <a name="mode">
     mode (required setting)
     
 </a>
@@ -257,7 +257,7 @@ padding, don't set this parameter</p>
 <p>Valid values are encrypt or decrypt</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -283,7 +283,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -309,7 +309,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_source">
+  <a name="source">
     source
     
 </a>
@@ -328,7 +328,7 @@ would remove the tag "foo_hello" if it is present</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -344,7 +344,7 @@ would remove the tag "foo_hello" if it is present</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_target">
+  <a name="target">
     target
     
 </a>
@@ -363,7 +363,7 @@ Optional.</p>
 </code></pre>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

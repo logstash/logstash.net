@@ -5,43 +5,7 @@ layout: content_right
 <h2>email</h2>
 <h3>Milestone: <a href="../plugin-milestones">1</a></h3>
 
-<p>https://github.com/mikel/mail
-supports equal(default), not equal(!), greater than(>), less than(&lt;), greater than or equal(>=), less than or equal(&lt;=), contains(<em>), does not contain(!</em>)
-you must provide a matchName - which is the key.  Then provide your query values - again in key value pairs, separated by a ',' in the value spot.
-You can say this :
-[ "response errors", "response,501,,or,response,301" ]
-I hate making requirements like this but this is the format that is the most flexible for making fine selections over data.
-NOTE: In the above example we are using just an equality test - so the two values must be exact for matches to be made. You must provide an AND/OR block
-between conditions so we know how to deal with them.  Please see below for an example where you wanted an AND instead of the OR default - this would require both to be valid.
-[ "response errors", "response,501,,and,response,301" ]
-as you can see you can just seperate the Operator logic with a blank key and the operator of your liking - AND/OR
-IMPORTANT : you MUST provide a "matchName". This is so I can easily be able to provide a label of sorts for the alert.<br/>
-In addition, we break after we find  the first valid match.</p>
-
-<p>  email {</p>
-
-<pre><code>   tags =&gt; [ "sometag" ]
-   match =&gt; [ "response errors", "response,501,,or,response,301",
-              "multiple response errors", "response,501,,and,response,301" ] 
-   to =&gt; "main.contact@domain.com"
-   from =&gt; "alert.account@domain.com" # default: logstash.alert@nowhere.com
-   cc =&gt; "" # provide additional recipients
-   options =&gt; [ "smtpIporHost", "smtp.gmail.com",
-                "port", "587",
-                "domain", "yourDomain", # optional
-                "userName", "yourSMTPUsername", 
-                "password", "PASS", 
-                "starttls", "true",
-                "authenticationType", "plain",
-                "debug", "true" # optional
-              ]
-   via =&gt; "smtp" # or pop or sendmail
-   subject =&gt; "Found '%{matchName}' Alert on %{@source_host}"
-   body =&gt; "Here is the event line %{@message}"
-   htmlbody =&gt; "&lt;h2&gt;%{matchName}&lt;/h2&gt;&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;Full Event&lt;/h3&gt;&lt;br/&gt;&lt;br/&gt;&lt;div align='center'&gt;%{@message}&lt;/div&gt;"
-</code></pre>
-
-<p>   }</p>
+<p>Send email when any event is received.</p>
 
 
 <h3> Synopsis </h3>
@@ -50,19 +14,18 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   email {
-    <a href="#setting_attachments">attachments</a> => ... # array (optional), default: []
-    <a href="#setting_body">body</a> => ... # string (optional), default: ""
-    <a href="#setting_cc">cc</a> => ... # string (optional), default: ""
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_contenttype">contenttype</a> => ... # string (optional), default: "text/html; charset=UTF-8"
-    <a href="#setting_from">from</a> => ... # string (optional), default: "logstash.alert@nowhere.com"
-    <a href="#setting_htmlbody">htmlbody</a> => ... # string (optional), default: ""
-    <a href="#setting_match">match</a> => ... # hash (required)
-    <a href="#setting_options">options</a> => ... # hash (optional), default: {}
-    <a href="#setting_replyto">replyto</a> => ... # string (optional)
-    <a href="#setting_subject">subject</a> => ... # string (optional), default: ""
-    <a href="#setting_to">to</a> => ... # string (required)
-    <a href="#setting_via">via</a> => ... # string (optional), default: "smtp"
+    <a href="#attachments">attachments</a> => ... # array (optional), default: []
+    <a href="#body">body</a> => ... # string (optional), default: ""
+    <a href="#cc">cc</a> => ... # string (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#contenttype">contenttype</a> => ... # string (optional), default: "text/html; charset=UTF-8"
+    <a href="#from">from</a> => ... # string (optional), default: "logstash.alert@nowhere.com"
+    <a href="#htmlbody">htmlbody</a> => ... # string (optional), default: ""
+    <a href="#options">options</a> => ... # hash (optional), default: {}
+    <a href="#replyto">replyto</a> => ... # string (optional)
+    <a href="#subject">subject</a> => ... # string (optional), default: ""
+    <a href="#to">to</a> => ... # string (required)
+    <a href="#via">via</a> => ... # string (optional), default: "smtp"
   }
 }
 </code></pre>
@@ -70,7 +33,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_attachments">
+  <a name="attachments">
     attachments
     
 </a>
@@ -84,7 +47,7 @@ This is what it might look like in your config file:
 <p>attachments - has of name of file and file location</p>
 
 <h4> 
-  <a name="setting_body">
+  <a name="body">
     body
     
 </a>
@@ -98,7 +61,7 @@ This is what it might look like in your config file:
 <p>body for email - just plain text</p>
 
 <h4> 
-  <a name="setting_cc">
+  <a name="cc">
     cc
     
 </a>
@@ -106,14 +69,15 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
-<p>cc - send to others
-See <em>to</em> field for accepted value description</p>
+<p>Who to CC on this email?</p>
+
+<p>See "to" setting for what is valid here.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -127,7 +91,7 @@ See <em>to</em> field for accepted value description</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_contenttype">
+  <a name="contenttype">
     contenttype
     
 </a>
@@ -141,7 +105,7 @@ See <em>to</em> field for accepted value description</p>
 <p>contenttype : for multipart messages, set the content type and/or charset of the html part</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -156,7 +120,7 @@ See <em>to</em> field for accepted value description</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_from">
+  <a name="from">
     from
     
 </a>
@@ -170,7 +134,7 @@ See <em>to</em> field for accepted value description</p>
 <p>The From setting for email - fully qualified email address for the From:</p>
 
 <h4> 
-  <a name="setting_htmlbody">
+  <a name="htmlbody">
     htmlbody
     
 </a>
@@ -184,28 +148,27 @@ See <em>to</em> field for accepted value description</p>
 <p>body for email - can contain html markup</p>
 
 <h4> 
-  <a name="setting_match">
-    match (required setting)
-    
+  <a name="match">
+    match
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> Value type is <a href="../configuration#hash">hash</a> </li>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The registered fields that we want to monitor
-A hash of matches of field => value
-Takes the form of:</p>
+<p>This setting is deprecated in favor of logstash's "conditionals" feature
+If you were using this setting previously, please use conditionals instead.</p>
 
-<p>   { "match name", "field.in.event,value.expected, , operand(and/or),field.in.event,value.expected, , or...",
-   "match name", "..." }</p>
-
-<p>The match name can be referenced using the <code>%{matchName}</code> field.</p>
+<p>If you need help converting your older 'match' setting to a conditional,
+I welcome you to join the #logstash irc channel on freenode or to email
+the logstash-users@googlegroups.com mailling list and ask for help! :)</p>
 
 <h4> 
-  <a name="setting_options">
+  <a name="options">
     options
     
 </a>
@@ -262,7 +225,7 @@ assigned the mail object.  So the above example will change only the :address va
 of the global smtp_settings to be 'some.host', keeping all other values</p>
 
 <h4> 
-  <a name="setting_replyto">
+  <a name="replyto">
     replyto
     
 </a>
@@ -277,7 +240,7 @@ of the global smtp_settings to be 'some.host', keeping all other values</p>
 here.</p>
 
 <h4> 
-  <a name="setting_subject">
+  <a name="subject">
     subject
     
 </a>
@@ -291,7 +254,7 @@ here.</p>
 <p>subject for email</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -308,7 +271,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_to">
+  <a name="to">
     to (required setting)
     
 </a>
@@ -319,12 +282,16 @@ Optional.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The To address setting - fully qualified email address to send to
-This field also accept a comma separated list of emails like "me@host.com, you@host.com"
-You can also use dynamic field from the event with the %{fieldname} syntax</p>
+<p>Who to send this email to?
+A fully qualified email address to send to</p>
+
+<p>This field also accept a comma separated list of emails like
+"me@host.com, you@host.com"</p>
+
+<p>You can also use dynamic field from the event with the %{fieldname} syntax.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -342,7 +309,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_via">
+  <a name="via">
     via
     
 </a>

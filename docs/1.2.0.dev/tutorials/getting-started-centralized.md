@@ -40,7 +40,7 @@ You'll most likely want the version of ElasticSearch specified by the
 [elasticsearch output](../outputs/elasticsearch) docs. Modify this in your shell
 for easy downloading of ElasticSearch:
 
-    ES_PACKAGE=elasticsearch-0.90.0.zip
+    ES_PACKAGE=elasticsearch-0.90.3.zip
     ES_DIR=${ES_PACKAGE%%.zip}
     SITE=https://download.elasticsearch.org/elasticsearch/elasticsearch
     if [ ! -d "$ES_DIR" ] ; then

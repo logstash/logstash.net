@@ -10,7 +10,7 @@ output for logstash. If you plan on using the logstash web interface, you'll
 need to use this output.</p>
 
 <p>  <em>VERSION NOTE</em>: Your elasticsearch cluster must be running elasticsearch
-  0.90.0. If you use any other version of elasticsearch,
+  0.90.3. If you use any other version of elasticsearch,
   you should consider using the <a href="elasticsearch_http">elasticsearch_http</a>
   output instead.</p>
 
@@ -40,19 +40,19 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   elasticsearch {
-    <a href="#setting_bind_host">bind_host</a> => ... # string (optional)
-    <a href="#setting_cluster">cluster</a> => ... # string (optional)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_document_id">document_id</a> => ... # string (optional), default: nil
-    <a href="#setting_embedded">embedded</a> => ... # boolean (optional), default: false
-    <a href="#setting_embedded_http_port">embedded_http_port</a> => ... # string (optional), default: "9200-9300"
-    <a href="#setting_flush_size">flush_size</a> => ... # number (optional), default: 100
-    <a href="#setting_host">host</a> => ... # string (optional)
-    <a href="#setting_idle_flush_time">idle_flush_time</a> => ... # number (optional), default: 1
-    <a href="#setting_index">index</a> => ... # string (optional), default: "logstash-%{+YYYY.MM.dd}"
-    <a href="#setting_index_type">index_type</a> => ... # string (optional)
-    <a href="#setting_node_name">node_name</a> => ... # string (optional)
-    <a href="#setting_port">port</a> => ... # string (optional), default: "9300-9400"
+    <a href="#bind_host">bind_host</a> => ... # string (optional)
+    <a href="#cluster">cluster</a> => ... # string (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#document_id">document_id</a> => ... # string (optional), default: nil
+    <a href="#embedded">embedded</a> => ... # boolean (optional), default: false
+    <a href="#embedded_http_port">embedded_http_port</a> => ... # string (optional), default: "9200-9300"
+    <a href="#flush_size">flush_size</a> => ... # number (optional), default: 100
+    <a href="#host">host</a> => ... # string (optional)
+    <a href="#idle_flush_time">idle_flush_time</a> => ... # number (optional), default: 1
+    <a href="#index">index</a> => ... # string (optional), default: "logstash-%{+YYYY.MM.dd}"
+    <a href="#index_type">index_type</a> => ... # string (optional)
+    <a href="#node_name">node_name</a> => ... # string (optional)
+    <a href="#port">port</a> => ... # string (optional), default: "9300-9400"
   }
 }
 </code></pre>
@@ -60,7 +60,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_bind_host">
+  <a name="bind_host">
     bind_host
     
 </a>
@@ -74,7 +74,7 @@ This is what it might look like in your config file:
 <p>The name/address of the host to bind to for ElasticSearch clustering</p>
 
 <h4> 
-  <a name="setting_cluster">
+  <a name="cluster">
     cluster
     
 </a>
@@ -89,7 +89,7 @@ This is what it might look like in your config file:
 for discovery.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -103,7 +103,7 @@ for discovery.</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_document_id">
+  <a name="document_id">
     document_id
     
 </a>
@@ -118,7 +118,7 @@ for discovery.</p>
 elasticsearch with the same ID.</p>
 
 <h4> 
-  <a name="setting_embedded">
+  <a name="embedded">
     embedded
     
 </a>
@@ -135,7 +135,7 @@ handles log processing and indexing; it saves you from needing to run
 a separate elasticsearch process.</p>
 
 <h4> 
-  <a name="setting_embedded_http_port">
+  <a name="embedded_http_port">
     embedded_http_port
     
 </a>
@@ -151,7 +151,7 @@ port it listens on here; it is not common to need this setting changed from
 default.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -166,7 +166,7 @@ default.</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_flush_size">
+  <a name="flush_size">
     flush_size
     
 </a>
@@ -180,7 +180,7 @@ default.</p>
 <p>The maximum number of events to spool before flushing to elasticsearch.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -196,7 +196,7 @@ This is only required if the normal multicast/cluster discovery stuff won't
 work in your environment.</p>
 
 <h4> 
-  <a name="setting_idle_flush_time">
+  <a name="idle_flush_time">
     idle_flush_time
     
 </a>
@@ -210,7 +210,7 @@ work in your environment.</p>
 <p>The amount of time since last flush before a flush is forced.</p>
 
 <h4> 
-  <a name="setting_index">
+  <a name="index">
     index
     
 </a>
@@ -226,7 +226,7 @@ The default value will partition your indices by day so you can more easily
 delete old data or only search specific date ranges.</p>
 
 <h4> 
-  <a name="setting_index_type">
+  <a name="index_type">
     index_type
     
 </a>
@@ -241,7 +241,7 @@ delete old data or only search specific date ranges.</p>
 similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 
 <h4> 
-  <a name="setting_max_inflight_requests">
+  <a name="max_inflight_requests">
     max_inflight_requests
      <strong>DEPRECATED</strong>
 </a>
@@ -257,7 +257,7 @@ similar events to the same 'type'. String expansion '%{foo}' works here.</p>
 from failing. It will be removed in future versions.</p>
 
 <h4> 
-  <a name="setting_node_name">
+  <a name="node_name">
     node_name
     
 </a>
@@ -273,7 +273,7 @@ from failing. It will be removed in future versions.</p>
 <p>By default, this is generated internally by the ES client.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -288,7 +288,7 @@ from failing. It will be removed in future versions.</p>
 REST API port (normally 9200).</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -305,7 +305,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

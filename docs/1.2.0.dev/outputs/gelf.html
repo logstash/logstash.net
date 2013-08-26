@@ -17,21 +17,21 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   gelf {
-    <a href="#setting_chunksize">chunksize</a> => ... # number (optional), default: 1420
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_custom_fields">custom_fields</a> => ... # hash (optional), default: {}
-    <a href="#setting_facility">facility</a> => ... # string (optional), default: "logstash-gelf"
-    <a href="#setting_file">file</a> => ... # string (optional), default: "%{@source_path}"
-    <a href="#setting_full_message">full_message</a> => ... # string (optional), default: "%{@message}"
-    <a href="#setting_host">host</a> => ... # string (required)
-    <a href="#setting_ignore_metadata">ignore_metadata</a> => ... # array (optional), default: ["severity", "source_host", "source_path", "short_message"]
-    <a href="#setting_level">level</a> => ... # array (optional), default: ["%{severity}", "INFO"]
-    <a href="#setting_line">line</a> => ... # string (optional)
-    <a href="#setting_port">port</a> => ... # number (optional), default: 12201
-    <a href="#setting_sender">sender</a> => ... # string (optional), default: "%{@source_host}"
-    <a href="#setting_ship_metadata">ship_metadata</a> => ... # boolean (optional), default: true
-    <a href="#setting_ship_tags">ship_tags</a> => ... # boolean (optional), default: true
-    <a href="#setting_short_message">short_message</a> => ... # string (optional), default: "short_message"
+    <a href="#chunksize">chunksize</a> => ... # number (optional), default: 1420
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#custom_fields">custom_fields</a> => ... # hash (optional), default: {}
+    <a href="#facility">facility</a> => ... # string (optional), default: "logstash-gelf"
+    <a href="#file">file</a> => ... # string (optional), default: "%{path}"
+    <a href="#full_message">full_message</a> => ... # string (optional), default: "%{message}"
+    <a href="#host">host</a> => ... # string (required)
+    <a href="#ignore_metadata">ignore_metadata</a> => ... # array (optional), default: ["@timestamp", "@version", "severity", "source_host", "source_path", "short_message"]
+    <a href="#level">level</a> => ... # array (optional), default: ["%{severity}", "INFO"]
+    <a href="#line">line</a> => ... # string (optional)
+    <a href="#port">port</a> => ... # number (optional), default: 12201
+    <a href="#sender">sender</a> => ... # string (optional), default: "%{source}"
+    <a href="#ship_metadata">ship_metadata</a> => ... # boolean (optional), default: true
+    <a href="#ship_tags">ship_tags</a> => ... # boolean (optional), default: true
+    <a href="#short_message">short_message</a> => ... # string (optional), default: "short_message"
   }
 }
 </code></pre>
@@ -39,7 +39,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_chunksize">
+  <a name="chunksize">
     chunksize
     
 </a>
@@ -53,7 +53,7 @@ This is what it might look like in your config file:
 <p>The GELF chunksize. You usually don't need to change this.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -67,7 +67,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_custom_fields">
+  <a name="custom_fields">
     custom_fields
     
 </a>
@@ -84,7 +84,7 @@ e.g. <code>custom_fields =&gt; ['foo_field', 'some_value']
 sets</code><em>foo</em>field<code>=</code>some_value`</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -99,7 +99,7 @@ sets</code><em>foo</em>field<code>=</code>some_value`</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_facility">
+  <a name="facility">
     facility
     
 </a>
@@ -114,7 +114,7 @@ sets</code><em>foo</em>field<code>=</code>some_value`</p>
 is useful if you need to use a value from the event as the facility name.</p>
 
 <h4> 
-  <a name="setting_file">
+  <a name="file">
     file
     
 </a>
@@ -122,14 +122,14 @@ is useful if you need to use a value from the event as the facility name.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source_path}" </li>
+  <li> Default value is "%{path}" </li>
 </ul>
 
 <p>The GELF file; this is usually the source code file in your program where
 the log event originated. Dynamic values like %{foo} are permitted here.</p>
 
 <h4> 
-  <a name="setting_full_message">
+  <a name="full_message">
     full_message
     
 </a>
@@ -137,13 +137,13 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@message}" </li>
+  <li> Default value is "%{message}" </li>
 </ul>
 
 <p>The GELF full message. Dynamic values like %{foo} are permitted here.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host (required setting)
     
 </a>
@@ -157,7 +157,7 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
 <p>graylog2 server address</p>
 
 <h4> 
-  <a name="setting_ignore_metadata">
+  <a name="ignore_metadata">
     ignore_metadata
     
 </a>
@@ -165,14 +165,14 @@ the log event originated. Dynamic values like %{foo} are permitted here.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#array">array</a> </li>
-  <li> Default value is ["severity", "source_host", "source_path", "short_message"] </li>
+  <li> Default value is ["@timestamp", "@version", "severity", "source_host", "source_path", "short_message"] </li>
 </ul>
 
 <p>Ignore these fields when ship_metadata is set. Typically this lists the
 fields used in dynamic values for GELF fields.</p>
 
 <h4> 
-  <a name="setting_level">
+  <a name="level">
     level
     
 </a>
@@ -196,7 +196,7 @@ are accepted: "emergency", "alert", "critical",  "warning", "notice", and
 "informational"</p>
 
 <h4> 
-  <a name="setting_line">
+  <a name="line">
     line
     
 </a>
@@ -212,7 +212,7 @@ the log event originated. Dynamic values like %{foo} are permitted here, but the
 value should be a number.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -226,7 +226,7 @@ value should be a number.</p>
 <p>graylog2 server port</p>
 
 <h4> 
-  <a name="setting_sender">
+  <a name="sender">
     sender
     
 </a>
@@ -234,7 +234,7 @@ value should be a number.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source_host}" </li>
+  <li> Default value is "%{source}" </li>
 </ul>
 
 <p>Allow overriding of the gelf 'sender' field. This is useful if you
@@ -243,7 +243,7 @@ want to use something other than the event's source host as the
 instead of the hostname.</p>
 
 <h4> 
-  <a name="setting_ship_metadata">
+  <a name="ship_metadata">
     ship_metadata
     
 </a>
@@ -259,7 +259,7 @@ any fields in the event (such as those created by grok) in the GELF
 messages.</p>
 
 <h4> 
-  <a name="setting_ship_tags">
+  <a name="ship_tags">
     ship_tags
     
 </a>
@@ -274,7 +274,7 @@ messages.</p>
 event as the field _tags.</p>
 
 <h4> 
-  <a name="setting_short_message">
+  <a name="short_message">
     short_message
     
 </a>
@@ -289,7 +289,7 @@ event as the field _tags.</p>
 the event message is taken instead.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -306,7 +306,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

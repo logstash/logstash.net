@@ -4,13 +4,19 @@ layout: content_right
 ---
 <div id="doc_index_container">
 
-  <h3> general </h3>
+  <h3> for users </h3>
   <ul>
     <li> <a href="https://logstash.objects.dreamhost.com/release/logstash-1.2.0.dev-flatjar.jar"> download logstash 1.2.0.dev </a> </li>
-    <li> <a href="flags"> command-line flags </a> </li>
     <li> <a href="configuration"> configuration file overview </a> </li>
-    <li> <a href="extending"> writing your own plugins </a> </li>
     <li> <a href="life-of-an-event"> the life of an event in logstash </a> </li>
+    <li> <a href="flags"> command-line flags </a> </li>
+    <li> <a href="conditionals">conditionals</a> </li>
+    <li> <a href="field-references">event field reference</a> </li>
+    <li> <a href="format-strings">text formatting</a> </li>
+  </ul>
+
+  <h3> for developers </h3>
+    <li> <a href="extending"> writing your own plugins </a> </li>
   </ul>
 
   <h3> use cases and tutorials </h3>
@@ -82,9 +88,6 @@ layout: content_right
       <a href="inputs/lumberjack">lumberjack</a>
       </li>
       <li>
-      <a href="inputs/lumberjack2">lumberjack2</a>
-      </li>
-      <li>
       <a href="inputs/pipe">pipe</a>
       </li>
       <li>
@@ -95,6 +98,9 @@ layout: content_right
       </li>
       <li>
       <a href="inputs/relp">relp</a>
+      </li>
+      <li>
+      <a href="inputs/s3">s3</a>
       </li>
       <li>
       <a href="inputs/snmptrap">snmptrap</a>
@@ -199,6 +205,9 @@ layout: content_right
       </li>
       <li>
       <a href="filters/json">json</a>
+      </li>
+      <li>
+      <a href="filters/json_encode">json_encode</a>
       </li>
       <li>
       <a href="filters/kv">kv</a>
@@ -320,9 +329,6 @@ layout: content_right
       <a href="outputs/http">http</a>
       </li>
       <li>
-      <a href="outputs/internal">internal</a>
-      </li>
-      <li>
       <a href="outputs/irc">irc</a>
       </li>
       <li>
@@ -396,6 +402,9 @@ layout: content_right
       </li>
       <li>
       <a href="outputs/tcp">tcp</a>
+      </li>
+      <li>
+      <a href="outputs/udp">udp</a>
       </li>
       <li>
       <a href="outputs/websocket">websocket</a>

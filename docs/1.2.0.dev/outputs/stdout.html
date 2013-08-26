@@ -14,10 +14,9 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   stdout {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_debug_format">debug_format</a> => ... # string, one of ["ruby", "dots"] (optional), default: "ruby"
-    <a href="#setting_message">message</a> => ... # string (optional), default: "%{+yyyy-MM-dd'T'HH:mm:ss.SSSZ} %{host}: %{message}"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#message">message</a> => ... # string (optional), default: "%{+yyyy-MM-dd'T'HH:mm:ss.SSSZ} %{host}: %{message}"
   }
 }
 </code></pre>
@@ -25,7 +24,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -39,7 +38,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -53,13 +52,14 @@ This is what it might look like in your config file:
 <p>Enable debugging. Tries to pretty-print the entire event object.</p>
 
 <h4> 
-  <a name="setting_debug_format">
+  <a name="debug_format">
     debug_format
-    
+     <strong>DEPRECATED</strong>
 </a>
 </h4>
 
 <ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
   <li> Value can be any of: "ruby", "dots" </li>
   <li> Default value is "ruby" </li>
 </ul>
@@ -67,7 +67,7 @@ This is what it might look like in your config file:
 <p>Debug output format: ruby (default), json</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -82,7 +82,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_message">
+  <a name="message">
     message
     
 </a>
@@ -96,7 +96,7 @@ This is what it might look like in your config file:
 <p>The message to emit to stdout.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -113,7 +113,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

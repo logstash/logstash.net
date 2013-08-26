@@ -14,10 +14,10 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   circonus {
-    <a href="#setting_annotation">annotation</a> => ... # hash (required), default: {}
-    <a href="#setting_api_token">api_token</a> => ... # string (required)
-    <a href="#setting_app_name">app_name</a> => ... # string (required)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#annotation">annotation</a> => ... # hash (required), default: {}
+    <a href="#api_token">api_token</a> => ... # string (required)
+    <a href="#app_name">app_name</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
   }
 }
 </code></pre>
@@ -25,7 +25,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_annotation">
+  <a name="annotation">
     annotation (required setting)
     
 </a>
@@ -44,12 +44,12 @@ You can add any other optional annotation values as well.
 All values will be passed through <code>event.sprintf</code></p>
 
 <p>Example:
-  ["title":"Logstash event", "description":"Logstash event for %{@source<em>host}"]
+  ["title":"Logstash event", "description":"Logstash event for %{host}"]
 or
-  ["title":"Logstash event", "description":"Logstash event for %{@source</em>host}", "parent_id", "1"]</p>
+  ["title":"Logstash event", "description":"Logstash event for %{host}", "parent_id", "1"]</p>
 
 <h4> 
-  <a name="setting_api_token">
+  <a name="api_token">
     api_token (required setting)
     
 </a>
@@ -66,7 +66,7 @@ Circonus based on Logstash events</p>
 <p>Your Circonus API Token</p>
 
 <h4> 
-  <a name="setting_app_name">
+  <a name="app_name">
     app_name (required setting)
     
 </a>
@@ -85,7 +85,7 @@ so variables are allowed here:</p>
  <code>app_name =&gt; "%{myappname}"</code></p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -99,7 +99,7 @@ so variables are allowed here:</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -114,7 +114,7 @@ so variables are allowed here:</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -131,7 +131,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

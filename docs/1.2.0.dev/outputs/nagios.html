@@ -28,36 +28,22 @@ nagios command file.</p>
 
 <ul>
 <li>commandfile - The location of the Nagios external command file</li>
-<li>nagios<em>level - Specifies the level of the check to be sent. Defaults to
+<li><p>nagios<em>level - Specifies the level of the check to be sent. Defaults to
 CRITICAL and can be overriden by setting the "nagios</em>level" field to one
-of "OK", "WARNING", "CRITICAL", or "UNKNOWN"</li>
+of "OK", "WARNING", "CRITICAL", or "UNKNOWN"</p>
+
+<pre><code> match =&gt; [ "message", "(error|ERROR|CRITICAL)" ]
+</code></pre>
+
+<p> output{
+   if [message] =~ /(error|ERROR|CRITICAL)/ {
+     nagios {
+       # your config here
+     }
+   }
+ }</p></li>
 </ul>
 
-
-<p>The easiest way to use this output is with the grep filter.
-Presumably, you only want certain events matching a given pattern
-to send events to nagios. So use grep to match and also to add the required
-fields.</p>
-
-<pre><code>filter {
-  grep {
-    type =&gt; "linux-syslog"
-    match =&gt; [ "@message", "(error|ERROR|CRITICAL)" ]
-    add_tag =&gt; [ "nagios-update" ]
-    add_field =&gt; [
-      "nagios_host", "%{@source_host}",
-      "nagios_service", "the name of your nagios service check"
-    ]
-  }
-}
-
-output{
-  nagios {
-    # only process events with this tag
-    tags =&gt; "nagios-update"
-  }
-}
-</code></pre>
 
 
 <h3> Synopsis </h3>
@@ -66,9 +52,9 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   nagios {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_commandfile">commandfile</a> => ... # a valid filesystem path (optional), default: "/var/lib/nagios3/rw/nagios.cmd"
-    <a href="#setting_nagios_level">nagios_level</a> => ... # string, one of ["0", "1", "2", "3"] (optional), default: "2"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#commandfile">commandfile</a> => ... # a valid filesystem path (optional), default: "/var/lib/nagios3/rw/nagios.cmd"
+    <a href="#nagios_level">nagios_level</a> => ... # string, one of ["0", "1", "2", "3"] (optional), default: "2"
   }
 }
 </code></pre>
@@ -76,7 +62,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -90,7 +76,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_commandfile">
+  <a name="commandfile">
     commandfile
     
 </a>
@@ -104,7 +90,7 @@ This is what it might look like in your config file:
 <p>The path to your nagios command file</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -119,7 +105,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_nagios_level">
+  <a name="nagios_level">
     nagios_level
     
 </a>
@@ -134,7 +120,7 @@ This is what it might look like in your config file:
 3=UNKNOWN. Defaults to 2 - CRITICAL.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -151,7 +137,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

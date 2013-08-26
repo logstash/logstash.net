@@ -1,16 +1,13 @@
 ---
-title: logstash docs for outputs/websocket
+title: logstash docs for outputs/udp
 layout: content_right
 ---
-<h2>websocket</h2>
+<h2>udp</h2>
 <h3>Milestone: <a href="../plugin-milestones">1</a></h3>
 
-<p>This output runs a websocket server and publishes any
-messages to all connected websocket clients.</p>
+<p>Send events over UDP</p>
 
-<p>You can connect to it with ws://&lt;host>:&lt;port>/</p>
-
-<p>If no clients are connected, any messages received are ignored.</p>
+<p>Keep in mind that UDP will lose messages.</p>
 
 
 <h3> Synopsis </h3>
@@ -18,10 +15,10 @@ messages to all connected websocket clients.</p>
 This is what it might look like in your config file:
 
 <pre><code>output {
-  websocket {
+  udp {
     <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#host">host</a> => ... # string (optional), default: "0.0.0.0"
-    <a href="#port">port</a> => ... # number (optional), default: 3232
+    <a href="#host">host</a> => ... # string (required)
+    <a href="#port">port</a> => ... # number (required)
   }
 }
 </code></pre>
@@ -59,31 +56,31 @@ This is what it might look like in your config file:
 
 <h4> 
   <a name="host">
-    host
+    host (required setting)
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "0.0.0.0" </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The address to serve websocket data from</p>
+<p>The address to send messages to</p>
 
 <h4> 
   <a name="port">
-    port
+    port (required setting)
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is <a href="../configuration#number">number</a> </li>
-  <li> Default value is 3232 </li>
+  <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The port to serve websocket data from</p>
+<p>The port to send messages on</p>
 
 <h4> 
   <a name="tags">
@@ -123,4 +120,4 @@ Optional.</p>
 
 <hr>
 
-This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/outputs/websocket.rb">lib/logstash/outputs/websocket.rb</a>
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/outputs/udp.rb">lib/logstash/outputs/udp.rb</a>

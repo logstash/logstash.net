@@ -33,15 +33,15 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   nagios_nsca {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_message_format">message_format</a> => ... # string (optional), default: "%{@timestamp} %{@source}: %{@message}"
-    <a href="#setting_nagios_host">nagios_host</a> => ... # string (optional), default: "%{@source_host}"
-    <a href="#setting_nagios_service">nagios_service</a> => ... # string (optional), default: "LOGSTASH"
-    <a href="#setting_nagios_status">nagios_status</a> => ... # string (required)
-    <a href="#setting_port">port</a> => ... # number (optional), default: 5667
-    <a href="#setting_send_nsca_bin">send_nsca_bin</a> => ... # a valid filesystem path (optional), default: "/usr/sbin/send_nsca"
-    <a href="#setting_send_nsca_config">send_nsca_config</a> => ... # a valid filesystem path (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#message_format">message_format</a> => ... # string (optional), default: "%{@timestamp} %{source}: %{message}"
+    <a href="#nagios_host">nagios_host</a> => ... # string (optional), default: "%{host}"
+    <a href="#nagios_service">nagios_service</a> => ... # string (optional), default: "LOGSTASH"
+    <a href="#nagios_status">nagios_status</a> => ... # string (required)
+    <a href="#port">port</a> => ... # number (optional), default: 5667
+    <a href="#send_nsca_bin">send_nsca_bin</a> => ... # a valid filesystem path (optional), default: "/usr/sbin/send_nsca"
+    <a href="#send_nsca_config">send_nsca_config</a> => ... # a valid filesystem path (optional)
   }
 }
 </code></pre>
@@ -49,7 +49,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -63,7 +63,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -78,7 +78,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -92,7 +92,7 @@ This is what it might look like in your config file:
 <p>The nagios host or IP to send logs to. It should have a NSCA daemon running.</p>
 
 <h4> 
-  <a name="setting_message_format">
+  <a name="message_format">
     message_format
     
 </a>
@@ -100,7 +100,7 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@timestamp} %{@source}: %{@message}" </li>
+  <li> Default value is "%{@timestamp} %{source}: %{message}" </li>
 </ul>
 
 <p>The format to use when writing events to nagios. This value
@@ -108,7 +108,7 @@ supports any string and can include %{name} and other dynamic
 strings.</p>
 
 <h4> 
-  <a name="setting_nagios_host">
+  <a name="nagios_host">
     nagios_host
     
 </a>
@@ -116,7 +116,7 @@ strings.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source_host}" </li>
+  <li> Default value is "%{host}" </li>
 </ul>
 
 <p>The nagios 'host' you want to submit a passive check result to. This
@@ -124,7 +124,7 @@ parameter accepts interpolation, e.g. you can use @source_host or other
 logstash internal variables.</p>
 
 <h4> 
-  <a name="setting_nagios_service">
+  <a name="nagios_service">
     nagios_service
     
 </a>
@@ -140,7 +140,7 @@ parameter accepts interpolation, e.g. you can use @source_host or other
 logstash internal variables.</p>
 
 <h4> 
-  <a name="setting_nagios_status">
+  <a name="nagios_status">
     nagios_status (required setting)
     
 </a>
@@ -154,7 +154,7 @@ logstash internal variables.</p>
 <p>The status to send to nagios. Should be 0 = OK, 1 = WARNING, 2 = CRITICAL, 3 = UNKNOWN</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -168,7 +168,7 @@ logstash internal variables.</p>
 <p>The port where the NSCA daemon on the nagios host listens.</p>
 
 <h4> 
-  <a name="setting_send_nsca_bin">
+  <a name="send_nsca_bin">
     send_nsca_bin
     
 </a>
@@ -182,7 +182,7 @@ logstash internal variables.</p>
 <p>The path to the 'send_nsca' binary on the local host.</p>
 
 <h4> 
-  <a name="setting_send_nsca_config">
+  <a name="send_nsca_config">
     send_nsca_config
     
 </a>
@@ -197,7 +197,7 @@ logstash internal variables.</p>
 Leave blank if you don't want to provide a config file.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -214,7 +214,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

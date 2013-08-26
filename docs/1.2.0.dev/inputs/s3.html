@@ -1,19 +1,14 @@
 ---
-title: logstash docs for inputs/gemfire
+title: logstash docs for inputs/s3
 layout: content_right
 ---
-<h2>gemfire</h2>
+<h2>s3</h2>
 <h3>Milestone: <a href="../plugin-milestones">1</a></h3>
 
-<p>Push events to a GemFire region.</p>
+<p>Stream events from files from a S3 bucket.</p>
 
-<p>GemFire is an object database.</p>
-
-<p>To use this plugin you need to add gemfire.jar to your CLASSPATH.
-Using format=json requires jackson.jar too; use of continuous
-queries requires antlr.jar.</p>
-
-<p>Note: this plugin has only been tested with GemFire 7.0.</p>
+<p>Each line from each file generates an event.
+Files ending in '.gz' are handled as gzip'ed files.</p>
 
 
 <h3> Synopsis </h3>
@@ -21,18 +16,20 @@ queries requires antlr.jar.</p>
 This is what it might look like in your config file:
 
 <pre><code>input {
-  gemfire {
+  s3 {
     <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#cache_name">cache_name</a> => ... # string (optional), default: "logstash"
-    <a href="#cache_xml_file">cache_xml_file</a> => ... # string (optional), default: nil
+    <a href="#backup_to_bucket">backup_to_bucket</a> => ... # string (optional), default: nil
+    <a href="#backup_to_dir">backup_to_dir</a> => ... # string (optional), default: nil
+    <a href="#bucket">bucket</a> => ... # string (required)
     <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#credentials">credentials</a> => ... # array (optional), default: nil
     <a href="#debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#interest_regexp">interest_regexp</a> => ... # string (optional), default: ".*"
-    <a href="#query">query</a> => ... # string (optional), default: nil
-    <a href="#region_name">region_name</a> => ... # string (optional), default: "Logstash"
-    <a href="#serialization">serialization</a> => ... # string (optional), default: nil
+    <a href="#delete">delete</a> => ... # boolean (optional), default: false
+    <a href="#interval">interval</a> => ... # number (optional), default: 60
+    <a href="#prefix">prefix</a> => ... # string (optional), default: nil
+    <a href="#region">region</a> => ... # string (optional), default: "us-east-1"
+    <a href="#sincedb_path">sincedb_path</a> => ... # string (optional), default: nil
     <a href="#tags">tags</a> => ... # array (optional)
-    <a href="#threads">threads</a> => ... # number (optional), default: 1
     <a href="#type">type</a> => ... # string (optional)
   }
 }
@@ -55,22 +52,8 @@ This is what it might look like in your config file:
 <p>Add a field to an event</p>
 
 <h4> 
-  <a name="cache_name">
-    cache_name
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "logstash" </li>
-</ul>
-
-<p>Your client cache name</p>
-
-<h4> 
-  <a name="cache_xml_file">
-    cache_xml_file
+  <a name="backup_to_bucket">
+    backup_to_bucket
     
 </a>
 </h4>
@@ -80,20 +63,35 @@ This is what it might look like in your config file:
   <li> Default value is nil </li>
 </ul>
 
-<p>The path to a GemFire client cache XML file.</p>
+<p>Name of a S3 bucket to backup processed files to.</p>
 
-<p>Example:</p>
+<h4> 
+  <a name="backup_to_dir">
+    backup_to_dir
+    
+</a>
+</h4>
 
-<pre><code> &lt;client-cache&gt;
-   &lt;pool name="client-pool" subscription-enabled="true" subscription-redundancy="1"&gt;
-       &lt;locator host="localhost" port="31331"/&gt;
-   &lt;/pool&gt;
-   &lt;region name="Logstash"&gt;
-       &lt;region-attributes refid="CACHING_PROXY" pool-name="client-pool" &gt;
-       &lt;/region-attributes&gt;
-   &lt;/region&gt;
- &lt;/client-cache&gt;
-</code></pre>
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is nil </li>
+</ul>
+
+<p>Path of a local directory to backup processed files to.</p>
+
+<h4> 
+  <a name="bucket">
+    bucket (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the S3 bucket.</p>
 
 <h4> 
   <a name="charset">
@@ -131,6 +129,26 @@ or in another character set other than UTF-8.</p>
 <p>The codec used for input data</p>
 
 <h4> 
+  <a name="credentials">
+    credentials
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is nil </li>
+</ul>
+
+<p>TODO(sissel): refactor to use 'line' codec (requires removing both gzip
+support and readline usage). Support gzip through a gzip codec! ;)
+The credentials of the AWS account used to access the bucket.
+Credentials can be specified:
+- As an ["id","secret"] array
+- As a path to a file containing AWS<em>ACCESS</em>KEY<em>ID=... and AWS</em>SECRET<em>ACCESS</em>KEY=...
+- In the environment (variables AWS<em>ACCESS</em>KEY<em>ID and AWS</em>SECRET<em>ACCESS</em>KEY)</p>
+
+<h4> 
   <a name="debug">
     debug
     
@@ -143,6 +161,20 @@ or in another character set other than UTF-8.</p>
 </ul>
 
 <p>Set this to true to enable debugging on an input.</p>
+
+<h4> 
+  <a name="delete">
+    delete
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Whether to delete processed files from the original bucket.</p>
 
 <h4> 
   <a name="format">
@@ -160,19 +192,19 @@ or in another character set other than UTF-8.</p>
 <p>The format of input data (plain, json, json_event)</p>
 
 <h4> 
-  <a name="interest_regexp">
-    interest_regexp
+  <a name="interval">
+    interval
     
 </a>
 </h4>
 
 <ul>
-  <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is ".*" </li>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 60 </li>
 </ul>
 
-<p>A regexp to use when registering interest for cache events.
-Ignored if a :query is specified.</p>
+<p>Interval to wait between to check the file list again after a run is finished.
+Value is in seconds.</p>
 
 <h4> 
   <a name="message_format">
@@ -196,8 +228,8 @@ are expected to be present. Not receiving all fields
 will cause unexpected results.</p>
 
 <h4> 
-  <a name="query">
-    query
+  <a name="prefix">
+    prefix
     
 </a>
 </h4>
@@ -207,28 +239,25 @@ will cause unexpected results.</p>
   <li> Default value is nil </li>
 </ul>
 
-<p>A query to run as a GemFire "continuous query"; if specified it takes
-precedence over :interest_regexp which will be ignore.</p>
-
-<p>Important: use of continuous queries requires subscriptions to be enabled on the client pool.</p>
+<p>If specified, the prefix the filenames in the bucket must match (not a regexp)</p>
 
 <h4> 
-  <a name="region_name">
-    region_name
+  <a name="region">
+    region
     
 </a>
 </h4>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "Logstash" </li>
+  <li> Default value is "us-east-1" </li>
 </ul>
 
-<p>The region name</p>
+<p>The AWS region for your bucket.</p>
 
 <h4> 
-  <a name="serialization">
-    serialization
+  <a name="sincedb_path">
+    sincedb_path
     
 </a>
 </h4>
@@ -238,7 +267,9 @@ precedence over :interest_regexp which will be ignore.</p>
   <li> Default value is nil </li>
 </ul>
 
-<p>How the message is serialized in the cache. Can be one of "json" or "plain"; default is plain</p>
+<p>Where to write the since database (keeps track of the date
+the last handled file was added to S3). The default will write
+sincedb files to some path matching "$HOME/.sincedb*"</p>
 
 <h4> 
   <a name="tags">
@@ -255,21 +286,6 @@ precedence over :interest_regexp which will be ignore.</p>
 <p>Add any number of arbitrary tags to your event.</p>
 
 <p>This can help with processing later.</p>
-
-<h4> 
-  <a name="threads">
-    threads
-    
-</a>
-</h4>
-
-<ul>
-  <li> Value type is <a href="../configuration#number">number</a> </li>
-  <li> Default value is 1 </li>
-</ul>
-
-<p>Set this to the number of threads you want this input to spawn.
-This is the same as declaring the input multiple times</p>
 
 <h4> 
   <a name="type">
@@ -302,4 +318,4 @@ when sent to another LogStash server.</p>
 
 <hr>
 
-This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/inputs/gemfire.rb">lib/logstash/inputs/gemfire.rb</a>
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.2.0.dev/lib/logstash/inputs/s3.rb">lib/logstash/inputs/s3.rb</a>

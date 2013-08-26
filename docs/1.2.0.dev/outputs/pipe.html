@@ -18,10 +18,10 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   pipe {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_command">command</a> => ... # string (required)
-    <a href="#setting_message_format">message_format</a> => ... # string (optional)
-    <a href="#setting_ttl">ttl</a> => ... # number (optional), default: 10
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#command">command</a> => ... # string (required)
+    <a href="#message_format">message_format</a> => ... # string (optional)
+    <a href="#ttl">ttl</a> => ... # number (optional), default: 10
   }
 }
 </code></pre>
@@ -29,7 +29,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -43,7 +43,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_command">
+  <a name="command">
     command (required setting)
     
 </a>
@@ -57,7 +57,7 @@ This is what it might look like in your config file:
 <p>Command line to launch and pipe to</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -72,7 +72,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_message_format">
+  <a name="message_format">
     message_format
     
 </a>
@@ -91,7 +91,7 @@ strings.</p>
 event will be written as a single line.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -108,7 +108,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_ttl">
+  <a name="ttl">
     ttl
     
 </a>
@@ -122,7 +122,7 @@ Optional.</p>
 <p>Close pipe that hasn't been used for TTL seconds. -1 or 0 means never close.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

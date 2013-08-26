@@ -14,13 +14,13 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   librato {
-    <a href="#setting_account_id">account_id</a> => ... # string (required)
-    <a href="#setting_annotation">annotation</a> => ... # hash (optional), default: {}
-    <a href="#setting_api_token">api_token</a> => ... # string (required)
-    <a href="#setting_batch_size">batch_size</a> => ... # string (optional), default: "10"
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_counter">counter</a> => ... # hash (optional), default: {}
-    <a href="#setting_gauge">gauge</a> => ... # hash (optional), default: {}
+    <a href="#account_id">account_id</a> => ... # string (required)
+    <a href="#annotation">annotation</a> => ... # hash (optional), default: {}
+    <a href="#api_token">api_token</a> => ... # string (required)
+    <a href="#batch_size">batch_size</a> => ... # string (optional), default: "10"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#counter">counter</a> => ... # hash (optional), default: {}
+    <a href="#gauge">gauge</a> => ... # hash (optional), default: {}
   }
 }
 </code></pre>
@@ -28,7 +28,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_account_id">
+  <a name="account_id">
     account_id (required setting)
     
 </a>
@@ -47,7 +47,7 @@ Your Librato account
 usually an email address</p>
 
 <h4> 
-  <a name="setting_annotation">
+  <a name="annotation">
     annotation
     
 </a>
@@ -66,12 +66,12 @@ You can add any other optional annotation values as well.
 All values will be passed through <code>event.sprintf</code></p>
 
 <p>Example:
-  ["title":"Logstash event on %{@source<em>host}", "name":"logstash</em>stream"]
+  ["title":"Logstash event on %{source}", "name":"logstash<em>stream"]
 or
-  ["title":"Logstash event", "description":"%{@message}", "name":"logstash_stream"]</p>
+  ["title":"Logstash event", "description":"%{message}", "name":"logstash</em>stream"]</p>
 
 <h4> 
-  <a name="setting_api_token">
+  <a name="api_token">
     api_token (required setting)
     
 </a>
@@ -85,7 +85,7 @@ or
 <p>Your Librato API Token</p>
 
 <h4> 
-  <a name="setting_batch_size">
+  <a name="batch_size">
     batch_size
     
 </a>
@@ -96,19 +96,11 @@ or
   <li> Default value is "10" </li>
 </ul>
 
-<p>Named metrics (NYI)
-These allow multiple metrics/annotations in the same output
-Examples:
-(Gauge)
-<code>apache_bytes =&gt; ["type", "gauge", "source", "%{@source_host}", "value", "%{bytes_received}"]</code>
-(Counter)
-<code>messages_received =&gt; ["type", "counter", "source", "%{@source_host}", "value", "1"]</code>
-config /[A-Za-z0-9.:_-]+/, :validate => :hash
-Batch size
+<p>Batch size
 Number of events to batch up before sending to Librato.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -122,7 +114,7 @@ Number of events to batch up before sending to Librato.</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_counter">
+  <a name="counter">
     counter
     
 </a>
@@ -137,13 +129,13 @@ Number of events to batch up before sending to Librato.</p>
 Send data to Librato as a counter</p>
 
 <p>Example:
-  ["value", "1", "source", "%{@source<em>host}", "name", "messages</em>received"]
+  ["value", "1", "source", "%{source}", "name", "messages<em>received"]
 Additionally, you can override the <code>measure_time</code> for the event. Must be a unix timestamp:
-  ["value", "1", "source", "%{@source<em>host}", "name", "messages</em>received", "measure<em>time", "%{my</em>unixtime_field}"]
+  ["value", "1", "source", "%{source}", "name", "messages</em>received", "measure<em>time", "%{my</em>unixtime_field}"]
 Default is to use the event's timestamp</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -158,7 +150,7 @@ Default is to use the event's timestamp</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_gauge">
+  <a name="gauge">
     gauge
     
 </a>
@@ -173,13 +165,13 @@ Default is to use the event's timestamp</p>
 Send data to Librato as a gauge</p>
 
 <p>Example:
-  ["value", "%{bytes<em>recieved}", "source", "%{@source</em>host}", "name", "apache<em>bytes"]
+  ["value", "%{bytes<em>recieved}", "source", "%{source}", "name", "apache</em>bytes"]
 Additionally, you can override the <code>measure_time</code> for the event. Must be a unix timestamp:
-  ["value", "%{bytes</em>recieved}", "source", "%{@source<em>host}", "name", "apache</em>bytes","measure<em>time", "%{my</em>unixtime_field}]
+  ["value", "%{bytes<em>recieved}", "source", "%{source}", "name", "apache</em>bytes","measure<em>time", "%{my</em>unixtime_field}]
 Default is to use the event's timestamp</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -196,7 +188,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

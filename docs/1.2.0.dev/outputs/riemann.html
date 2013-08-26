@@ -29,13 +29,13 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   riemann {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_host">host</a> => ... # string (optional), default: "localhost"
-    <a href="#setting_port">port</a> => ... # number (optional), default: 5555
-    <a href="#setting_protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "tcp"
-    <a href="#setting_riemann_event">riemann_event</a> => ... # hash (optional)
-    <a href="#setting_sender">sender</a> => ... # string (optional), default: "%{@source_host}"
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#host">host</a> => ... # string (optional), default: "localhost"
+    <a href="#port">port</a> => ... # number (optional), default: 5555
+    <a href="#protocol">protocol</a> => ... # string, one of ["tcp", "udp"] (optional), default: "tcp"
+    <a href="#riemann_event">riemann_event</a> => ... # hash (optional)
+    <a href="#sender">sender</a> => ... # string (optional), default: "%{host}"
   }
 }
 </code></pre>
@@ -43,7 +43,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -57,7 +57,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -71,7 +71,7 @@ This is what it might look like in your config file:
 <p>Enable debugging output?</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -86,7 +86,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -100,7 +100,7 @@ This is what it might look like in your config file:
 <p>The address of the Riemann server.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -114,7 +114,7 @@ This is what it might look like in your config file:
 <p>The port to connect to on your Riemann server.</p>
 
 <h4> 
-  <a name="setting_protocol">
+  <a name="protocol">
     protocol
     
 </a>
@@ -134,7 +134,7 @@ is to never lose events
 As such, we use tcp as default here</p>
 
 <h4> 
-  <a name="setting_riemann_event">
+  <a name="riemann_event">
     riemann_event
     
 </a>
@@ -168,7 +168,7 @@ Values which cannot be coerced will zero (0.0).</p>
 but can be overridden here.</p>
 
 <h4> 
-  <a name="setting_sender">
+  <a name="sender">
     sender
     
 </a>
@@ -176,7 +176,7 @@ but can be overridden here.</p>
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source_host}" </li>
+  <li> Default value is "%{host}" </li>
 </ul>
 
 <p>The name of the sender.
@@ -184,7 +184,7 @@ This sets the <code>host</code> value
 in the Riemann event</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -201,7 +201,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

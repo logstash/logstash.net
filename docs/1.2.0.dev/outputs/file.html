@@ -17,12 +17,12 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   file {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_flush_interval">flush_interval</a> => ... # number (optional), default: 2
-    <a href="#setting_gzip">gzip</a> => ... # boolean (optional), default: false
-    <a href="#setting_max_size">max_size</a> => ... # string (optional)
-    <a href="#setting_message_format">message_format</a> => ... # string (optional)
-    <a href="#setting_path">path</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#flush_interval">flush_interval</a> => ... # number (optional), default: 2
+    <a href="#gzip">gzip</a> => ... # boolean (optional), default: false
+    <a href="#max_size">max_size</a> => ... # string (optional)
+    <a href="#message_format">message_format</a> => ... # string (optional)
+    <a href="#path">path</a> => ... # string (required)
   }
 }
 </code></pre>
@@ -30,7 +30,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -44,7 +44,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -59,7 +59,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_flush_interval">
+  <a name="flush_interval">
     flush_interval
     
 </a>
@@ -73,7 +73,7 @@ This is what it might look like in your config file:
 <p>Flush interval for flushing writes to log files. 0 will flush on every meesage</p>
 
 <h4> 
-  <a name="setting_gzip">
+  <a name="gzip">
     gzip
     
 </a>
@@ -87,7 +87,7 @@ This is what it might look like in your config file:
 <p>Gzip output stream</p>
 
 <h4> 
-  <a name="setting_max_size">
+  <a name="max_size">
     max_size
     
 </a>
@@ -106,7 +106,7 @@ and so forth.</p>
 <p>NOT YET SUPPORTED</p>
 
 <h4> 
-  <a name="setting_message_format">
+  <a name="message_format">
     message_format
     
 </a>
@@ -125,7 +125,7 @@ strings.</p>
 event will be written as a single line.</p>
 
 <h4> 
-  <a name="setting_path">
+  <a name="path">
     path (required setting)
     
 </a>
@@ -137,7 +137,7 @@ event will be written as a single line.</p>
 </ul>
 
 <p>The path to the file to write. Event fields can be used here,
-like "/var/log/logstash/%{@source_host}/%{application}"
+like "/var/log/logstash/%{host}/%{application}"
 One may also utilize the path option for date-based log
 rotation via the joda time format. This will use the event
 timestamp.
@@ -145,7 +145,7 @@ E.g.: path => "./test-%{+YYYY-MM-dd}.txt" to create
 ./test-2013-05-29.txt</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -162,7 +162,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

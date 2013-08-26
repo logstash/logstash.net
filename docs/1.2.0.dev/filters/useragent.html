@@ -21,14 +21,14 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   useragent {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_prefix">prefix</a> => ... # string (optional), default: ""
-    <a href="#setting_regexes">regexes</a> => ... # string (optional)
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_source">source</a> => ... # string (required)
-    <a href="#setting_target">target</a> => ... # string (optional)
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#prefix">prefix</a> => ... # string (optional), default: ""
+    <a href="#regexes">regexes</a> => ... # string (optional)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (required)
+    <a href="#target">target</a> => ... # string (optional)
   }
 }
 </code></pre>
@@ -36,7 +36,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -53,18 +53,18 @@ Example:</p>
 
 <pre><code>filter {
   useragent {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -90,7 +90,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -107,7 +107,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_prefix">
+  <a name="prefix">
     prefix
     
 </a>
@@ -121,7 +121,7 @@ Optional.</p>
 <p>A string to prepend to all of the extracted keys</p>
 
 <h4> 
-  <a name="setting_regexes">
+  <a name="regexes">
     regexes
     
 </a>
@@ -141,7 +141,7 @@ with logstash.</p>
 <a href="https://github.com/tobie/ua-parser/blob/master/regexes.yaml">https://github.com/tobie/ua-parser/blob/master/regexes.yaml</a></p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -167,7 +167,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -193,7 +193,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_source">
+  <a name="source">
     source (required setting)
     
 </a>
@@ -208,7 +208,7 @@ would remove the tag "foo_hello" if it is present</p>
 array, only the first value will be used.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -224,7 +224,7 @@ array, only the first value will be used.</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_target">
+  <a name="target">
     target
     
 </a>
@@ -240,7 +240,7 @@ Optional.</p>
 <p>If not specified user agent data will be stored in the root of the event.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

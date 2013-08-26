@@ -14,13 +14,13 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   mongodb {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_collection">collection</a> => ... # string (required)
-    <a href="#setting_database">database</a> => ... # string (required)
-    <a href="#setting_generateId">generateId</a> => ... # boolean (optional), default: false
-    <a href="#setting_isodate">isodate</a> => ... # boolean (optional), default: false
-    <a href="#setting_retry_delay">retry_delay</a> => ... # number (optional), default: 3
-    <a href="#setting_uri">uri</a> => ... # string (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#collection">collection</a> => ... # string (required)
+    <a href="#database">database</a> => ... # string (required)
+    <a href="#generateId">generateId</a> => ... # boolean (optional), default: false
+    <a href="#isodate">isodate</a> => ... # boolean (optional), default: false
+    <a href="#retry_delay">retry_delay</a> => ... # number (optional), default: 3
+    <a href="#uri">uri</a> => ... # string (required)
   }
 }
 </code></pre>
@@ -28,7 +28,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -42,7 +42,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_collection">
+  <a name="collection">
     collection (required setting)
     
 </a>
@@ -57,7 +57,7 @@ This is what it might look like in your config file:
 select a collection based on data in the event.</p>
 
 <h4> 
-  <a name="setting_database">
+  <a name="database">
     database (required setting)
     
 </a>
@@ -71,7 +71,7 @@ select a collection based on data in the event.</p>
 <p>The database to use</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -86,7 +86,7 @@ select a collection based on data in the event.</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_generateId">
+  <a name="generateId">
     generateId
     
 </a>
@@ -102,7 +102,7 @@ The </em>id field will use the timestamp of the event and overwrite an existing
 _id field in the event.</p>
 
 <h4> 
-  <a name="setting_isodate">
+  <a name="isodate">
     isodate
     
 </a>
@@ -118,7 +118,7 @@ of an ISO8601 string.  For more information about this, see
 http://www.mongodb.org/display/DOCS/Dates</p>
 
 <h4> 
-  <a name="setting_retry_delay">
+  <a name="retry_delay">
     retry_delay
     
 </a>
@@ -132,7 +132,7 @@ http://www.mongodb.org/display/DOCS/Dates</p>
 <p>Number of seconds to wait after failure before retrying</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -149,7 +149,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -167,7 +167,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_uri">
+  <a name="uri">
     uri (required setting)
     
 </a>

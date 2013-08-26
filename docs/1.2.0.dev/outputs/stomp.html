@@ -14,14 +14,14 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   stomp {
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_debug">debug</a> => ... # boolean (optional), default: false
-    <a href="#setting_destination">destination</a> => ... # string (required)
-    <a href="#setting_host">host</a> => ... # string (required)
-    <a href="#setting_password">password</a> => ... # password (optional), default: ""
-    <a href="#setting_port">port</a> => ... # number (optional), default: 61613
-    <a href="#setting_user">user</a> => ... # string (optional), default: ""
-    <a href="#setting_vhost">vhost</a> => ... # string (optional), default: nil
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#debug">debug</a> => ... # boolean (optional), default: false
+    <a href="#destination">destination</a> => ... # string (required)
+    <a href="#host">host</a> => ... # string (required)
+    <a href="#password">password</a> => ... # password (optional), default: ""
+    <a href="#port">port</a> => ... # number (optional), default: 61613
+    <a href="#user">user</a> => ... # string (optional), default: ""
+    <a href="#vhost">vhost</a> => ... # string (optional), default: nil
   }
 }
 </code></pre>
@@ -29,7 +29,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -43,7 +43,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_debug">
+  <a name="debug">
     debug
     
 </a>
@@ -57,7 +57,7 @@ This is what it might look like in your config file:
 <p>Enable debugging output?</p>
 
 <h4> 
-  <a name="setting_destination">
+  <a name="destination">
     destination (required setting)
     
 </a>
@@ -74,7 +74,7 @@ This is what it might look like in your config file:
 <p>Example: "/topic/logstash"</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -89,7 +89,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host (required setting)
     
 </a>
@@ -103,7 +103,7 @@ This is what it might look like in your config file:
 <p>The address of the STOMP server.</p>
 
 <h4> 
-  <a name="setting_password">
+  <a name="password">
     password
     
 </a>
@@ -117,7 +117,7 @@ This is what it might look like in your config file:
 <p>The password to authenticate with.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -131,7 +131,7 @@ This is what it might look like in your config file:
 <p>The port to connect to on your STOMP server.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -148,7 +148,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
@@ -166,7 +166,7 @@ attribute for more.
 Optional.</p>
 
 <h4> 
-  <a name="setting_user">
+  <a name="user">
     user
     
 </a>
@@ -180,7 +180,7 @@ Optional.</p>
 <p>The username to authenticate with.</p>
 
 <h4> 
-  <a name="setting_vhost">
+  <a name="vhost">
     vhost
     
 </a>

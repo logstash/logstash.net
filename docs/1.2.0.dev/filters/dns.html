@@ -39,15 +39,15 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   dns {
-    <a href="#setting_action">action</a> => ... # string, one of ["append", "replace"] (optional), default: "append"
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_nameserver">nameserver</a> => ... # string (optional)
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_resolve">resolve</a> => ... # array (optional)
-    <a href="#setting_reverse">reverse</a> => ... # array (optional)
-    <a href="#setting_timeout">timeout</a> => ... # int (optional), default: 2
+    <a href="#action">action</a> => ... # string, one of ["append", "replace"] (optional), default: "append"
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#nameserver">nameserver</a> => ... # string (optional)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#resolve">resolve</a> => ... # array (optional)
+    <a href="#reverse">reverse</a> => ... # array (optional)
+    <a href="#timeout">timeout</a> => ... # int (optional), default: 2
   }
 }
 </code></pre>
@@ -55,7 +55,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_action">
+  <a name="action">
     action
     
 </a>
@@ -70,7 +70,7 @@ This is what it might look like in your config file:
 specified under "reverse" and "resolve."</p>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -87,18 +87,18 @@ Example:</p>
 
 <pre><code>filter {
   dns {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -124,7 +124,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -141,7 +141,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_nameserver">
+  <a name="nameserver">
     nameserver
     
 </a>
@@ -155,7 +155,7 @@ Optional.</p>
 <p>Use custom nameserver.</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -181,7 +181,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -207,7 +207,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_resolve">
+  <a name="resolve">
     resolve
     
 </a>
@@ -221,7 +221,7 @@ would remove the tag "foo_hello" if it is present</p>
 <p>Forward resolve one or more fields.</p>
 
 <h4> 
-  <a name="setting_reverse">
+  <a name="reverse">
     reverse
     
 </a>
@@ -235,7 +235,7 @@ would remove the tag "foo_hello" if it is present</p>
 <p>Reverse resolve one or more fields.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -251,7 +251,7 @@ would remove the tag "foo_hello" if it is present</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_timeout">
+  <a name="timeout">
     timeout
     
 </a>
@@ -268,7 +268,7 @@ versions was 'append' by accident.
 resolv calls will be wrapped in a timeout instance</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

@@ -22,14 +22,14 @@ This is what it might look like in your config file:
 
 <pre><code>filter {
   geoip {
-    <a href="#setting_add_field">add_field</a> => ... # hash (optional), default: {}
-    <a href="#setting_add_tag">add_tag</a> => ... # array (optional), default: []
-    <a href="#setting_database">database</a> => ... # a valid filesystem path (optional)
-    <a href="#setting_fields">fields</a> => ... # array (optional)
-    <a href="#setting_remove_field">remove_field</a> => ... # array (optional), default: []
-    <a href="#setting_remove_tag">remove_tag</a> => ... # array (optional), default: []
-    <a href="#setting_source">source</a> => ... # string (optional)
-    <a href="#setting_target">target</a> => ... # string (optional), default: "geoip"
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#database">database</a> => ... # a valid filesystem path (optional)
+    <a href="#fields">fields</a> => ... # array (optional)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (optional)
+    <a href="#target">target</a> => ... # string (optional), default: "geoip"
   }
 }
 </code></pre>
@@ -37,7 +37,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_add_field">
+  <a name="add_field">
     add_field
     
 </a>
@@ -54,18 +54,18 @@ Example:</p>
 
 <pre><code>filter {
   geoip {
-    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{@source}" ]
+    add_field =&gt; [ "foo_%{somefield}", "Hello world, from %{source}" ]
   }
 }
 </code></pre>
 
 <p>If the event has field "somefield" == "hello" this filter, on success,
 would add field "foo_hello" if it is present, with the
-value above and the %{@source} piece replaced with that value from the
+value above and the %{source} piece replaced with that value from the
 event.</p>
 
 <h4> 
-  <a name="setting_add_tag">
+  <a name="add_tag">
     add_tag
     
 </a>
@@ -91,7 +91,7 @@ syntax. Example:</p>
 would add a tag "foo_hello"</p>
 
 <h4> 
-  <a name="setting_database">
+  <a name="database">
     database
     
 </a>
@@ -109,7 +109,7 @@ databases are supported</p>
 with logstash.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -126,7 +126,7 @@ option) of these tags.
 Optional.</p>
 
 <h4> 
-  <a name="setting_fields">
+  <a name="fields">
     fields
     
 </a>
@@ -143,11 +143,11 @@ Optional.</p>
 are included in the event.</p>
 
 <p>For the built in GeoLiteCity database, the following are available:
-city<em>name, continent</em>code, country<em>code2, country</em>code3, country<em>name,
-dma</em>code, ip, latitude, longitude, postal<em>code, region</em>name, timezone</p>
+city_name, continent_code, country_code2, country_code3, country_name,
+dma_code, ip, latitude, longitude, postal_code, region_name, timezone</p>
 
 <h4> 
-  <a name="setting_remove_field">
+  <a name="remove_field">
     remove_field
     
 </a>
@@ -173,7 +173,7 @@ Example:</p>
 would remove the field with name "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_remove_tag">
+  <a name="remove_tag">
     remove_tag
     
 </a>
@@ -199,7 +199,7 @@ syntax. Example:</p>
 would remove the tag "foo_hello" if it is present</p>
 
 <h4> 
-  <a name="setting_source">
+  <a name="source">
     source
     
 </a>
@@ -214,7 +214,7 @@ would remove the tag "foo_hello" if it is present</p>
 array, only the first value will be used.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -230,7 +230,7 @@ array, only the first value will be used.</p>
 Optional.</p>
 
 <h4> 
-  <a name="setting_target">
+  <a name="target">
     target
     
 </a>
@@ -242,11 +242,11 @@ Optional.</p>
 </ul>
 
 <p>Specify into what field you want the geoip data.
-This can be useful for example if you have a src<em>ip and dst</em>ip and want
+This can be useful for example if you have a src_ip and dst_ip and want
 information of both IP's</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

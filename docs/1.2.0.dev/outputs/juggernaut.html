@@ -24,14 +24,14 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   juggernaut {
-    <a href="#setting_channels">channels</a> => ... # array (required)
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_db">db</a> => ... # number (optional), default: 0
-    <a href="#setting_host">host</a> => ... # string (optional), default: "127.0.0.1"
-    <a href="#setting_message_format">message_format</a> => ... # string (optional)
-    <a href="#setting_password">password</a> => ... # password (optional)
-    <a href="#setting_port">port</a> => ... # number (optional), default: 6379
-    <a href="#setting_timeout">timeout</a> => ... # number (optional), default: 5
+    <a href="#channels">channels</a> => ... # array (required)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#db">db</a> => ... # number (optional), default: 0
+    <a href="#host">host</a> => ... # string (optional), default: "127.0.0.1"
+    <a href="#message_format">message_format</a> => ... # string (optional)
+    <a href="#password">password</a> => ... # password (optional)
+    <a href="#port">port</a> => ... # number (optional), default: 6379
+    <a href="#timeout">timeout</a> => ... # number (optional), default: 5
   }
 }
 </code></pre>
@@ -39,7 +39,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_channels">
+  <a name="channels">
     channels (required setting)
     
 </a>
@@ -51,10 +51,10 @@ This is what it might look like in your config file:
 </ul>
 
 <p>List of channels to which to publish. Dynamic names are
-valid here, for example "logstash-%{@type}".</p>
+valid here, for example "logstash-%{type}".</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -68,7 +68,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_db">
+  <a name="db">
     db
     
 </a>
@@ -82,7 +82,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>The redis database number.</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -97,7 +97,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_host">
+  <a name="host">
     host
     
 </a>
@@ -111,7 +111,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>The hostname of the redis server to which juggernaut is listening.</p>
 
 <h4> 
-  <a name="setting_message_format">
+  <a name="message_format">
     message_format
     
 </a>
@@ -125,7 +125,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>How should the message be formatted before pushing to the websocket.</p>
 
 <h4> 
-  <a name="setting_password">
+  <a name="password">
     password
     
 </a>
@@ -139,7 +139,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>Password to authenticate with.  There is no authentication by default.</p>
 
 <h4> 
-  <a name="setting_port">
+  <a name="port">
     port
     
 </a>
@@ -153,7 +153,7 @@ valid here, for example "logstash-%{@type}".</p>
 <p>The port to connect on.</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -170,7 +170,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_timeout">
+  <a name="timeout">
     timeout
     
 </a>
@@ -184,7 +184,7 @@ Optional.</p>
 <p>Redis initial connection timeout in seconds.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

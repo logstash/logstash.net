@@ -20,12 +20,12 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   zeromq {
-    <a href="#setting_address">address</a> => ... # array (optional), default: ["tcp://127.0.0.1:2120"]
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
-    <a href="#setting_sockopt">sockopt</a> => ... # hash (optional)
-    <a href="#setting_topic">topic</a> => ... # string (optional), default: ""
-    <a href="#setting_topology">topology</a> => ... # string, one of ["pushpull", "pubsub", "pair"] (required)
+    <a href="#address">address</a> => ... # array (optional), default: ["tcp://127.0.0.1:2120"]
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#mode">mode</a> => ... # string, one of ["server", "client"] (optional), default: "client"
+    <a href="#sockopt">sockopt</a> => ... # hash (optional)
+    <a href="#topic">topic</a> => ... # string (optional), default: ""
+    <a href="#topology">topology</a> => ... # string, one of ["pushpull", "pubsub", "pair"] (required)
   }
 }
 </code></pre>
@@ -33,7 +33,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_address">
+  <a name="address">
     address
     
 </a>
@@ -50,7 +50,7 @@ For each we use a context per thread.
 By default, inputs bind/listen and outputs connect.</p>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -64,7 +64,7 @@ By default, inputs bind/listen and outputs connect.</p>
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -79,7 +79,7 @@ By default, inputs bind/listen and outputs connect.</p>
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_mode">
+  <a name="mode">
     mode
     
 </a>
@@ -93,7 +93,7 @@ By default, inputs bind/listen and outputs connect.</p>
 <p>Server mode binds/listens. Client mode connects.</p>
 
 <h4> 
-  <a name="setting_sockopt">
+  <a name="sockopt">
     sockopt
     
 </a>
@@ -119,7 +119,7 @@ See http://api.zeromq.org/2-1:zmq-setsockopt for details.</p>
 <p>Example: sockopt => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "my<em>named</em>queue"]</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -136,7 +136,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_topic">
+  <a name="topic">
     topic
     
 </a>
@@ -154,7 +154,7 @@ NOTE: ZeroMQ does subscriber-side filtering
 NOTE: Topic is evaluated with <code>event.sprintf</code> so macros are valid here.</p>
 
 <h4> 
-  <a name="setting_topology">
+  <a name="topology">
     topology (required setting)
     
 </a>
@@ -180,7 +180,7 @@ TODO (lusis) add req/rep MAYBE
 TODO (lusis) add router/dealer</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>

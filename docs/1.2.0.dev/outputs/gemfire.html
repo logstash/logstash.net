@@ -21,11 +21,11 @@ This is what it might look like in your config file:
 
 <pre><code>output {
   gemfire {
-    <a href="#setting_cache_name">cache_name</a> => ... # string (optional), default: "logstash"
-    <a href="#setting_cache_xml_file">cache_xml_file</a> => ... # string (optional), default: nil
-    <a href="#setting_codec">codec</a> => ... # codec (optional), default: "plain"
-    <a href="#setting_key_format">key_format</a> => ... # string (optional), default: "%{@source}-%{@timestamp}"
-    <a href="#setting_region_name">region_name</a> => ... # string (optional), default: "Logstash"
+    <a href="#cache_name">cache_name</a> => ... # string (optional), default: "logstash"
+    <a href="#cache_xml_file">cache_xml_file</a> => ... # string (optional), default: nil
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#key_format">key_format</a> => ... # string (optional), default: "%{source}-%{@timestamp}"
+    <a href="#region_name">region_name</a> => ... # string (optional), default: "Logstash"
   }
 }
 </code></pre>
@@ -33,7 +33,7 @@ This is what it might look like in your config file:
 <h3> Details </h3>
 
 <h4> 
-  <a name="setting_cache_name">
+  <a name="cache_name">
     cache_name
     
 </a>
@@ -47,7 +47,7 @@ This is what it might look like in your config file:
 <p>Your client cache name</p>
 
 <h4> 
-  <a name="setting_cache_xml_file">
+  <a name="cache_xml_file">
     cache_xml_file
     
 </a>
@@ -74,7 +74,7 @@ This is what it might look like in your config file:
 </code></pre>
 
 <h4> 
-  <a name="setting_codec">
+  <a name="codec">
     codec
     
 </a>
@@ -88,7 +88,7 @@ This is what it might look like in your config file:
 <p>The codec used for output data</p>
 
 <h4> 
-  <a name="setting_exclude_tags">
+  <a name="exclude_tags">
     exclude_tags
      <strong>DEPRECATED</strong>
 </a>
@@ -103,7 +103,7 @@ This is what it might look like in your config file:
 <p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
 
 <h4> 
-  <a name="setting_key_format">
+  <a name="key_format">
     key_format
     
 </a>
@@ -111,13 +111,13 @@ This is what it might look like in your config file:
 
 <ul>
   <li> Value type is <a href="../configuration#string">string</a> </li>
-  <li> Default value is "%{@source}-%{@timestamp}" </li>
+  <li> Default value is "%{source}-%{@timestamp}" </li>
 </ul>
 
 <p>A sprintf format to use when building keys</p>
 
 <h4> 
-  <a name="setting_region_name">
+  <a name="region_name">
     region_name
     
 </a>
@@ -131,7 +131,7 @@ This is what it might look like in your config file:
 <p>The region name</p>
 
 <h4> 
-  <a name="setting_tags">
+  <a name="tags">
     tags
      <strong>DEPRECATED</strong>
 </a>
@@ -148,7 +148,7 @@ a type, the event must also match that type.
 Optional.</p>
 
 <h4> 
-  <a name="setting_type">
+  <a name="type">
     type
      <strong>DEPRECATED</strong>
 </a>
