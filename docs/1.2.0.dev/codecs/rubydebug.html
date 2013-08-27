@@ -12,8 +12,12 @@ layout: content_right
 
 This is what it might look like in your config file:
 
-<pre><code>codec {
-  rubydebug {
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file { 
+    codec =&gt;   rubydebug {
+  }
   }
 }
 </code></pre>

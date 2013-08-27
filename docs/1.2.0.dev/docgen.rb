@@ -202,6 +202,9 @@ class LogStashConfigDocGenerator
     klassname = LogStash::Config::Registry.registry[@name].to_s
     name = @name
 
+    synopsis_file = File.join(File.dirname(__FILE__), "plugin-synopsis.html.erb")
+    synopsis = ERB.new(File.new(synopsis_file).read, nil, "-").result(binding)
+
     if settings[:output]
       dir = File.join(settings[:output], section + "s")
       path = File.join(dir, "#{name}.html")

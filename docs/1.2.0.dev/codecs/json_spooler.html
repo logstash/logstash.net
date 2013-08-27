@@ -12,9 +12,13 @@ layout: content_right
 
 This is what it might look like in your config file:
 
-<pre><code>codec {
-  json_spooler {
-    <a href="#spool_size">spool_size</a> => ... # number (optional), default: 50
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file { 
+    codec =&gt;   json_spooler {
+      <a href="#spool_size">spool_size</a> => ... # number (optional), default: 50
+  }
   }
 }
 </code></pre>

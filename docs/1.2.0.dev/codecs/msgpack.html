@@ -12,9 +12,13 @@ layout: content_right
 
 This is what it might look like in your config file:
 
-<pre><code>codec {
-  msgpack {
-    <a href="#format">format</a> => ... # string (optional), default: nil
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file { 
+    codec =&gt;   msgpack {
+      <a href="#format">format</a> => ... # string (optional), default: nil
+  }
   }
 }
 </code></pre>
