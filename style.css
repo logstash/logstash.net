@@ -30,7 +30,8 @@ li { list-style-type: disc; margin-left: 30px !important; }
 .nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 0px 10px; }
 
 /* featured content for homepage */
-.mascot { float:left; margin:0px 30px 0px 0px; }
+.mascot { float:right; margin-left: 30px; }
+.logo-text { height: 2em; }
 .image_and_logo { margin: 45px 0px 0px 0px; font-size:18px; }
 .featured_text { margin:0px 0px 260px; }
 .featured_text p { font-size: 16px; margin-bottom: 20px; }
@@ -39,7 +40,7 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
 
 /* main content rendered via template */
 #content { margin: 0px 0px 60px 0px; }
-.content_wrapper {float:left; width:620px; } /* floats content to the right of mascot image for content_right layout */
+.content_wrapper {float:left; width: 100%;} /* floats content to the right of mascot image for content_right layout */
 
 /* main content that needs to float all the way down for doc single pages */
 #content_right { padding: 0px 0px 60px 0px;}
