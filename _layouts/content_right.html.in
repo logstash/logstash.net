@@ -6,6 +6,7 @@
   <body>
   <div class="container">
     <div class="header">
+      <a href="/"><img src="/images/logo.png" alt="logstash"/></a>
       <div class="nav">
         <a href="/">home</a>
         <a href="/docs/%VERSION%">docs</a>
@@ -14,13 +15,10 @@
         <a href="http://logstash.jira.com/">bugs</a>
       </div>
     </div>
-    <div class="mascot_and_logo">
-      <img src="/images/logstash.png" alt="logstash" class="mascot"/>
-      <a href="/"><img src="/images/logo.png" alt="logstash"/></a>
-    </div>
     <div id="content_right">
       <!--main content goes here, yo!-->
       <div class="content_wrapper">
+        <img src="/images/logstash.png" alt="logstash" class="mascot" style="float: right;"/>
          {{ content }}
       </div>
       <div class="clear">
