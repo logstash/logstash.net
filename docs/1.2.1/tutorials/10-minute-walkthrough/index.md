@@ -8,7 +8,7 @@ layout: content_right
 
 ### Download logstash:
 
-* [logstash-1.2.1-flatjar.jar](http://logstash.objects.dreamhost.com/release/logstash-1.2.1-flatjar.jar)
+* [logstash-1.2.1-flatjar.jar](https://download.elasticsearch.org/logstash/logstash/logstash-1.2.1-flatjar.jar)
 
 ### Requirements:
 

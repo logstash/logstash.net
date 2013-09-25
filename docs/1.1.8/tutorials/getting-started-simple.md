@@ -25,7 +25,7 @@ If you have problems, feel free to email the users list
 
 ## logstash
 
-You should download the logstash 'monolithic' jar - if you haven't yet, [download it now](http://logstash.objects.dreamhost.com/release/logstash-1.1.8-monolithic.jar). This package includes most
+You should download the logstash 'monolithic' jar - if you haven't yet, [download it now](https://download.elasticsearch.org/logstash/logstash/logstash-1.1.8-monolithic.jar). This package includes most
 of the dependencies for logstash in it and helps you get started quicker.
 
 The configuration of any logstash agent consists of specifying inputs, filters,
