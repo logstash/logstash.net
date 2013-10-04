@@ -253,6 +253,14 @@ You can also do multiple expressions in a single condition:
         }
       }
     }
+    
+You can also use boolean expressions to check whether a field exists:
+
+    filter {
+      if [http_response_code] {
+          metrics { ... }
+      }
+    }
 
 ## Further Reading
 
