@@ -24,10 +24,12 @@ LoadPlugin load
 LoadPlugin memory
 LoadPlugin network
 &lt;Plugin interface&gt;
-         Interface "eth0"
-         IgnoreSelected false
+    Interface "eth0"
+    IgnoreSelected false
 &lt;/Plugin&gt;
 &lt;Plugin network&gt;
+    &lt;Server "10.0.0.1" "25826"&gt;
+    &lt;/Server&gt;
 &lt;/Plugin&gt;
 </code></pre>
 
