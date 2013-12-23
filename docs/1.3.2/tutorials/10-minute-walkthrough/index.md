@@ -8,7 +8,7 @@ layout: content_right
 
 ### Download logstash:
 
-* [logstash-1.3.1-flatjar.jar](https://download.elasticsearch.org/logstash/logstash/logstash-1.3.1-flatjar.jar)
+* [logstash-1.3.2-flatjar.jar](https://download.elasticsearch.org/logstash/logstash/logstash-1.3.2-flatjar.jar)
 
 ### Requirements:
 
@@ -29,7 +29,7 @@ I bake as much as possible into the single release file.
 
 ### Run it:
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f hello.conf
+    java -jar logstash-1.3.2-flatjar.jar agent -f hello.conf
 
 Type stuff on standard input. Press enter. Watch what event logstash sees.
 Press ^C to kill it.
@@ -42,7 +42,7 @@ Press ^C to kill it.
 
 ### Run it:
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f hello-search.conf
+    java -jar logstash-1.3.2-flatjar.jar agent -f hello-search.conf
 
 Same config as step 2, but now we are also writing events to ElasticSearch. Do
 a search for `*` (all):
@@ -57,7 +57,7 @@ The same config as step 3 is used.
 
 ### Run it:
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f hello-search.conf -- web
+    java -jar logstash-1.3.2-flatjar.jar agent -f hello-search.conf -- web
 
 The above runs both the agent and the logstash web interface in the same
 process. Useful for simple deploys.
@@ -81,7 +81,7 @@ Use the ['grok'](../../filters/grok) logstash filter to parse logs.
 
 ### Run it
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f apache-parse.conf
+    java -jar logstash-1.3.2-flatjar.jar agent -f apache-parse.conf
 
 Logstash will now be listening on TCP port 3333. Send an apache log message at it:
 
@@ -100,7 +100,7 @@ Same as the previous step, but we'll output to ElasticSearch now.
 
 ### Run it
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f apache-elasticsearch.conf -- web
+    java -jar logstash-1.3.2-flatjar.jar agent -f apache-elasticsearch.conf -- web
 
 Logstash should be all set for you now. Start feeding it logs:
 
@@ -118,7 +118,7 @@ on some results, drill around in some logs.
 For further learning, try these:
 
 * [Watch a presentation on logstash](http://www.youtube.com/embed/RuUFnog29M4)
-* [Getting started 'standalone' guide](http://logstash.net/docs/1.3.1/tutorials/getting-started-simple)
-* [Getting started 'centralized' guide](http://logstash.net/docs/1.3.1/tutorials/getting-started-centralized) - 
+* [Getting started 'standalone' guide](http://logstash.net/docs/1.3.2/tutorials/getting-started-simple)
+* [Getting started 'centralized' guide](http://logstash.net/docs/1.3.2/tutorials/getting-started-centralized) - 
   learn how to build out your logstash infrastructure and centralize your logs.
-* [Dive into the docs](http://logstash.net/docs/1.3.1/)
+* [Dive into the docs](http://logstash.net/docs/1.3.2/)

@@ -75,7 +75,7 @@ ready to configure logstash.
 Download the logstash release jar file. The package contains all
 required dependencies to save you time chasing down requirements.
 
-Follow [this link to download logstash-1.3.1](https://download.elasticsearch.org/logstash/logstash/logstash-1.3.1-flatjar.jar).
+Follow [this link to download logstash-1.3.2](https://download.elasticsearch.org/logstash/logstash/logstash-1.3.2-flatjar.jar).
 
 Since we're doing a centralized configuration, you'll have two main
 logstash agent roles: a shipper and an indexer. You will ship logs from
@@ -99,7 +99,7 @@ As with the simple example, we're going to start simple to ensure that events ar
 
 Put this in a file and call it 'shipper.conf' (or anything, really), and run: 
 
-    java -jar logstash-1.3.1-flatjar.jar agent -f shipper.conf
+    java -jar logstash-1.3.2-flatjar.jar agent -f shipper.conf
 
 This will take anything you type into this console and display it on the console. Additionally it will save events to Redis in a `list` named after the `key` value you provided.
 
@@ -166,7 +166,7 @@ The above configuration will attach to Redis and issue a `BLPOP` against the `lo
 
 Start the indexer the same way as the agent but specifying the `indexer.conf` file:
 
-`java -jar logstash-1.3.1-flatjar.jar agent -f indexer.conf`
+`java -jar logstash-1.3.2-flatjar.jar agent -f indexer.conf`
 
 To verify that your Logstash indexer is connecting to Elasticsearch properly, you should see a message in your Elasticsearch window similar to the following:
 
@@ -198,7 +198,7 @@ Run this on the same server as your elasticsearch server.
 To run the logstash web server, just run the jar with 'web' as the first
 argument. 
 
-    java -jar logstash-1.3.1-flatjar.jar web
+    java -jar logstash-1.3.2-flatjar.jar web
 
 Just point your browser at the http://127.0.0.1:9292/ and start searching
 logs!
