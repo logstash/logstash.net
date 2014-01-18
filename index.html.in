@@ -17,7 +17,7 @@ title: Logstash
 
   <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
   <a class="awesome_button" href="http://cookbook.logstash.net/">Cookbook</a>
-  <a class="awesome_button" href="http://demo.logstash.net/">Search Demo</a>
+  <a class="awesome_button" href="http://demo3.logstash.net/index.html#/dashboard/file/logstash.json">Search Demo</a>
 
 </div>
 <div class="clear"></div>
