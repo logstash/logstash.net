@@ -1,0 +1,257 @@
+---
+title: logstash docs for outputs/jira
+layout: content_right
+---
+<h2>jira</h2>
+<h3>Milestone: <a href="../plugin-milestones">2</a></h3>
+  <h3>Community plugin!</h3>
+  This is a community-contributed plugin. To use this, you must have <a href="core-vs-contrib">installed the contrib plugins package</a>.
+
+<p>Origin https://groups.google.com/forum/#!msg/logstash-users/exgrB4iQ-mw/R34apku5nXsJ
+and https://botbot.me/freenode/logstash/msg/4169496/
+via https://gist.github.com/electrical/4660061e8fff11cdcf37#file-jira-rb
+Uses jiralicious as the bridge to JIRA
+By Martin Cleaver, Blended Perspectives
+with a lot of help from 'electrical' in #logstash
+This output plugin requires the logstash-contrib package, available at LSCONTRIB</p>
+
+<p>This is so is most useful so you can use logstash to parse and structure
+your logs and ship structured, json events to JIRA</p>
+
+<p>To use this, you'll need to ensure your JIRA instance allows REST calls</p>
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>output {
+  jira {
+    <a href="#assignee">assignee</a> => ... # string (optional)
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#host">host</a> => ... # string (optional)
+    <a href="#issuetypeid">issuetypeid</a> => ... # string (required)
+    <a href="#password">password</a> => ... # string (required)
+    <a href="#priority">priority</a> => ... # string (required)
+    <a href="#projectid">projectid</a> => ... # string (required)
+    <a href="#reporter">reporter</a> => ... # string (optional)
+    <a href="#summary">summary</a> => ... # string (required)
+    <a href="#username">username</a> => ... # string (required)
+    <a href="#workers">workers</a> => ... # number (optional), default: 1
+}
+
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="assignee">
+    assignee
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>JIRA Reporter</p>
+
+<h4> 
+  <a name="codec">
+    codec
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#codec">codec</a> </li>
+  <li> Default value is "plain" </li>
+</ul>
+
+<p>The codec used for output data</p>
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without any of these tags. Note this check is additional to type and tags.</p>
+
+<h4> 
+  <a name="host">
+    host
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The hostname to send logs to. This should target your JIRA server
+and has to have the REST interface enabled</p>
+
+<h4> 
+  <a name="issuetypeid">
+    issuetypeid (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>JIRA Issuetype number</p>
+
+<h4> 
+  <a name="password">
+    password (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="priority">
+    priority (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>JIRA Priority</p>
+
+<h4> 
+  <a name="projectid">
+    projectid (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Javalicious has no proxy support
+JIRA Project number</p>
+
+<h4> 
+  <a name="reporter">
+    reporter
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>JIRA Reporter</p>
+
+<h4> 
+  <a name="summary">
+    summary (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>JIRA Summary</p>
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all of these tags.  Note that if you specify
+a type, the event must also match that type.
+Optional.</p>
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>The type to act on. If a type is given, then this output will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="username">
+    username (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+
+
+<h4> 
+  <a name="workers">
+    workers
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 1 </li>
+</ul>
+
+<p>The number of workers to use for this output.
+Note that this setting may not be useful for all outputs.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.0.dev/lib/logstash/outputs/jira.rb">lib/logstash/outputs/jira.rb</a>
