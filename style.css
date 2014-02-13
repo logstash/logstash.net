@@ -96,3 +96,16 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
 .warning a {
   color: white;
 }
+
+.community-plugin-notice {
+  padding-left: 1em;
+  padding-right: 1em;
+  margin: 1em;
+  font-size: 100%;
+  font-weight: bold;
+  color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+
+  background: rgba(50, 200, 0, 0.5);
+}
