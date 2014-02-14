@@ -2,7 +2,7 @@ source :rubygems
 
 gem "compass"
 gem "foreman"
-gem "jekyll"
+gem "jekyll", "0.11.2"
 gem "sass"
 gem "haml"
 
