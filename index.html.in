@@ -2,24 +2,53 @@
 layout: default
 title: Logstash
 ---
-<div class="featured_text">
-  <p>logstash is a tool for managing events and logs. You can use it to collect
-  logs, parse them, and store them for later use (like, for searching).
-  Speaking of searching, logstash comes with a web interface for searching and
-  drilling into all of your logs.</p>
+<div id="logstash_is">
+  <h2>Logstash is...</h2>
 
-  <p>It is fully free and fully open source. The license is Apache 2.0, meaning
-  you are pretty much free to use it however you want in whatever way.</p>
+  <ul>
+    <li>A tool for making sense of all your events and logs</li>
+    <li>Free and open-source under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 license</a></li>
+    <li>Easy to <a href="http://logstash.net/docs/%VERSION%/tutorials/getting-started-simple">get started</a> with</li>
+    <li>Very extensible with a wealth of <a href="http://logstash.net/docs/%VERSION%/">built-in plugins</a> and support for <a href="http://logstash.net/docs/%VERSION%/extending">custom plugins</a></li>
+    <li>Used by an active, passionate community</li>
+    <li><a href="http://www.elasticsearch.org/overview/logstash/">Supported by ElasticSearch</a> for commercial training and support</li>
+  </ul>
 
-  <p>logstash is now a part of the <a href="http://elasticsearch.org">Elasticsearch</a> family! This allows us to build better software much faster as well as offering <a href="http://www.elasticsearch.com/support/">production support</a></p>
-
-  <a class="awesome_button" href="https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%-flatjar.jar">Download</a>
-
-  <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
-  <a class="awesome_button" href="http://cookbook.logstash.net/">Cookbook</a>
-  <a class="awesome_button" href="http://demo3.logstash.net/index.html#/dashboard/file/logstash.json">Search Demo</a>
-
+  <p id="call_to_action">
+    <a class="awesome_button" href="https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%-flatjar.jar">Download Logstash</a>
+    <a class="awesome_button" href="http://demo.kibana.org/">Try a Live Demo</a>
+    <a class="awesome_button" href="/learn">Learn More</a>
+  </p>
 </div>
+
+<div id="getting_started">
+  <h2>Getting Started</h2>
+
+  <div class="getting_started_step">
+    <h3>Configure</h3>
+    <pre><code class="logstash_config"><span class="comment"># logstash.conf</span>
+<span class="plugin_type">input</span> {
+  <span class="plugin_name">file</span> { <span class="param">path</span> =&gt; <span class="string">"/var/log/apache/access.log"</span> }
+}
+<span class="plugin_type">filter</span> {
+  <span class="plugin_name">grok</span> {
+    <span class="param">match</span> =&gt; [ <span class="string">"message"</span>, <span class="string">"%{<span class="grok_syntax">COMBINEDAPACHELOG</span>}"</span> ]
+  }
+}
+<span class="plugin_type">output</span> {
+  <span class="plugin_name">elasticsearch</span> { <span class="param">embedded</span> =&gt; <span class="number">True</span> }
+}</code></pre>
+  </div>
+
+  <div class="getting_started_step">
+    <h3>Run</h3>
+    <pre><code class="terminal">java -jar logstash.jar agent -f logstash.conf -- web</code></pre>
+  </div>
+
+  <h3>Explore</h3>
+  <img src="images/screenshot.png"/>
+</div>
+
 <div class="clear"></div>
 
 <div class="sub_content">

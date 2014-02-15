@@ -12,22 +12,50 @@ p  { margin: 0; }
 a:link, a:visited  { color: #658F3D; text-decoration:none; }
 a:hover  { text-decoration:underline; }
 pre { white-space: pre; margin-left: 15px; margin-right: 15x; border: 1px solid #FFC280; background-color: #F7F0E9; padding: 8px; overflow: auto; }
-code { font-family: monospace; }
 dl { margin-left: 20px; }
 dt { font-weight: bold; }
 dd { margin-left: 20px; }
 
-li { list-style-type: disc; margin-left: 30px !important; }
+ul li { list-style-type: disc; margin-left: 30px !important; }
+ol li { list-style-type: decimal; margin-left: 30px !important; }
+
+code, code * { font-family: monospace; }
+code.logstash_config .comment {
+  color: #998;
+}
+code.logstash_config .plugin_type {
+  color: #458;
+}
+code.logstash_config .plugin_name {
+  color: #08B;
+}
+code.logstash_config .param {
+  color: #900;
+}
+code.logstash_config .string {
+  color: #D24;
+}
+code.logstash_config .grok_syntax {
+  color: #917;
+}
+code.logstash_config .number {
+  color: #299;
+}
 
 /* main container */
 .container { width: 960px; margin: 0 auto -30px; min-height: 100%; height: auto !important; height: 100%;}
 
 /* header */ 
-.header {padding: 26px 0px;}
+.header { padding: 26px 0px; }
+.header img { float: left; }
 
 /* nav */ 
-.nav { float: right; font-size: 18px;}
-.nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 0px 10px; }
+.nav {
+  padding-top: 20px;
+  text-align: right;
+  font-size: 18px;
+}
+.nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 40px 10px; }
 
 /* featured content for homepage */
 .mascot { float:right; margin-left: 30px; }
@@ -35,11 +63,52 @@ li { list-style-type: disc; margin-left: 30px !important; }
 .image_and_logo { margin: 45px 0px 0px 0px; font-size:18px; }
 .featured_text { margin:0px 0px 260px; }
 .featured_text p { font-size: 16px; margin-bottom: 20px; }
-a.awesome_button { background:url('images/button.png'); background-repeat:no-repeat; width:283px; height:56px; float:left; text-decoration:none; text-align:center; padding-right: 10px; padding-top:10px; font-weight:bold; font-family:"Helvetica Neue","Helvetica","Arial",sans-serif; font-size:22px; color:#475530; text-shadow: -1px -1px 1px #DDD; }
-a.awesome_button:hover { background: url('images/button_hover.png'); background-repeat:no-repeat;}
+a.awesome_button {
+  background: url('images/button.png');
+  background-repeat: no-repeat;
+  width: 283px;
+  height: 56px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding-right: 10px;
+  padding-top: 10px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 22px;
+  color: #475530;
+  text-shadow: -1px -1px 1px #DDD;
+}
+a.awesome_button:hover {
+  background: url('images/button_hover.png');
+  background-repeat:no-repeat;
+}
+
+/* home page content */
+#call_to_action {
+  text-align: center;
+  margin-top: 1em;
+}
+#getting_started h3 {
+  text-align: center;
+}
+.getting_started_step {
+  display: inline-block;
+  width: 460px;
+  vertical-align: top;
+  margin: 24px 0px;
+}
+.getting_started_step .awesome_button {
+  padding-right: 0;
+}
+.getting_started_step pre {
+  text-align: left;
+  font-size: 14px;
+}  
 
 /* main content rendered via template */
 #content { margin: 0px 0px 60px 0px; }
+#content div { clear: left; }
 .content_wrapper {float:left; width: 100%;} /* floats content to the right of mascot image for content_right layout */
 
 /* main content that needs to float all the way down for doc single pages */
@@ -56,9 +125,6 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
 #content_right li { margin: 5px 0px 0px 0px;}
 #content_right p { margin: 10px 0px;}
 
-
-
-
 /* about page */
 .about p { margin: 0px 0px 20px 0px;}
 
@@ -67,11 +133,6 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
 .sub_content h2 { text-align:center; line-height:1.2; margin: 0px 0px 20px; }
 .sub_content_text { width: 460px; margin: 0px 20px 0px; float: left; text-align:left; }
 .sub_content_text p { margin: 0px 0px 12px; }
-
-
-/* footer */
-
-.footer { font-size:80%; text-align:center;}
 
 .warning {
   padding-left: 1em;
