@@ -20,7 +20,7 @@ update: | validate-version
 	@echo "Don't forget to commit this"
 
 %.js: %.js.in | validate-version
-	sed -e "s/%VERSION%/$(VERSION)/" $< > $@
+	sed -e "s/%VERSION%/$(VERSION)/g" $< > $@
 
 %.html: %.html.in | validate-version
-	sed -e "s/%VERSION%/$(VERSION)/" $< > $@
+	sed -e "s/%VERSION%/$(VERSION)/g" $< > $@
