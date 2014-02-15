@@ -5,7 +5,36 @@ layout: content_right
 <h2>stdout</h2>
 <h3>Milestone: <a href="../plugin-milestones">3</a></h3>
 
+<p>A simple output which prints to the STDOUT of the shell running
+Logstash. This output can be quite convenient when debugging
+plugin configurations, by allowing instant access to the event
+data after it has passed through the inputs and filters.</p>
 
+<p>For example, the following output configuration, in conjunction with the
+Logstash <code>-e</code> command-line flag, will allow you to see the results
+of your event pipeline for quick iteration.</p>
+
+<pre><code>output {
+  stdout {}
+}
+</code></pre>
+
+<p>Useful codecs include:</p>
+
+<p><code>rubydebug</code>: outputs event data using the ruby "awesome<em>print"
+library[http://rubygems.org/gems/awesome</em>print]</p>
+
+<pre><code>output {
+  stdout { codec =&gt; rubydebug }
+}
+</code></pre>
+
+<p><code>json</code>: outputs event data in structured JSON format</p>
+
+<pre><code>output {
+  stdout { codec =&gt; json }
+}
+</code></pre>
 
 <h3> Synopsis </h3>
 

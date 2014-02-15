@@ -38,7 +38,7 @@ for such things, that works for me, too.)
 
 ## Download It
 
-[Download logstash-1.4.0.beta1-modified](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1-modified-flatjar.jar)
+[Download logstash-1.4.0.beta1](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1-flatjar.jar)
 
 ## What's next?
 
