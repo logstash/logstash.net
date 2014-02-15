@@ -2,33 +2,28 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>logstash - open source log management</title>
+        <title>Logstash - open source log management</title>
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-	    <div class="container">
-	        <div class="header">
-		        <div class="nav">
-			        <a href="/">home</a>
-			        <a href="/docs/%VERSION%">docs</a>
-			        <a href="/docs/%VERSION%/learn">about</a>
-              <a href="http://cookbook.logstash.net/">cookbook</a>
-			        <a href="http://logstash.jira.com/">bugs</a>
-			    </div>
+        <div class="container">
+            <div class="header">
+                <a href="/">
+                  <img src="images/logstash.png" alt="a log with a moustash" style="padding-right:16px;" height="82px">
+                  <img src="images/logo.png" alt="logstash">
+                </a>
+                <div class="nav">
+                  <a href="/">home</a>
+                  <a href="/docs/%VERSION%">docs</a>
+                  <a href="/docs/%VERSION%/learn">about</a>
+                  <a href="http://cookbook.logstash.net/">cookbook</a>
+                  <a href="http://logstash.jira.com/">bugs</a>
+                </div>
             </div>
-	        <div class="mascot_and_logo">
-            <img src="/images/logstash.png" alt="logstash" style="float:left;"/>
-            <a href="/" ><img src="/images/logo.png" alt="logstash" /></a>
-	        </div>
-	        <div id="content"><!--main content goes here, yo!-->
-		        {{ content }}
-		    </div>
+            <div id="content"><!--main content goes here, yo!-->
+                {{ content }}
+            </div>
         </div><!--closes main container div-->
-        <div class="clear"></div>
-        <div class="footer">	
-            <p>Hello! I'm your friendly footer. If you're actually reading this, I'm impressed.</p>
-        </div>
-
         <script type="text/javascript">
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-6522917-5']);
