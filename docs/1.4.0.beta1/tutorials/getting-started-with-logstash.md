@@ -49,9 +49,9 @@ Logstash in two commands
 First, we’re going to download the pre-built logstash binary and run it
 with a very simple configuration.
 
-    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%-flatjar.jar
+    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1-modified-flatjar.jar
 
-Now you should have the file named *logstash-%VERSION%-flatjar.jar* on
+Now you should have the file named *logstash-1.4.0.beta1-modified-flatjar.jar* on
 your local filesystem. Let’s run it:
 
     bin/logstash -e 'input { stdin { } } output { stdout {} }'
@@ -103,14 +103,14 @@ package](http://www.elasticsearch.org/download/), or install manually by
 downloading the current release tarball, by issuing the following four
 commands:
 
-    curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-%ELASTICSEARCH_VERSION%.tar.gz
-    tar zxvf elasticsearch-%ELASTICSEARCH_VERSION%.tar.gz
-    cd elasticsearch-%ELASTICSEARCH_VERSION%/
+    curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.tar.gz
+    tar zxvf elasticsearch-1.0.0.tar.gz
+    cd elasticsearch-1.0.0/
     ./bin/elasticsearch
 
 > **Note**
 >
-> This tutorial specifies running Logstash %VERSION% with Elasticsearch
+> This tutorial specifies running Logstash 1.4.0.beta1-modified with Elasticsearch
 > %ELASTICSEARCH\_VERSION%. Each release of Logstash has a
 > **recommended** version of Elasticsearch to pair with. Make sure the
 > versions match based on the [Logstash

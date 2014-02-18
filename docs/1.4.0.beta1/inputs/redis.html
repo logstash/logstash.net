@@ -5,18 +5,16 @@ layout: content_right
 <h2>redis</h2>
 <h3>Milestone: <a href="../plugin-milestones">2</a></h3>
 
-<p>Read events from a redis instance. Supports both redis channels and lists.
-The list command (BLPOP) used by Logstash is supported in redis v1.3.1+
-The channel commands used by Logstash are found in redis v1.3.8+
-While you may be able to make these redis versions work the best performance
+<p>This input will read events from a Redis instance; it supports both Redis channels and lists.
+The list command (BLPOP) used by Logstash is supported in Redis v1.3.1+, and
+the channel commands used by Logstash are found in Redis v1.3.8+.
+While you may be able to make these Redis versions work, the best performance
 and stability will be found in more recent stable versions.  Versions 2.6.0+
 are recommended.</p>
 
-<p>For more information about redis, see <a href="http://redis.io/">http://redis.io/</a></p>
+<p>For more information about Redis, see <a href="http://redis.io/">http://redis.io/</a></p>
 
-<h2><code>batch_count</code> note</h2>
-
-<p>If you use the 'batch_count' setting, you <em>must</em> use a redis version 2.6.0 or
+<p><code>batch_count</code> note: If you use the <code>batch_count</code> setting, you <em>must</em> use a Redis version 2.6.0 or
 newer. Anything older does not support the operations used by batching.</p>
 
 <h3> Synopsis </h3>
@@ -71,7 +69,7 @@ This is what it might look like in your config file:
   <li> Default value is 1 </li>
 </ul>
 
-<p>How many events to return from redis using EVAL</p>
+<p>The number of events to return from Redis using EVAL.</p>
 
 <h4> 
   <a name="charset">
@@ -120,9 +118,9 @@ or in another character set other than UTF-8.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Either list or channel.  If redis_type is list, then we will BLPOP the
-key.  If redis_type is channel, then we will SUBSCRIBE to the key.
-If redis_type is pattern_channel, then we will PSUBSCRIBE to the key.
+<p>Specify either list or channel.  If <code>redis\_type</code> is <code>list</code>, then we will BLPOP the
+key.  If <code>redis\_type</code> is <code>channel</code>, then we will SUBSCRIBE to the key.
+If <code>redis\_type</code> is <code>pattern_channel</code>, then we will PSUBSCRIBE to the key.
 TODO: change required to true</p>
 
 <h4> 
@@ -137,7 +135,7 @@ TODO: change required to true</p>
   <li> Default value is 0 </li>
 </ul>
 
-<p>The redis database number.</p>
+<p>The Redis database number.</p>
 
 <h4> 
   <a name="debug">
@@ -181,7 +179,7 @@ TODO: change required to true</p>
   <li> Default value is "127.0.0.1" </li>
 </ul>
 
-<p>The hostname of your redis server.</p>
+<p>The hostname of your Redis server.</p>
 
 <h4> 
   <a name="key">
@@ -195,7 +193,7 @@ TODO: change required to true</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of a redis list or channel.
+<p>The name of a Redis list or channel.
 TODO: change required to true</p>
 
 <h4> 
@@ -232,7 +230,7 @@ will cause unexpected results.</p>
   <li> Default value is "default" </li>
 </ul>
 
-<p>Name is used for logging in case there are multiple instances.
+<p>The <code>name</code> configuration is used for logging in case there are multiple instances.
 This feature has no real function and will be removed in future versions.</p>
 
 <h4> 
@@ -276,7 +274,7 @@ This feature has no real function and will be removed in future versions.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of the redis queue (we'll use BLPOP against this).
+<p>The name of the Redis queue (we'll use BLPOP against this).
 TODO: remove soon.</p>
 
 <h4> 

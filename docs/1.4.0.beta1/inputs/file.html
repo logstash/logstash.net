@@ -9,7 +9,7 @@ layout: content_right
 
 <p>By default, each event is assumed to be one line. If you would like
 to join multiple log lines into one event, you'll want to use the
-multiline filter.</p>
+multiline codec.</p>
 
 <p>Files are followed in a manner similar to "tail -0F". File rotation
 is detected and handled by this input.</p>
@@ -134,7 +134,7 @@ are valid here, too. For example, if you have</p>
 <pre><code>path =&gt; "/var/log/*"
 </code></pre>
 
-<p>you might want to exclude gzipped files:</p>
+<p>You might want to exclude gzipped files:</p>
 
 <pre><code>exclude =&gt; "*.gz"
 </code></pre>
@@ -239,12 +239,12 @@ monitored log files.</p>
   <li> Default value is "end" </li>
 </ul>
 
-<p>Choose where Logstash starts initially reading files - at the beginning or
+<p>Choose where Logstash starts initially reading files: at the beginning or
 at the end. The default behavior treats files like live streams and thus
 starts at the end. If you have old data you want to import, set this
 to 'beginning'</p>
 
-<p>This option only modifieds "first contact" situations where a file is new
+<p>This option only modifies "first contact" situations where a file is new
 and not seen before. If a file has already been seen before, this option
 has no effect.</p>
 

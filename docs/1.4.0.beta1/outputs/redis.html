@@ -5,14 +5,14 @@ layout: content_right
 <h2>redis</h2>
 <h3>Milestone: <a href="../plugin-milestones">2</a></h3>
 
-<p>send events to a redis database using RPUSH
-The RPUSH command is supported in redis v0.0.7+
-To PUBLISH to a channel requires at least v1.3.8+
-While you may be able to make these redis versions workcool the best performance
-and stability will be found in more recent stable versions.  Versions 2.6.0+
-are recommended.</p>
+<p>This output will send events to a Redis queue using RPUSH.
+The RPUSH command is supported in Redis v0.0.7+. Using
+PUBLISH to a channel requires at least v1.3.8+.
+While you may be able to make these Redis versions work,
+the best performance and stability will be found in more
+recent stable versions.  Versions 2.6.0+ are recommended.</p>
 
-<p>For more information about redis, see <a href="http://redis.io/">http://redis.io/</a></p>
+<p>For more information about Redis, see <a href="http://redis.io/">http://redis.io/</a></p>
 
 <h3> Synopsis </h3>
 
@@ -55,13 +55,13 @@ This is what it might look like in your config file:
   <li> Default value is false </li>
 </ul>
 
-<p>Set to true if you want redis to batch up values and send 1 RPUSH command
+<p>Set to true if you want Redis to batch up values and send 1 RPUSH command
 instead of one command per value to push on the list.  Note that this only
-works with data_type="list" mode right now.</p>
+works with <code>data_type="list"</code> mode right now.</p>
 
 <p>If true, we send an RPUSH every "batch<em>events" events or
 "batch</em>timeout" seconds (whichever comes first).
-Only supported for list redis data_type.</p>
+Only supported for <code>data_type</code> is "list".</p>
 
 <h4> 
   <a name="batch_events">
@@ -118,7 +118,7 @@ when there are pending events to flush.</p>
   <li> Default value is 1 </li>
 </ul>
 
-<p>How often to check for congestion, defaults to 1 second.
+<p>How often to check for congestion. Default is one second.
 Zero means to check on every event.</p>
 
 <h4> 
@@ -133,12 +133,13 @@ Zero means to check on every event.</p>
   <li> Default value is 0 </li>
 </ul>
 
-<p>In case redis data<em>type is list and has more than @congestion</em>threshold items, block until someone consumes them and reduces
-congestion, otherwise if there are no consumers redis will run out of memory, unless it was configured with OOM protection.
-But even with OOM protection single redis list can block all other users of redis, as well redis cpu consumption
-becomes bad then it reaches the max allowed ram size.
-Default value of 0 means that this limit is disabled.
-Only supported for list redis data_type.</p>
+<p>In case Redis <code>data_type</code> is "list" and has more than @congestion_threshold items,
+block until someone consumes them and reduces congestion, otherwise if there are
+no consumers Redis will run out of memory, unless it was configured with OOM protection.
+But even with OOM protection, a single Redis list can block all other users of Redis,
+until Redis CPU consumption reaches the max allowed RAM size.
+A default value of 0 means that this limit is disabled.
+Only supported for <code>list</code> Redis <code>data_type</code>.</p>
 
 <h4> 
   <a name="data_type">
@@ -152,8 +153,8 @@ Only supported for list redis data_type.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>Either list or channel.  If redis<em>type is list, then we will RPUSH to key.
-If redis</em>type is channel, then we will PUBLISH to key.
+<p>Either list or channel.  If <code>redis_type</code> is list, then we will set
+RPUSH to key. If <code>redis_type</code> is channel, then we will PUBLISH to <code>key</code>.
 TODO set required true</p>
 
 <h4> 
@@ -168,7 +169,7 @@ TODO set required true</p>
   <li> Default value is 0 </li>
 </ul>
 
-<p>The redis database number.</p>
+<p>The Redis database number.</p>
 
 <h4> 
   <a name="exclude_tags">
@@ -197,7 +198,7 @@ TODO set required true</p>
   <li> Default value is ["127.0.0.1"] </li>
 </ul>
 
-<p>The hostname(s) of your redis server(s). Ports may be specified on any
+<p>The hostname(s) of your Redis server(s). Ports may be specified on any
 hostname, which will override the global port config.</p>
 
 <p>For example:</p>
@@ -219,7 +220,7 @@ hostname, which will override the global port config.</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of a redis list or channel. Dynamic names are
+<p>The name of a Redis list or channel. Dynamic names are
 valid here, for example "logstash-%{type}".
 TODO set required true</p>
 
@@ -280,7 +281,7 @@ TODO: delete</p>
   <li> There is no default value for this setting. </li>
 </ul>
 
-<p>The name of the redis queue (we'll use RPUSH on this). Dynamic names are
+<p>The name of the Redis queue (we'll use RPUSH on this). Dynamic names are
 valid here, for example "logstash-%{type}"
 TODO: delete</p>
 
@@ -296,7 +297,7 @@ TODO: delete</p>
   <li> Default value is 1 </li>
 </ul>
 
-<p>Interval for reconnecting to failed redis connections</p>
+<p>Interval for reconnecting to failed Redis connections</p>
 
 <h4> 
   <a name="shuffle_hosts">
@@ -310,7 +311,7 @@ TODO: delete</p>
   <li> Default value is true </li>
 </ul>
 
-<p>Shuffle the host list during logstash startup.</p>
+<p>Shuffle the host list during Logstash startup.</p>
 
 <h4> 
   <a name="tags">
