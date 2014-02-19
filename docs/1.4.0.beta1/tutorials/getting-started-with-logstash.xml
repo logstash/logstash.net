@@ -32,8 +32,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.45-b08, mixed mode)</screen>
 <title>Logstash in two commands</title>
 <simpara>First, we&#8217;re going to download the pre-built logstash binary and run it with a very simple configuration.</simpara>
 <screen>curl -O https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%.tar.gz</screen>
-<simpara>Now you should have the file named <emphasis>logstash-%VERSION%.tar.gz</emphasis> on your local filesystem. Let&#8217;s run it:</simpara>
-<screen>bin/logstash -e 'input { stdin { } } output { stdout {} }'</screen>
+<simpara>Now you should have the file named <emphasis>logstash-%VERSION%.tar.gz</emphasis> on your local filesystem. Let&#8217;s unpack it:</simpara>
+<screen>tar zxvf logstash-%VERSION%.tar.gz
+cd logstash-%VERSION%
+---
+Now let's run it:
+---
+bin/logstash -e 'input { stdin { } } output { stdout {} }'</screen>
 <simpara>Now type something into your command prompt, and you will see it output by logstash:</simpara>
 <screen>hello world
 2013-11-21T01:22:14.405+0000 0.0.0.0 hello world</screen>
@@ -216,7 +221,7 @@ cd elasticsearch-%ELASTICSEARCH_VERSION%/
 <title>More fun with Logstash</title>
 <section id="_persistent_configuration_files">
 <title>Persistent Configuration files</title>
-<simpara>Specifying configurations on the command line using <emphasis>-e</emphasis> is only so helpful, and more advanced setups will require more lengthy, long-lived configurations. First, let&#8217;s create a simple configuration file, and invoke logstash using it. Create a file named "logstash-simple.conf" and save it in the same directory as the logstash flatjar.</simpara>
+<simpara>Specifying configurations on the command line using <emphasis>-e</emphasis> is only so helpful, and more advanced setups will require more lengthy, long-lived configurations. First, let&#8217;s create a simple configuration file, and invoke logstash using it. Create a file named "logstash-simple.conf" and save it in the same directory as logstash.</simpara>
 <screen>input { stdin { } }
 output {
   elasticsearch { host =&gt; localhost }
@@ -244,7 +249,7 @@ output {
   elasticsearch { host =&gt; localhost }
   stdout { codec =&gt; rubydebug }
 }</screen>
-<simpara>Run the logstash jar file with this configuration:</simpara>
+<simpara>Run logstash with this configuration:</simpara>
 <screen>bin/logstash -f logstash-filter.conf</screen>
 <simpara>Now paste this line into the terminal (so it will be processed by the stdin input):</simpara>
 <screen>127.0.0.1 - - [11/Dec/2013:00:01:45 -0800] "GET /xampp/status.php HTTP/1.1" 200 3891 "http://cadenza/xampp/navi.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:25.0) Gecko/20100101 Firefox/25.0"</screen>
