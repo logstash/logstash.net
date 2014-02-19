@@ -16,9 +16,9 @@
       var warning = document.createElement("div");
       var recommended_path = "/docs/" + latest_version + match[2];
       warning.innerHTML = (
-        "<p>OLD VERSION NOTICE</p>"
+        "<p>VERSION NOTICE</p>"
         + "<p>NOTICE: This page documents logstash " + version
-        + ", which is NOT the latest version. The latest version of "
+        + ", which is NOT the latest stable release. The latest stable release of "
         + "logstash is " + latest_version + ". Unless you are "
         + "here on purpose, you probably want to be viewing the latest "
         + "documentation.</p>"
