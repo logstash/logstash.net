@@ -38,21 +38,21 @@ The `bin/plugin` script will handle the installation for you:
 
 The contrib plugins can be extracted on top of an existing Logstash installation. 
 
-For example, if I've extracted `logstash-1.4.0.beta1-modified.tar.gz` into `/path`, e.g.
+For example, if I've extracted `logstash-1.4.0.beta1.tar.gz` into `/path`, e.g.
  
     cd /path
-    tar zxf ~/logstash-1.4.0.beta1-modified.tar.gz
+    tar zxf ~/logstash-1.4.0.beta1.tar.gz
 
-It will have a `/path/logstash-1.4.0.beta1-modified` directory, e.g.
+It will have a `/path/logstash-1.4.0.beta1` directory, e.g.
 
     $ ls
-    logstash-1.4.0.beta1-modified
+    logstash-1.4.0.beta1
 
 The method to install the contrib tarball is identical.
 
     cd /path
-    wget http://download.elasticsearch.org/logstash/logstash/logstash-contrib-1.4.0.beta1-modified.tar.gz
-    tar zxf ~/logstash-contrib-1.4.0.beta1-modified.tar.gz
+    wget http://download.elasticsearch.org/logstash/logstash/logstash-contrib-1.4.0.beta1.tar.gz
+    tar zxf ~/logstash-contrib-1.4.0.beta1.tar.gz
 
 This will install the contrib plugins in the same directory as the core
 install. These plugins will be available to logstash the next time it starts.
