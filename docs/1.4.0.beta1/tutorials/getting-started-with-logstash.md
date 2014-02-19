@@ -49,11 +49,16 @@ Logstash in two commands
 First, we’re going to download the pre-built logstash binary and run it
 with a very simple configuration.
 
-    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1-modified-flatjar.jar
+    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1.tar.gz
 
-Now you should have the file named *logstash-1.4.0.beta1-modified-flatjar.jar* on
-your local filesystem. Let’s run it:
+Now you should have the file named *logstash-1.4.0.beta1.tar.gz* on your
+local filesystem. Let’s unpack it:
 
+    tar zxvf logstash-1.4.0.beta1.tar.gz
+    cd logstash-1.4.0.beta1
+    ---
+    Now let's run it:
+    ---
     bin/logstash -e 'input { stdin { } } output { stdout {} }'
 
 Now type something into your command prompt, and you will see it output
@@ -110,7 +115,7 @@ commands:
 
 > **Note**
 >
-> This tutorial specifies running Logstash 1.4.0.beta1-modified with Elasticsearch
+> This tutorial specifies running Logstash 1.4.0.beta1 with Elasticsearch
 > %ELASTICSEARCH\_VERSION%. Each release of Logstash has a
 > **recommended** version of Elasticsearch to pair with. Make sure the
 > versions match based on the [Logstash
@@ -321,7 +326,7 @@ Specifying configurations on the command line using *-e* is only so
 helpful, and more advanced setups will require more lengthy, long-lived
 configurations. First, let’s create a simple configuration file, and
 invoke logstash using it. Create a file named "logstash-simple.conf" and
-save it in the same directory as the logstash flatjar.
+save it in the same directory as logstash.
 
     input { stdin { } }
     output {
@@ -362,7 +367,7 @@ in action, namely the **grok filter**.
       stdout { codec => rubydebug }
     }
 
-Run the logstash jar file with this configuration:
+Run logstash with this configuration:
 
     bin/logstash -f logstash-filter.conf
 
