@@ -8,7 +8,7 @@ layout: content_right
 
 ### Download logstash:
 
-* [logstash-1.4.0.beta1-flatjar.jar](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1-flatjar.jar)
+* [logstash-1.4.0.beta1.tar.gz](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.beta1.tar.gz)
 
 ### Requirements:
 

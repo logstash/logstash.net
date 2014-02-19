@@ -31,8 +31,8 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.45-b08, mixed mode)</screen>
 <section id="_logstash_in_two_commands">
 <title>Logstash in two commands</title>
 <simpara>First, we&#8217;re going to download the pre-built logstash binary and run it with a very simple configuration.</simpara>
-<screen>curl -O https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%-flatjar.jar</screen>
-<simpara>Now you should have the file named <emphasis>logstash-%VERSION%-flatjar.jar</emphasis> on your local filesystem. Let&#8217;s run it:</simpara>
+<screen>curl -O https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%.tar.gz</screen>
+<simpara>Now you should have the file named <emphasis>logstash-%VERSION%.tar.gz</emphasis> on your local filesystem. Let&#8217;s run it:</simpara>
 <screen>bin/logstash -e 'input { stdin { } } output { stdout {} }'</screen>
 <simpara>Now type something into your command prompt, and you will see it output by logstash:</simpara>
 <screen>hello world
