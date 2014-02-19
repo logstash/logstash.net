@@ -98,20 +98,20 @@ include the plugin right in the jar file.
 
     # This command will take your 'logstash/filters/foo.rb' file
     # and add it into the jar file.
-    % jar -uf logstash-1.4.0.beta1-flatjar.jar logstash/filters/foo.rb
+    % jar -uf logstash-1.4.0.beta1-modified-flatjar.jar logstash/filters/foo.rb
 
     # Verify it's in the right location in the jar!
-    % jar tf logstash-1.4.0.beta1-flatjar.jar | grep foo.rb
+    % jar tf logstash-1.4.0.beta1-modified-flatjar.jar | grep foo.rb
     logstash/filters/foo.rb
 
-    % java -jar logstash-1.4.0.beta1-flatjar.jar agent -f example.conf
+    % java -jar logstash-1.4.0.beta1-modified-flatjar.jar agent -f example.conf
 
 ## Example running
 
 In the example below, I typed in "the quick brown fox" after running the java
 command.
 
-    % java -jar logstash-1.4.0.beta1-flatjar.jar agent -f example.conf
+    % java -jar logstash-1.4.0.beta1-modified-flatjar.jar agent -f example.conf
     the quick brown fox   
     2011-05-12T01:05:09.495000Z stdin://snack.home/: Hello world!
 
