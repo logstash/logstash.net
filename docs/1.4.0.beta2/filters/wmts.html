@@ -1,0 +1,474 @@
+---
+title: logstash docs for filters/wmts
+layout: content_right
+---
+<h2>wmts</h2>
+<h3>Milestone: <a href="../plugin-milestones">3</a></h3>
+<div class="community-plugin-notice">
+  <strong>This is a community-contributed plugin!</strong> It does not ship with logstash by default, but it is easy to install!
+  To use this, you must have <a href="../contrib-plugins">installed the contrib plugins package</a>.
+</div>
+
+<p>This filter converts data from OGC WMTS (Web Map Tile Service) URLs to
+geospatial information, and expands the logstash event accordingly. See
+http://www.opengeospatial.org/standards/wmts for more information about WMTS.</p>
+
+<p>Given a grid, WMTS urls contain all the necessary information to find out
+which coordinates a requested tile belongs to.  Using a simple grok filter
+you can extract all the relevant information. This plugin then translates
+these information into coordinates in LV03 and WGS84.</p>
+
+<p>Here is an example of such a request:
+http://wmts4.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/20130213/21781/23/470/561.jpeg</p>
+
+<p>The current filter can be configured as follows in the configuration file:</p>
+
+<p> filter {</p>
+
+<pre><code># First, waiting for varnish log file formats (combined apache logs)
+grok { match =&gt; [ "message", "%{COMBINEDAPACHELOG}" ] }
+# Then, parameters 
+grok {
+  [ 
+    "request",
+    "(?&lt;wmts.version&gt;([0-9\.]{5}))\/(?&lt;wmts.layer&gt;([a-z0-9\.-]*))\/default\/(?&lt;wmts.release&gt;([0-9]*))\/(?&lt;wmts.reference-system&gt;([a-z0-9]*))\/(?&lt;wmts.zoomlevel&gt;([0-9]*))\/(?&lt;wmts.row&gt;([0-9]*))\/(?&lt;wmts.col&gt;([0-9]*))\.(?&lt;wmts.filetype&gt;([a-zA-Z]*))"
+  ]
+}
+# actually passes the previously parsed message to the wmts plugin
+wmts { }
+</code></pre>
+
+<p> }</p>
+
+<p>By default, the filter is configured to parse requests made on WMTS servers
+configured with the Swisstopo WMTS grid, but this can be customized, by
+setting the following parameters:</p>
+
+<ul>
+<li>x_origin: the abscissa origin of the grid</li>
+<li>y_origin: the ordinate origin of the grid</li>
+<li>tile_width: the width of the produced image tiles</li>
+<li>tile_height: the height of the image tiles</li>
+<li>resolutions: the array of resolutions for this wmts grid</li>
+</ul>
+
+
+<p>Additionnally, the following parameters can be set:</p>
+
+<ul>
+<li>prefix: the prefix used on the added variables, by default 'wmts.'</li>
+<li>output_epsg: the output projection, classical one by default (lat/lon /
+epsg:4326)</li>
+<li>zoomlevel_field: the name of the field where the filter can find the
+previously extracted zoomlevel, defaults to 'wmts.zoomlevel'</li>
+<li>column_field: same for column, defaults to 'wmts.col'</li>
+<li>row_field: same, defaults to 'wmts.row'</li>
+<li>refsys<em>field: same, defaults to 'wmts.reference-system'
+Note: if the reference system is different from the output</em>epsg, a
+reprojection of the coordinates will take place.</li>
+<li>epsg_mapping: sometimes, the reference-system can be given as a string
+('swissgrid' for instance). This parameter allows to set a mapping between
+a regular name and the epsg number of a projection, e.g.:
+{ 'swissgrid' => 21781 }</li>
+</ul>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  wmts {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#column_field">column_field</a> => ... # string (optional), default: "wmts.col"
+    <a href="#epsg_mapping">epsg_mapping</a> => ... # hash (optional), default: {}
+    <a href="#output_epsg">output_epsg</a> => ... # string (optional), default: "epsg:4326"
+    <a href="#prefix">prefix</a> => ... # string (optional), default: "wmts."
+    <a href="#refsys_field">refsys_field</a> => ... # string (optional), default: "wmts.reference-system"
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#resolutions">resolutions</a> => ... # array (optional), default: [4000, 3750, 3500, 3250, 3000, 2750, 2500, 2250, 2000, 1750, 1500, 1250, 1000, 750, 650, 500, 250, 100, 50, 20, 10, 5, 2.5, 2, 1.5, 1, 0.5, 0.25, 0.1]
+    <a href="#row_field">row_field</a> => ... # string (optional), default: "wmts.row"
+    <a href="#tile_height">tile_height</a> => ... # number (optional), default: 256
+    <a href="#tile_width">tile_width</a> => ... # number (optional), default: 256
+    <a href="#x_origin">x_origin</a> => ... # number (optional), default: 420000
+    <a href="#y_origin">y_origin</a> => ... # number (optional), default: 350000
+    <a href="#zoomlevel_field">zoomlevel_field</a> => ... # string (optional), default: "wmts.zoomlevel"
+}
+
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  wmts {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  wmts {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add field "foo_hello" if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  wmts {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  wmts {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo<em>hello" (and the second example would of course add a "taggedy</em>tag" tag).</p>
+
+<h4> 
+  <a name="column_field">
+    column_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "wmts.col" </li>
+</ul>
+
+<p>configures the name of the field for the column</p>
+
+<h4> 
+  <a name="epsg_mapping">
+    epsg_mapping
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>configures a mapping between named projections and their actual EPSG code.
+Some production WMTS use a regular name instead of a numerical value for
+the projection code. This parameter allows to define a custom mapping</p>
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="output_epsg">
+    output_epsg
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "epsg:4326" </li>
+</ul>
+
+<p>configures the output projection</p>
+
+<h4> 
+  <a name="prefix">
+    prefix
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "wmts." </li>
+</ul>
+
+<p>configures the prefix</p>
+
+<h4> 
+  <a name="refsys_field">
+    refsys_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "wmts.reference-system" </li>
+</ul>
+
+<p>configures the name of the field for the reference system</p>
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  wmts {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  wmts {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the field with name "foo_hello" if it is present. The second
+example would remove an additional, non-dynamic field.</p>
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  wmts {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  wmts {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+<h4> 
+  <a name="resolutions">
+    resolutions
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [4000, 3750, 3500, 3250, 3000, 2750, 2500, 2250, 2000, 1750, 1500, 1250, 1000, 750, 650, 500, 250, 100, 50, 20, 10, 5, 2.5, 2, 1.5, 1, 0.5, 0.25, 0.1] </li>
+</ul>
+
+<p>resolutions</p>
+
+<h4> 
+  <a name="row_field">
+    row_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "wmts.row" </li>
+</ul>
+
+<p>configures the name of the field for the row</p>
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="tile_height">
+    tile_height
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 256 </li>
+</ul>
+
+<p>tile_height</p>
+
+<h4> 
+  <a name="tile_width">
+    tile_width
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 256 </li>
+</ul>
+
+<p>tile_width</p>
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="x_origin">
+    x_origin
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 420000 </li>
+</ul>
+
+<p>WMTS grid configuration (by default, it is set to Swisstopo's WMTS grid)
+x_origin</p>
+
+<h4> 
+  <a name="y_origin">
+    y_origin
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 350000 </li>
+</ul>
+
+<p>y_origin</p>
+
+<h4> 
+  <a name="zoomlevel_field">
+    zoomlevel_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "wmts.zoomlevel" </li>
+</ul>
+
+<p>configures the name of the field for the WMTS zoomlevel</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.0.beta1/lib/logstash/filters/wmts.rb">lib/logstash/filters/wmts.rb</a>

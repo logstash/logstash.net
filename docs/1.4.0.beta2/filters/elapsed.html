@@ -1,0 +1,384 @@
+---
+title: logstash docs for filters/elapsed
+layout: content_right
+---
+<h2>elapsed</h2>
+<h3>Milestone: <a href="../plugin-milestones">1</a></h3>
+<div class="community-plugin-notice">
+  <strong>This is a community-contributed plugin!</strong> It does not ship with logstash by default, but it is easy to install!
+  To use this, you must have <a href="../contrib-plugins">installed the contrib plugins package</a>.
+</div>
+
+<p>elapsed filter</p>
+
+<p>This filter tracks a pair of start/end events and calculates the elapsed
+time between them.
+The elapsed filter tracks a pair of start/end events and uses their
+timestamps to calculate the elapsed time between them.</p>
+
+<p>The filter has been developed to track the execution time of processes and
+other long tasks.</p>
+
+<p>The configuration looks like this:</p>
+
+<pre><code>filter {
+  elapsed {
+    start_tag =&gt; "start event tag"
+    end_tag =&gt; "end event tag"
+    unique_id_field =&gt; "id field name"
+    timeout =&gt; seconds
+    new_event_on_match =&gt; true/false
+  }
+}
+</code></pre>
+
+<p>The events managed by this filter must have some particular properties.
+The event describing the start of the task (the "start event") must contain
+a tag equal to 'start<em>tag'. On the other side, the event describing the end
+of the task (the "end event") must contain a tag equal to 'end</em>tag'. Both
+these two kinds of event need to own an ID field which identify uniquely that
+particular task. The name of this field is stored in 'unique<em>id</em>field'.</p>
+
+<p>You can use a Grok filter to prepare the events for the elapsed filter.
+An example of configuration can be:</p>
+
+<pre><code>filter {
+  grok {
+    match =&gt; ["message", "%{TIMESTAMP_ISO8601} START id: (?&lt;task_id&gt;.*)"]
+    add_tag =&gt; [ "taskStarted" ]
+  }
+
+  grok {
+    match =&gt; ["message", "%{TIMESTAMP_ISO8601} END id: (?&lt;task_id&gt;.*)"]
+    add_tag =&gt; [ "taskTerminated"]
+  }
+
+  elapsed {
+    start_tag =&gt; "taskStarted"
+    end_tag =&gt; "taskTerminated"
+    unique_id_field =&gt; "task_id"
+  }
+}
+</code></pre>
+
+<p>The elapsed filter collects all the "start events". If two, or more, "start
+events" have the same ID, only the first one is recorded, the others are
+discarded.</p>
+
+<p>When an "end event" matching a previously collected "start event" is
+received, there is a match. The configuration property 'new<em>event</em>on<em>match'
+tells where to insert the elapsed information: they can be added to the
+"end event" or a new "match event" can be created. Both events store the
+following information:
+- the tags "elapsed" and "elapsed.match"
+- the field "elapsed.time" with the difference, in seconds, between
+  the two events timestamps
+- an ID filed with the task ID
+- the field "elapsed.timestamp</em>start" with the timestamp of the "start event"</p>
+
+<p>If the "end event" does not arrive before "timeout" seconds, the
+"start event" is discarded and an "expired event" is generated. This event
+contains:
+- the tags "elapsed" and "elapsed.expired<em>error"
+- a field called "elapsed.time" with the age, in seconds, of the
+  "start event"
+- an ID filed with the task ID
+- the field "elapsed.timestamp</em>start" with the timestamp of the "start event"</p>
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  elapsed {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#end_tag">end_tag</a> => ... # string (required)
+    <a href="#new_event_on_match">new_event_on_match</a> => ... # boolean (optional), default: false
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#start_tag">start_tag</a> => ... # string (required)
+    <a href="#timeout">timeout</a> => ... # number (optional), default: 1800
+    <a href="#unique_id_field">unique_id_field</a> => ... # string (required)
+}
+
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  elapsed {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  elapsed {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add field "foo_hello" if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  elapsed {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  elapsed {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo<em>hello" (and the second example would of course add a "taggedy</em>tag" tag).</p>
+
+<h4> 
+  <a name="end_tag">
+    end_tag (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the tag identifying the "end event"</p>
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="new_event_on_match">
+    new_event_on_match
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>This property manage what to do when an "end event" matches a "start event".
+If it's set to 'false' (default value), the elapsed information are added
+to the "end event"; if it's set to 'true' a new "match event" is created.</p>
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  elapsed {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  elapsed {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the field with name "foo_hello" if it is present. The second
+example would remove an additional, non-dynamic field.</p>
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  elapsed {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  elapsed {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+<h4> 
+  <a name="start_tag">
+    start_tag (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the tag identifying the "start event"</p>
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="timeout">
+    timeout
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 1800 </li>
+</ul>
+
+<p>The amount of seconds after an "end event" can be considered lost.
+The corresponding "start event" is discarded and an "expired event"
+is generated. The default value is 30 minutes (1800 seconds).</p>
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+<h4> 
+  <a name="unique_id_field">
+    unique_id_field (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the field containing the task ID.
+This value must uniquely identify the task in the system, otherwise
+it's impossible to match the couple of events.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.0.beta1/lib/logstash/filters/elapsed.rb">lib/logstash/filters/elapsed.rb</a>
