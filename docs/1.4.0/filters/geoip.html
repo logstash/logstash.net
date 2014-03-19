@@ -1,0 +1,325 @@
+---
+title: logstash docs for filters/geoip
+layout: content_right
+---
+<h2>geoip</h2>
+<h3>Milestone: <a href="../plugin-milestones">3</a></h3>
+
+<p>The GeoIP filter adds information about the geographical location of IP addresses,
+based on data from the Maxmind database.</p>
+
+<p>Starting with version 1.3.0 of Logstash, a [geoip][location] field is created if
+the GeoIP lookup returns a latitude and longitude. The field is stored in
+<a href="http://geojson.org/geojson-spec.html">GeoJSON</a> format. Additionally,
+the default Elasticsearch template provided with the
+<a href="../outputs/elasticsearch.html">elasticsearch output</a>
+maps the [geoip][location] field to a
+<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html">geo_point</a>.</p>
+
+<p>As this field is a geo_point <em>and</em> it is still valid GeoJSON, you get
+the awesomeness of Elasticsearch's geospatial query, facet and filter functions
+and the flexibility of having GeoJSON for all other applications (like Kibana's
+<a href="https://github.com/elasticsearch/kibana/tree/master/src/app/panels/bettermap">bettermap panel</a>).</p>
+
+<p>Logstash releases ship with the GeoLiteCity database made available from
+Maxmind with a CCA-ShareAlike 3.0 license. For more details on GeoLite, see
+<a href="http://www.maxmind.com/en/geolite">http://www.maxmind.com/en/geolite</a>.</p>
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  geoip {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#database">database</a> => ... # a valid filesystem path (optional)
+    <a href="#fields">fields</a> => ... # array (optional)
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#source">source</a> => ... # string (required)
+    <a href="#target">target</a> => ... # string (optional), default: "geoip"
+}
+
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  geoip {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  geoip {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add field "foo_hello" if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  geoip {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  geoip {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would add a tag "foo<em>hello" (and the second example would of course add a "taggedy</em>tag" tag).</p>
+
+<h4> 
+  <a name="database">
+    database
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#path">path</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The path to the GeoIP database file which Logstash should use. Country, City, ASN, ISP
+and organization databases are supported.</p>
+
+<p>If not specified, this will default to the GeoLiteCity database that ships
+with Logstash.</p>
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="fields">
+    fields
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>An array of geoip fields to be included in the event.</p>
+
+<p>Possible fields depend on the database type. By default, all geoip fields
+are included in the event.</p>
+
+<p>For the built-in GeoLiteCity database, the following are available:
+<code>city\_name</code>, <code>continent\_code</code>, <code>country\_code2</code>, <code>country\_code3</code>, <code>country\_name</code>,
+<code>dma\_code</code>, <code>ip</code>, <code>latitude</code>, <code>longitude</code>, <code>postal\_code</code>, <code>region\_name</code> and <code>timezone</code>.</p>
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  geoip {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  geoip {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the field with name "foo_hello" if it is present. The second
+example would remove an additional, non-dynamic field.</p>
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  geoip {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  geoip {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field "somefield" == "hello" this filter, on success,
+would remove the tag "foo_hello" if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+<h4> 
+  <a name="source">
+    source (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The field containing the IP address or hostname to map via geoip. If
+this field is an array, only the first value will be used.</p>
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+<h4> 
+  <a name="target">
+    target
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "geoip" </li>
+</ul>
+
+<p>Specify the field into which Logstash should store the geoip data.
+This can be useful, for example, if you have <code>src\_ip</code> and <code>dst\_ip</code> fields and
+would like the GeoIP information of both IPs.</p>
+
+<p>If you save the data to a target field other than "geoip" and want to use the
+geo_point related functions in Elasticsearch, you need to alter the template
+provided with the Elasticsearch output and configure the output to use the
+new template.</p>
+
+<p>Even if you don't use the geo_point mapping, the [target][location] field
+is still valid GeoJSON.</p>
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin's "type"
+attribute for more.
+Optional.</p>
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.0/lib/logstash/filters/geoip.rb">lib/logstash/filters/geoip.rb</a>
