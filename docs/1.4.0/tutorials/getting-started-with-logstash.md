@@ -49,13 +49,13 @@ Logstash in two commands
 First, we’re going to download the *logstash* binary and run it with a
 very simple configuration.
 
-    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.rc1-modified.tar.gz
+    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.0.tar.gz
 
-Now you should have the file named *logstash-1.4.0.rc1-modified.tar.gz* on your
+Now you should have the file named *logstash-1.4.0.tar.gz* on your
 local filesystem. Let’s unpack it:
 
-    tar zxvf logstash-1.4.0.rc1-modified.tar.gz
-    cd logstash-1.4.0.rc1-modified
+    tar zxvf logstash-1.4.0.tar.gz
+    cd logstash-1.4.0
 
 Now let’s run it:
 
@@ -116,7 +116,7 @@ commands:
 
 > **Note**
 >
-> This tutorial specifies running Logstash 1.4.0.rc1-modified with Elasticsearch
+> This tutorial specifies running Logstash 1.4.0 with Elasticsearch
 > %ELASTICSEARCH\_VERSION%. Each release of Logstash has a
 > **recommended** version of Elasticsearch to pair with. Make sure the
 > versions match based on the [Logstash
