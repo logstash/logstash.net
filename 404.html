@@ -33,10 +33,15 @@
         route.redirect("/docs/1.4.0" + path);
       });
 
+      route.add("/docs/[^/]+/tutorials/getting-started-(simple|centralized)", function() {
+        route.redirect("/docs/latest/tutorials/getting-started-with-logstash");
+      });
+
       route.add(".*", function() {
         // Actually, 404.
         document.getElementById("four-oh-four").setAttribute("style", "display: block");
       });
+
 
       route.run();
     </script>
