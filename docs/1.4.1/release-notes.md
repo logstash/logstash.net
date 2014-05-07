@@ -1,14 +1,14 @@
 ---
-title: release notes for 1.4.1-modified
+title: release notes for 1.4.1
 layout: content_right
 ---
 
-# 1.4.1-modified - Release Notes
+# 1.4.1 - Release Notes
 
 This document is targeted at existing users of Logstash who are upgrading from
-an older version to version 1.4.1-modified. This document is intended to supplement
+an older version to version 1.4.1. This document is intended to supplement
 a the [changelog
-file](https://github.com/elasticsearch/logstash/blob/v1.4.1-modified/CHANGELOG) by
+file](https://github.com/elasticsearch/logstash/blob/v1.4.1/CHANGELOG) by
 providing more details on certain changes.
 
 ### tarball 
@@ -33,8 +33,8 @@ much more accessible and able to satisfy any curiosity you may have.
 The new way to do things is:
 
 * Download logstash tarball
-* Unpack it (`tar -zxf logstash-1.4.1-modified.tar.gz`)
-* `cd logstash-1.4.1-modified`
+* Unpack it (`tar -zxf logstash-1.4.1.tar.gz`)
+* `cd logstash-1.4.1`
 % Run it: `bin/logstash ...`
 
 The old way to run logstash of `java -jar logstash.jar` is now replaced with
@@ -59,7 +59,7 @@ All the other plugins are now available in a contrib package. All plugins
 continue to be open source and free, of course! Installing plugins from the
 contrib package is very easy:
 
-    % cd /path/to/logstash-1.4.1-modified/
+    % cd /path/to/logstash-1.4.1/
     % bin/plugin install contrib
 
 A bonus effect of this decision is that the default Logstash download size
@@ -67,4 +67,4 @@ shrank by 19MB compared to the previous release because we were able to shed
 some lesser-used dependencies.
 
 You can learn more about contrib plugins on the [contrib plugins
-page](http://logstash.net/docs/1.4.1-modified/contrib-plugins)
+page](http://logstash.net/docs/1.4.1/contrib-plugins)

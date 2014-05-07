@@ -8,14 +8,14 @@ layout: content_right
 
 ### Download logstash:
 
-* [logstash-1.4.1-modified.tar.gz](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1-modified.tar.gz)
+* [logstash-1.4.1.tar.gz](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1.tar.gz)
 
-    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1-modified.tar.gz
+    curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1.tar.gz
 
 ### Unpack it
 
-    tar -xzf logstash-1.4.1-modified.tar.gz
-    cd logstash-1.4.1-modified
+    tar -xzf logstash-1.4.1.tar.gz
+    cd logstash-1.4.1
 
 ### Requirements:
 
@@ -125,7 +125,7 @@ on some results, drill around in some logs.
 For further learning, try these:
 
 * [Watch a presentation on logstash](http://www.youtube.com/embed/RuUFnog29M4)
-* [Getting started 'standalone' guide](http://logstash.net/docs/1.4.1-modified/tutorials/getting-started-simple)
-* [Getting started 'centralized' guide](http://logstash.net/docs/1.4.1-modified/tutorials/getting-started-centralized) - 
+* [Getting started 'standalone' guide](http://logstash.net/docs/1.4.1/tutorials/getting-started-simple)
+* [Getting started 'centralized' guide](http://logstash.net/docs/1.4.1/tutorials/getting-started-centralized) - 
   learn how to build out your logstash infrastructure and centralize your logs.
-* [Dive into the docs](http://logstash.net/docs/1.4.1-modified/)
+* [Dive into the docs](http://logstash.net/docs/1.4.1/)

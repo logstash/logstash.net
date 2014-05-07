@@ -38,7 +38,7 @@ for such things, that works for me, too.)
 
 ## Download It
 
-[Download logstash-1.4.1-modified](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1-modified.tar.gz)
+[Download logstash-1.4.1](https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1.tar.gz)
 
 ## What's next?
 
