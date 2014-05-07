@@ -1,0 +1,205 @@
+---
+title: logstash docs for inputs/eventlog
+layout: content_right
+---
+<h2>eventlog</h2>
+<h3>Milestone: <a href="../plugin-milestones">2</a></h3>
+
+<p>This input will pull events from a (http://msdn.microsoft.com/en-us/library/windows/desktop/bb309026%28v=vs.85%29.aspx)[Windows Event Log].</p>
+
+<p>To collect Events from the System Event Log, use a config like:</p>
+
+<pre><code>input {
+  eventlog {
+    type  =&gt; 'Win32-EventLog'
+    logfile  =&gt; 'System'
+  }
+}
+</code></pre>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>input {
+  eventlog {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#codec">codec</a> => ... # codec (optional), default: "plain"
+    <a href="#logfile">logfile</a> => ... # array (optional), default: ["Application", "Security", "System"]
+    <a href="#tags">tags</a> => ... # array (optional)
+    <a href="#type">type</a> => ... # string (optional)
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>Add a field to an event</p>
+
+
+<h4> 
+  <a name="charset">
+    charset
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value can be any of: "ASCII-8BIT", "Big5", "Big5-HKSCS", "Big5-UAO", "CP949", "Emacs-Mule", "EUC-JP", "EUC-KR", "EUC-TW", "GB18030", "GBK", "ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-6", "ISO-8859-7", "ISO-8859-8", "ISO-8859-9", "ISO-8859-10", "ISO-8859-11", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", "KOI8-R", "KOI8-U", "Shift_JIS", "US-ASCII", "UTF-8", "UTF-16BE", "UTF-16LE", "UTF-32BE", "UTF-32LE", "Windows-1251", "GB2312", "IBM437", "IBM737", "IBM775", "CP850", "IBM852", "CP852", "IBM855", "CP855", "IBM857", "IBM860", "IBM861", "IBM862", "IBM863", "IBM864", "IBM865", "IBM866", "IBM869", "Windows-1258", "GB1988", "macCentEuro", "macCroatian", "macCyrillic", "macGreek", "macIceland", "macRoman", "macRomania", "macThai", "macTurkish", "macUkraine", "CP950", "CP951", "stateless-ISO-2022-JP", "eucJP-ms", "CP51932", "GB12345", "ISO-2022-JP", "ISO-2022-JP-2", "CP50220", "CP50221", "Windows-1252", "Windows-1250", "Windows-1256", "Windows-1253", "Windows-1255", "Windows-1254", "TIS-620", "Windows-874", "Windows-1257", "Windows-31J", "MacJapanese", "UTF-7", "UTF8-MAC", "UTF-16", "UTF-32", "UTF8-DoCoMo", "SJIS-DoCoMo", "UTF8-KDDI", "SJIS-KDDI", "ISO-2022-JP-KDDI", "stateless-ISO-2022-JP-KDDI", "UTF8-SoftBank", "SJIS-SoftBank", "BINARY", "CP437", "CP737", "CP775", "IBM850", "CP857", "CP860", "CP861", "CP862", "CP863", "CP864", "CP865", "CP866", "CP869", "CP1258", "Big5-HKSCS:2008", "eucJP", "euc-jp-ms", "eucKR", "eucTW", "EUC-CN", "eucCN", "CP936", "ISO2022-JP", "ISO2022-JP2", "ISO8859-1", "CP1252", "ISO8859-2", "CP1250", "ISO8859-3", "ISO8859-4", "ISO8859-5", "ISO8859-6", "CP1256", "ISO8859-7", "CP1253", "ISO8859-8", "CP1255", "ISO8859-9", "CP1254", "ISO8859-10", "ISO8859-11", "CP874", "ISO8859-13", "CP1257", "ISO8859-14", "ISO8859-15", "ISO8859-16", "CP878", "CP932", "csWindows31J", "SJIS", "PCK", "MacJapan", "ASCII", "ANSI_X3.4-1968", "646", "CP65000", "CP65001", "UTF-8-MAC", "UTF-8-HFS", "UCS-2BE", "UCS-4BE", "UCS-4LE", "CP1251", "external", "locale" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The character encoding used in this input. Examples include &#8220;UTF-8&#8221;
+and &#8220;cp1252&#8221;</p>
+
+<p>This setting is useful if your log files are in Latin-1 (aka cp1252)
+or in another character set other than UTF-8.</p>
+
+<p>This only affects &#8220;plain&#8221; format logs since json is UTF-8 already.</p>
+
+
+<h4> 
+  <a name="codec">
+    codec
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#codec">codec</a> </li>
+  <li> Default value is "plain" </li>
+</ul>
+
+<p>The codec used for input data. Input codecs are a convenient method for decoding your data before it enters the input, without needing a separate filter in your Logstash pipeline.</p>
+
+
+<h4> 
+  <a name="debug">
+    debug
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+
+
+
+<h4> 
+  <a name="format">
+    format
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value can be any of: "plain", "json", "json_event", "msgpack_event" </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The format of input data (plain, json, json_event)</p>
+
+
+<h4> 
+  <a name="logfile">
+    logfile
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is ["Application", "Security", "System"] </li>
+</ul>
+
+<p>Event Log Name</p>
+
+
+<h4> 
+  <a name="message_format">
+    message_format
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>If format is &#8220;json&#8221;, an event sprintf string to build what
+the display @message should be given (defaults to the raw JSON).
+sprintf format strings look like %{fieldname}</p>
+
+<p>If format is &#8220;json_event&#8221;, ALL fields except for @type
+are expected to be present. Not receiving all fields
+will cause unexpected results.</p>
+
+
+<h4> 
+  <a name="tags">
+    tags
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add any number of arbitrary tags to your event.</p>
+
+<p>This can help with processing later.</p>
+
+
+<h4> 
+  <a name="type">
+    type
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Add a &#8216;type&#8217; field to all events handled by this input.</p>
+
+<p>Types are used mainly for filter activation.</p>
+
+<p>The type is stored as part of the event itself, so you can
+also use the type to search for it in the web interface.</p>
+
+<p>If you try to set a type on an event that already has one (for
+example when you send an event from a shipper to an indexer) then
+a new input will not override the existing type. A type set at 
+the shipper stays with that event for its life even
+when sent to another Logstash server.</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.1/lib/logstash/inputs/eventlog.rb">lib/logstash/inputs/eventlog.rb</a>
