@@ -28,12 +28,12 @@ Once you have verified the existence of Java on your system, we can move on!
 === Logstash in two commands
 First, we're going to download the 'logstash' binary and run it with a very simple configuration.
 ----
-curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1-modified.tar.gz
+curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1.tar.gz
 ----
-Now you should have the file named 'logstash-1.4.1-modified.tar.gz' on your local filesystem. Let's unpack it:
+Now you should have the file named 'logstash-1.4.1.tar.gz' on your local filesystem. Let's unpack it:
 ----
-tar zxvf logstash-1.4.1-modified.tar.gz
-cd logstash-1.4.1-modified
+tar zxvf logstash-1.4.1.tar.gz
+cd logstash-1.4.1
 ----
 Now let's run it:
 ----
@@ -75,7 +75,7 @@ cd elasticsearch-1.1.1/
 ./bin/elasticsearch
 ----
 
-NOTE: This tutorial specifies running Logstash 1.4.1-modified with Elasticsearch 1.1.1. Each release of Logstash has a *recommended* version of Elasticsearch to pair with. Make sure the versions match based on the http://logstash.net/docs/latest[Logstash version] you're running!
+NOTE: This tutorial specifies running Logstash 1.4.1 with Elasticsearch 1.1.1. Each release of Logstash has a *recommended* version of Elasticsearch to pair with. Make sure the versions match based on the http://logstash.net/docs/latest[Logstash version] you're running!
 
 More detailed information on installing and configuring Elasticsearch can be found on http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/index.html[The Elasticsearch reference pages]. However, for the purposes of Getting Started with Logstash, the default installation and configuration of Elasticsearch should be sufficient.
 
