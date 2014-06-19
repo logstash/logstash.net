@@ -16,10 +16,6 @@ title: Logstash
   <a class="awesome_button" href="https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%.tar.gz">Download</a>
 
   <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
-  <a class="awesome_button" href="http://cookbook.logstash.net/">Cookbook</a>
-  <!-- Demo disabled until we get around to upgrading it.
-  <a class="awesome_button" href="http://demo3.logstash.net/index.html#/dashboard/file/logstash.json">Search Demo</a>
-  -->
 
 </div>
 <div class="clear"></div>
