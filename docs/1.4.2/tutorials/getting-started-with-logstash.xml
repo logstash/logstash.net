@@ -31,10 +31,10 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.45-b08, mixed mode)</screen>
 <section id="_logstash_in_two_commands">
 <title>Logstash in two commands</title>
 <simpara>First, we&#8217;re going to download the <emphasis>logstash</emphasis> binary and run it with a very simple configuration.</simpara>
-<screen>curl -O https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%.tar.gz</screen>
-<simpara>Now you should have the file named <emphasis>logstash-%VERSION%.tar.gz</emphasis> on your local filesystem. Let&#8217;s unpack it:</simpara>
-<screen>tar zxvf logstash-%VERSION%.tar.gz
-cd logstash-%VERSION%</screen>
+<screen>curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz</screen>
+<simpara>Now you should have the file named <emphasis>logstash-1.4.2.tar.gz</emphasis> on your local filesystem. Let&#8217;s unpack it:</simpara>
+<screen>tar zxvf logstash-1.4.2.tar.gz
+cd logstash-1.4.2</screen>
 <simpara>Now let&#8217;s run it:</simpara>
 <screen>bin/logstash -e 'input { stdin { } } output { stdout {} }'</screen>
 <simpara>Now type something into your command prompt, and you will see it output by Logstash:</simpara>
@@ -57,11 +57,11 @@ cd logstash-%VERSION%</screen>
 <section id="_storing_logs_with_elasticsearch">
 <title>Storing logs with Elasticsearch</title>
 <simpara>Now, you&#8217;re probably saying, "that&#8217;s all fine and dandy, but typing all my logs into Logstash isn&#8217;t really an option, and merely seeing them spit to STDOUT isn&#8217;t very useful." Good point. First, let&#8217;s set up Elasticsearch to store the messages we send into Logstash. If you don&#8217;t have Elasticearch already installed, you can <ulink url="http://www.elasticsearch.org/download/">download the RPM or DEB package</ulink>, or install manually by downloading the current release tarball, by issuing the following four commands:</simpara>
-<screen>curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-%ELASTICSEARCH_VERSION%.tar.gz
-tar zxvf elasticsearch-%ELASTICSEARCH_VERSION%.tar.gz
-cd elasticsearch-%ELASTICSEARCH_VERSION%/
+<screen>curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.2.tar.gz
+tar zxvf elasticsearch-1.4.2.tar.gz
+cd elasticsearch-1.4.2/
 ./bin/elasticsearch</screen>
-<note><simpara>This tutorial specifies running Logstash %VERSION% with Elasticsearch %ELASTICSEARCH_VERSION%. Each release of Logstash has a <emphasis role="strong">recommended</emphasis> version of Elasticsearch to pair with. Make sure the versions match based on the <ulink url="http://logstash.net/docs/latest">Logstash version</ulink> you&#8217;re running!</simpara></note>
+<note><simpara>This tutorial specifies running Logstash 1.4.2 with Elasticsearch 1.4.2. Each release of Logstash has a <emphasis role="strong">recommended</emphasis> version of Elasticsearch to pair with. Make sure the versions match based on the <ulink url="http://logstash.net/docs/latest">Logstash version</ulink> you&#8217;re running!</simpara></note>
 <simpara>More detailed information on installing and configuring Elasticsearch can be found on <ulink url="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/index.html">The Elasticsearch reference pages</ulink>. However, for the purposes of Getting Started with Logstash, the default installation and configuration of Elasticsearch should be sufficient.</simpara>
 <simpara>Now that we have Elasticsearch running on port 9200 (we do, right?), Logstash can be simply configured to use Elasticsearch as its backend. The defaults for both Logstash and Elasticsearch are fairly sane and well thought out, so we can omit the optional configurations within the elasticsearch output:</simpara>
 <screen>bin/logstash -e 'input { stdin { } } output { elasticsearch { host =&gt; localhost } }'</screen>

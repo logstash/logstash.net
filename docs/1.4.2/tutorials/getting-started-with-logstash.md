@@ -117,7 +117,7 @@ commands:
 > **Note**
 >
 > This tutorial specifies running Logstash 1.4.2 with Elasticsearch
-> %ELASTICSEARCH\_VERSION%. Each release of Logstash has a
+> 1.1.1. Each release of Logstash has a
 > **recommended** version of Elasticsearch to pair with. Make sure the
 > versions match based on the [Logstash
 > version](http://logstash.net/docs/latest) you’re running!
