@@ -1,0 +1,49 @@
+---
+title: logstash docs for codecs/cloudtrail
+layout: content_right
+---
+<h2>cloudtrail</h2>
+<h3>Milestone: <a href="../plugin-milestones">1</a></h3>
+<div class="community-plugin-notice">
+  <strong>This is a community-contributed plugin!</strong> It does not ship with logstash by default, but it is easy to install!
+  To use this, you must have <a href="../contrib-plugins">installed the contrib plugins package</a>.
+</div>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file {
+    codec =&gt; cloudtrail {
+      <a href="#spool_size">spool_size</a> => ... # number (optional), default: 50
+    }
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="spool_size">
+    spool_size
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 50 </li>
+</ul>
+
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.1/lib/logstash/codecs/cloudtrail.rb">lib/logstash/codecs/cloudtrail.rb</a>
