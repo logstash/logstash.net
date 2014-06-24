@@ -1,5 +1,5 @@
 (function() {
-  var latest_version = "1.4.1";
+  var latest_version = "1.4.2";
   var path = document.location.pathname;
   var docs_path_re = new RegExp("/docs/([^/]+)(/.*|$)");
   
