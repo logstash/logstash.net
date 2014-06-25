@@ -12,7 +12,6 @@
 			        <a href="/">home</a>
 			        <a href="/docs/%VERSION%">docs</a>
 			        <a href="/docs/%VERSION%/learn">about</a>
-              <a href="http://cookbook.logstash.net/">cookbook</a>
 			        <a href="http://logstash.jira.com/">bugs</a>
 			    </div>
             </div>
