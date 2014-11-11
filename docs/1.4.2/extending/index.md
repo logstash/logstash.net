@@ -10,9 +10,9 @@ If you're looking to extend logstash today, please look at the existing plugins.
 
 ## Good examples of plugins
 
-* [inputs/tcp](https://github.com/logstash/logstash/blob/master/lib/logstash/inputs/tcp.rb)
-* [filters/multiline](https://github.com/logstash/logstash/blob/master/lib/logstash/filters/multiline.rb)
-* [outputs/mongodb](https://github.com/logstash/logstash/blob/master/lib/logstash/outputs/mongodb.rb)
+* [inputs/tcp](https://github.com/logstash/logstash/blob/v1.4.2/lib/logstash/inputs/tcp.rb)
+* [filters/multiline](https://github.com/logstash/logstash/blob/v1.4.2/lib/logstash/filters/multiline.rb)
+* [outputs/mongodb](https://github.com/logstash/logstash/blob/v1.4.2/lib/logstash/outputs/mongodb.rb)
 
 ## Common concepts
 

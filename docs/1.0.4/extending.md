@@ -12,9 +12,9 @@ If you're looking to extend logstash today, please look at the existing plugins.
 
 Good examples include:
 
-* [inputs/beanstalk](https://github.com/logstash/logstash/blob/master/lib/logstash/inputs/beanstalk.rb)
-* [filters/multiline](https://github.com/logstash/logstash/blob/master/lib/logstash/filters/multiline.rb)
-* [outputs/mongodb](https://github.com/logstash/logstash/blob/master/lib/logstash/outputs/mongodb.rb)
+* [inputs/beanstalk](https://github.com/logstash/logstash/blob/v1.0.4/lib/logstash/inputs/beanstalk.rb)
+* [filters/multiline](https://github.com/logstash/logstash/blob/v1.0.4/lib/logstash/filters/multiline.rb)
+* [outputs/mongodb](https://github.com/logstash/logstash/blob/v1.0.4/lib/logstash/outputs/mongodb.rb)
 
 Main stuff you need to know:
 

@@ -407,7 +407,7 @@ are quite a few grok patterns included with Logstash out-of-the-box, so
 it’s quite likely if you’re attempting to parse a fairly common log
 format, someone has already done the work for you. For more details, see
 the list of [logstash grok
-patterns](https://github.com/logstash/logstash/blob/master/patterns/grok-patterns)
+patterns](https://github.com/logstash/logstash/blob/v1.4.0/patterns/grok-patterns)
 on github.
 
 The other filter used in this example is the **date** filter. This
