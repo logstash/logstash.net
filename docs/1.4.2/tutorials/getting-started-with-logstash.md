@@ -109,9 +109,9 @@ package](http://www.elasticsearch.org/download/), or install manually by
 downloading the current release tarball, by issuing the following four
 commands:
 
-    curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.tar.gz
-    tar zxvf elasticsearch-1.1.1.tar.gz
-    cd elasticsearch-1.1.1/
+    curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.2.tar.gz
+    tar zxvf elasticsearch-1.4.2.tar.gz
+    cd elasticsearch-1.4.2/
     ./bin/elasticsearch
 
 > **Note**
