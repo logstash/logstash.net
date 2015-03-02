@@ -30,7 +30,7 @@ li { list-style-type: disc; margin-left: 30px !important; }
 .nav a:link, .nav a:visited, .nav a:hover { font-weight: bold; padding: 0px 10px; }
 
 /* featured content for homepage */
-.mascot { float:right; margin-left: 30px; }
+.mascot { margin-left: 30px; }
 .logo-text { height: 2em; }
 .image_and_logo { margin: 45px 0px 0px 0px; font-size:18px; }
 .featured_text { margin:0px 0px 260px; }
@@ -107,4 +107,11 @@ a.awesome_button:hover { background: url('images/button_hover.png'); background-
   border-radius: 5px;
 
   background: rgba(200, 200, 0, 0.2);
+}
+
+.rtp {
+  float: left;
+  border: 2px solid grey;
+  padding: 0.5em;
+  border-radius: 20px;
 }
