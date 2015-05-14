@@ -11,11 +11,11 @@ title: Logstash
   <p>It is fully free and fully open source. The license is Apache 2.0, meaning
   you are pretty much free to use it however you want in whatever way.</p>
 
-  <p>logstash is now a part of the <a href="http://elasticsearch.org">Elasticsearch</a> family! This allows us to build better software much faster as well as offering <a href="http://www.elasticsearch.com/support/">production support</a></p>
+  <p>logstash is now a part of the <a href="http://www.elastic.co">Elastic</a> family! This allows us to build better software much faster as well as offering <a href="https://www.elastic.co/subscriptions">production support</a></p>
 
-  <a class="awesome_button" href="https://download.elasticsearch.org/logstash/logstash/logstash-%VERSION%.tar.gz">Download</a>
+  <a class="awesome_button" href="https://www.elastic.co/downloads/logstash">Download</a>
 
-  <a class="awesome_button" href="/docs/%VERSION%/learn">Learn</a>
+  <a class="awesome_button" href="http://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html">Learn</a>
 
 </div>
 <div class="clear"></div>

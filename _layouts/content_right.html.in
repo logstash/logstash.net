@@ -9,10 +9,10 @@
     <div class="header">
       <a href="/"><img src="/images/logo.png" alt="logstash"/></a>
       <div class="nav">
-        <a href="/">home</a>
-        <a href="/docs/%VERSION%">docs</a>
-        <a href="/docs/%VERSION%/learn">about</a>
-        <a href="https://github.com/elasticsearch/logstash/issues">bugs</a>
+			        <a href="/">home</a>
+			        <a href="http://www.elastic.co/guide/en/logstash/current/index.html">docs</a>
+			        <a href="http://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html">about</a>
+			        <a href="https://github.com/elastic/logstash/issues">bugs</a>
       </div>
     </div>
     <div id="content_right">
