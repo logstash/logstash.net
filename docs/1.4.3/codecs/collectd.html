@@ -1,0 +1,153 @@
+---
+title: logstash docs for codecs/collectd
+layout: content_right
+---
+<h2>collectd</h2>
+<h3>Milestone: <a href="../plugin-milestones">1</a></h3>
+
+
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file {
+    codec =&gt; collectd {
+      <a href="#authfile">authfile</a> => ... # string (optional)
+      <a href="#nan_handling">nan_handling</a> => ... # string, one of ["change_value", "warn", "drop"] (optional), default: "change_value"
+      <a href="#nan_tag">nan_tag</a> => ... # string (optional), default: "_collectdNaN"
+      <a href="#nan_value">nan_value</a> => ... # number (optional), default: 0
+      <a href="#prune_intervals">prune_intervals</a> => ... # boolean (optional), default: true
+      <a href="#security_level">security_level</a> => ... # string, one of ["None", "Sign", "Encrypt"] (optional), default: "None"
+      <a href="#typesdb">typesdb</a> => ... # array (optional)
+    }
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="authfile">
+    authfile
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Path to the authentication file. This file should have the same format as
+the <a href="http://collectd.org/documentation/manpages/collectd.conf.5.shtml#authfile_filename">AuthFile</a>
+in collectd. You only need to set this option if the security_level is set to
+&#8220;Sign&#8221; or &#8220;Encrypt&#8221;</p>
+
+
+<h4> 
+  <a name="nan_handling">
+    nan_handling
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "change_value", "warn", "drop" </li>
+  <li> Default value is "change_value" </li>
+</ul>
+
+<p>What to do when a value in the event is NaN (Not a Number)
+- change_value (default): Change the NaN to the value of the nan_value option and add nan_tag as a tag
+- warn: Change the NaN to the value of the nan_value option, print a warning to the log and add nan_tag as a tag
+- drop: Drop the event containing the NaN (this only drops the single event, not the whole packet)</p>
+
+
+<h4> 
+  <a name="nan_tag">
+    nan_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "_collectdNaN" </li>
+</ul>
+
+<p>The tag to add to the event if a NaN value was found
+Set this to an empty string (&#8216;&#8217;) if you don&#8217;t want to tag</p>
+
+
+<h4> 
+  <a name="nan_value">
+    nan_value
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 0 </li>
+</ul>
+
+<p>Only relevant when nan_handeling is set to &#8216;change_value&#8217;
+Change NaN to this configured value</p>
+
+
+<h4> 
+  <a name="prune_intervals">
+    prune_intervals
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>Prune interval records.  Defaults to true.</p>
+
+
+<h4> 
+  <a name="security_level">
+    security_level
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value can be any of: "None", "Sign", "Encrypt" </li>
+  <li> Default value is "None" </li>
+</ul>
+
+<p>Security Level. Default is &#8220;None&#8221;. This setting mirrors the setting from the
+collectd <a href="https://collectd.org/wiki/index.php/Plugin:Network">Network plugin</a></p>
+
+
+<h4> 
+  <a name="typesdb">
+    typesdb
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>File path(s) to collectd types.db to use.
+The last matching pattern wins if you have identical pattern names in multiple files.
+If no types.db is provided the included types.db will be used (currently 5.4.0).</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.3/lib/logstash/codecs/collectd.rb">lib/logstash/codecs/collectd.rb</a>
