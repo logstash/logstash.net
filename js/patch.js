@@ -22,9 +22,13 @@
     var recommendation = default_recommended_path;
     
     var recommendations = {
-      "/output/elasticsearch_http": {
+      "/outputs/elasticsearch_http": {
         path: "https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html",
         text: "The elasticsearch_http plugin has been merged with the elasticsearch output plugin since Logstash 1.5.0."
+      },
+      "/outputs/elasticsearch_river": {
+        path: "https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html",
+        text: "The elasticsearch_river plugin has been deprecated since Logstash 1.5.0. Please use the the elasticsearch output plugin instead."
       },
       "/inputs/collectd": {
         path: "https://www.elastic.co/guide/en/logstash/current/plugins-codecs-collectd.html",
