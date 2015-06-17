@@ -26,6 +26,10 @@
         path: "https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html",
         text: "The elasticsearch_http plugin has been merged with the elasticsearch output plugin since Logstash 1.5.0."
       },
+      "/outputs/elasticsearch_river": {
+        path: "https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html",
+        text: "The elasticsearch_river plugin has been deprecated since Logstash 1.5.0. Please use the the elasticsearch output plugin instead."
+      },
       "/inputs/collectd": {
         path: "https://www.elastic.co/guide/en/logstash/current/plugins-codecs-collectd.html",
         text: "The collectd input has been moved to a codec which can be used with the udp input."
