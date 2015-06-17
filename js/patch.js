@@ -56,15 +56,67 @@
       },
       "/flags": {
         path: "https://www.elastic.co/guide/en/logstash/current/_command_line_flags.html",
-        text: ""
+        text: null
       },
       "/release-notes": {
         path: "https://github.com/elastic/logstash/blob/master/CHANGELOG.md",
-        text: ""
+        text: null
       },
       "/inputs/gemfire": {
         path: null,
         text: "The gemfire input is no longer maintained"
+      },
+      "/configuration": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/configuration.html",
+        text: null
+      },
+      "/contrib-plugins": { 
+        path: null,
+        text: "The contrib package is replaced in Logstash 1.5.0 and beyond by the <a href=\"https://www.elastic.co/blog/plugin-ecosystem-changes\">plugins ecosystem</a>. This allows you to upgrade and install plugins individually from a single Logstash deployment. Read more about this on <a href=\"https://www.elastic.co/blog/plugin-ecosystem-changes\">the plugin ecosystem blog post</a>"
+      },
+      "/extending/": { 
+        path: null,
+        text: "Newer Logstash documentation has one guide per plugin type. Choose which kind of plugin you want to learn to implement: <a href=\"https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_input_plugin.html\">input</a>, <a href=\"https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_codec_plugin.html\">codec</a>, <a href=\"https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_filter_plugin.html\">filter</a>, or <a href=\"https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_output_plugin.html\">output</a>."
+      },
+      "/extending/example-add-a-new-filter": { 
+        text: null,
+        path: "https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_filter_plugin.html"
+      },
+      "/life-of-an-event": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/pipeline.html",
+        text: null
+      },
+      "/repositories": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/package-repositories.html",
+        text: null
+      },
+      "/tutorials/10-minute-walkthrough/": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/tutorials/getting-started-centralized": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/tutorials/getting-started-simple": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/tutorials/getting-started-with-logstash": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/tutorials/metrics-from-logs": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/getting-started-centralized": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
+      },
+      "/installation": { 
+        path: "https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html",
+        text: "In newer Logstash docs, this guide has been consolidated into the single 'getting started' guide."
       }
     }; // recommendations
 
@@ -85,7 +137,7 @@
     }
 
     if (recommended_path !== null) {
-      var link_info = "Go to the latest version of the docs: <a href=\"" + recommended_path + "\">" + recommended_path + "</a>";
+      var link_info = "Go to the latest available document for this page: <a href=\"" + recommended_path + "\">" + recommended_path + "</a>";
       warning += link_info;
     }
     
