@@ -509,7 +509,7 @@ concept of a **conditional**. A conditional should be familiar to most
 Logstash users, in the general sense. You may use *if*, *else if* and
 *else* statements, as in many other programming languages. Let’s label
 each event according to which file it appeared in (access\_log,
-error\_log and other random files which end with "log").
+error\_log and other random files which end with "_log").
 
     input {
       file {
