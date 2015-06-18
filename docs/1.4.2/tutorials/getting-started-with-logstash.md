@@ -479,7 +479,7 @@ the type ⇒ "apache\_access" line in the input configuration).
 
 In this configuration, Logstash is only watching the apache access\_log,
 but it’s easy enough to watch both the access\_log and the error\_log
-(actually, any file matching *\*log*), by changing one line in the above
+(actually, any file matching *\*_log*), by changing one line in the above
 configuration, like this:
 
     input {
@@ -509,7 +509,7 @@ concept of a **conditional**. A conditional should be familiar to most
 Logstash users, in the general sense. You may use *if*, *else if* and
 *else* statements, as in many other programming languages. Let’s label
 each event according to which file it appeared in (access\_log,
-error\_log and other random files which end with "log").
+error\_log and other random files which end with "_log").
 
     input {
       file {

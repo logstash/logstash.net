@@ -299,7 +299,7 @@ bin/logstash -f logstash-apache.conf
 ----
 You should be able to see your apache log data in Elasticsearch now! You'll notice that Logstash opened the file you configured, and read through it, processing any events it encountered. Any additional lines logged to this file will also be captured, processed by Logstash as events and stored in Elasticsearch. As an added bonus, they will be stashed with the field "type" set to "apache_access" (this is done by the type => "apache_access" line in the input configuration).
 
-In this configuration, Logstash is only watching the apache access_log, but it's easy enough to watch both the access_log and the error_log (actually, any file matching '*log'), by changing one line in the above configuration, like this:
+In this configuration, Logstash is only watching the apache access_log, but it's easy enough to watch both the access_log and the error_log (actually, any file matching '*_log'), by changing one line in the above configuration, like this:
 
 ----
 input {

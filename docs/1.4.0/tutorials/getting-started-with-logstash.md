@@ -479,7 +479,7 @@ the type ⇒ "apache\_access" line in the input configuration).
 
 In this configuration, Logstash is only watching the apache access\_log,
 but it’s easy enough to watch both the access\_log and the error\_log
-(actually, any file matching *\*log*), by changing one line in the above
+(actually, any file matching *\*_loglog*), by changing one line in the above
 configuration, like this:
 
     input {
