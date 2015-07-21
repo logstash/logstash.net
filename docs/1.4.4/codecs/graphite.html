@@ -1,0 +1,124 @@
+---
+title: logstash docs for codecs/graphite
+layout: content_right
+---
+<h2>graphite</h2>
+<h3>Milestone: <a href="../plugin-milestones">2</a></h3>
+
+<p>This codec will encode and decode Graphite formated lines.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code># with an input plugin:
+# you can also use this codec with an output.
+input { 
+  file {
+    codec =&gt; graphite {
+      <a href="#exclude_metrics">exclude_metrics</a> => ... # array (optional), default: ["%{[^}]+}"]
+      <a href="#fields_are_metrics">fields_are_metrics</a> => ... # boolean (optional), default: false
+      <a href="#include_metrics">include_metrics</a> => ... # array (optional), default: [".*"]
+      <a href="#metrics">metrics</a> => ... # hash (optional), default: {}
+      <a href="#metrics_format">metrics_format</a> => ... # string (optional), default: "*"
+    }
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="exclude_metrics">
+    exclude_metrics
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is ["%{[^}]+}"] </li>
+</ul>
+
+<p>Exclude regex matched metric names, by default exclude unresolved %{field} strings</p>
+
+
+<h4> 
+  <a name="fields_are_metrics">
+    fields_are_metrics
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Indicate that the event @fields should be treated as metrics and will be sent as is to graphite</p>
+
+
+<h4> 
+  <a name="include_metrics">
+    include_metrics
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [".*"] </li>
+</ul>
+
+<p>Include only regex matched metric names</p>
+
+
+<h4> 
+  <a name="metrics">
+    metrics
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>The metric(s) to use. This supports dynamic strings like %{host}
+for metric names and also for values. This is a hash field with key
+of the metric name, value of the metric value. Example:</p>
+
+<pre><code>[ "%{host}/uptime", "%{uptime_1m}" ]
+</code></pre>
+
+<p>The value will be coerced to a floating point value. Values which cannot be
+coerced will zero (0)</p>
+
+
+<h4> 
+  <a name="metrics_format">
+    metrics_format
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "*" </li>
+</ul>
+
+<p>Defines format of the metric string. The placeholder &#8216;*&#8217; will be
+replaced with the name of the actual metric.</p>
+
+<pre><code>metrics_format =&gt; "foo.bar.*.sum"
+</code></pre>
+
+<p>NOTE: If no metrics_format is defined the name of the metric will be used as fallback.</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.4/lib/logstash/codecs/graphite.rb">lib/logstash/codecs/graphite.rb</a>

@@ -1,0 +1,584 @@
+---
+title: logstash docs for filters/grok
+layout: content_right
+---
+<h2>grok</h2>
+<h3>Milestone: <a href="../plugin-milestones">3</a></h3>
+
+<p>Parse arbitrary text and structure it.</p>
+
+<p>Grok is currently the best way in logstash to parse crappy unstructured log
+data into something structured and queryable.</p>
+
+<p>This tool is perfect for syslog logs, apache and other webserver logs, mysql
+logs, and in general, any log format that is generally written for humans
+and not computer consumption.</p>
+
+<p>Logstash ships with about 120 patterns by default. You can find them here:
+<a href="https://github.com/logstash/logstash/tree/v1.4.4/patterns">https://github.com/logstash/logstash/tree/v1.4.4/patterns</a>. You can add
+your own trivially. (See the patterns_dir setting)</p>
+
+<p>If you need help building patterns to match your logs, you will find the
+<a href="http://grokdebug.herokuapp.com">http://grokdebug.herokuapp.com</a> too quite useful!</p>
+
+<h4 id="grok-basics">Grok Basics</h4>
+
+<p>Grok works by combining text patterns into something that matches your
+logs.</p>
+
+<p>The syntax for a grok pattern is <code>%{SYNTAX:SEMANTIC}</code></p>
+
+<p>The <code>SYNTAX</code> is the name of the pattern that will match your text. For
+example, &#8220;3.44&#8221; will be matched by the NUMBER pattern and &#8220;55.3.244.1&#8221; will
+be matched by the IP pattern. The syntax is how you match.</p>
+
+<p>The <code>SEMANTIC</code> is the identifier you give to the piece of text being matched.
+For example, &#8220;3.44&#8221; could be the duration of an event, so you could call it
+simply &#8216;duration&#8217;. Further, a string &#8220;55.3.244.1&#8221; might identify the &#8216;client&#8217;
+making a request.</p>
+
+<p>For the above example, your grok filter would look something like this:</p>
+
+<p>%{NUMBER:duration} %{IP:client}</p>
+
+<p>Optionally you can add a data type conversion to your grok pattern. By default
+all semantics are saved as strings. If you wish to convert a semantic&#8217;s data type,
+for example change a string to an integer then suffix it with the target data type.
+For example <code>%{NUMBER:num:int}</code> which converts the &#8216;num&#8217; semantic from a string to an
+integer. Currently the only supported conversions are <code>int</code> and <code>float</code>.</p>
+
+<h4 id="example">Example</h4>
+
+<p>With that idea of a syntax and semantic, we can pull out useful fields from a
+sample log like this fictional http request log:</p>
+
+<pre><code>55.3.244.1 GET /index.html 15824 0.043
+</code></pre>
+
+<p>The pattern for this could be:</p>
+
+<pre><code>%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}
+</code></pre>
+
+<p>A more realistic example, let&#8217;s read these logs from a file:</p>
+
+<pre><code>input {
+  file {
+    path =&gt; "/var/log/http.log"
+  }
+}
+filter {
+  grok {
+    match =&gt; [ "message", "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}" ]
+  }
+}
+</code></pre>
+
+<p>After the grok filter, the event will have a few extra fields in it:</p>
+
+<ul>
+  <li>client: 55.3.244.1</li>
+  <li>method: GET</li>
+  <li>request: /index.html</li>
+  <li>bytes: 15824</li>
+  <li>duration: 0.043</li>
+</ul>
+
+<h4 id="regular-expressions">Regular Expressions</h4>
+
+<p>Grok sits on top of regular expressions, so any regular expressions are valid
+in grok as well. The regular expression library is Oniguruma, and you can see
+the full supported regexp syntax <a href="http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt">on the Onigiruma
+site</a>.</p>
+
+<h4 id="custom-patterns">Custom Patterns</h4>
+
+<p>Sometimes logstash doesn&#8217;t have a pattern you need. For this, you have
+a few options.</p>
+
+<p>First, you can use the Oniguruma syntax for &#8216;named capture&#8217; which will
+let you match a piece of text and save it as a field:</p>
+
+<pre><code>(?&lt;field_name&gt;the pattern here)
+</code></pre>
+
+<p>For example, postfix logs have a &#8216;queue id&#8217; that is an 10 or 11-character
+hexadecimal value. I can capture that easily like this:</p>
+
+<pre><code>(?&lt;queue_id&gt;[0-9A-F]{10,11})
+</code></pre>
+
+<p>Alternately, you can create a custom patterns file.</p>
+
+<ul>
+  <li>Create a directory called <code>patterns</code> with a file in it called <code>extra</code>
+(the file name doesn&#8217;t matter, but name it meaningfully for yourself)</li>
+  <li>In that file, write the pattern you need as the pattern name, a space, then
+the regexp for that pattern.</li>
+</ul>
+
+<p>For example, doing the postfix queue id example as above:</p>
+
+<pre><code># contents of ./patterns/postfix:
+POSTFIX_QUEUEID [0-9A-F]{10,11}
+</code></pre>
+
+<p>Then use the <code>patterns_dir</code> setting in this plugin to tell logstash where
+your custom patterns directory is. Here&#8217;s a full example with a sample log:</p>
+
+<pre><code>Jan  1 06:25:43 mailserver14 postfix/cleanup[21403]: BEF25A72965: message-id=&lt;20130101142543.5828399CCAF@mailserver14.example.com&gt;
+
+filter {
+  grok {
+    patterns_dir =&gt; "./patterns"
+    match =&gt; [ "message", "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}: %{GREEDYDATA:syslog_message}" ]
+  }
+}
+</code></pre>
+
+<p>The above will match and result in the following fields:</p>
+
+<ul>
+  <li>timestamp: Jan  1 06:25:43</li>
+  <li>logsource: mailserver14</li>
+  <li>program: postfix/cleanup</li>
+  <li>pid: 21403</li>
+  <li>queue_id: BEF25A72965</li>
+  <li>syslog_message: message-id=<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#050;&#048;&#049;&#051;&#048;&#049;&#048;&#049;&#049;&#052;&#050;&#053;&#052;&#051;&#046;&#053;&#056;&#050;&#056;&#051;&#057;&#057;&#067;&#067;&#065;&#070;&#064;&#109;&#097;&#105;&#108;&#115;&#101;&#114;&#118;&#101;&#114;&#049;&#052;&#046;&#101;&#120;&#097;&#109;&#112;&#108;&#101;&#046;&#099;&#111;&#109;">&#050;&#048;&#049;&#051;&#048;&#049;&#048;&#049;&#049;&#052;&#050;&#053;&#052;&#051;&#046;&#053;&#056;&#050;&#056;&#051;&#057;&#057;&#067;&#067;&#065;&#070;&#064;&#109;&#097;&#105;&#108;&#115;&#101;&#114;&#118;&#101;&#114;&#049;&#052;&#046;&#101;&#120;&#097;&#109;&#112;&#108;&#101;&#046;&#099;&#111;&#109;</a></li>
+</ul>
+
+<p>The <code>timestamp</code>, <code>logsource</code>, <code>program</code>, and <code>pid</code> fields come from the
+SYSLOGBASE pattern which itself is defined by other patterns.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  grok {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#break_on_match">break_on_match</a> => ... # boolean (optional), default: true
+    <a href="#drop_if_match">drop_if_match</a> => ... # boolean (optional), default: false
+    <a href="#keep_empty_captures">keep_empty_captures</a> => ... # boolean (optional), default: false
+    <a href="#match">match</a> => ... # hash (optional), default: {}
+    <a href="#named_captures_only">named_captures_only</a> => ... # boolean (optional), default: true
+    <a href="#overwrite">overwrite</a> => ... # array (optional), default: []
+    <a href="#patterns_dir">patterns_dir</a> => ... # array (optional), default: []
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+    <a href="#tag_on_failure">tag_on_failure</a> => ... # array (optional), default: ["_grokparsefailure"]
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  grok {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  grok {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add field &#8220;foo_hello&#8221; if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  grok {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  grok {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add a tag &#8220;foo_hello&#8221; (and the second example would of course add a &#8220;taggedy_tag&#8221; tag).</p>
+
+
+<h4> 
+  <a name="break_on_match">
+    break_on_match
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>Break on first match. The first successful match by grok will result in the
+filter being finished. If you want grok to try all patterns (maybe you are
+parsing different things), then set this to false.</p>
+
+
+<h4> 
+  <a name="drop_if_match">
+    drop_if_match
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>Drop if matched. Note, this feature may not stay. It is preferable to combine
+grok + grep filters to do parsing + dropping.</p>
+
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="keep_empty_captures">
+    keep_empty_captures
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>If true, keep empty captures as event fields.</p>
+
+
+<h4> 
+  <a name="match">
+    match
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>A hash of matches of field =&gt; value</p>
+
+<p>For example:</p>
+
+<pre><code>filter {
+  grok {
+    match =&gt; [ "message", "Duration: %{NUMBER:duration}" ]
+  }
+}
+</code></pre>
+
+
+<h4> 
+  <a name="named_captures_only">
+    named_captures_only
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>If true, only store named captures from grok.</p>
+
+
+<h4> 
+  <a name="overwrite">
+    overwrite
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>The fields to overwrite.</p>
+
+<p>This allows you to overwrite a value in a field that already exists.</p>
+
+<p>For example, if you have a syslog line in the &#8216;message&#8217; field, you can
+overwrite the &#8216;message&#8217; field with part of the match like so:</p>
+
+<pre><code>filter {
+  grok {
+    match =&gt; [
+      "message",
+      "%{SYSLOGBASE} %{DATA:message}"
+    ]
+    overwrite =&gt; [ "message" ]
+  }
+}
+</code></pre>
+
+<p>In this case, a line like &#8220;May 29 16:37:11 sadness logger: hello world&#8221;
+ will be parsed and &#8216;hello world&#8217; will overwrite the original message.</p>
+
+
+<h4> 
+  <a name="pattern">
+    pattern
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>Specify a pattern to parse with. This will match the &#8216;message&#8217; field.</p>
+
+<p>If you want to match other fields than message, use the &#8216;match&#8217; setting.
+Multiple patterns is fine.</p>
+
+
+<h4> 
+  <a name="patterns_dir">
+    patterns_dir
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+
+<p>logstash ships by default with a bunch of patterns, so you don&#8217;t
+necessarily need to define this yourself unless you are adding additional
+patterns.</p>
+
+<p>Pattern files are plain text with format:</p>
+
+<pre><code>NAME PATTERN
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>NUMBER \d+
+</code></pre>
+
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  grok {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  grok {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the field with name &#8220;foo_hello&#8221; if it is present. The second 
+example would remove an additional, non-dynamic field.</p>
+
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  grok {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  grok {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the tag &#8220;foo_hello&#8221; if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+
+<h4> 
+  <a name="singles">
+    singles
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>If true, make single-value fields simply that value, not an array
+containing that one value.</p>
+
+
+<h4> 
+  <a name="tag_on_failure">
+    tag_on_failure
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is ["_grokparsefailure"] </li>
+</ul>
+
+<p>Append values to the &#8216;tags&#8217; field when there has been no
+successful match</p>
+
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin&#8217;s &#8220;type&#8221;
+attribute for more.
+Optional.</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.4/lib/logstash/filters/grok.rb">lib/logstash/filters/grok.rb</a>

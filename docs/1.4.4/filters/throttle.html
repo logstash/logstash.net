@@ -1,0 +1,432 @@
+---
+title: logstash docs for filters/throttle
+layout: content_right
+---
+<h2>throttle</h2>
+<h3>Milestone: <a href="../plugin-milestones">1</a></h3>
+
+<p>The throttle filter is for throttling the number of events received. The filter
+is configured with a lower bound, the before_count, and upper bound, the after_count,
+and a period of time. All events passing through the filter will be counted based on 
+a key. As long as the count is less than the before_count or greater than the 
+after_count, the event will be &#8220;throttled&#8221; which means the filter will be considered 
+successful and any tags or fields will be added.</p>
+
+<p>For example, if you wanted to throttle events so you only receive an event after 2 
+occurrences and you get no more than 3 in 10 minutes, you would use the 
+configuration:
+    period =&gt; 600
+    before_count =&gt; 3
+    after_count =&gt; 5</p>
+
+<p>Which would result in:
+    event 1 - throttled (successful filter, period start)
+    event 2 - throttled (successful filter)
+    event 3 - not throttled
+    event 4 - not throttled
+    event 5 - not throttled
+    event 6 - throttled (successful filter)
+    event 7 - throttled (successful filter)
+    event x - throttled (successful filter)
+    period end
+    event 1 - throttled (successful filter, period start)
+    event 2 - throttled (successful filter)
+    event 3 - not throttled
+    event 4 - not throttled
+    event 5 - not throttled
+    event 6 - throttled (successful filter)
+    &#8230;</p>
+
+<p>Another example is if you wanted to throttle events so you only receive 1 event per 
+hour, you would use the configuration:
+    period =&gt; 3600
+    before_count =&gt; -1
+    after_count =&gt; 1</p>
+
+<p>Which would result in:
+    event 1 - not throttled (period start)
+    event 2 - throttled (successful filter)
+    event 3 - throttled (successful filter)
+    event 4 - throttled (successful filter)
+    event x - throttled (successful filter)
+    period end
+    event 1 - not throttled (period start)
+    event 2 - throttled (successful filter)
+    event 3 - throttled (successful filter)
+    event 4 - throttled (successful filter)
+    &#8230;</p>
+
+<p>A common use case would be to use the throttle filter to throttle events before 3 and 
+after 5 while using multiple fields for the key and then use the drop filter to remove 
+throttled events. This configuration might appear as:</p>
+
+<pre><code>filter {
+  throttle {
+    before_count =&gt; 3
+    after_count =&gt; 5
+    period =&gt; 3600
+    key =&gt; "%{host}%{message}"
+    add_tag =&gt; "throttled"
+  }
+  if "throttled" in [tags] {
+    drop { }
+  }
+}
+</code></pre>
+
+<p>Another case would be to store all events, but only email non-throttled 
+events so the op&#8217;s inbox isn&#8217;t flooded with emails in the event of a system error. 
+This configuration might appear as:</p>
+
+<pre><code>filter {
+  throttle {
+    before_count =&gt; 3
+    after_count =&gt; 5
+    period =&gt; 3600
+    key =&gt; "%{message}"
+    add_tag =&gt; "throttled"
+  }
+}
+output {
+  if "throttled" not in [tags] {
+    email {
+   	    from =&gt; "logstash@mycompany.com"
+   	    subject =&gt; "Production System Alert"
+   	    to =&gt; "ops@mycompany.com"
+   	    via =&gt; "sendmail"
+   	    body =&gt; "Alert on %{host} from path %{path}:\n\n%{message}"
+   	    options =&gt; { "location" =&gt; "/usr/sbin/sendmail" }
+    }
+  }
+  elasticsearch_http {
+    host =&gt; "localhost"
+    port =&gt; "19200"
+  }
+}
+</code></pre>
+
+<p>The event counts are cleared after the configured period elapses since the 
+first instance of the event. That is, all the counts don&#8217;t reset at the same 
+time but rather the throttle period is per unique key value.</p>
+
+<p>Mike Pilone (@mikepilone)</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  throttle {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#after_count">after_count</a> => ... # number (optional), default: -1
+    <a href="#before_count">before_count</a> => ... # number (optional), default: -1
+    <a href="#key">key</a> => ... # string (required)
+    <a href="#max_counters">max_counters</a> => ... # number (optional), default: 100000
+    <a href="#period">period</a> => ... # string (optional), default: "3600"
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  throttle {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  throttle {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add field &#8220;foo_hello&#8221; if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  throttle {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  throttle {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add a tag &#8220;foo_hello&#8221; (and the second example would of course add a &#8220;taggedy_tag&#8221; tag).</p>
+
+
+<h4> 
+  <a name="after_count">
+    after_count
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is -1 </li>
+</ul>
+
+<p>Events greater than this count will be throttled. Setting this value to -1, the 
+default, will cause no messages to be throttled based on the upper bound.</p>
+
+
+<h4> 
+  <a name="before_count">
+    before_count
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is -1 </li>
+</ul>
+
+<p>Events less than this count will be throttled. Setting this value to -1, the 
+default, will cause no messages to be throttled based on the lower bound.</p>
+
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="key">
+    key (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name to use in configuration files.
+New plugins should start life at milestone 1.
+The key used to identify events. Events with the same key will be throttled
+as a group.  Field substitutions are allowed, so you can combine multiple
+fields.</p>
+
+
+<h4> 
+  <a name="max_counters">
+    max_counters
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 100000 </li>
+</ul>
+
+<p>The maximum number of counters to store before the oldest counter is purged. Setting 
+this value to -1 will prevent an upper bound no constraint on the number of counters<br />
+and they will only be purged after expiration. This configuration value should only 
+be used as a memory control mechanism and can cause early counter expiration if the 
+value is reached. It is recommended to leave the default value and ensure that your 
+key is selected such that it limits the number of counters required (i.e. don&#8217;t 
+use UUID as the key!)</p>
+
+
+<h4> 
+  <a name="period">
+    period
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "3600" </li>
+</ul>
+
+<p>The period in seconds after the first occurrence of an event until the count is 
+reset for the event. This period is tracked per unique key value.  Field
+substitutions are allowed in this value.  They will be evaluated when the <em>first</em>
+event for a given key is seen.  This allows you to specify that certain kinds
+of events throttle for a specific period.</p>
+
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  throttle {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  throttle {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the field with name &#8220;foo_hello&#8221; if it is present. The second 
+example would remove an additional, non-dynamic field.</p>
+
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  throttle {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  throttle {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the tag &#8220;foo_hello&#8221; if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin&#8217;s &#8220;type&#8221;
+attribute for more.
+Optional.</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.4/lib/logstash/filters/throttle.rb">lib/logstash/filters/throttle.rb</a>
