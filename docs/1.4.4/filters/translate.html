@@ -1,0 +1,453 @@
+---
+title: logstash docs for filters/translate
+layout: content_right
+---
+<h2>translate</h2>
+<h3>Milestone: <a href="../plugin-milestones">1</a></h3>
+
+<p>A general search and replace tool which uses a configured hash
+and/or a YAML file to determine replacement values.</p>
+
+<p>The dictionary entries can be specified in one of two ways: First,
+the &#8220;dictionary&#8221; configuration item may contain a hash representing
+the mapping. Second, an external YAML file (readable by logstash) may be specified
+in the &#8220;dictionary_path&#8221; configuration item. These two methods may not be used
+in conjunction; it will produce an error.</p>
+
+<p>Operationally, if the event field specified in the &#8220;field&#8221; configuration
+matches the EXACT contents of a dictionary entry key (or matches a regex if
+&#8220;regex&#8221; configuration item has been enabled), the field&#8217;s value will be substituted
+with the matched key&#8217;s value from the dictionary.</p>
+
+<p>By default, the translate filter will replace the contents of the 
+maching event field (in-place). However, by using the &#8220;destination&#8221;
+configuration item, you may also specify a target event field to
+populate with the new translated value.</p>
+
+<p>Alternatively, for simple string search and replacements for just a few values
+you might consider using the gsub function of the mutate filter.</p>
+
+
+<h3> Synopsis </h3>
+
+This is what it might look like in your config file:
+
+<pre><code>filter {
+  translate {
+    <a href="#add_field">add_field</a> => ... # hash (optional), default: {}
+    <a href="#add_tag">add_tag</a> => ... # array (optional), default: []
+    <a href="#destination">destination</a> => ... # string (optional), default: "translation"
+    <a href="#dictionary">dictionary</a> => ... # hash (optional), default: {}
+    <a href="#dictionary_path">dictionary_path</a> => ... # a valid filesystem path (optional)
+    <a href="#exact">exact</a> => ... # boolean (optional), default: true
+    <a href="#fallback">fallback</a> => ... # string (optional)
+    <a href="#field">field</a> => ... # string (required)
+    <a href="#override">override</a> => ... # boolean (optional), default: false
+    <a href="#refresh_interval">refresh_interval</a> => ... # number (optional), default: 300
+    <a href="#regex">regex</a> => ... # boolean (optional), default: false
+    <a href="#remove_field">remove_field</a> => ... # array (optional), default: []
+    <a href="#remove_tag">remove_tag</a> => ... # array (optional), default: []
+  }
+}
+</code></pre>
+
+<h3> Details </h3>
+
+<h4> 
+  <a name="add_field">
+    add_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>If this filter is successful, add any arbitrary fields to this event.
+Field names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  translate {
+    add_field =&gt; { "foo_%{somefield}" =&gt; "Hello world, from %{host}" }
+  }
+}
+
+# You can also add multiple fields at once:
+
+filter {
+  translate {
+    add_field =&gt; { 
+      "foo_%{somefield}" =&gt; "Hello world, from %{host}"
+      "new_field" =&gt; "new_static_value"
+    }
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add field &#8220;foo_hello&#8221; if it is present, with the
+value above and the %{host} piece replaced with that value from the
+event. The second example would also add a hardcoded field.</p>
+
+
+<h4> 
+  <a name="add_tag">
+    add_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, add arbitrary tags to the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  translate {
+    add_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also add multiple tags at once:
+filter {
+  translate {
+    add_tag =&gt; [ "foo_%{somefield}", "taggedy_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would add a tag &#8220;foo_hello&#8221; (and the second example would of course add a &#8220;taggedy_tag&#8221; tag).</p>
+
+
+<h4> 
+  <a name="destination">
+    destination
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "translation" </li>
+</ul>
+
+<p>The destination field you wish to populate with the translated code. The default
+is a field named &#8220;translation&#8221;. Set this to the same value as source if you want
+to do a substitution, in this case filter will allways succeed. This will clobber
+the old value of the source field!</p>
+
+
+<h4> 
+  <a name="dictionary">
+    dictionary
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#hash">hash</a> </li>
+  <li> Default value is {} </li>
+</ul>
+
+<p>The dictionary to use for translation, when specified in the logstash filter
+configuration item (i.e. do not use the @dictionary_path YAML file)
+Example:</p>
+
+<pre><code>filter {
+  translate {
+    dictionary =&gt; [ "100", "Continue",
+                    "101", "Switching Protocols",
+                    "merci", "thank you",
+                    "old version", "new version" ]
+  }
+} NOTE: it is an error to specify both dictionary and dictionary_path
+</code></pre>
+
+
+<h4> 
+  <a name="dictionary_path">
+    dictionary_path
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#path">path</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The full path of the external YAML dictionary file. The format of the table
+should be a standard YAML file. Make sure you specify any integer-based keys
+in quotes. The YAML file should look something like this:</p>
+
+<pre><code>"100": Continue
+"101": Switching Protocols
+merci: gracias
+old version: new version
+</code></pre>
+
+<p>NOTE: it is an error to specify both dictionary and dictionary_path</p>
+
+
+<h4> 
+  <a name="exact">
+    exact
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is true </li>
+</ul>
+
+<p>When <code>exact =&gt; true</code>, the translate filter will populate the destination field
+with the exact contents of the dictionary value. When <code>exact =&gt; false</code>, the
+filter will populate the destination field with the result of any existing
+destination field&#8217;s data, with the translated value substituted in-place.</p>
+
+<p>For example, consider this simple translation.yml, configured to check the <code>data</code> field:
+    foo: bar</p>
+
+<p>If logstash receives an event with the <code>data</code> field set to &#8220;foo&#8221;, and <code>exact =&gt; true</code>,
+the destination field will be populated with the string &#8220;bar&#8221;.
+If <code>exact =&gt; false</code>, and logstash receives the same event, the destination field
+will be also set to &#8220;bar&#8221;. However, if logstash receives an event with the <code>data</code> field
+set to &#8220;foofing&#8221;, the destination field will be set to &#8220;barfing&#8221;.</p>
+
+<p>Set both <code>exact =&gt; true</code> AND <code>regex =&gt; </code>true` if you would like to match using dictionary
+keys as regular expressions. A large dictionary could be expensive to match in this case.</p>
+
+
+<h4> 
+  <a name="exclude_tags">
+    exclude_tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events without all/any (controlled by exclude_any config
+option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="fallback">
+    fallback
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>In case no translation occurs in the event (no matches), this will add a default
+translation string, which will always populate &#8220;field&#8221;, if the match failed.</p>
+
+<p>For example, if we have configured <code>fallback =&gt; "no match"</code>, using this dictionary:</p>
+
+<pre><code>foo: bar
+</code></pre>
+
+<p>Then, if logstash received an event with the field <code>foo</code> set to &#8220;bar&#8221;, the destination
+field would be set to &#8220;bar&#8221;. However, if logstash received an event with <code>foo</code> set to &#8220;nope&#8221;,
+then the destination field would still be populated, but with the value of &#8220;no match&#8221;.</p>
+
+
+<h4> 
+  <a name="field">
+    field (required setting)
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> There is no default value for this setting. </li>
+</ul>
+
+<p>The name of the logstash event field containing the value to be compared for a
+match by the translate filter (e.g. &#8220;message&#8221;, &#8220;host&#8221;, &#8220;response_code&#8221;).</p>
+
+<p>If this field is an array, only the first value will be used.</p>
+
+
+<h4> 
+  <a name="override">
+    override
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>If the destination (or target) field already exists, this configuration item specifies
+whether the filter should skip translation (default) or overwrite the target field
+value with the new translation value.</p>
+
+
+<h4> 
+  <a name="refresh_interval">
+    refresh_interval
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#number">number</a> </li>
+  <li> Default value is 300 </li>
+</ul>
+
+<p>When using a dictionary file, this setting will indicate how frequently
+(in seconds) logstash will check the YAML file for updates.</p>
+
+
+<h4> 
+  <a name="regex">
+    regex
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#boolean">boolean</a> </li>
+  <li> Default value is false </li>
+</ul>
+
+<p>If you&#8217;d like to treat dictionary keys as regular expressions, set <code>exact =&gt; true</code>.
+Note: this is activated only when <code>exact =&gt; true</code>.</p>
+
+
+<h4> 
+  <a name="remove_field">
+    remove_field
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary fields from this event.
+Fields names can be dynamic and include parts of the event using the %{field}
+Example:</p>
+
+<pre><code>filter {
+  translate {
+    remove_field =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple fields at once:
+
+filter {
+  translate {
+    remove_field =&gt; [ "foo_%{somefield}" "my_extraneous_field" ]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the field with name &#8220;foo_hello&#8221; if it is present. The second 
+example would remove an additional, non-dynamic field.</p>
+
+
+<h4> 
+  <a name="remove_tag">
+    remove_tag
+    
+</a>
+</h4>
+
+<ul>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>If this filter is successful, remove arbitrary tags from the event.
+Tags can be dynamic and include parts of the event using the %{field}
+syntax. Example:</p>
+
+<pre><code>filter {
+  translate {
+    remove_tag =&gt; [ "foo_%{somefield}" ]
+  }
+}
+
+# You can also remove multiple tags at once:
+
+filter {
+  translate {
+    remove_tag =&gt; [ "foo_%{somefield}", "sad_unwanted_tag"]
+  }
+}
+</code></pre>
+
+<p>If the event has field &#8220;somefield&#8221; == &#8220;hello&#8221; this filter, on success,
+would remove the tag &#8220;foo_hello&#8221; if it is present. The second example
+would remove a sad, unwanted tag as well.</p>
+
+
+<h4> 
+  <a name="tags">
+    tags
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#array">array</a> </li>
+  <li> Default value is [] </li>
+</ul>
+
+<p>Only handle events with all/any (controlled by include_any config option) of these tags.
+Optional.</p>
+
+
+<h4> 
+  <a name="type">
+    type
+     <strong>DEPRECATED</strong>
+</a>
+</h4>
+
+<ul>
+  <li> DEPRECATED WARNING: This config item is deprecated. It may be removed in a further version. </li>
+  <li> Value type is <a href="../configuration#string">string</a> </li>
+  <li> Default value is "" </li>
+</ul>
+
+<p>Note that all of the specified routing options (type,tags.exclude_tags,include_fields,exclude_fields)
+must be met in order for the event to be handled by the filter.
+The type to act on. If a type is given, then this filter will only
+act on messages with the same type. See any input plugin&#8217;s &#8220;type&#8221;
+attribute for more.
+Optional.</p>
+
+
+
+<hr>
+
+This is documentation from <a href="https://github.com/logstash/logstash/blob/v1.4.4/lib/logstash/filters/translate.rb">lib/logstash/filters/translate.rb</a>
